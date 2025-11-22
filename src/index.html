@@ -151,8 +151,9 @@ end</code></pre>
           <div class="bg-violet-800 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold flex-shrink-0">3</div>
           <div class="flex-1">
             <h3 class="font-bold text-lg mb-3">Build and deploy</h3>
-            <pre class="text-sm"><code class="language-bash">mix lambda.build --zip</code></pre>
+            <pre class="text-sm"><code class="language-bash">mix lambda.build --zip --docker</code></pre>
             <p class="mt-3 text-sm text-zinc-600">Upload <code class="bg-violet-100 text-violet-800 px-2 py-1 rounded">lambda.zip</code> to AWS Lambda and set handler to <code class="bg-violet-100 text-violet-800 px-2 py-1 rounded">Elixir.MyFunction.handle</code></p>
+            <p class="mt-2 text-xs text-zinc-500 italic">Note: On Apple Silicon (M1/M2/M3), the Lambda will be built for ARM64 architecture. Select "arm64" when creating your Lambda function in the AWS Console.</p>
           </div>
         </div>
       </div>
