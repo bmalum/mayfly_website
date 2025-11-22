@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Mayfly - A lightweight AWS Lambda Custom Runtime for Elixir. Run Elixir code serverless with zero boilerplate.">
+  <title>Mayfly - Elixir AWS Lambda Runtime</title>
+  <link href="output.css" rel="stylesheet">
+  <link rel="stylesheet" href="theme.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/languages/elixir.min.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      document.querySelectorAll('code').forEach((block) => {
+        hljs.highlightElement(block);
+      });
+    });
+  </script>
+</head>
+
+<body class="bg-gradient-to-b from-white to-violet-50 text-zinc-700">
+  
+  <!-- Navigation -->
+  <nav class="sticky top-0 bg-white/90 backdrop-blur-sm border-b border-violet-100 z-50">
+    <div class="max-w-6xl mx-auto px-4 py-4">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <img src="elixir-drop-only.png" class="h-10" alt="Elixir Logo" />
+          <span class="text-2xl font-bold text-violet-800">Mayfly</span>
+        </div>
+        <ul class="flex gap-6 text-sm font-medium">
+          <li><a href="#home" class="hover:text-violet-800 transition">HOME</a></li>
+          <li><a href="#install" class="hover:text-violet-800 transition">INSTALL</a></li>
+          <li><a href="https://github.com/bmalum/mayfly/blob/main/guides/getting-started.md" target="_blank" class="hover:text-violet-800 transition">GUIDE</a></li>
+          <li><a href="https://github.com/bmalum/mayfly" target="_blank" class="hover:text-violet-800 transition">DOCS</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section id="home" class="max-w-6xl mx-auto px-4 py-20">
+    <div class="text-center mb-12">
+      <div class="inline-block mb-6">
+        <span class="text-6xl">🪰</span>
+      </div>
+      <h1 class="text-5xl md:text-6xl font-bold text-zinc-800 mb-4">
+        Mayfly
+      </h1>
+      <p class="text-xl md:text-2xl text-zinc-600 mb-8">
+        A lightweight AWS Lambda Custom Runtime for Elixir
+      </p>
+      <div class="flex gap-4 justify-center flex-wrap">
+        <a href="https://github.com/bmalum/mayfly" target="_blank" 
+           class="bg-violet-800 text-white px-8 py-3 rounded-lg font-semibold hover:bg-violet-900 transition">
+          Get Started
+        </a>
+        <a href="#install" 
+           class="border-2 border-violet-800 text-violet-800 px-8 py-3 rounded-lg font-semibold hover:bg-violet-50 transition">
+          Quick Install
+        </a>
+      </div>
+    </div>
+
+    <!-- Feature Grid -->
+    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mt-16">
+      <div class="bg-white p-6 rounded-lg shadow-sm border border-violet-100">
+        <div class="text-3xl mb-3">⚡</div>
+        <h3 class="font-bold text-lg mb-2">Zero Boilerplate</h3>
+        <p class="text-sm text-zinc-600">Focus on business logic, not Lambda implementation details</p>
+      </div>
+      <div class="bg-white p-6 rounded-lg shadow-sm border border-violet-100">
+        <div class="text-3xl mb-3">💜</div>
+        <h3 class="font-bold text-lg mb-2">Native Elixir</h3>
+        <p class="text-sm text-zinc-600">Use the same patterns and libraries you love</p>
+      </div>
+      <div class="bg-white p-6 rounded-lg shadow-sm border border-violet-100">
+        <div class="text-3xl mb-3">🚀</div>
+        <h3 class="font-bold text-lg mb-2">Optimized Performance</h3>
+        <p class="text-sm text-zinc-600">Built specifically for Elixir's strengths</p>
+      </div>
+      <div class="bg-white p-6 rounded-lg shadow-sm border border-violet-100">
+        <div class="text-3xl mb-3">🛡️</div>
+        <h3 class="font-bold text-lg mb-2">Error Handling</h3>
+        <p class="text-sm text-zinc-600">Meaningful stack traces and error reports</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Code Example Section -->
+  <section class="bg-white py-16">
+    <div class="max-w-6xl mx-auto px-4">
+      <h2 class="text-3xl font-bold text-center mb-8">Simple & Powerful</h2>
+      <p class="text-center text-zinc-600 mb-8">Write Lambda functions in pure Elixir with minimal setup</p>
+      
+      <div class="max-w-3xl mx-auto">
+        <pre class="rounded-lg overflow-hidden shadow-lg"><code class="language-elixir">defmodule MyFunction do
+  def handle(event) do
+    {:ok, %{
+      message: "Hello from Elixir!",
+      event: event
+    }}
+  end
+end</code></pre>
+      </div>
+    </div>
+  </section>
+
+  <!-- Installation Section -->
+  <section id="install" class="max-w-6xl mx-auto px-4 py-16">
+    <h2 class="text-3xl font-bold text-center mb-12">Get Started in Minutes</h2>
+    
+    <div class="max-w-3xl mx-auto space-y-8">
+      
+      <!-- Step 1 -->
+      <div class="bg-white p-6 rounded-lg shadow-sm border border-violet-100">
+        <div class="flex items-start gap-4">
+          <div class="bg-violet-800 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold flex-shrink-0">1</div>
+          <div class="flex-1">
+            <h3 class="font-bold text-lg mb-3">Add Mayfly to your dependencies</h3>
+            <pre class="text-sm"><code class="language-elixir"># In mix.exs
+def deps do
+  [
+    {:mayfly, github: "bmalum/mayfly"}
+  ]
+end</code></pre>
+            <p class="mt-3 text-sm text-zinc-600">Then run: <code class="bg-violet-100 text-violet-800 px-2 py-1 rounded">mix deps.get</code></p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 2 -->
+      <div class="bg-white p-6 rounded-lg shadow-sm border border-violet-100">
+        <div class="flex items-start gap-4">
+          <div class="bg-violet-800 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold flex-shrink-0">2</div>
+          <div class="flex-1">
+            <h3 class="font-bold text-lg mb-3">Create your handler function</h3>
+            <pre class="text-sm"><code class="language-elixir">defmodule MyFunction do
+  def handle(event) do
+    {:ok, %{message: "Hello!", event: event}}
+  end
+end</code></pre>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 3 -->
+      <div class="bg-white p-6 rounded-lg shadow-sm border border-violet-100">
+        <div class="flex items-start gap-4">
+          <div class="bg-violet-800 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold flex-shrink-0">3</div>
+          <div class="flex-1">
+            <h3 class="font-bold text-lg mb-3">Build and deploy</h3>
+            <pre class="text-sm"><code class="language-bash">mix lambda.build --zip</code></pre>
+            <p class="mt-3 text-sm text-zinc-600">Upload <code class="bg-violet-100 text-violet-800 px-2 py-1 rounded">lambda.zip</code> to AWS Lambda and set handler to <code class="bg-violet-100 text-violet-800 px-2 py-1 rounded">Elixir.MyFunction.handle</code></p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Why Mayfly Section -->
+  <section class="bg-violet-800 text-white py-16">
+    <div class="max-w-6xl mx-auto px-4">
+      <h2 class="text-3xl font-bold text-center mb-8">Why Mayfly?</h2>
+      <div class="max-w-3xl mx-auto text-center">
+        <p class="text-lg mb-6">
+          Run your Elixir code in AWS Lambda without compromise. Mayfly brings the full power of Elixir to serverless functions.
+        </p>
+        <p class="text-violet-200">
+          Unlike generic custom runtimes, Mayfly is purpose-built for Elixir, bringing the language's reliability and expressiveness to serverless computing.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-zinc-900 text-zinc-400 py-12">
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="grid md:grid-cols-3 gap-8 mb-8">
+        <div>
+          <h3 class="text-white font-bold mb-4">Mayfly</h3>
+          <p class="text-sm">A lightweight AWS Lambda Custom Runtime for Elixir</p>
+        </div>
+        <div>
+          <h3 class="text-white font-bold mb-4">Resources</h3>
+          <ul class="space-y-2 text-sm">
+            <li><a href="https://github.com/bmalum/mayfly" target="_blank" class="hover:text-white transition">GitHub</a></li>
+            <li><a href="https://github.com/bmalum/mayfly/blob/main/guides/getting-started.md" target="_blank" class="hover:text-white transition">Getting Started</a></li>
+            <li><a href="https://github.com/bmalum/mayfly/blob/main/guides/deployment.md" target="_blank" class="hover:text-white transition">Deployment Guide</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="text-white font-bold mb-4">Community</h3>
+          <ul class="space-y-2 text-sm">
+            <li><a href="https://github.com/bmalum/mayfly/issues" target="_blank" class="hover:text-white transition">Report Issues</a></li>
+            <li><a href="https://github.com/bmalum/mayfly/blob/main/CHANGELOG.md" target="_blank" class="hover:text-white transition">Changelog</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="border-t border-zinc-800 pt-8 text-center text-sm">
+        <p>© 2025 Mayfly. Licensed under MIT License.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="utils.js"></script>
+  <script>
+    const tracker = new Tracker({
+      apiUrl: 'https://finger.cloud.kiwi/data'
+    });
+  </script>
+
+</body>
+
+</html>
