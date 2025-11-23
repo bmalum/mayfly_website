@@ -4,8 +4,35 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Mayfly - A lightweight AWS Lambda Custom Runtime for Elixir. Run Elixir code serverless with zero boilerplate.">
-  <title>Mayfly - Elixir AWS Lambda Runtime</title>
+  
+  <!-- Primary Meta Tags -->
+  <title>Mayfly - Elixir AWS Lambda Runtime | Serverless Elixir Functions</title>
+  <meta name="title" content="Mayfly - Elixir AWS Lambda Runtime | Serverless Elixir Functions">
+  <meta name="description" content="Mayfly - A lightweight AWS Lambda Custom Runtime for Elixir. Run Elixir code serverless with zero boilerplate. Deploy Elixir functions to AWS Lambda effortlessly.">
+  <meta name="keywords" content="Elixir, AWS Lambda, Serverless, Custom Runtime, Elixir Lambda, AWS, Cloud Functions, Mayfly">
+  <meta name="author" content="Mayfly">
+  <meta name="robots" content="index, follow">
+  
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://elixir-aws-lambda.dev/">
+  <meta property="og:title" content="Mayfly - Elixir AWS Lambda Runtime">
+  <meta property="og:description" content="A lightweight AWS Lambda Custom Runtime for Elixir. Run Elixir code serverless with zero boilerplate.">
+  <meta property="og:image" content="https://elixir-aws-lambda.dev/elixir-drop-only.png">
+  
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://elixir-aws-lambda.dev/">
+  <meta property="twitter:title" content="Mayfly - Elixir AWS Lambda Runtime">
+  <meta property="twitter:description" content="A lightweight AWS Lambda Custom Runtime for Elixir. Run Elixir code serverless with zero boilerplate.">
+  <meta property="twitter:image" content="https://elixir-aws-lambda.dev/elixir-drop-only.png">
+  
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://elixir-aws-lambda.dev/">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="elixir-drop-only.png">
+  
   <link href="output.css" rel="stylesheet">
   <link rel="stylesheet" href="theme.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
@@ -17,53 +44,77 @@
       });
     });
   </script>
+  
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Mayfly",
+    "applicationCategory": "DeveloperApplication",
+    "description": "A lightweight AWS Lambda Custom Runtime for Elixir",
+    "operatingSystem": "AWS Lambda",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "programmingLanguage": "Elixir",
+    "url": "https://elixir-aws-lambda.dev/",
+    "codeRepository": "https://github.com/bmalum/mayfly"
+  }
+  </script>
 </head>
 
 <body class="bg-gradient-to-b from-white to-violet-50 text-zinc-700">
   
   <!-- Navigation -->
-  <nav class="sticky top-0 bg-white/90 backdrop-blur-sm border-b border-violet-100 z-50">
+  <nav class="sticky top-0 bg-white/90 backdrop-blur-sm border-b border-violet-100 z-50" role="navigation" aria-label="Main navigation">
     <div class="max-w-6xl mx-auto px-4 py-4">
       <div class="flex items-center justify-between">
         <div class="flex items-center gap-3">
-          <img src="elixir-drop-only.png" class="h-10" alt="Elixir Logo" />
+          <img src="elixir-drop-only.png" class="h-10" alt="Elixir programming language logo" width="40" height="40" />
           <span class="text-2xl font-bold text-violet-800">Mayfly</span>
         </div>
         <ul class="flex gap-6 text-sm font-medium">
-          <li><a href="#home" class="hover:text-violet-800 transition">HOME</a></li>
-          <li><a href="#install" class="hover:text-violet-800 transition">INSTALL</a></li>
-          <li><a href="https://github.com/bmalum/mayfly/blob/main/guides/getting-started.md" target="_blank" class="hover:text-violet-800 transition">GUIDE</a></li>
-          <li><a href="https://github.com/bmalum/mayfly" target="_blank" class="hover:text-violet-800 transition">DOCS</a></li>
+          <li><a href="#home" class="hover:text-violet-800 transition" aria-label="Go to home section">HOME</a></li>
+          <li><a href="#install" class="hover:text-violet-800 transition" aria-label="Go to installation section">INSTALL</a></li>
+          <li><a href="https://github.com/bmalum/mayfly/blob/main/guides/getting-started.md" target="_blank" rel="noopener noreferrer" class="hover:text-violet-800 transition" aria-label="Read getting started guide (opens in new tab)">GUIDE</a></li>
+          <li><a href="https://github.com/bmalum/mayfly" target="_blank" rel="noopener noreferrer" class="hover:text-violet-800 transition" aria-label="View documentation on GitHub (opens in new tab)">DOCS</a></li>
         </ul>
       </div>
     </div>
   </nav>
 
   <!-- Hero Section -->
-  <section id="home" class="max-w-6xl mx-auto px-4 py-20 relative">
+  <section id="home" class="max-w-6xl mx-auto px-4 py-20 relative" aria-labelledby="hero-heading">
     <!-- Version Ribbon -->
     <div class="absolute top-0 right-0 bg-violet-800 text-white px-4 py-2 text-sm font-semibold shadow-lg" 
-         style="transform: rotate(0deg); border-radius: 0 0 0 8px;">
+         style="transform: rotate(0deg); border-radius: 0 0 0 8px;"
+         role="status"
+         aria-label="Current Elixir version">
       Elixir 1.19.3
     </div>
     
     <div class="text-center mb-12">
-      <div class="inline-block mb-6">
+      <div class="inline-block mb-6" role="img" aria-label="Mayfly icon">
         <span class="text-6xl">🪰</span>
       </div>
-      <h1 class="text-5xl md:text-6xl font-bold text-zinc-800 mb-4">
+      <h1 id="hero-heading" class="text-5xl md:text-6xl font-bold text-zinc-800 mb-4">
         Mayfly
       </h1>
       <p class="text-xl md:text-2xl text-zinc-600 mb-8">
         A lightweight AWS Lambda Custom Runtime for Elixir
       </p>
       <div class="flex gap-4 justify-center flex-wrap">
-        <a href="https://github.com/bmalum/mayfly" target="_blank" 
-           class="bg-violet-800 text-white px-8 py-3 rounded-lg font-semibold hover:bg-violet-900 transition">
+        <a href="https://github.com/bmalum/mayfly" target="_blank" rel="noopener noreferrer"
+           class="bg-violet-800 text-white px-8 py-3 rounded-lg font-semibold hover:bg-violet-900 transition"
+           aria-label="Get started with Mayfly on GitHub (opens in new tab)">
           Get Started
         </a>
         <a href="#install" 
-           class="border-2 border-violet-800 text-violet-800 px-8 py-3 rounded-lg font-semibold hover:bg-violet-50 transition">
+           class="border-2 border-violet-800 text-violet-800 px-8 py-3 rounded-lg font-semibold hover:bg-violet-50 transition"
+           aria-label="Jump to quick installation guide">
           Quick Install
         </a>
       </div>
@@ -95,13 +146,13 @@
   </section>
 
   <!-- Code Example Section -->
-  <section class="bg-white py-16">
+  <section class="bg-white py-16" aria-labelledby="code-example-heading">
     <div class="max-w-6xl mx-auto px-4">
-      <h2 class="text-3xl font-bold text-center mb-8">Simple & Powerful</h2>
+      <h2 id="code-example-heading" class="text-3xl font-bold text-center mb-8">Simple & Powerful</h2>
       <p class="text-center text-zinc-600 mb-8">Write Lambda functions in pure Elixir with minimal setup</p>
       
       <div class="max-w-3xl mx-auto">
-        <pre class="rounded-lg overflow-hidden shadow-lg"><code class="language-elixir">defmodule MyFunction do
+        <pre class="rounded-lg overflow-hidden shadow-lg" role="region" aria-label="Code example"><code class="language-elixir">defmodule MyFunction do
   def handle(event) do
     {:ok, %{
       message: "Hello from Elixir!",
@@ -114,8 +165,8 @@ end</code></pre>
   </section>
 
   <!-- Installation Section -->
-  <section id="install" class="max-w-6xl mx-auto px-4 py-16">
-    <h2 class="text-3xl font-bold text-center mb-12">Get Started in Minutes</h2>
+  <section id="install" class="max-w-6xl mx-auto px-4 py-16" aria-labelledby="install-heading">
+    <h2 id="install-heading" class="text-3xl font-bold text-center mb-12">Get Started in Minutes</h2>
     
     <div class="max-w-3xl mx-auto space-y-8">
       
@@ -168,9 +219,9 @@ end</code></pre>
   </section>
 
   <!-- Why Mayfly Section -->
-  <section class="bg-violet-800 text-white py-16">
+  <section class="bg-violet-800 text-white py-16" aria-labelledby="why-mayfly-heading">
     <div class="max-w-6xl mx-auto px-4">
-      <h2 class="text-3xl font-bold text-center mb-8">Why Mayfly?</h2>
+      <h2 id="why-mayfly-heading" class="text-3xl font-bold text-center mb-8">Why Mayfly?</h2>
       <div class="max-w-3xl mx-auto text-center">
         <p class="text-lg mb-6">
           Run your Elixir code in AWS Lambda without compromise. Mayfly brings the full power of Elixir to serverless functions.
@@ -183,7 +234,7 @@ end</code></pre>
   </section>
 
   <!-- Footer -->
-  <footer class="bg-zinc-900 text-zinc-400 py-12">
+  <footer class="bg-zinc-900 text-zinc-400 py-12" role="contentinfo">
     <div class="max-w-6xl mx-auto px-4">
       <div class="grid md:grid-cols-3 gap-8 mb-8">
         <div>
@@ -193,16 +244,16 @@ end</code></pre>
         <div>
           <h3 class="text-white font-bold mb-4">Resources</h3>
           <ul class="space-y-2 text-sm">
-            <li><a href="https://github.com/bmalum/mayfly" target="_blank" class="hover:text-white transition">GitHub</a></li>
-            <li><a href="https://github.com/bmalum/mayfly/blob/main/guides/getting-started.md" target="_blank" class="hover:text-white transition">Getting Started</a></li>
-            <li><a href="https://github.com/bmalum/mayfly/blob/main/guides/deployment.md" target="_blank" class="hover:text-white transition">Deployment Guide</a></li>
+            <li><a href="https://github.com/bmalum/mayfly" target="_blank" rel="noopener noreferrer" class="hover:text-white transition" aria-label="Visit Mayfly GitHub repository (opens in new tab)">GitHub</a></li>
+            <li><a href="https://github.com/bmalum/mayfly/blob/main/guides/getting-started.md" target="_blank" rel="noopener noreferrer" class="hover:text-white transition" aria-label="Read getting started guide (opens in new tab)">Getting Started</a></li>
+            <li><a href="https://github.com/bmalum/mayfly/blob/main/guides/deployment.md" target="_blank" rel="noopener noreferrer" class="hover:text-white transition" aria-label="Read deployment guide (opens in new tab)">Deployment Guide</a></li>
           </ul>
         </div>
         <div>
           <h3 class="text-white font-bold mb-4">Community</h3>
           <ul class="space-y-2 text-sm">
-            <li><a href="https://github.com/bmalum/mayfly/issues" target="_blank" class="hover:text-white transition">Report Issues</a></li>
-            <li><a href="https://github.com/bmalum/mayfly/blob/main/CHANGELOG.md" target="_blank" class="hover:text-white transition">Changelog</a></li>
+            <li><a href="https://github.com/bmalum/mayfly/issues" target="_blank" rel="noopener noreferrer" class="hover:text-white transition" aria-label="Report issues on GitHub (opens in new tab)">Report Issues</a></li>
+            <li><a href="https://github.com/bmalum/mayfly/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer" class="hover:text-white transition" aria-label="View changelog on GitHub (opens in new tab)">Changelog</a></li>
           </ul>
         </div>
       </div>
