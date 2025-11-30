@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="ExDoc v0.39.1">
+    <meta name="project" content="Mayfly v0.1.0">
+
+
+    <title>mix lambda.build — Mayfly v0.1.0</title>
+
+    <link rel="stylesheet" href="dist/html-elixir-ZFNMEJKT.css" />
+
+    <script defer src="dist/sidebar_items-32970337.js"></script>
+    <script defer src="docs_config.js"></script>
+    <script defer src="dist/html-HBZYRXZS.js"></script>
+
+  </head>
+  <body>
+    <script>(()=>{var t="ex_doc:settings",e="dark";var o="dark",s="light";var E="sidebar_state",n="closed";var r="sidebar_width";var a="sidebar-open";var i=new URLSearchParams(window.location.search),S=i.get("theme")||JSON.parse(localStorage.getItem(t)||"{}").theme;(S===o||S!==s&&window.matchMedia("(prefers-color-scheme: dark)").matches)&&document.body.classList.add(e);var d=sessionStorage.getItem(E),A=d!==n&&!window.matchMedia(`screen and (max-width: ${768}px)`).matches;document.body.classList.toggle(a,A);var c=sessionStorage.getItem(r);c&&document.body.style.setProperty("--sidebarWidth",`${c}px`);var p=/(Macintosh|iPhone|iPad|iPod)/.test(window.navigator.userAgent);document.documentElement.classList.toggle("apple-os",p);})();
+</script>
+
+<div class="body-wrapper">
+
+<button id="sidebar-menu" class="sidebar-button sidebar-toggle" aria-label="toggle sidebar" aria-controls="sidebar">
+  <i class="ri-menu-line ri-lg" title="Collapse/expand sidebar"></i>
+</button>
+
+<nav id="sidebar" class="sidebar">
+
+  <div class="sidebar-header">
+    <div class="sidebar-projectInfo">
+
+        <a href="https://github.com/bmalum/mayfly" class="sidebar-projectImage">
+          <img src="assets/logo.png" alt="Mayfly" />
+        </a>
+
+      <div>
+        <a href="https://github.com/bmalum/mayfly" class="sidebar-projectName" translate="no">
+Mayfly
+        </a>
+        <div class="sidebar-projectVersion" translate="no">
+          v0.1.0
+        </div>
+      </div>
+    </div>
+    <ul id="sidebar-list-nav" class="sidebar-list-nav" role="tablist" data-extras=""></ul>
+  </div>
+</nav>
+
+<output role="status" id="toast"></output>
+
+<main class="content page-task" id="main" data-type="tasks">
+  <div id="content" class="content-inner">
+    <div class="top-search">
+      <div class="search-settings">
+        <form class="search-bar" action="search.html">
+          <label class="search-label">
+            <span class="sr-only">Search documentation of Mayfly</span>
+            <div class="search-input-wrapper">
+              <input name="q" type="text" class="search-input" placeholder="Press / to search" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" />
+              <button type="button" tabindex="-1" class="search-close-button" aria-hidden="true">
+                <i class="ri-close-line ri-lg" title="Cancel search"></i>
+              </button>
+            </div>
+          </label>
+        </form>
+        <div class="autocomplete">
+        </div>
+        <div class="engine-selector" data-multiple="false">
+          <button type="button" class="engine-button" aria-label="Select search engine" aria-haspopup="true" aria-expanded="false">
+            <i class="ri-search-2-line" aria-hidden="true"></i>
+            <span class="engine-name">Default</span>
+            <i class="ri-arrow-down-s-line" aria-hidden="true"></i>
+          </button>
+          <div class="engine-dropdown" hidden role="menu">
+
+              <button type="button"
+                      class="engine-option"
+                      data-engine-url="search.html?q="
+                      role="menuitemradio"
+                      aria-checked="true">
+                <span class="name">Default</span>
+                <span class="help">In-browser search</span>
+              </button>
+
+          </div>
+        </div>
+        <button class="icon-settings display-settings">
+          <i class="ri-settings-3-line"></i>
+          <span class="sr-only">Settings</span>
+        </button>
+      </div>
+    </div>
+
+<div id="top-content">
+  <div class="heading-with-actions top-heading">
+    <h1>
+      <span translate="no">mix lambda.build</span> 
+      <small class="app-vsn" translate="no">(Mayfly v0.1.0)</small>
+
+    </h1>
+
+      <a href="https://github.com/bmalum/mayfly/blob/main/lib/mix/lambda.ex#L1" title="View Source" class="icon-action" rel="help">
+        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+        <span class="sr-only">View Source</span>
+      </a>
+
+  </div>
+
+
+    <section id="moduledoc">
+<p>A Mix task for building AWS Lambda deployment packages for Elixir applications.</p><p>This task creates a deployment package for AWS Lambda, including:</p><ul><li>Building a release using <a href="https://hexdocs.pm/mix/Mix.Tasks.Release.html"><code class="inline">mix release</code></a></li><li>Creating a bootstrap script</li><li>Optionally building in a Docker container</li><li>Optionally creating a ZIP archive for deployment</li></ul><h2 id="module-usage" class="section-heading"><a href="#module-usage" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a><span class="text">Usage</span></h2><pre><code class="makeup elixir" translate="no"><span class="n">mix</span><span class="w"> </span><span class="n">lambda</span><span class="o">.</span><span class="n">build</span><span class="w"> </span><span class="p" data-group-id="7681723567-1">[</span><span class="n">options</span><span class="p" data-group-id="7681723567-1">]</span></code></pre><h2 id="module-options" class="section-heading"><a href="#module-options" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a><span class="text">Options</span></h2><pre><code class="makeup elixir" translate="no"><span class="o">--</span><span class="n">zip</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="n">z</span><span class="w">      </span><span class="o">-</span><span class="w"> </span><span class="nc">Create</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="nc">ZIP</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">deployment</span><span class="w">
+</span><span class="o">--</span><span class="n">outdir</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="n">o</span><span class="w">   </span><span class="o">-</span><span class="w"> </span><span class="nc">Specify</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">output</span><span class="w"> </span><span class="n">directory</span><span class="w"> </span><span class="p" data-group-id="4036944830-1">(</span><span class="ss">default</span><span class="p">:</span><span class="w"> </span><span class="n">current</span><span class="w"> </span><span class="n">directory</span><span class="p" data-group-id="4036944830-1">)</span><span class="w">
+</span><span class="o">--</span><span class="n">docker</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="n">d</span><span class="w">   </span><span class="o">-</span><span class="w"> </span><span class="nc">Build</span><span class="w"> </span><span class="n">using</span><span class="w"> </span><span class="nc">Docker</span><span class="w"> </span><span class="p" data-group-id="4036944830-2">(</span><span class="n">useful</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">cross</span><span class="o">-</span><span class="n">platform</span><span class="w"> </span><span class="n">compatibility</span><span class="p" data-group-id="4036944830-2">)</span><span class="w">
+</span><span class="o">--</span><span class="n">help</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="n">h</span><span class="w">     </span><span class="o">-</span><span class="w"> </span><span class="nc">Print</span><span class="w"> </span><span class="n">this</span><span class="w"> </span><span class="n">help</span><span class="w"> </span><span class="n">message</span></code></pre><h2 id="module-examples" class="section-heading"><a href="#module-examples" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a><span class="text">Examples</span></h2><pre><code class="makeup elixir" translate="no"><span class="c1"># Build a release</span><span class="w">
+</span><span class="n">mix</span><span class="w"> </span><span class="n">lambda</span><span class="o">.</span><span class="n">build</span><span class="w">
+
+</span><span class="c1"># Build a release and create a ZIP file</span><span class="w">
+</span><span class="n">mix</span><span class="w"> </span><span class="n">lambda</span><span class="o">.</span><span class="n">build</span><span class="w"> </span><span class="o">--</span><span class="n">zip</span><span class="w">
+
+</span><span class="c1"># Build using Docker and create a ZIP file</span><span class="w">
+</span><span class="n">mix</span><span class="w"> </span><span class="n">lambda</span><span class="o">.</span><span class="n">build</span><span class="w"> </span><span class="o">--</span><span class="n">docker</span><span class="w"> </span><span class="o">--</span><span class="n">zip</span><span class="w">
+
+</span><span class="c1"># Specify an output directory</span><span class="w">
+</span><span class="n">mix</span><span class="w"> </span><span class="n">lambda</span><span class="o">.</span><span class="n">build</span><span class="w"> </span><span class="o">--</span><span class="n">zip</span><span class="w"> </span><span class="o">--</span><span class="n">outdir</span><span class="w"> </span><span class="o">.</span><span class="o">/</span><span class="n">deploy</span></code></pre>
+    </section>
+
+</div>
+
+  <section id="summary" class="details-list">
+    <h1 class="section-heading">
+      <a class="hover-link" href="#summary">
+        <i class="ri-link-m" aria-hidden="true"></i>
+      </a>
+      <span class="text">Summary</span>
+    </h1>
+<div class="summary-functions summary">
+  <h2>
+    <a href="#functions">Functions</a>
+  </h2>
+
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#bootstrap_content/1" data-no-tooltip="" translate="no">bootstrap_content(project_name)</a>
+
+      </div>
+
+        <div class="summary-synopsis"><p>Generates the content for the bootstrap script.</p></div>
+
+    </div>
+
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#build_release/0" data-no-tooltip="" translate="no">build_release()</a>
+
+      </div>
+
+        <div class="summary-synopsis"><p>Builds the release using mix release.</p></div>
+
+    </div>
+
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#create_bootstrap/1" data-no-tooltip="" translate="no">create_bootstrap(opts)</a>
+
+      </div>
+
+        <div class="summary-synopsis"><p>Creates the bootstrap file.</p></div>
+
+    </div>
+
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#create_zip_archive/2" data-no-tooltip="" translate="no">create_zip_archive(opts, bootstrap_path)</a>
+
+      </div>
+
+        <div class="summary-synopsis"><p>Creates a ZIP archive if requested.</p></div>
+
+    </div>
+
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#handle_docker_build/2" data-no-tooltip="" translate="no">handle_docker_build(opts, bootstrap_path)</a>
+
+      </div>
+
+        <div class="summary-synopsis"><p>Handles Docker build if requested.</p></div>
+
+    </div>
+
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#parse_and_validate_args/1" data-no-tooltip="" translate="no">parse_and_validate_args(args)</a>
+
+      </div>
+
+        <div class="summary-synopsis"><p>Parses and validates command line arguments.</p></div>
+
+    </div>
+
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#print_help/0" data-no-tooltip="" translate="no">print_help()</a>
+
+      </div>
+
+        <div class="summary-synopsis"><p>Prints help information.</p></div>
+
+    </div>
+
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#print_summary/1" data-no-tooltip="" translate="no">print_summary(opts)</a>
+
+      </div>
+
+        <div class="summary-synopsis"><p>Prints a summary of the build process.</p></div>
+
+    </div>
+
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#restore_environment/1" data-no-tooltip="" translate="no">restore_environment(old_mix_env)</a>
+
+      </div>
+
+        <div class="summary-synopsis"><p>Restores the original environment.</p></div>
+
+    </div>
+
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#run/1" data-no-tooltip="" translate="no">run(args)</a>
+
+      </div>
+
+        <div class="summary-synopsis"><p>Runs the Lambda build task.</p></div>
+
+    </div>
+
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#run_command/2" data-no-tooltip="" translate="no">run_command(cmd, args)</a>
+
+      </div>
+
+        <div class="summary-synopsis"><p>Runs a system command and handles the result.</p></div>
+
+    </div>
+
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#setup_environment/0" data-no-tooltip="" translate="no">setup_environment()</a>
+
+      </div>
+
+        <div class="summary-synopsis"><p>Sets up the build environment.</p></div>
+
+    </div>
+
+</div>
+
+  </section>
+
+
+  <section id="functions" class="details-list">
+    <h1 class="section-heading">
+      <a class="hover-link" href="#functions">
+        <i class="ri-link-m" aria-hidden="true"></i>
+      </a>
+      <span class="text">Functions</span>
+    </h1>
+
+    <div class="functions-list">
+<section class="detail" id="bootstrap_content/1">
+
+  <div class="detail-header">
+    <a href="#bootstrap_content/1" class="detail-link" data-no-tooltip="" aria-label="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+    </a>
+    <div class="heading-with-actions">
+      <h1 class="signature" translate="no">bootstrap_content(project_name)</h1>
+
+
+        <a href="https://github.com/bmalum/mayfly/blob/main/lib/mix/lambda.ex#L287" class="icon-action" rel="help" aria-label="View Source">
+          <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+        </a>
+
+    </div>
+  </div>
+
+  <section class="docstring">
+
+      <div class="specs">
+
+          <pre translate="no"><span class="attribute">@spec</span> bootstrap_content(<a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">atom</a>()) :: <a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>()</pre>
+
+      </div>
+
+<p>Generates the content for the bootstrap script.</p>
+  </section>
+</section>
+<section class="detail" id="build_release/0">
+
+  <div class="detail-header">
+    <a href="#build_release/0" class="detail-link" data-no-tooltip="" aria-label="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+    </a>
+    <div class="heading-with-actions">
+      <h1 class="signature" translate="no">build_release()</h1>
+
+
+        <a href="https://github.com/bmalum/mayfly/blob/main/lib/mix/lambda.ex#L121" class="icon-action" rel="help" aria-label="View Source">
+          <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+        </a>
+
+    </div>
+  </div>
+
+  <section class="docstring">
+
+      <div class="specs">
+
+          <pre translate="no"><span class="attribute">@spec</span> build_release() :: :ok | {:error, <a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>()}</pre>
+
+      </div>
+
+<p>Builds the release using mix release.</p><p>Returns <code class="inline">:ok</code> if successful.</p>
+  </section>
+</section>
+<section class="detail" id="create_bootstrap/1">
+
+  <div class="detail-header">
+    <a href="#create_bootstrap/1" class="detail-link" data-no-tooltip="" aria-label="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+    </a>
+    <div class="heading-with-actions">
+      <h1 class="signature" translate="no">create_bootstrap(opts)</h1>
+
+
+        <a href="https://github.com/bmalum/mayfly/blob/main/lib/mix/lambda.ex#L140" class="icon-action" rel="help" aria-label="View Source">
+          <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+        </a>
+
+    </div>
+  </div>
+
+  <section class="docstring">
+
+      <div class="specs">
+
+          <pre translate="no"><span class="attribute">@spec</span> create_bootstrap(<a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">keyword</a>()) :: {:ok, <a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>()} | {:error, <a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>()}</pre>
+
+      </div>
+
+<p>Creates the bootstrap file.</p><p>Returns <code class="inline">{:ok, bootstrap_path}</code> if successful.</p>
+  </section>
+</section>
+<section class="detail" id="create_zip_archive/2">
+
+  <div class="detail-header">
+    <a href="#create_zip_archive/2" class="detail-link" data-no-tooltip="" aria-label="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+    </a>
+    <div class="heading-with-actions">
+      <h1 class="signature" translate="no">create_zip_archive(opts, bootstrap_path)</h1>
+
+
+        <a href="https://github.com/bmalum/mayfly/blob/main/lib/mix/lambda.ex#L191" class="icon-action" rel="help" aria-label="View Source">
+          <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+        </a>
+
+    </div>
+  </div>
+
+  <section class="docstring">
+
+      <div class="specs">
+
+          <pre translate="no"><span class="attribute">@spec</span> create_zip_archive(
+  <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">keyword</a>(),
+  <a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>()
+) :: :ok | {:error, <a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>()}</pre>
+
+      </div>
+
+<p>Creates a ZIP archive if requested.</p><p>Returns <code class="inline">:ok</code> if successful or if ZIP creation was not requested.</p>
+  </section>
+</section>
+<section class="detail" id="handle_docker_build/2">
+
+  <div class="detail-header">
+    <a href="#handle_docker_build/2" class="detail-link" data-no-tooltip="" aria-label="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+    </a>
+    <div class="heading-with-actions">
+      <h1 class="signature" translate="no">handle_docker_build(opts, bootstrap_path)</h1>
+
+
+        <a href="https://github.com/bmalum/mayfly/blob/main/lib/mix/lambda.ex#L167" class="icon-action" rel="help" aria-label="View Source">
+          <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+        </a>
+
+    </div>
+  </div>
+
+  <section class="docstring">
+
+      <div class="specs">
+
+          <pre translate="no"><span class="attribute">@spec</span> handle_docker_build(
+  <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">keyword</a>(),
+  <a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>()
+) :: :ok | {:error, <a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>()}</pre>
+
+      </div>
+
+<p>Handles Docker build if requested.</p><p>Returns <code class="inline">:ok</code> if successful or if Docker build was not requested.</p>
+  </section>
+</section>
+<section class="detail" id="parse_and_validate_args/1">
+
+  <div class="detail-header">
+    <a href="#parse_and_validate_args/1" class="detail-link" data-no-tooltip="" aria-label="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+    </a>
+    <div class="heading-with-actions">
+      <h1 class="signature" translate="no">parse_and_validate_args(args)</h1>
+
+
+        <a href="https://github.com/bmalum/mayfly/blob/main/lib/mix/lambda.ex#L86" class="icon-action" rel="help" aria-label="View Source">
+          <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+        </a>
+
+    </div>
+  </div>
+
+  <section class="docstring">
+
+      <div class="specs">
+
+          <pre translate="no"><span class="attribute">@spec</span> parse_and_validate_args([<a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>()]) ::
+  {:ok, <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">keyword</a>()} | {:halt, :help} | {:error, <a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>()}</pre>
+
+      </div>
+
+<p>Parses and validates command line arguments.</p><p>Returns <code class="inline">{:ok, opts}</code> if successful, <code class="inline">{:halt, :help}</code> if help was requested,
+or <code class="inline">{:error, reason}</code> if validation fails.</p>
+  </section>
+</section>
+<section class="detail" id="print_help/0">
+
+  <div class="detail-header">
+    <a href="#print_help/0" class="detail-link" data-no-tooltip="" aria-label="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+    </a>
+    <div class="heading-with-actions">
+      <h1 class="signature" translate="no">print_help()</h1>
+
+
+        <a href="https://github.com/bmalum/mayfly/blob/main/lib/mix/lambda.ex#L261" class="icon-action" rel="help" aria-label="View Source">
+          <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+        </a>
+
+    </div>
+  </div>
+
+  <section class="docstring">
+
+      <div class="specs">
+
+          <pre translate="no"><span class="attribute">@spec</span> print_help() :: :ok</pre>
+
+      </div>
+
+<p>Prints help information.</p>
+  </section>
+</section>
+<section class="detail" id="print_summary/1">
+
+  <div class="detail-header">
+    <a href="#print_summary/1" class="detail-link" data-no-tooltip="" aria-label="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+    </a>
+    <div class="heading-with-actions">
+      <h1 class="signature" translate="no">print_summary(opts)</h1>
+
+
+        <a href="https://github.com/bmalum/mayfly/blob/main/lib/mix/lambda.ex#L238" class="icon-action" rel="help" aria-label="View Source">
+          <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+        </a>
+
+    </div>
+  </div>
+
+  <section class="docstring">
+
+      <div class="specs">
+
+          <pre translate="no"><span class="attribute">@spec</span> print_summary(<a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">keyword</a>()) :: :ok</pre>
+
+      </div>
+
+<p>Prints a summary of the build process.</p>
+  </section>
+</section>
+<section class="detail" id="restore_environment/1">
+
+  <div class="detail-header">
+    <a href="#restore_environment/1" class="detail-link" data-no-tooltip="" aria-label="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+    </a>
+    <div class="heading-with-actions">
+      <h1 class="signature" translate="no">restore_environment(old_mix_env)</h1>
+
+
+        <a href="https://github.com/bmalum/mayfly/blob/main/lib/mix/lambda.ex#L224" class="icon-action" rel="help" aria-label="View Source">
+          <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+        </a>
+
+    </div>
+  </div>
+
+  <section class="docstring">
+
+      <div class="specs">
+
+          <pre translate="no"><span class="attribute">@spec</span> restore_environment(<a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>() | nil) :: :ok</pre>
+
+      </div>
+
+<p>Restores the original environment.</p><p>Returns <code class="inline">:ok</code> if successful.</p>
+  </section>
+</section>
+<section class="detail" id="run/1">
+
+  <div class="detail-header">
+    <a href="#run/1" class="detail-link" data-no-tooltip="" aria-label="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+    </a>
+    <div class="heading-with-actions">
+      <h1 class="signature" translate="no">run(args)</h1>
+
+
+        <a href="https://github.com/bmalum/mayfly/blob/main/lib/mix/lambda.ex#L59" class="icon-action" rel="help" aria-label="View Source">
+          <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+        </a>
+
+    </div>
+  </div>
+
+  <section class="docstring">
+
+      <div class="specs">
+
+          <pre translate="no"><span class="attribute">@spec</span> run([<a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>()]) :: <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">any</a>()</pre>
+
+      </div>
+
+<p>Runs the Lambda build task.</p><p>This is the main entry point for the mix task, orchestrating the build process.</p>
+  </section>
+</section>
+<section class="detail" id="run_command/2">
+
+  <div class="detail-header">
+    <a href="#run_command/2" class="detail-link" data-no-tooltip="" aria-label="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+    </a>
+    <div class="heading-with-actions">
+      <h1 class="signature" translate="no">run_command(cmd, args)</h1>
+
+
+        <a href="https://github.com/bmalum/mayfly/blob/main/lib/mix/lambda.ex#L272" class="icon-action" rel="help" aria-label="View Source">
+          <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+        </a>
+
+    </div>
+  </div>
+
+  <section class="docstring">
+
+      <div class="specs">
+
+          <pre translate="no"><span class="attribute">@spec</span> run_command(<a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>(), [<a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>()]) ::
+  {:ok, <a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>()} | {:error, <a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>()}</pre>
+
+      </div>
+
+<p>Runs a system command and handles the result.</p><p>Returns <code class="inline">{:ok, output}</code> if successful, or <code class="inline">{:error, reason}</code> if the command fails.</p>
+  </section>
+</section>
+<section class="detail" id="setup_environment/0">
+
+  <div class="detail-header">
+    <a href="#setup_environment/0" class="detail-link" data-no-tooltip="" aria-label="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+    </a>
+    <div class="heading-with-actions">
+      <h1 class="signature" translate="no">setup_environment()</h1>
+
+
+        <a href="https://github.com/bmalum/mayfly/blob/main/lib/mix/lambda.ex#L108" class="icon-action" rel="help" aria-label="View Source">
+          <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+        </a>
+
+    </div>
+  </div>
+
+  <section class="docstring">
+
+      <div class="specs">
+
+          <pre translate="no"><span class="attribute">@spec</span> setup_environment() :: <a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>() | nil</pre>
+
+      </div>
+
+<p>Sets up the build environment.</p><p>Sets MIX_ENV to &quot;lambda&quot; and returns the original value.</p>
+  </section>
+</section>
+
+    </div>
+  </section>
+
+    <footer class="footer">
+      <p>
+
+        <span class="line">
+          <button class="a-main footer-button display-quick-switch" title="Search HexDocs packages">
+            Search HexDocs
+          </button>
+
+            <a href="Mayfly.epub" title="ePub version">
+              Download ePub version
+            </a>
+
+        </span>
+      </p>
+
+      <p class="built-using">
+        Built using
+        <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" target="_blank" rel="help noopener" translate="no">ExDoc</a> (v0.39.1) for the
+
+          <a href="https://elixir-lang.org" title="Elixir" target="_blank" translate="no">Elixir programming language</a>
+
+      </p>
+
+    </footer>
+  </div>
+</main>
+</div>
+
+  </body>
+</html>

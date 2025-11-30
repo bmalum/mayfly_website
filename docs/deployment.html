@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="ExDoc v0.39.1">
+    <meta name="project" content="Mayfly v0.1.0">
+
+
+    <title>Deployment Guide — Mayfly v0.1.0</title>
+
+    <link rel="stylesheet" href="dist/html-elixir-ZFNMEJKT.css" />
+
+    <script defer src="dist/sidebar_items-32970337.js"></script>
+    <script defer src="docs_config.js"></script>
+    <script defer src="dist/html-HBZYRXZS.js"></script>
+
+  </head>
+  <body>
+    <script>(()=>{var t="ex_doc:settings",e="dark";var o="dark",s="light";var E="sidebar_state",n="closed";var r="sidebar_width";var a="sidebar-open";var i=new URLSearchParams(window.location.search),S=i.get("theme")||JSON.parse(localStorage.getItem(t)||"{}").theme;(S===o||S!==s&&window.matchMedia("(prefers-color-scheme: dark)").matches)&&document.body.classList.add(e);var d=sessionStorage.getItem(E),A=d!==n&&!window.matchMedia(`screen and (max-width: ${768}px)`).matches;document.body.classList.toggle(a,A);var c=sessionStorage.getItem(r);c&&document.body.style.setProperty("--sidebarWidth",`${c}px`);var p=/(Macintosh|iPhone|iPad|iPod)/.test(window.navigator.userAgent);document.documentElement.classList.toggle("apple-os",p);})();
+</script>
+
+<div class="body-wrapper">
+
+<button id="sidebar-menu" class="sidebar-button sidebar-toggle" aria-label="toggle sidebar" aria-controls="sidebar">
+  <i class="ri-menu-line ri-lg" title="Collapse/expand sidebar"></i>
+</button>
+
+<nav id="sidebar" class="sidebar">
+
+  <div class="sidebar-header">
+    <div class="sidebar-projectInfo">
+
+        <a href="https://github.com/bmalum/mayfly" class="sidebar-projectImage">
+          <img src="assets/logo.png" alt="Mayfly" />
+        </a>
+
+      <div>
+        <a href="https://github.com/bmalum/mayfly" class="sidebar-projectName" translate="no">
+Mayfly
+        </a>
+        <div class="sidebar-projectVersion" translate="no">
+          v0.1.0
+        </div>
+      </div>
+    </div>
+    <ul id="sidebar-list-nav" class="sidebar-list-nav" role="tablist" data-extras=""></ul>
+  </div>
+</nav>
+
+<output role="status" id="toast"></output>
+
+<main class="content page-extra" id="main" data-type="extras">
+  <div id="content" class="content-inner">
+    <div class="top-search">
+      <div class="search-settings">
+        <form class="search-bar" action="search.html">
+          <label class="search-label">
+            <span class="sr-only">Search documentation of Mayfly</span>
+            <div class="search-input-wrapper">
+              <input name="q" type="text" class="search-input" placeholder="Press / to search" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" />
+              <button type="button" tabindex="-1" class="search-close-button" aria-hidden="true">
+                <i class="ri-close-line ri-lg" title="Cancel search"></i>
+              </button>
+            </div>
+          </label>
+        </form>
+        <div class="autocomplete">
+        </div>
+        <div class="engine-selector" data-multiple="false">
+          <button type="button" class="engine-button" aria-label="Select search engine" aria-haspopup="true" aria-expanded="false">
+            <i class="ri-search-2-line" aria-hidden="true"></i>
+            <span class="engine-name">Default</span>
+            <i class="ri-arrow-down-s-line" aria-hidden="true"></i>
+          </button>
+          <div class="engine-dropdown" hidden role="menu">
+
+              <button type="button"
+                      class="engine-option"
+                      data-engine-url="search.html?q="
+                      role="menuitemradio"
+                      aria-checked="true">
+                <span class="name">Default</span>
+                <span class="help">In-browser search</span>
+              </button>
+
+          </div>
+        </div>
+        <button class="icon-settings display-settings">
+          <i class="ri-settings-3-line"></i>
+          <span class="sr-only">Settings</span>
+        </button>
+      </div>
+    </div>
+
+<div id="top-content">
+  <div class="heading-with-actions top-heading">
+    <h1>Deployment Guide</h1>
+
+
+      <a href="https://github.com/bmalum/mayfly/blob/main/guides/deployment.md#L1" title="View Source" class="icon-action" rel="help">
+        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+        <span class="sr-only">View Source</span>
+      </a>
+
+  </div>
+
+
+<p>This guide covers advanced deployment scenarios and best practices for Mayfly Lambda functions.</p><h2 id="build-options" class="section-heading"><a href="#build-options" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a><span class="text">Build Options</span></h2><h3 id="local-build" class="section-heading"><a href="#local-build" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a><span class="text">Local Build</span></h3><p>Build on your local machine (same architecture as Lambda):</p><pre><code class="makeup bash" translate="no"><span class="">mix lambda.build --zip
+</span></code></pre><h3 id="docker-build" class="section-heading"><a href="#docker-build" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a><span class="text">Docker Build</span></h3><p>Build using Docker for cross-platform compatibility:</p><pre><code class="makeup bash" translate="no"><span class="">mix lambda.build --docker --zip
+</span></code></pre><p>This ensures your build matches the Lambda execution environment exactly.</p><h3 id="custom-output-directory" class="section-heading"><a href="#custom-output-directory" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a><span class="text">Custom Output Directory</span></h3><p>Specify where to save the build artifacts:</p><pre><code class="makeup bash" translate="no"><span class="">mix lambda.build --zip --outdir ./deploy
+</span></code></pre><h2 id="api-gateway-integration" class="section-heading"><a href="#api-gateway-integration" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a><span class="text">API Gateway Integration</span></h2><p>When integrating with API Gateway, structure your responses according to the proxy integration format:</p><pre><code class="makeup elixir" translate="no"><span class="kd">defmodule</span><span class="w"> </span><span class="nc">MyApp.ApiHandler</span><span class="w"> </span><span class="k" data-group-id="5032274137-1">do</span><span class="w">
+  </span><span class="kd">def</span><span class="w"> </span><span class="nf">handle</span><span class="p" data-group-id="5032274137-2">(</span><span class="n">event</span><span class="p" data-group-id="5032274137-2">)</span><span class="w"> </span><span class="k" data-group-id="5032274137-3">do</span><span class="w">
+    </span><span class="c1"># Extract request details</span><span class="w">
+    </span><span class="n">path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">event</span><span class="p" data-group-id="5032274137-4">[</span><span class="s">&quot;path&quot;</span><span class="p" data-group-id="5032274137-4">]</span><span class="w">
+    </span><span class="n">method</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">event</span><span class="p" data-group-id="5032274137-5">[</span><span class="s">&quot;httpMethod&quot;</span><span class="p" data-group-id="5032274137-5">]</span><span class="w">
+    </span><span class="n">body</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">event</span><span class="p" data-group-id="5032274137-6">[</span><span class="s">&quot;body&quot;</span><span class="p" data-group-id="5032274137-6">]</span><span class="w">
+    
+    </span><span class="c1"># Process request</span><span class="w">
+    </span><span class="n">response_body</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">process_request</span><span class="p" data-group-id="5032274137-7">(</span><span class="n">method</span><span class="p">,</span><span class="w"> </span><span class="n">path</span><span class="p">,</span><span class="w"> </span><span class="n">body</span><span class="p" data-group-id="5032274137-7">)</span><span class="w">
+    
+    </span><span class="c1"># Return API Gateway proxy response</span><span class="w">
+    </span><span class="p" data-group-id="5032274137-8">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="5032274137-9">%{</span><span class="w">
+      </span><span class="ss">statusCode</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
+      </span><span class="ss">headers</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="5032274137-10">%{</span><span class="w">
+        </span><span class="s">&quot;Content-Type&quot;</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="s">&quot;application/json&quot;</span><span class="p">,</span><span class="w">
+        </span><span class="s">&quot;Access-Control-Allow-Origin&quot;</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="s">&quot;*&quot;</span><span class="w">
+      </span><span class="p" data-group-id="5032274137-10">}</span><span class="p">,</span><span class="w">
+      </span><span class="ss">body</span><span class="p">:</span><span class="w"> </span><span class="nc">Jason</span><span class="o">.</span><span class="n">encode!</span><span class="p" data-group-id="5032274137-11">(</span><span class="n">response_body</span><span class="p" data-group-id="5032274137-11">)</span><span class="w">
+    </span><span class="p" data-group-id="5032274137-9">}</span><span class="p" data-group-id="5032274137-8">}</span><span class="w">
+  </span><span class="k" data-group-id="5032274137-3">end</span><span class="w">
+  
+  </span><span class="kd">defp</span><span class="w"> </span><span class="nf">process_request</span><span class="p" data-group-id="5032274137-12">(</span><span class="s">&quot;GET&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;/users&quot;</span><span class="p">,</span><span class="w"> </span><span class="c">_body</span><span class="p" data-group-id="5032274137-12">)</span><span class="w"> </span><span class="k" data-group-id="5032274137-13">do</span><span class="w">
+    </span><span class="p" data-group-id="5032274137-14">%{</span><span class="ss">users</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="5032274137-15">[</span><span class="s">&quot;Alice&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Bob&quot;</span><span class="p" data-group-id="5032274137-15">]</span><span class="p" data-group-id="5032274137-14">}</span><span class="w">
+  </span><span class="k" data-group-id="5032274137-13">end</span><span class="w">
+  
+  </span><span class="kd">defp</span><span class="w"> </span><span class="nf">process_request</span><span class="p" data-group-id="5032274137-16">(</span><span class="s">&quot;POST&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;/users&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">body</span><span class="p" data-group-id="5032274137-16">)</span><span class="w"> </span><span class="k" data-group-id="5032274137-17">do</span><span class="w">
+    </span><span class="n">user</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Jason</span><span class="o">.</span><span class="n">decode!</span><span class="p" data-group-id="5032274137-18">(</span><span class="n">body</span><span class="p" data-group-id="5032274137-18">)</span><span class="w">
+    </span><span class="p" data-group-id="5032274137-19">%{</span><span class="ss">created</span><span class="p">:</span><span class="w"> </span><span class="n">user</span><span class="p" data-group-id="5032274137-19">}</span><span class="w">
+  </span><span class="k" data-group-id="5032274137-17">end</span><span class="w">
+  
+  </span><span class="kd">defp</span><span class="w"> </span><span class="nf">process_request</span><span class="p" data-group-id="5032274137-20">(</span><span class="c">_method</span><span class="p">,</span><span class="w"> </span><span class="c">_path</span><span class="p">,</span><span class="w"> </span><span class="c">_body</span><span class="p" data-group-id="5032274137-20">)</span><span class="w"> </span><span class="k" data-group-id="5032274137-21">do</span><span class="w">
+    </span><span class="p" data-group-id="5032274137-22">%{</span><span class="ss">error</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Not found&quot;</span><span class="p" data-group-id="5032274137-22">}</span><span class="w">
+  </span><span class="k" data-group-id="5032274137-21">end</span><span class="w">
+</span><span class="k" data-group-id="5032274137-1">end</span></code></pre><h3 id="handling-different-http-methods" class="section-heading"><a href="#handling-different-http-methods" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a><span class="text">Handling Different HTTP Methods</span></h3><pre><code class="makeup elixir" translate="no"><span class="kd">def</span><span class="w"> </span><span class="nf">handle</span><span class="p" data-group-id="6425786663-1">(</span><span class="p" data-group-id="6425786663-2">%{</span><span class="s">&quot;httpMethod&quot;</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="s">&quot;GET&quot;</span><span class="p" data-group-id="6425786663-2">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">event</span><span class="p" data-group-id="6425786663-1">)</span><span class="w"> </span><span class="k" data-group-id="6425786663-3">do</span><span class="w">
+  </span><span class="n">handle_get</span><span class="p" data-group-id="6425786663-4">(</span><span class="n">event</span><span class="p" data-group-id="6425786663-4">)</span><span class="w">
+</span><span class="k" data-group-id="6425786663-3">end</span><span class="w">
+
+</span><span class="kd">def</span><span class="w"> </span><span class="nf">handle</span><span class="p" data-group-id="6425786663-5">(</span><span class="p" data-group-id="6425786663-6">%{</span><span class="s">&quot;httpMethod&quot;</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="s">&quot;POST&quot;</span><span class="p" data-group-id="6425786663-6">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">event</span><span class="p" data-group-id="6425786663-5">)</span><span class="w"> </span><span class="k" data-group-id="6425786663-7">do</span><span class="w">
+  </span><span class="n">handle_post</span><span class="p" data-group-id="6425786663-8">(</span><span class="n">event</span><span class="p" data-group-id="6425786663-8">)</span><span class="w">
+</span><span class="k" data-group-id="6425786663-7">end</span><span class="w">
+
+</span><span class="kd">def</span><span class="w"> </span><span class="nf">handle</span><span class="p" data-group-id="6425786663-9">(</span><span class="p" data-group-id="6425786663-10">%{</span><span class="s">&quot;httpMethod&quot;</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="s">&quot;PUT&quot;</span><span class="p" data-group-id="6425786663-10">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">event</span><span class="p" data-group-id="6425786663-9">)</span><span class="w"> </span><span class="k" data-group-id="6425786663-11">do</span><span class="w">
+  </span><span class="n">handle_put</span><span class="p" data-group-id="6425786663-12">(</span><span class="n">event</span><span class="p" data-group-id="6425786663-12">)</span><span class="w">
+</span><span class="k" data-group-id="6425786663-11">end</span><span class="w">
+
+</span><span class="kd">def</span><span class="w"> </span><span class="nf">handle</span><span class="p" data-group-id="6425786663-13">(</span><span class="p" data-group-id="6425786663-14">%{</span><span class="s">&quot;httpMethod&quot;</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="s">&quot;DELETE&quot;</span><span class="p" data-group-id="6425786663-14">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">event</span><span class="p" data-group-id="6425786663-13">)</span><span class="w"> </span><span class="k" data-group-id="6425786663-15">do</span><span class="w">
+  </span><span class="n">handle_delete</span><span class="p" data-group-id="6425786663-16">(</span><span class="n">event</span><span class="p" data-group-id="6425786663-16">)</span><span class="w">
+</span><span class="k" data-group-id="6425786663-15">end</span></code></pre><h2 id="error-handling" class="section-heading"><a href="#error-handling" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a><span class="text">Error Handling</span></h2><h3 id="returning-errors" class="section-heading"><a href="#returning-errors" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a><span class="text">Returning Errors</span></h3><p>Return errors using the standard tuple format:</p><pre><code class="makeup elixir" translate="no"><span class="kd">def</span><span class="w"> </span><span class="nf">handle</span><span class="p" data-group-id="3290166034-1">(</span><span class="n">event</span><span class="p" data-group-id="3290166034-1">)</span><span class="w"> </span><span class="k" data-group-id="3290166034-2">do</span><span class="w">
+  </span><span class="k">case</span><span class="w"> </span><span class="n">validate_input</span><span class="p" data-group-id="3290166034-3">(</span><span class="n">event</span><span class="p" data-group-id="3290166034-3">)</span><span class="w"> </span><span class="k" data-group-id="3290166034-4">do</span><span class="w">
+    </span><span class="ss">:ok</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> 
+      </span><span class="p" data-group-id="3290166034-5">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="n">process</span><span class="p" data-group-id="3290166034-6">(</span><span class="n">event</span><span class="p" data-group-id="3290166034-6">)</span><span class="p" data-group-id="3290166034-5">}</span><span class="w">
+    
+    </span><span class="p" data-group-id="3290166034-7">{</span><span class="ss">:error</span><span class="p">,</span><span class="w"> </span><span class="n">message</span><span class="p" data-group-id="3290166034-7">}</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> 
+      </span><span class="p" data-group-id="3290166034-8">{</span><span class="ss">:error</span><span class="p">,</span><span class="w"> </span><span class="n">message</span><span class="p" data-group-id="3290166034-8">}</span><span class="w">
+  </span><span class="k" data-group-id="3290166034-4">end</span><span class="w">
+</span><span class="k" data-group-id="3290166034-2">end</span></code></pre><p>Mayfly will automatically format errors according to Lambda's error response format:</p><pre><code class="json">{
+  &quot;errorType&quot;: &quot;RuntimeError&quot;,
+  &quot;errorMessage&quot;: &quot;Invalid input&quot;,
+  &quot;stackTrace&quot;: &quot;...&quot;
+}</code></pre><h3 id="raising-exceptions" class="section-heading"><a href="#raising-exceptions" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a><span class="text">Raising Exceptions</span></h3><p>You can also raise exceptions, which Mayfly will catch and format:</p><pre><code class="makeup elixir" translate="no"><span class="kd">def</span><span class="w"> </span><span class="nf">handle</span><span class="p" data-group-id="4342408123-1">(</span><span class="n">event</span><span class="p" data-group-id="4342408123-1">)</span><span class="w"> </span><span class="k" data-group-id="4342408123-2">do</span><span class="w">
+  </span><span class="k">unless</span><span class="w"> </span><span class="nc">Map</span><span class="o">.</span><span class="n">has_key?</span><span class="p" data-group-id="4342408123-3">(</span><span class="n">event</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;required_field&quot;</span><span class="p" data-group-id="4342408123-3">)</span><span class="w"> </span><span class="k" data-group-id="4342408123-4">do</span><span class="w">
+    </span><span class="k">raise</span><span class="w"> </span><span class="s">&quot;Missing required field&quot;</span><span class="w">
+  </span><span class="k" data-group-id="4342408123-4">end</span><span class="w">
+  
+  </span><span class="p" data-group-id="4342408123-5">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="n">process</span><span class="p" data-group-id="4342408123-6">(</span><span class="n">event</span><span class="p" data-group-id="4342408123-6">)</span><span class="p" data-group-id="4342408123-5">}</span><span class="w">
+</span><span class="k" data-group-id="4342408123-2">end</span></code></pre><h3 id="custom-error-types" class="section-heading"><a href="#custom-error-types" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a><span class="text">Custom Error Types</span></h3><p>Define custom error structs for better error handling:</p><pre><code class="makeup elixir" translate="no"><span class="kd">defmodule</span><span class="w"> </span><span class="nc">MyApp.ValidationError</span><span class="w"> </span><span class="k" data-group-id="0842129790-1">do</span><span class="w">
+  </span><span class="kd">defexception</span><span class="w"> </span><span class="p" data-group-id="0842129790-2">[</span><span class="ss">:message</span><span class="p">,</span><span class="w"> </span><span class="ss">:field</span><span class="p" data-group-id="0842129790-2">]</span><span class="w">
+</span><span class="k" data-group-id="0842129790-1">end</span><span class="w">
+
+</span><span class="kd">def</span><span class="w"> </span><span class="nf">handle</span><span class="p" data-group-id="0842129790-3">(</span><span class="n">event</span><span class="p" data-group-id="0842129790-3">)</span><span class="w"> </span><span class="k" data-group-id="0842129790-4">do</span><span class="w">
+  </span><span class="k">case</span><span class="w"> </span><span class="n">validate</span><span class="p" data-group-id="0842129790-5">(</span><span class="n">event</span><span class="p" data-group-id="0842129790-5">)</span><span class="w"> </span><span class="k" data-group-id="0842129790-6">do</span><span class="w">
+    </span><span class="ss">:ok</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> 
+      </span><span class="p" data-group-id="0842129790-7">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="n">process</span><span class="p" data-group-id="0842129790-8">(</span><span class="n">event</span><span class="p" data-group-id="0842129790-8">)</span><span class="p" data-group-id="0842129790-7">}</span><span class="w">
+    
+    </span><span class="p" data-group-id="0842129790-9">{</span><span class="ss">:error</span><span class="p">,</span><span class="w"> </span><span class="n">field</span><span class="p" data-group-id="0842129790-9">}</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> 
+      </span><span class="k">raise</span><span class="w"> </span><span class="nc">MyApp.ValidationError</span><span class="p">,</span><span class="w"> 
+        </span><span class="ss">message</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Validation failed&quot;</span><span class="p">,</span><span class="w"> 
+        </span><span class="ss">field</span><span class="p">:</span><span class="w"> </span><span class="n">field</span><span class="w">
+  </span><span class="k" data-group-id="0842129790-6">end</span><span class="w">
+</span><span class="k" data-group-id="0842129790-4">end</span></code></pre><h2 id="event-sources" class="section-heading"><a href="#event-sources" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a><span class="text">Event Sources</span></h2><h3 id="s3-events" class="section-heading"><a href="#s3-events" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a><span class="text">S3 Events</span></h3><pre><code class="makeup elixir" translate="no"><span class="kd">defmodule</span><span class="w"> </span><span class="nc">MyApp.S3Handler</span><span class="w"> </span><span class="k" data-group-id="8216168844-1">do</span><span class="w">
+  </span><span class="kd">def</span><span class="w"> </span><span class="nf">handle</span><span class="p" data-group-id="8216168844-2">(</span><span class="p" data-group-id="8216168844-3">%{</span><span class="s">&quot;Records&quot;</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="n">records</span><span class="p" data-group-id="8216168844-3">}</span><span class="p" data-group-id="8216168844-2">)</span><span class="w"> </span><span class="k" data-group-id="8216168844-4">do</span><span class="w">
+    </span><span class="n">results</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Enum</span><span class="o">.</span><span class="n">map</span><span class="p" data-group-id="8216168844-5">(</span><span class="n">records</span><span class="p">,</span><span class="w"> </span><span class="k" data-group-id="8216168844-6">fn</span><span class="w"> </span><span class="n">record</span><span class="w"> </span><span class="o">-&gt;</span><span class="w">
+      </span><span class="n">bucket</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">get_in</span><span class="p" data-group-id="8216168844-7">(</span><span class="n">record</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="8216168844-8">[</span><span class="s">&quot;s3&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;bucket&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;name&quot;</span><span class="p" data-group-id="8216168844-8">]</span><span class="p" data-group-id="8216168844-7">)</span><span class="w">
+      </span><span class="n">key</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">get_in</span><span class="p" data-group-id="8216168844-9">(</span><span class="n">record</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="8216168844-10">[</span><span class="s">&quot;s3&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;object&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;key&quot;</span><span class="p" data-group-id="8216168844-10">]</span><span class="p" data-group-id="8216168844-9">)</span><span class="w">
+      
+      </span><span class="n">process_s3_object</span><span class="p" data-group-id="8216168844-11">(</span><span class="n">bucket</span><span class="p">,</span><span class="w"> </span><span class="n">key</span><span class="p" data-group-id="8216168844-11">)</span><span class="w">
+    </span><span class="k" data-group-id="8216168844-6">end</span><span class="p" data-group-id="8216168844-5">)</span><span class="w">
+    
+    </span><span class="p" data-group-id="8216168844-12">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="8216168844-13">%{</span><span class="ss">processed</span><span class="p">:</span><span class="w"> </span><span class="n">length</span><span class="p" data-group-id="8216168844-14">(</span><span class="n">results</span><span class="p" data-group-id="8216168844-14">)</span><span class="p" data-group-id="8216168844-13">}</span><span class="p" data-group-id="8216168844-12">}</span><span class="w">
+  </span><span class="k" data-group-id="8216168844-4">end</span><span class="w">
+</span><span class="k" data-group-id="8216168844-1">end</span></code></pre><h3 id="eventbridge-events" class="section-heading"><a href="#eventbridge-events" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a><span class="text">EventBridge Events</span></h3><pre><code class="makeup elixir" translate="no"><span class="kd">defmodule</span><span class="w"> </span><span class="nc">MyApp.EventBridgeHandler</span><span class="w"> </span><span class="k" data-group-id="5591289850-1">do</span><span class="w">
+  </span><span class="kd">def</span><span class="w"> </span><span class="nf">handle</span><span class="p" data-group-id="5591289850-2">(</span><span class="p" data-group-id="5591289850-3">%{</span><span class="s">&quot;detail-type&quot;</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="n">detail_type</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;detail&quot;</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="n">detail</span><span class="p" data-group-id="5591289850-3">}</span><span class="p" data-group-id="5591289850-2">)</span><span class="w"> </span><span class="k" data-group-id="5591289850-4">do</span><span class="w">
+    </span><span class="k">case</span><span class="w"> </span><span class="n">detail_type</span><span class="w"> </span><span class="k" data-group-id="5591289850-5">do</span><span class="w">
+      </span><span class="s">&quot;Order Placed&quot;</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> 
+        </span><span class="n">process_order</span><span class="p" data-group-id="5591289850-6">(</span><span class="n">detail</span><span class="p" data-group-id="5591289850-6">)</span><span class="w">
+      
+      </span><span class="s">&quot;User Registered&quot;</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> 
+        </span><span class="n">process_registration</span><span class="p" data-group-id="5591289850-7">(</span><span class="n">detail</span><span class="p" data-group-id="5591289850-7">)</span><span class="w">
+      
+      </span><span class="bp">_</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> 
+        </span><span class="p" data-group-id="5591289850-8">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="5591289850-9">%{</span><span class="ss">status</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;ignored&quot;</span><span class="p" data-group-id="5591289850-9">}</span><span class="p" data-group-id="5591289850-8">}</span><span class="w">
+    </span><span class="k" data-group-id="5591289850-5">end</span><span class="w">
+  </span><span class="k" data-group-id="5591289850-4">end</span><span class="w">
+</span><span class="k" data-group-id="5591289850-1">end</span></code></pre><h3 id="sqs-events" class="section-heading"><a href="#sqs-events" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a><span class="text">SQS Events</span></h3><pre><code class="makeup elixir" translate="no"><span class="kd">defmodule</span><span class="w"> </span><span class="nc">MyApp.SqsHandler</span><span class="w"> </span><span class="k" data-group-id="3792178183-1">do</span><span class="w">
+  </span><span class="kd">def</span><span class="w"> </span><span class="nf">handle</span><span class="p" data-group-id="3792178183-2">(</span><span class="p" data-group-id="3792178183-3">%{</span><span class="s">&quot;Records&quot;</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="n">records</span><span class="p" data-group-id="3792178183-3">}</span><span class="p" data-group-id="3792178183-2">)</span><span class="w"> </span><span class="k" data-group-id="3792178183-4">do</span><span class="w">
+    </span><span class="n">results</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Enum</span><span class="o">.</span><span class="n">map</span><span class="p" data-group-id="3792178183-5">(</span><span class="n">records</span><span class="p">,</span><span class="w"> </span><span class="k" data-group-id="3792178183-6">fn</span><span class="w"> </span><span class="n">record</span><span class="w"> </span><span class="o">-&gt;</span><span class="w">
+      </span><span class="n">body</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">record</span><span class="p" data-group-id="3792178183-7">[</span><span class="s">&quot;body&quot;</span><span class="p" data-group-id="3792178183-7">]</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="nc">Jason</span><span class="o">.</span><span class="n">decode!</span><span class="p" data-group-id="3792178183-8">(</span><span class="p" data-group-id="3792178183-8">)</span><span class="w">
+      </span><span class="n">process_message</span><span class="p" data-group-id="3792178183-9">(</span><span class="n">body</span><span class="p" data-group-id="3792178183-9">)</span><span class="w">
+    </span><span class="k" data-group-id="3792178183-6">end</span><span class="p" data-group-id="3792178183-5">)</span><span class="w">
+    
+    </span><span class="p" data-group-id="3792178183-10">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="3792178183-11">%{</span><span class="w">
+      </span><span class="ss">batchItemFailures</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="3792178183-12">[</span><span class="p" data-group-id="3792178183-12">]</span><span class="w">  </span><span class="c1"># Return failed message IDs for retry</span><span class="w">
+    </span><span class="p" data-group-id="3792178183-11">}</span><span class="p" data-group-id="3792178183-10">}</span><span class="w">
+  </span><span class="k" data-group-id="3792178183-4">end</span><span class="w">
+</span><span class="k" data-group-id="3792178183-1">end</span></code></pre><h2 id="performance-optimization" class="section-heading"><a href="#performance-optimization" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a><span class="text">Performance Optimization</span></h2><h3 id="memory-configuration" class="section-heading"><a href="#memory-configuration" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a><span class="text">Memory Configuration</span></h3><p>Start with 512MB and adjust based on your function's needs:</p><pre><code class="makeup bash" translate="no"><span class="">aws lambda update-function-configuration \
+</span><span class="">  --function-name my-function \
+</span><span class="">  --memory-size 1024
+</span></code></pre><p>More memory also means more CPU power.</p><h3 id="timeout-configuration" class="section-heading"><a href="#timeout-configuration" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a><span class="text">Timeout Configuration</span></h3><p>Set appropriate timeouts (default is 3 seconds):</p><pre><code class="makeup bash" translate="no"><span class="">aws lambda update-function-configuration \
+</span><span class="">  --function-name my-function \
+</span><span class="">  --timeout 30
+</span></code></pre><h3 id="cold-start-optimization" class="section-heading"><a href="#cold-start-optimization" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a><span class="text">Cold Start Optimization</span></h3><ul><li>Keep dependencies minimal</li><li>Use provisioned concurrency for critical functions</li><li>Consider Lambda SnapStart (when available for custom runtimes)</li></ul><h2 id="environment-variables" class="section-heading"><a href="#environment-variables" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a><span class="text">Environment Variables</span></h2><p>Set environment variables for configuration:</p><pre><code class="makeup bash" translate="no"><span class="">aws lambda update-function-configuration \
+</span><span class="">  --function-name my-function \
+</span><span class="">  --environment Variables=&quot;{
+</span><span class="">    _HANDLER=Elixir.MyApp.Handler.handle,
+</span><span class="">    DATABASE_URL=postgres://...,
+</span><span class="">    API_KEY=secret123
+</span><span class="">  }&quot;
+</span></code></pre><p>Access in your code:</p><pre><code class="makeup elixir" translate="no"><span class="kd">def</span><span class="w"> </span><span class="nf">handle</span><span class="p" data-group-id="8761660287-1">(</span><span class="n">event</span><span class="p" data-group-id="8761660287-1">)</span><span class="w"> </span><span class="k" data-group-id="8761660287-2">do</span><span class="w">
+  </span><span class="n">db_url</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">System</span><span class="o">.</span><span class="n">get_env</span><span class="p" data-group-id="8761660287-3">(</span><span class="s">&quot;DATABASE_URL&quot;</span><span class="p" data-group-id="8761660287-3">)</span><span class="w">
+  </span><span class="n">api_key</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">System</span><span class="o">.</span><span class="n">get_env</span><span class="p" data-group-id="8761660287-4">(</span><span class="s">&quot;API_KEY&quot;</span><span class="p" data-group-id="8761660287-4">)</span><span class="w">
+  
+  </span><span class="c1"># Use configuration</span><span class="w">
+  </span><span class="p" data-group-id="8761660287-5">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="n">process</span><span class="p" data-group-id="8761660287-6">(</span><span class="n">event</span><span class="p">,</span><span class="w"> </span><span class="n">db_url</span><span class="p">,</span><span class="w"> </span><span class="n">api_key</span><span class="p" data-group-id="8761660287-6">)</span><span class="p" data-group-id="8761660287-5">}</span><span class="w">
+</span><span class="k" data-group-id="8761660287-2">end</span></code></pre><h2 id="monitoring-and-logging" class="section-heading"><a href="#monitoring-and-logging" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a><span class="text">Monitoring and Logging</span></h2><h3 id="structured-logging" class="section-heading"><a href="#structured-logging" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a><span class="text">Structured Logging</span></h3><p>Use Logger for structured logging:</p><pre><code class="makeup elixir" translate="no"><span class="kn">require</span><span class="w"> </span><span class="nc">Logger</span><span class="w">
+
+</span><span class="kd">def</span><span class="w"> </span><span class="nf">handle</span><span class="p" data-group-id="7731327159-1">(</span><span class="n">event</span><span class="p" data-group-id="7731327159-1">)</span><span class="w"> </span><span class="k" data-group-id="7731327159-2">do</span><span class="w">
+  </span><span class="nc">Logger</span><span class="o">.</span><span class="n">info</span><span class="p" data-group-id="7731327159-3">(</span><span class="s">&quot;Processing event&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">event_type</span><span class="p">:</span><span class="w"> </span><span class="n">event</span><span class="p" data-group-id="7731327159-4">[</span><span class="s">&quot;type&quot;</span><span class="p" data-group-id="7731327159-4">]</span><span class="p" data-group-id="7731327159-3">)</span><span class="w">
+  
+  </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">process</span><span class="p" data-group-id="7731327159-5">(</span><span class="n">event</span><span class="p" data-group-id="7731327159-5">)</span><span class="w">
+  
+  </span><span class="nc">Logger</span><span class="o">.</span><span class="n">info</span><span class="p" data-group-id="7731327159-6">(</span><span class="s">&quot;Event processed successfully&quot;</span><span class="p">,</span><span class="w"> 
+    </span><span class="ss">event_type</span><span class="p">:</span><span class="w"> </span><span class="n">event</span><span class="p" data-group-id="7731327159-7">[</span><span class="s">&quot;type&quot;</span><span class="p" data-group-id="7731327159-7">]</span><span class="p">,</span><span class="w">
+    </span><span class="ss">duration_ms</span><span class="p">:</span><span class="w"> </span><span class="mi">123</span><span class="w">
+  </span><span class="p" data-group-id="7731327159-6">)</span><span class="w">
+  
+  </span><span class="p" data-group-id="7731327159-8">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="n">result</span><span class="p" data-group-id="7731327159-8">}</span><span class="w">
+</span><span class="k" data-group-id="7731327159-2">end</span></code></pre><p>Logs appear in CloudWatch Logs automatically.</p><h3 id="metrics" class="section-heading"><a href="#metrics" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a><span class="text">Metrics</span></h3><p>Track custom metrics using CloudWatch:</p><pre><code class="makeup elixir" translate="no"><span class="kd">def</span><span class="w"> </span><span class="nf">handle</span><span class="p" data-group-id="0142770190-1">(</span><span class="n">event</span><span class="p" data-group-id="0142770190-1">)</span><span class="w"> </span><span class="k" data-group-id="0142770190-2">do</span><span class="w">
+  </span><span class="n">start_time</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">System</span><span class="o">.</span><span class="n">monotonic_time</span><span class="p" data-group-id="0142770190-3">(</span><span class="ss">:millisecond</span><span class="p" data-group-id="0142770190-3">)</span><span class="w">
+  
+  </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">process</span><span class="p" data-group-id="0142770190-4">(</span><span class="n">event</span><span class="p" data-group-id="0142770190-4">)</span><span class="w">
+  
+  </span><span class="n">duration</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">System</span><span class="o">.</span><span class="n">monotonic_time</span><span class="p" data-group-id="0142770190-5">(</span><span class="ss">:millisecond</span><span class="p" data-group-id="0142770190-5">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">start_time</span><span class="w">
+  </span><span class="nc">Logger</span><span class="o">.</span><span class="n">info</span><span class="p" data-group-id="0142770190-6">(</span><span class="s">&quot;MONITORING|</span><span class="si" data-group-id="0142770190-7">#{</span><span class="n">duration</span><span class="si" data-group-id="0142770190-7">}</span><span class="s">|milliseconds|ProcessingTime&quot;</span><span class="p" data-group-id="0142770190-6">)</span><span class="w">
+  
+  </span><span class="p" data-group-id="0142770190-8">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="n">result</span><span class="p" data-group-id="0142770190-8">}</span><span class="w">
+</span><span class="k" data-group-id="0142770190-2">end</span></code></pre><h2 id="ci-cd-integration" class="section-heading"><a href="#ci-cd-integration" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a><span class="text">CI/CD Integration</span></h2><h3 id="github-actions-example" class="section-heading"><a href="#github-actions-example" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a><span class="text">GitHub Actions Example</span></h3><pre><code class="yaml">name: Deploy Lambda
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      
+      - uses: erlef/setup-beam@v1
+        with:
+          elixir-version: '1.15'
+          otp-version: '26'
+      
+      - name: Install dependencies
+        run: mix deps.get
+      
+      - name: Build Lambda package
+        run: mix lambda.build --docker --zip
+      
+      - name: Deploy to AWS
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        run: |
+          aws lambda update-function-code \
+            --function-name my-function \
+            --zip-file fileb://lambda.zip</code></pre><h2 id="best-practices" class="section-heading"><a href="#best-practices" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a><span class="text">Best Practices</span></h2><ol><li><strong>Keep handlers simple</strong> - Move business logic to separate modules</li><li><strong>Use pattern matching</strong> - Handle different event types cleanly</li><li><strong>Return early</strong> - Validate input and return errors quickly</li><li><strong>Log appropriately</strong> - Use structured logging for better observability</li><li><strong>Test locally</strong> - Write unit tests for your handler logic</li><li><strong>Monitor performance</strong> - Track cold starts and execution times</li><li><strong>Handle errors gracefully</strong> - Always return proper error responses</li><li><strong>Use environment variables</strong> - Keep configuration out of code</li><li><strong>Version your functions</strong> - Use Lambda versions and aliases</li><li><strong>Set appropriate timeouts</strong> - Don't use default 3s for long-running tasks</li></ol>
+
+</div>
+
+<div class="bottom-actions" id="bottom-actions">
+  <div class="bottom-actions-item">
+
+      <a href="getting-started.html" class="bottom-actions-button" rel="prev">
+        <span class="subheader">
+          ← Previous Page
+        </span>
+        <span class="title">
+Getting Started with Mayfly
+        </span>
+      </a>
+
+  </div>
+  <div class="bottom-actions-item">
+
+  </div>
+</div>
+    <footer class="footer">
+      <p>
+
+        <span class="line">
+          <button class="a-main footer-button display-quick-switch" title="Search HexDocs packages">
+            Search HexDocs
+          </button>
+
+            <a href="Mayfly.epub" title="ePub version">
+              Download ePub version
+            </a>
+
+        </span>
+      </p>
+
+      <p class="built-using">
+        Built using
+        <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" target="_blank" rel="help noopener" translate="no">ExDoc</a> (v0.39.1) for the
+
+          <a href="https://elixir-lang.org" title="Elixir" target="_blank" translate="no">Elixir programming language</a>
+
+      </p>
+
+    </footer>
+  </div>
+</main>
+</div>
+
+  </body>
+</html>
