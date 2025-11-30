@@ -12,6 +12,8 @@
 
     <link rel="stylesheet" href="dist/html-elixir-ZFNMEJKT.css" />
 
+      <link rel="canonical" href="https://elixir-aws-lambda.dev/docs/Mix.Tasks.Lambda.Build.html" />
+
     <script defer src="dist/sidebar_items-32970337.js"></script>
     <script defer src="docs_config.js"></script>
     <script defer src="dist/html-HBZYRXZS.js"></script>
@@ -111,9 +113,9 @@ Mayfly
 
 
     <section id="moduledoc">
-<p>A Mix task for building AWS Lambda deployment packages for Elixir applications.</p><p>This task creates a deployment package for AWS Lambda, including:</p><ul><li>Building a release using <a href="https://hexdocs.pm/mix/Mix.Tasks.Release.html"><code class="inline">mix release</code></a></li><li>Creating a bootstrap script</li><li>Optionally building in a Docker container</li><li>Optionally creating a ZIP archive for deployment</li></ul><h2 id="module-usage" class="section-heading"><a href="#module-usage" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a><span class="text">Usage</span></h2><pre><code class="makeup elixir" translate="no"><span class="n">mix</span><span class="w"> </span><span class="n">lambda</span><span class="o">.</span><span class="n">build</span><span class="w"> </span><span class="p" data-group-id="7681723567-1">[</span><span class="n">options</span><span class="p" data-group-id="7681723567-1">]</span></code></pre><h2 id="module-options" class="section-heading"><a href="#module-options" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a><span class="text">Options</span></h2><pre><code class="makeup elixir" translate="no"><span class="o">--</span><span class="n">zip</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="n">z</span><span class="w">      </span><span class="o">-</span><span class="w"> </span><span class="nc">Create</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="nc">ZIP</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">deployment</span><span class="w">
-</span><span class="o">--</span><span class="n">outdir</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="n">o</span><span class="w">   </span><span class="o">-</span><span class="w"> </span><span class="nc">Specify</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">output</span><span class="w"> </span><span class="n">directory</span><span class="w"> </span><span class="p" data-group-id="4036944830-1">(</span><span class="ss">default</span><span class="p">:</span><span class="w"> </span><span class="n">current</span><span class="w"> </span><span class="n">directory</span><span class="p" data-group-id="4036944830-1">)</span><span class="w">
-</span><span class="o">--</span><span class="n">docker</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="n">d</span><span class="w">   </span><span class="o">-</span><span class="w"> </span><span class="nc">Build</span><span class="w"> </span><span class="n">using</span><span class="w"> </span><span class="nc">Docker</span><span class="w"> </span><span class="p" data-group-id="4036944830-2">(</span><span class="n">useful</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">cross</span><span class="o">-</span><span class="n">platform</span><span class="w"> </span><span class="n">compatibility</span><span class="p" data-group-id="4036944830-2">)</span><span class="w">
+<p>A Mix task for building AWS Lambda deployment packages for Elixir applications.</p><p>This task creates a deployment package for AWS Lambda, including:</p><ul><li>Building a release using <a href="https://hexdocs.pm/mix/Mix.Tasks.Release.html"><code class="inline">mix release</code></a></li><li>Creating a bootstrap script</li><li>Optionally building in a Docker container</li><li>Optionally creating a ZIP archive for deployment</li></ul><h2 id="module-usage" class="section-heading"><a href="#module-usage" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a><span class="text">Usage</span></h2><pre><code class="makeup elixir" translate="no"><span class="n">mix</span><span class="w"> </span><span class="n">lambda</span><span class="o">.</span><span class="n">build</span><span class="w"> </span><span class="p" data-group-id="7945421732-1">[</span><span class="n">options</span><span class="p" data-group-id="7945421732-1">]</span></code></pre><h2 id="module-options" class="section-heading"><a href="#module-options" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a><span class="text">Options</span></h2><pre><code class="makeup elixir" translate="no"><span class="o">--</span><span class="n">zip</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="n">z</span><span class="w">      </span><span class="o">-</span><span class="w"> </span><span class="nc">Create</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="nc">ZIP</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">deployment</span><span class="w">
+</span><span class="o">--</span><span class="n">outdir</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="n">o</span><span class="w">   </span><span class="o">-</span><span class="w"> </span><span class="nc">Specify</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">output</span><span class="w"> </span><span class="n">directory</span><span class="w"> </span><span class="p" data-group-id="3138062416-1">(</span><span class="ss">default</span><span class="p">:</span><span class="w"> </span><span class="n">current</span><span class="w"> </span><span class="n">directory</span><span class="p" data-group-id="3138062416-1">)</span><span class="w">
+</span><span class="o">--</span><span class="n">docker</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="n">d</span><span class="w">   </span><span class="o">-</span><span class="w"> </span><span class="nc">Build</span><span class="w"> </span><span class="n">using</span><span class="w"> </span><span class="nc">Docker</span><span class="w"> </span><span class="p" data-group-id="3138062416-2">(</span><span class="n">useful</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">cross</span><span class="o">-</span><span class="n">platform</span><span class="w"> </span><span class="n">compatibility</span><span class="p" data-group-id="3138062416-2">)</span><span class="w">
 </span><span class="o">--</span><span class="n">help</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="n">h</span><span class="w">     </span><span class="o">-</span><span class="w"> </span><span class="nc">Print</span><span class="w"> </span><span class="n">this</span><span class="w"> </span><span class="n">help</span><span class="w"> </span><span class="n">message</span></code></pre><h2 id="module-examples" class="section-heading"><a href="#module-examples" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a><span class="text">Examples</span></h2><pre><code class="makeup elixir" translate="no"><span class="c1"># Build a release</span><span class="w">
 </span><span class="n">mix</span><span class="w"> </span><span class="n">lambda</span><span class="o">.</span><span class="n">build</span><span class="w">
 
@@ -285,7 +287,7 @@ Mayfly
       <h1 class="signature" translate="no">bootstrap_content(project_name)</h1>
 
 
-        <a href="https://github.com/bmalum/mayfly/blob/main/lib/mix/lambda.ex#L287" class="icon-action" rel="help" aria-label="View Source">
+        <a href="https://github.com/bmalum/mayfly/blob/main/lib/mix/lambda.ex#L299" class="icon-action" rel="help" aria-label="View Source">
           <i class="ri-code-s-slash-line" aria-hidden="true"></i>
         </a>
 
@@ -313,7 +315,7 @@ Mayfly
       <h1 class="signature" translate="no">build_release()</h1>
 
 
-        <a href="https://github.com/bmalum/mayfly/blob/main/lib/mix/lambda.ex#L121" class="icon-action" rel="help" aria-label="View Source">
+        <a href="https://github.com/bmalum/mayfly/blob/main/lib/mix/lambda.ex#L133" class="icon-action" rel="help" aria-label="View Source">
           <i class="ri-code-s-slash-line" aria-hidden="true"></i>
         </a>
 
@@ -341,7 +343,7 @@ Mayfly
       <h1 class="signature" translate="no">create_bootstrap(opts)</h1>
 
 
-        <a href="https://github.com/bmalum/mayfly/blob/main/lib/mix/lambda.ex#L140" class="icon-action" rel="help" aria-label="View Source">
+        <a href="https://github.com/bmalum/mayfly/blob/main/lib/mix/lambda.ex#L152" class="icon-action" rel="help" aria-label="View Source">
           <i class="ri-code-s-slash-line" aria-hidden="true"></i>
         </a>
 
@@ -369,7 +371,7 @@ Mayfly
       <h1 class="signature" translate="no">create_zip_archive(opts, bootstrap_path)</h1>
 
 
-        <a href="https://github.com/bmalum/mayfly/blob/main/lib/mix/lambda.ex#L191" class="icon-action" rel="help" aria-label="View Source">
+        <a href="https://github.com/bmalum/mayfly/blob/main/lib/mix/lambda.ex#L204" class="icon-action" rel="help" aria-label="View Source">
           <i class="ri-code-s-slash-line" aria-hidden="true"></i>
         </a>
 
@@ -400,7 +402,7 @@ Mayfly
       <h1 class="signature" translate="no">handle_docker_build(opts, bootstrap_path)</h1>
 
 
-        <a href="https://github.com/bmalum/mayfly/blob/main/lib/mix/lambda.ex#L167" class="icon-action" rel="help" aria-label="View Source">
+        <a href="https://github.com/bmalum/mayfly/blob/main/lib/mix/lambda.ex#L179" class="icon-action" rel="help" aria-label="View Source">
           <i class="ri-code-s-slash-line" aria-hidden="true"></i>
         </a>
 
@@ -431,7 +433,7 @@ Mayfly
       <h1 class="signature" translate="no">parse_and_validate_args(args)</h1>
 
 
-        <a href="https://github.com/bmalum/mayfly/blob/main/lib/mix/lambda.ex#L86" class="icon-action" rel="help" aria-label="View Source">
+        <a href="https://github.com/bmalum/mayfly/blob/main/lib/mix/lambda.ex#L98" class="icon-action" rel="help" aria-label="View Source">
           <i class="ri-code-s-slash-line" aria-hidden="true"></i>
         </a>
 
@@ -461,7 +463,7 @@ or <code class="inline">{:error, reason}</code> if validation fails.</p>
       <h1 class="signature" translate="no">print_help()</h1>
 
 
-        <a href="https://github.com/bmalum/mayfly/blob/main/lib/mix/lambda.ex#L261" class="icon-action" rel="help" aria-label="View Source">
+        <a href="https://github.com/bmalum/mayfly/blob/main/lib/mix/lambda.ex#L273" class="icon-action" rel="help" aria-label="View Source">
           <i class="ri-code-s-slash-line" aria-hidden="true"></i>
         </a>
 
@@ -489,7 +491,7 @@ or <code class="inline">{:error, reason}</code> if validation fails.</p>
       <h1 class="signature" translate="no">print_summary(opts)</h1>
 
 
-        <a href="https://github.com/bmalum/mayfly/blob/main/lib/mix/lambda.ex#L238" class="icon-action" rel="help" aria-label="View Source">
+        <a href="https://github.com/bmalum/mayfly/blob/main/lib/mix/lambda.ex#L250" class="icon-action" rel="help" aria-label="View Source">
           <i class="ri-code-s-slash-line" aria-hidden="true"></i>
         </a>
 
@@ -517,7 +519,7 @@ or <code class="inline">{:error, reason}</code> if validation fails.</p>
       <h1 class="signature" translate="no">restore_environment(old_mix_env)</h1>
 
 
-        <a href="https://github.com/bmalum/mayfly/blob/main/lib/mix/lambda.ex#L224" class="icon-action" rel="help" aria-label="View Source">
+        <a href="https://github.com/bmalum/mayfly/blob/main/lib/mix/lambda.ex#L236" class="icon-action" rel="help" aria-label="View Source">
           <i class="ri-code-s-slash-line" aria-hidden="true"></i>
         </a>
 
@@ -573,7 +575,7 @@ or <code class="inline">{:error, reason}</code> if validation fails.</p>
       <h1 class="signature" translate="no">run_command(cmd, args)</h1>
 
 
-        <a href="https://github.com/bmalum/mayfly/blob/main/lib/mix/lambda.ex#L272" class="icon-action" rel="help" aria-label="View Source">
+        <a href="https://github.com/bmalum/mayfly/blob/main/lib/mix/lambda.ex#L284" class="icon-action" rel="help" aria-label="View Source">
           <i class="ri-code-s-slash-line" aria-hidden="true"></i>
         </a>
 
@@ -602,7 +604,7 @@ or <code class="inline">{:error, reason}</code> if validation fails.</p>
       <h1 class="signature" translate="no">setup_environment()</h1>
 
 
-        <a href="https://github.com/bmalum/mayfly/blob/main/lib/mix/lambda.ex#L108" class="icon-action" rel="help" aria-label="View Source">
+        <a href="https://github.com/bmalum/mayfly/blob/main/lib/mix/lambda.ex#L120" class="icon-action" rel="help" aria-label="View Source">
           <i class="ri-code-s-slash-line" aria-hidden="true"></i>
         </a>
 

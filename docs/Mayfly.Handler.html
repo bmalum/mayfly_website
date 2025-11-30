@@ -12,6 +12,8 @@
 
     <link rel="stylesheet" href="dist/html-elixir-ZFNMEJKT.css" />
 
+      <link rel="canonical" href="https://elixir-aws-lambda.dev/docs/Mayfly.Handler.html" />
+
     <script defer src="dist/sidebar_items-32970337.js"></script>
     <script defer src="docs_config.js"></script>
     <script defer src="dist/html-HBZYRXZS.js"></script>
@@ -260,9 +262,9 @@ Handles proper error conversion and response formatting.</p>
       </div>
 
 <p>Resolves the handler module and function from environment variables.
-Returns a tuple with {module, function}.</p><h2 id="resolve/0-examples" class="section-heading"><a href="#resolve/0-examples" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a><span class="text">Examples</span></h2><pre><code class="makeup elixir" translate="no"><span class="gp unselectable">iex&gt; </span><span class="nc">System</span><span class="o">.</span><span class="n">put_env</span><span class="p" data-group-id="3236776539-1">(</span><span class="s">&quot;_HANDLER&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Elixir.MyModule.my_function&quot;</span><span class="p" data-group-id="3236776539-1">)</span><span class="w">
-</span><span class="gp unselectable">iex&gt; </span><span class="nc">Mayfly.Handler</span><span class="o">.</span><span class="n">resolve</span><span class="p" data-group-id="3236776539-2">(</span><span class="p" data-group-id="3236776539-2">)</span><span class="w">
-</span><span class="p" data-group-id="3236776539-3">{</span><span class="nc">MyModule</span><span class="p">,</span><span class="w"> </span><span class="ss">:my_function</span><span class="p" data-group-id="3236776539-3">}</span></code></pre>
+Returns a tuple with {module, function}.</p><h2 id="resolve/0-examples" class="section-heading"><a href="#resolve/0-examples" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a><span class="text">Examples</span></h2><pre><code class="makeup elixir" translate="no"><span class="gp unselectable">iex&gt; </span><span class="nc">System</span><span class="o">.</span><span class="n">put_env</span><span class="p" data-group-id="5020179043-1">(</span><span class="s">&quot;_HANDLER&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Elixir.MyModule.my_function&quot;</span><span class="p" data-group-id="5020179043-1">)</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="nc">Mayfly.Handler</span><span class="o">.</span><span class="n">resolve</span><span class="p" data-group-id="5020179043-2">(</span><span class="p" data-group-id="5020179043-2">)</span><span class="w">
+</span><span class="p" data-group-id="5020179043-3">{</span><span class="nc">MyModule</span><span class="p">,</span><span class="w"> </span><span class="ss">:my_function</span><span class="p" data-group-id="5020179043-3">}</span></code></pre>
   </section>
 </section>
 
