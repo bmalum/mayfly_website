@@ -1,0 +1,2 @@
+// ExDoc configuration
+window.exDocConfig = {};
