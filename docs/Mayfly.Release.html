@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="ExDoc v0.40.4">
+    <meta name="project" content="Mayfly v1.0.0-rc.1">
+
+
+    <title>Mayfly.Release — Mayfly v1.0.0-rc.1</title>
+
+    <link rel="stylesheet" href="dist/html-elixir-RXHHCTJW.css" />
+
+      <link rel="canonical" href="https://elixir-aws-lambda.dev/docs/Mayfly.Release.html" />
+
+    <script defer src="dist/sidebar_items-B9A7F5BC.js"></script>
+    <script defer src="docs_config.js"></script>
+    <script defer src="dist/html-MI33G4N7.js"></script>
+
+  </head>
+  <body>
+    <script>(()=>{var t="ex_doc:settings",e="dark";var o="dark",s="light";var E="sidebar_state",n="closed";var r="sidebar_width";var a="sidebar-open";var i=new URLSearchParams(window.location.search),S=i.get("theme")||JSON.parse(localStorage.getItem(t)||"{}").theme;(S===o||S!==s&&window.matchMedia("(prefers-color-scheme: dark)").matches)&&document.body.classList.add(e);var d=sessionStorage.getItem(E),A=d!==n&&!window.matchMedia(`screen and (max-width: ${768}px)`).matches;document.body.classList.toggle(a,A);var c=sessionStorage.getItem(r);c&&document.body.style.setProperty("--sidebarWidth",`${c}px`);var p=/(Macintosh|iPhone|iPad|iPod)/.test(window.navigator.userAgent);document.documentElement.classList.toggle("apple-os",p);})();
+</script>
+
+<div class="body-wrapper">
+
+<button id="sidebar-menu" class="sidebar-button sidebar-toggle" aria-label="toggle sidebar" aria-controls="sidebar">
+  <i class="ri-menu-line ri-lg" title="Collapse/expand sidebar"></i>
+</button>
+
+<nav id="sidebar" class="sidebar">
+
+  <div class="sidebar-header">
+    <div class="sidebar-projectInfo">
+
+        <a href="https://github.com/bmalum/mayfly" class="sidebar-projectImage">
+          <img src="assets/logo.png" alt="Mayfly" />
+        </a>
+
+      <div>
+        <a href="https://github.com/bmalum/mayfly" class="sidebar-projectName" translate="no">
+Mayfly
+        </a>
+        <div class="sidebar-projectVersion" translate="no">
+          v1.0.0-rc.1
+        </div>
+      </div>
+    </div>
+    <ul id="sidebar-list-nav" class="sidebar-list-nav" role="tablist" data-extras="Pages"></ul>
+  </div>
+</nav>
+
+<output role="status" id="toast"></output>
+
+<main class="content page-module" id="main" data-type="modules">
+  <div id="content" class="content-inner">
+    <div class="top-search">
+      <div class="search-settings">
+        <form class="search-bar" action="search.html">
+          <label class="search-label">
+            <span class="sr-only">Search documentation of Mayfly</span>
+            <div class="search-input-wrapper">
+              <input name="q" type="text" class="search-input" placeholder="Press / to search" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" />
+              <button type="button" tabindex="-1" class="search-close-button" aria-hidden="true">
+                <i class="ri-close-line ri-lg" title="Cancel search"></i>
+              </button>
+            </div>
+          </label>
+        </form>
+        <div class="autocomplete">
+        </div>
+        <div class="engine-selector" data-multiple="false">
+          <button type="button" class="engine-button" aria-label="Select search engine" aria-haspopup="true" aria-expanded="false">
+            <i class="ri-search-2-line" aria-hidden="true"></i>
+            <span class="engine-name">Default</span>
+            <i class="ri-arrow-down-s-line" aria-hidden="true"></i>
+          </button>
+          <div class="engine-dropdown" hidden role="menu">
+
+              <button type="button"
+                      class="engine-option"
+                      data-engine-url="search.html?q="
+                      role="menuitemradio"
+                      aria-checked="true">
+                <span class="name">Default</span>
+                <span class="help">In-browser search</span>
+              </button>
+
+          </div>
+        </div>
+        <button class="icon-settings display-settings">
+          <i class="ri-settings-3-line"></i>
+          <span class="sr-only">Settings</span>
+        </button>
+      </div>
+    </div>
+
+<div id="top-content">
+  <div class="heading-with-actions top-heading">
+    <h1>
+      <span translate="no">Mayfly.<wbr />Release</span> 
+      <small class="app-vsn" translate="no">(Mayfly v1.0.0-rc.1)</small>
+
+    </h1>
+
+<a href="Mayfly.Release.md" title="Copy Markdown (hold Ctrl/Cmd and click it to open as Markdown)" class="copy-markdown icon-action" rel="help">
+  <i class="ri-markdown-line" aria-hidden="true"></i>
+  <span class="sr-only">Copy Markdown</span>
+</a>
+
+
+
+      <a href="https://github.com/bmalum/mayfly/blob/v1.0.0-rc.1/lib/mayfly/release.ex#L1" title="View Source" class="icon-action" rel="help nofollow">
+        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+        <span class="sr-only">View Source</span>
+      </a>
+
+  </div>
+
+
+    <section id="moduledoc">
+<p>Turns <a href="https://mix.hexdocs.pm/Mix.Tasks.Release.html"><code class="inline">mix release</code></a> into a Lambda package builder.</p><pre><code class="makeup elixir" translate="no"><span class="c1"># mix.exs</span><span class="w">
+</span><span class="kd">def</span><span class="w"> </span><span class="nf">project</span><span class="w"> </span><span class="k" data-group-id="group-1">do</span><span class="w">
+  </span><span class="p" data-group-id="group-2">[</span><span class="w">
+    </span><span class="ss">releases</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="group-3">[</span><span class="w">
+      </span><span class="ss">lambda</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="group-4">[</span><span class="w">
+        </span><span class="ss">steps</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="group-5">[</span><span class="o">&amp;</span><span class="nc">Mayfly.Release</span><span class="o">.</span><span class="n">prepare</span><span class="o">/</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="ss">:assemble</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="nc">Mayfly.Release</span><span class="o">.</span><span class="n">bootstrap</span><span class="o">/</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="nc">Mayfly.Release</span><span class="o">.</span><span class="n">zip</span><span class="o">/</span><span class="mi">1</span><span class="p" data-group-id="group-5">]</span><span class="p">,</span><span class="w">
+        </span><span class="ss">mayfly</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="group-6">[</span><span class="ss">handler</span><span class="p">:</span><span class="w"> </span><span class="nc">MyApp.Handler</span><span class="p" data-group-id="group-6">]</span><span class="w">
+      </span><span class="p" data-group-id="group-4">]</span><span class="w">
+    </span><span class="p" data-group-id="group-3">]</span><span class="w">
+  </span><span class="p" data-group-id="group-2">]</span><span class="w">
+</span><span class="k" data-group-id="group-1">end</span><span class="w">
+
+</span><span class="nc">MIX_ENV</span><span class="o">=</span><span class="n">prod</span><span class="w"> </span><span class="n">mix</span><span class="w"> </span><span class="n">release</span><span class="w"> </span><span class="n">lambda</span><span class="w">      </span><span class="c1"># -&gt; _build/prod/rel/lambda/lambda.zip</span></code></pre><p>Use function captures, not a call such as <code class="inline">Mayfly.Release.steps()</code>: <code class="inline">mix.exs</code>
+is evaluated before dependencies are compiled, and a capture of a remote
+function does not require the module to be loaded, so <a href="https://mix.hexdocs.pm/Mix.Tasks.Deps.Get.html"><code class="inline">mix deps.get</code></a> on a
+fresh clone works. Drop <code class="inline">&amp;Mayfly.Release.zip/1</code> if you only want the
+directory.</p><h2 id="module-mayfly-options" class="section-heading"><a href="#module-mayfly-options" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a><span class="text"><code class="inline">:mayfly</code> options</span></h2><ul><li><code class="inline">:handler</code> (required) – module implementing <a href="Mayfly.Handler.html"><code class="inline">Mayfly.Handler</code></a> or a
+<code class="inline">&quot;Module.function&quot;</code> string. Written into <code class="inline">bootstrap</code> as the default
+<code class="inline">_HANDLER</code>; the Lambda <strong>Handler</strong> setting overrides it.</li><li><code class="inline">:layer</code> – build for the Mayfly ERTS layer: sets <code class="inline">include_erts: false</code>
+and makes <code class="inline">bootstrap</code> use <code class="inline">/opt/erlang/bin/erl</code> (default <code class="inline">false</code>).
+The zip then contains only BEAM files and can be built on any OS.</li></ul><p><a href="#prepare/1"><code class="inline">prepare/1</code></a> applies these defaults unless you set them yourself:
+<code class="inline">include_executables_for: [:unix]</code>, <code class="inline">strip_beams: true</code>,
+<code class="inline">rel_templates_path</code> pointing at Mayfly's <code class="inline">vm.args</code>/<code class="inline">env.sh</code> (no
+distribution, <code class="inline">+sbwt none</code>, <code class="inline">RELEASE_TMP=/tmp</code>).</p><p>Everything else is a normal release: umbrellas, several releases,
+<code class="inline">config/runtime.exs</code>, <code class="inline">--overwrite</code>, <code class="inline">MIX_ENV=prod</code>.</p>
+    </section>
+
+</div>
+
+  <section id="summary" class="details-list">
+    <h2 class="section-heading">
+      <a class="hover-link" href="#summary">
+        <i class="ri-link-m" aria-hidden="true"></i>
+      </a>
+      <span class="text">Summary</span>
+    </h2>
+<div class="summary-functions summary">
+  <h3>
+    <a href="#functions">Functions</a>
+  </h3>
+
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#bootstrap/1" data-no-tooltip="" translate="no">bootstrap(release)</a>
+
+      </div>
+
+        <div class="summary-synopsis"><p>Release step: writes an executable <code class="inline">bootstrap</code> into the release root.</p></div>
+
+    </div>
+
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#prepare/1" data-no-tooltip="" translate="no">prepare(release)</a>
+
+      </div>
+
+        <div class="summary-synopsis"><p>Release step (before <code class="inline">:assemble</code>): applies Lambda-friendly defaults.</p></div>
+
+    </div>
+
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#zip/1" data-no-tooltip="" translate="no">zip(release)</a>
+
+      </div>
+
+        <div class="summary-synopsis"><p>Release step: zips the release directory into <code class="inline">&lt;release path&gt;/lambda.zip</code>.</p></div>
+
+    </div>
+
+</div>
+
+  </section>
+
+
+  <section id="functions" class="details-list">
+    <h2 class="section-heading">
+      <a class="hover-link" href="#functions">
+        <i class="ri-link-m" aria-hidden="true"></i>
+      </a>
+      <span class="text">Functions</span>
+    </h2>
+
+    <div class="functions-list">
+<section class="detail" id="bootstrap/1">
+
+  <div class="detail-header">
+    <a href="#bootstrap/1" class="detail-link" data-no-tooltip="" aria-label="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+    </a>
+    <div class="heading-with-actions">
+      <h1 class="signature" translate="no">bootstrap(release)</h1>
+
+
+        <a href="https://github.com/bmalum/mayfly/blob/v1.0.0-rc.1/lib/mayfly/release.ex#L72" class="icon-action" rel="help nofollow" aria-label="View Source">
+          <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+        </a>
+
+    </div>
+  </div>
+
+  <section class="docstring">
+
+      <div class="specs">
+
+          <pre translate="no"><span class="attribute">@spec</span> bootstrap(<a href="https://mix.hexdocs.pm/Mix.Release.html#t:t/0">Mix.Release.t</a>()) :: <a href="https://mix.hexdocs.pm/Mix.Release.html#t:t/0">Mix.Release.t</a>()</pre>
+
+      </div>
+
+<p>Release step: writes an executable <code class="inline">bootstrap</code> into the release root.</p><p>Lambda runs <code class="inline">bootstrap</code> from <code class="inline">/var/task</code>. The script sets <code class="inline">RELEASE_TMP=/tmp</code>
+(<code class="inline">/var/task</code> is read-only), disables distribution and runs
+<code class="inline">bin/&lt;release&gt; eval &quot;Mayfly.Boot.main()&quot;</code>. When ERTS is not bundled it
+prepends the layer's <code class="inline">/opt/erlang/bin</code> (or <code class="inline">$MAYFLY_ERTS/bin</code>) to <code class="inline">PATH</code>.</p>
+  </section>
+</section>
+<section class="detail" id="prepare/1">
+
+  <div class="detail-header">
+    <a href="#prepare/1" class="detail-link" data-no-tooltip="" aria-label="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+    </a>
+    <div class="heading-with-actions">
+      <h1 class="signature" translate="no">prepare(release)</h1>
+
+
+        <a href="https://github.com/bmalum/mayfly/blob/v1.0.0-rc.1/lib/mayfly/release.ex#L45" class="icon-action" rel="help nofollow" aria-label="View Source">
+          <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+        </a>
+
+    </div>
+  </div>
+
+  <section class="docstring">
+
+      <div class="specs">
+
+          <pre translate="no"><span class="attribute">@spec</span> prepare(<a href="https://mix.hexdocs.pm/Mix.Release.html#t:t/0">Mix.Release.t</a>()) :: <a href="https://mix.hexdocs.pm/Mix.Release.html#t:t/0">Mix.Release.t</a>()</pre>
+
+      </div>
+
+<p>Release step (before <code class="inline">:assemble</code>): applies Lambda-friendly defaults.</p>
+  </section>
+</section>
+<section class="detail" id="zip/1">
+
+  <div class="detail-header">
+    <a href="#zip/1" class="detail-link" data-no-tooltip="" aria-label="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+    </a>
+    <div class="heading-with-actions">
+      <h1 class="signature" translate="no">zip(release)</h1>
+
+
+        <a href="https://github.com/bmalum/mayfly/blob/v1.0.0-rc.1/lib/mayfly/release.ex#L86" class="icon-action" rel="help nofollow" aria-label="View Source">
+          <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+        </a>
+
+    </div>
+  </div>
+
+  <section class="docstring">
+
+      <div class="specs">
+
+          <pre translate="no"><span class="attribute">@spec</span> zip(<a href="https://mix.hexdocs.pm/Mix.Release.html#t:t/0">Mix.Release.t</a>()) :: <a href="https://mix.hexdocs.pm/Mix.Release.html#t:t/0">Mix.Release.t</a>()</pre>
+
+      </div>
+
+<p>Release step: zips the release directory into <code class="inline">&lt;release path&gt;/lambda.zip</code>.</p>
+  </section>
+</section>
+
+    </div>
+  </section>
+
+    <footer class="footer">
+
+        <p>
+
+            <span class="line">
+              <a href="https://hex.pm/packages/mayfly/1.0.0-rc.1">Hex Package</a>
+
+              <a href="https://preview.hex.pm/preview/mayfly/1.0.0-rc.1">Hex Preview</a>
+
+            </span>
+
+          <span class="line">
+            <button class="a-main footer-button display-quick-switch" title="Go to package docs">
+              Go to package docs
+            </button>
+
+              <a href="llms.txt" target="_blank">
+                View llms.txt
+              </a>
+
+
+              <a href="Mayfly.epub">
+                Download ePub version
+              </a>
+
+          </span>
+        </p>
+
+        <p class="built-using">
+          Built using
+          <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" target="_blank" rel="help noopener" translate="no">ExDoc</a> (v0.40.4) for the
+
+            <a href="https://elixir-lang.org" title="Elixir" target="_blank" translate="no">Elixir programming language</a>
+
+        </p>
+
+
+    </footer>
+  </div>
+</main>
+</div>
+
+  </body>
+</html>

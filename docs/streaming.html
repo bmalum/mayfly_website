@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="ExDoc v0.40.4">
+    <meta name="project" content="Mayfly v1.0.0-rc.1">
+
+
+    <title>Response streaming — Mayfly v1.0.0-rc.1</title>
+
+    <link rel="stylesheet" href="dist/html-elixir-RXHHCTJW.css" />
+
+      <link rel="canonical" href="https://elixir-aws-lambda.dev/docs/streaming.html" />
+
+    <script defer src="dist/sidebar_items-B9A7F5BC.js"></script>
+    <script defer src="docs_config.js"></script>
+    <script defer src="dist/html-MI33G4N7.js"></script>
+
+  </head>
+  <body>
+    <script>(()=>{var t="ex_doc:settings",e="dark";var o="dark",s="light";var E="sidebar_state",n="closed";var r="sidebar_width";var a="sidebar-open";var i=new URLSearchParams(window.location.search),S=i.get("theme")||JSON.parse(localStorage.getItem(t)||"{}").theme;(S===o||S!==s&&window.matchMedia("(prefers-color-scheme: dark)").matches)&&document.body.classList.add(e);var d=sessionStorage.getItem(E),A=d!==n&&!window.matchMedia(`screen and (max-width: ${768}px)`).matches;document.body.classList.toggle(a,A);var c=sessionStorage.getItem(r);c&&document.body.style.setProperty("--sidebarWidth",`${c}px`);var p=/(Macintosh|iPhone|iPad|iPod)/.test(window.navigator.userAgent);document.documentElement.classList.toggle("apple-os",p);})();
+</script>
+
+<div class="body-wrapper">
+
+<button id="sidebar-menu" class="sidebar-button sidebar-toggle" aria-label="toggle sidebar" aria-controls="sidebar">
+  <i class="ri-menu-line ri-lg" title="Collapse/expand sidebar"></i>
+</button>
+
+<nav id="sidebar" class="sidebar">
+
+  <div class="sidebar-header">
+    <div class="sidebar-projectInfo">
+
+        <a href="https://github.com/bmalum/mayfly" class="sidebar-projectImage">
+          <img src="assets/logo.png" alt="Mayfly" />
+        </a>
+
+      <div>
+        <a href="https://github.com/bmalum/mayfly" class="sidebar-projectName" translate="no">
+Mayfly
+        </a>
+        <div class="sidebar-projectVersion" translate="no">
+          v1.0.0-rc.1
+        </div>
+      </div>
+    </div>
+    <ul id="sidebar-list-nav" class="sidebar-list-nav" role="tablist" data-extras="Pages"></ul>
+  </div>
+</nav>
+
+<output role="status" id="toast"></output>
+
+<main class="content page-extra" id="main" data-type="extras">
+  <div id="content" class="content-inner">
+    <div class="top-search">
+      <div class="search-settings">
+        <form class="search-bar" action="search.html">
+          <label class="search-label">
+            <span class="sr-only">Search documentation of Mayfly</span>
+            <div class="search-input-wrapper">
+              <input name="q" type="text" class="search-input" placeholder="Press / to search" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" />
+              <button type="button" tabindex="-1" class="search-close-button" aria-hidden="true">
+                <i class="ri-close-line ri-lg" title="Cancel search"></i>
+              </button>
+            </div>
+          </label>
+        </form>
+        <div class="autocomplete">
+        </div>
+        <div class="engine-selector" data-multiple="false">
+          <button type="button" class="engine-button" aria-label="Select search engine" aria-haspopup="true" aria-expanded="false">
+            <i class="ri-search-2-line" aria-hidden="true"></i>
+            <span class="engine-name">Default</span>
+            <i class="ri-arrow-down-s-line" aria-hidden="true"></i>
+          </button>
+          <div class="engine-dropdown" hidden role="menu">
+
+              <button type="button"
+                      class="engine-option"
+                      data-engine-url="search.html?q="
+                      role="menuitemradio"
+                      aria-checked="true">
+                <span class="name">Default</span>
+                <span class="help">In-browser search</span>
+              </button>
+
+          </div>
+        </div>
+        <button class="icon-settings display-settings">
+          <i class="ri-settings-3-line"></i>
+          <span class="sr-only">Settings</span>
+        </button>
+      </div>
+    </div>
+
+<div id="top-content">
+  <div class="heading-with-actions top-heading">
+    <h1>Response streaming</h1>
+
+<a href="streaming.md" title="Copy Markdown (hold Ctrl/Cmd and click it to open as Markdown)" class="copy-markdown icon-action" rel="help">
+  <i class="ri-markdown-line" aria-hidden="true"></i>
+  <span class="sr-only">Copy Markdown</span>
+</a>
+
+
+      <a href="https://github.com/bmalum/mayfly/blob/v1.0.0-rc.1/guides/streaming.md#L1" title="View Source" class="icon-action" rel="help nofollow">
+        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+        <span class="sr-only">View Source</span>
+      </a>
+
+  </div>
+
+
+<p>Lambda can stream a response to the caller while your handler is still
+producing it – useful for LLM token streams, large exports, or server-sent
+events. Mayfly implements the custom-runtime streaming protocol
+(<code class="inline">Lambda-Runtime-Function-Response-Mode: streaming</code>, chunked transfer encoding,
+error trailers).</p><h2 id="returning-a-stream" class="section-heading"><a href="#returning-a-stream" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a><span class="text">Returning a stream</span></h2><pre><code class="makeup elixir" translate="no"><span class="kd">defmodule</span><span class="w"> </span><span class="nc">MyApp.Stream</span><span class="w"> </span><span class="k" data-group-id="group-1">do</span><span class="w">
+  </span><span class="kn">use</span><span class="w"> </span><span class="nc">Mayfly.Handler</span><span class="w">
+
+  </span><span class="na">@impl</span><span class="w"> </span><span class="no">true</span><span class="w">
+  </span><span class="kd">def</span><span class="w"> </span><span class="nf">handle</span><span class="p" data-group-id="group-2">(</span><span class="p" data-group-id="group-3">%{</span><span class="s">&quot;prompt&quot;</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="n">prompt</span><span class="p" data-group-id="group-3">}</span><span class="p">,</span><span class="w"> </span><span class="c">_ctx</span><span class="p">,</span><span class="w"> </span><span class="c">_state</span><span class="p" data-group-id="group-2">)</span><span class="w"> </span><span class="k" data-group-id="group-4">do</span><span class="w">
+    </span><span class="n">chunks</span><span class="w"> </span><span class="o">=</span><span class="w">
+      </span><span class="n">prompt</span><span class="w">
+      </span><span class="o">|&gt;</span><span class="w"> </span><span class="nc">MyApp.LLM</span><span class="o">.</span><span class="n">stream_tokens</span><span class="p" data-group-id="group-5">(</span><span class="p" data-group-id="group-5">)</span><span class="w">               </span><span class="c1"># any Enumerable of iodata</span><span class="w">
+      </span><span class="o">|&gt;</span><span class="w"> </span><span class="nc">Stream</span><span class="o">.</span><span class="n">map</span><span class="p" data-group-id="group-6">(</span><span class="o">&amp;</span><span class="s">&quot;data: </span><span class="si" data-group-id="group-7">#{</span><span class="ni">&amp;1</span><span class="si" data-group-id="group-7">}</span><span class="se">\n</span><span class="se">\n</span><span class="s">&quot;</span><span class="p" data-group-id="group-6">)</span><span class="w">
+
+    </span><span class="p" data-group-id="group-8">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w">
+     </span><span class="p" data-group-id="group-9">%</span><span class="nc" data-group-id="group-9">Mayfly.Response</span><span class="p" data-group-id="group-9">{</span><span class="ss">body</span><span class="p">:</span><span class="w"> </span><span class="n">chunks</span><span class="p">,</span><span class="w"> </span><span class="ss">content_type</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;text/event-stream&quot;</span><span class="p" data-group-id="group-9">}</span><span class="w">
+     </span><span class="o">|&gt;</span><span class="w"> </span><span class="nc">Mayfly.Response</span><span class="o">.</span><span class="n">stream</span><span class="p" data-group-id="group-10">(</span><span class="p" data-group-id="group-10">)</span><span class="p" data-group-id="group-8">}</span><span class="w">
+  </span><span class="k" data-group-id="group-4">end</span><span class="w">
+</span><span class="k" data-group-id="group-1">end</span></code></pre><p>The enumerable is consumed lazily; each element is written as one HTTP chunk.
+Empty elements are skipped.</p><h2 id="function-urls-status-and-headers" class="section-heading"><a href="#function-urls-status-and-headers" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a><span class="text">Function URLs: status and headers</span></h2><p>When the function is behind a Function URL in <code class="inline">RESPONSE_STREAM</code> mode, Lambda
+expects an HTTP &quot;prelude&quot; before the body. Add it with <a href="Mayfly.Response.html#http/2"><code class="inline">Mayfly.Response.http/2</code></a>:</p><pre><code class="makeup elixir" translate="no"><span class="p" data-group-id="group-1">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w">
+ </span><span class="p" data-group-id="group-2">%</span><span class="nc" data-group-id="group-2">Mayfly.Response</span><span class="p" data-group-id="group-2">{</span><span class="ss">body</span><span class="p">:</span><span class="w"> </span><span class="n">chunks</span><span class="p">,</span><span class="w"> </span><span class="ss">content_type</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;text/event-stream&quot;</span><span class="p" data-group-id="group-2">}</span><span class="w">
+ </span><span class="o">|&gt;</span><span class="w"> </span><span class="nc">Mayfly.Response</span><span class="o">.</span><span class="n">stream</span><span class="p" data-group-id="group-3">(</span><span class="p" data-group-id="group-3">)</span><span class="w">
+ </span><span class="o">|&gt;</span><span class="w"> </span><span class="nc">Mayfly.Response</span><span class="o">.</span><span class="n">http</span><span class="p" data-group-id="group-4">(</span><span class="w">
+   </span><span class="ss">status</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
+   </span><span class="ss">headers</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="group-5">%{</span><span class="s">&quot;cache-control&quot;</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="s">&quot;no-cache&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;x-accel-buffering&quot;</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="s">&quot;no&quot;</span><span class="p" data-group-id="group-5">}</span><span class="p">,</span><span class="w">
+   </span><span class="ss">cookies</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="group-6">[</span><span class="p" data-group-id="group-6">]</span><span class="w">
+ </span><span class="p" data-group-id="group-4">)</span><span class="p" data-group-id="group-1">}</span></code></pre><p>Mayfly sets <code class="inline">Content-Type: application/vnd.awslambda.http-integration-response</code>
+and prepends the JSON prelude plus the eight-null-byte delimiter; Lambda strips
+both before forwarding to the client. Without <code class="inline">http/2</code> the raw chunks are sent
+as-is (correct for <code class="inline">InvokeWithResponseStream</code> callers).</p><h2 id="errors-while-streaming" class="section-heading"><a href="#errors-while-streaming" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a><span class="text">Errors while streaming</span></h2><p>Before the first chunk, any error is reported through <code class="inline">/runtime/invocation/&lt;id&gt;/error</code>
+as usual. Once streaming has started, the HTTP response is committed, so an
+exception raised by the enumerable is reported via trailers:</p><pre><code class="makeup elixir" translate="no"><span class="nc">Lambda</span><span class="o">-</span><span class="nc">Runtime</span><span class="o">-</span><span class="nc">Function</span><span class="o">-</span><span class="nc">Error</span><span class="o">-</span><span class="ss">Type</span><span class="p">:</span><span class="w"> </span><span class="nc">Function.RuntimeError</span><span class="w">
+</span><span class="nc">Lambda</span><span class="o">-</span><span class="nc">Runtime</span><span class="o">-</span><span class="nc">Function</span><span class="o">-</span><span class="nc">Error</span><span class="o">-</span><span class="ss">Body</span><span class="p">:</span><span class="w"> </span><span class="o">&lt;</span><span class="n">base64</span><span class="w"> </span><span class="n">error</span><span class="w"> </span><span class="n">payload</span><span class="o">&gt;</span></code></pre><p>Lambda records the invocation as successful and forwards the error metadata
+to the client (Function URLs close the connection; <code class="inline">InvokeWithResponseStream</code>
+delivers an <code class="inline">InvokeComplete</code> event with <code class="inline">ErrorCode</code>/<code class="inline">ErrorDetails</code>). Validate
+input and fail fast <em>before</em> returning the stream when you can.</p><h2 id="invoking" class="section-heading"><a href="#invoking" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a><span class="text">Invoking</span></h2><pre><code class="makeup bash" translate="no"><span class=""># Function URL
+</span><span class="">aws lambda create-function-url-config --function-name stream \
+</span><span class="">  --auth-type NONE --invoke-mode RESPONSE_STREAM
+</span><span class="">curl -N https://&lt;url-id&gt;.lambda-url.eu-central-1.on.aws/
+</span><span class="">
+</span><span class=""># SDK / CLI
+</span><span class="">aws lambda invoke-with-response-stream --function-name stream \
+</span><span class="">  --cli-binary-format raw-in-base64-out --payload &#39;{&quot;prompt&quot;:&quot;hi&quot;}&#39; /dev/stdout
+</span></code></pre><p>The Lambda console always shows a buffered result; that is expected.</p><h2 id="backpressure" class="section-heading"><a href="#backpressure" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a><span class="text">Backpressure</span></h2><p>Each element of the enumerable is written to the Runtime API socket
+synchronously, so a producer that is faster than the consumer simply blocks
+inside the stream: no buffering, no unbounded memory. If Lambda stops reading
+altogether, a single write may stall; <code class="inline">send_timeout</code> bounds that:</p><pre><code class="makeup elixir" translate="no"><span class="p" data-group-id="group-1">%</span><span class="nc" data-group-id="group-1">Mayfly.Response</span><span class="p" data-group-id="group-1">{</span><span class="ss">body</span><span class="p">:</span><span class="w"> </span><span class="n">chunks</span><span class="p" data-group-id="group-1">}</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="nc">Mayfly.Response</span><span class="o">.</span><span class="n">stream</span><span class="p" data-group-id="group-2">(</span><span class="ss">send_timeout</span><span class="p">:</span><span class="w"> </span><span class="mi">10_000</span><span class="p" data-group-id="group-2">)</span></code></pre><p>After the timeout the socket is closed and the poller reports
+<code class="inline">Runtime.ResponseFailed</code>; the invocation is over. The default is 30 s.</p><h2 id="limits-and-billing" class="section-heading"><a href="#limits-and-billing" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a><span class="text">Limits and billing</span></h2><ul><li>First 6 MB stream uncapped, afterwards 2 MB/s.</li><li>You are billed for the full duration even if the client disconnects; keep
+the function timeout as low as your use case allows.</li><li>API Gateway REST/HTTP APIs do not stream Lambda responses; use Function URLs
+(optionally behind CloudFront) or the SDK.</li></ul><h2 id="testing-locally" class="section-heading"><a href="#testing-locally" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a><span class="text">Testing locally</span></h2><p><a href="Mayfly.LocalRuntime.html"><code class="inline">Mayfly.LocalRuntime</code></a> understands streaming:</p><pre><code class="makeup elixir" translate="no"><span class="p" data-group-id="group-1">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="n">rt</span><span class="p" data-group-id="group-1">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Mayfly.LocalRuntime</span><span class="o">.</span><span class="n">start_link</span><span class="p" data-group-id="group-2">(</span><span class="p" data-group-id="group-2">)</span><span class="w">
+</span><span class="p" data-group-id="group-3">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="bp">_</span><span class="p" data-group-id="group-3">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Mayfly</span><span class="o">.</span><span class="n">start_link</span><span class="p" data-group-id="group-4">(</span><span class="ss">handler</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;MyApp.Stream&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">runtime_api</span><span class="p">:</span><span class="w"> </span><span class="nc">Mayfly.LocalRuntime</span><span class="o">.</span><span class="n">address</span><span class="p" data-group-id="group-5">(</span><span class="n">rt</span><span class="p" data-group-id="group-5">)</span><span class="p" data-group-id="group-4">)</span><span class="w">
+
+</span><span class="p" data-group-id="group-6">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="group-7">%{</span><span class="ss">body</span><span class="p">:</span><span class="w"> </span><span class="n">body</span><span class="p">,</span><span class="w"> </span><span class="ss">headers</span><span class="p">:</span><span class="w"> </span><span class="n">headers</span><span class="p">,</span><span class="w"> </span><span class="ss">trailers</span><span class="p">:</span><span class="w"> </span><span class="n">trailers</span><span class="p" data-group-id="group-7">}</span><span class="p" data-group-id="group-6">}</span><span class="w"> </span><span class="o">=</span><span class="w">
+  </span><span class="nc">Mayfly.LocalRuntime</span><span class="o">.</span><span class="n">invoke</span><span class="p" data-group-id="group-8">(</span><span class="n">rt</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="group-9">%{</span><span class="s">&quot;prompt&quot;</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="s">&quot;hi&quot;</span><span class="p" data-group-id="group-9">}</span><span class="p" data-group-id="group-8">)</span><span class="w">
+
+</span><span class="n">assert</span><span class="w"> </span><span class="p" data-group-id="group-10">{</span><span class="s">&quot;lambda-runtime-function-response-mode&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;streaming&quot;</span><span class="p" data-group-id="group-10">}</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">headers</span><span class="w">
+</span><span class="n">assert</span><span class="w"> </span><span class="n">trailers</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="p" data-group-id="group-11">%{</span><span class="p" data-group-id="group-11">}</span></code></pre>
+
+</div>
+
+<div class="bottom-actions" id="bottom-actions">
+  <div class="bottom-actions-item">
+
+      <a href="architecture.html" class="bottom-actions-button" rel="prev">
+        <span class="subheader">
+          ← Previous Page
+        </span>
+        <span class="title">
+Architecture
+        </span>
+      </a>
+
+  </div>
+  <div class="bottom-actions-item">
+
+      <a href="observability.html" class="bottom-actions-button" rel="next">
+        <span class="subheader">
+          Next Page →
+        </span>
+        <span class="title">
+Observability
+        </span>
+      </a>
+
+  </div>
+</div>
+    <footer class="footer">
+
+        <p>
+
+            <span class="line">
+              <a href="https://hex.pm/packages/mayfly/1.0.0-rc.1">Hex Package</a>
+
+              <a href="https://preview.hex.pm/preview/mayfly/1.0.0-rc.1">Hex Preview</a>
+
+                (<a href="https://preview.hex.pm/preview/mayfly/1.0.0-rc.1/show/guides/streaming.md">current file</a>)
+
+            </span>
+
+          <span class="line">
+            <button class="a-main footer-button display-quick-switch" title="Go to package docs">
+              Go to package docs
+            </button>
+
+              <a href="llms.txt" target="_blank">
+                View llms.txt
+              </a>
+
+
+              <a href="Mayfly.epub">
+                Download ePub version
+              </a>
+
+          </span>
+        </p>
+
+        <p class="built-using">
+          Built using
+          <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" target="_blank" rel="help noopener" translate="no">ExDoc</a> (v0.40.4) for the
+
+            <a href="https://elixir-lang.org" title="Elixir" target="_blank" translate="no">Elixir programming language</a>
+
+        </p>
+
+
+    </footer>
+  </div>
+</main>
+</div>
+
+  </body>
+</html>

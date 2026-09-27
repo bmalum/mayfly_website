@@ -1,0 +1,61 @@
+# Mayfly v1.0.0-rc.1 - Table of Contents
+
+> A lightweight AWS Lambda custom runtime for Elixir
+
+## Pages
+
+- [🪰 Mayfly](readme.md)
+- [Changelog](changelog.md)
+
+- Guides
+  - [Getting Started](getting-started.md)
+  - [Deployment](deployment.md)
+  - [Erlang runtime layers](layers.md)
+  - [Architecture](architecture.md)
+  - [Response streaming](streaming.md)
+  - [Observability](observability.md)
+  - [Migrating from 0.x](migrating-from-0-x.md)
+
+## Modules
+
+- Writing functions
+  - [Mayfly.Context](Mayfly.Context.md): Per-invocation metadata, built from the `GET /runtime/invocation/next`
+response headers and passed as the second argument to `c:Mayfly.Handler.handle/3`.
+  - [Mayfly.ErrorPayload](Mayfly.ErrorPayload.md): Builds the error document Lambda expects on `/runtime/invocation/<id>/error`
+and `/runtime/init/error`
+  - [Mayfly.Handler](Mayfly.Handler.md): Behaviour for Lambda function handlers.
+  - [Mayfly.Response](Mayfly.Response.md): What a handler may return inside `{:ok, _}`.
+
+- Runtime
+  - [Mayfly](Mayfly.md): Mayfly – an AWS Lambda custom runtime for Elixir.
+  - [Mayfly.Boot](Mayfly.Boot.md): Entry point used by the generated `bootstrap` script
+  - [Mayfly.HTTP](Mayfly.HTTP.md): Minimal HTTP/1.1 client over `:gen_tcp` for the link-local Lambda Runtime API.
+  - [Mayfly.Poller](Mayfly.Poller.md): One poller owns one concurrency slot: it long-polls `/runtime/invocation/next`,
+runs the handler and posts the result, then polls again.
+  - [Mayfly.RuntimeAPI](Mayfly.RuntimeAPI.md): Client for the [Lambda Runtime API](https://docs.aws.amazon.com/lambda/latest/dg/runtimes-api.html)
+(version 2018-06-01), built on `Mayfly.HTTP`.
+  - [Mayfly.Supervisor](Mayfly.Supervisor.md): Starts one `Mayfly.Poller` per concurrency slot after the handler has been
+resolved and initialised exactly once.
+
+- Observability
+  - [Mayfly.LogFormatter](Mayfly.LogFormatter.md): Logger formatter that emits one JSON object per line in the shape Lambda's
+[advanced logging controls](https://docs.aws.amazon.com/lambda/latest/dg/monitoring-cloudwatchlogs-advanced.html)
+expect, so CloudWatch parses level, request id and tenant id
+  - [Mayfly.Telemetry](Mayfly.Telemetry.md): Telemetry events emitted by the runtime. `:telemetry` is an optional
+dependency; when it is not present the calls are no-ops.
+
+- Build &amp; local dev
+  - [Mayfly.LocalRuntime](Mayfly.LocalRuntime.md): A small Lambda Runtime API emulator for local development and tests.
+  - [Mayfly.Release](Mayfly.Release.md): Turns `mix release` into a Lambda package builder.
+
+## Mix Tasks
+
+- [mix lambda.doctor](Mix.Tasks.Lambda.Doctor.md): Runs a set of checks that catch the common setup mistakes before you deploy
+
+- Build &amp; local dev
+  - [mix lambda.build](Mix.Tasks.Lambda.Build.md): Builds the Lambda package for a release configured with `Mayfly.Release`
+and copies the resulting `lambda.zip` to `--outdir`.
+  - [mix lambda.invoke](Mix.Tasks.Lambda.Invoke.md): Runs your handler exactly as Mayfly would inside Lambda – handler
+resolution, `init/1`, JSON decoding, context, error formatting – against
+`Mayfly.LocalRuntime`, and prints the response or error.
+

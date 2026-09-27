@@ -4,19 +4,19 @@
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="generator" content="ExDoc v0.39.1">
-    <meta name="project" content="Mayfly v0.1.0">
+    <meta name="generator" content="ExDoc v0.40.4">
+    <meta name="project" content="Mayfly v1.0.0-rc.1">
 
 
-    <title>Mayfly — Mayfly v0.1.0</title>
+    <title>Mayfly — Mayfly v1.0.0-rc.1</title>
 
-    <link rel="stylesheet" href="dist/html-elixir-ZFNMEJKT.css" />
+    <link rel="stylesheet" href="dist/html-elixir-RXHHCTJW.css" />
 
       <link rel="canonical" href="https://elixir-aws-lambda.dev/docs/Mayfly.html" />
 
-    <script defer src="dist/sidebar_items-32970337.js"></script>
+    <script defer src="dist/sidebar_items-B9A7F5BC.js"></script>
     <script defer src="docs_config.js"></script>
-    <script defer src="dist/html-HBZYRXZS.js"></script>
+    <script defer src="dist/html-MI33G4N7.js"></script>
 
   </head>
   <body>
@@ -43,11 +43,11 @@
 Mayfly
         </a>
         <div class="sidebar-projectVersion" translate="no">
-          v0.1.0
+          v1.0.0-rc.1
         </div>
       </div>
     </div>
-    <ul id="sidebar-list-nav" class="sidebar-list-nav" role="tablist" data-extras=""></ul>
+    <ul id="sidebar-list-nav" class="sidebar-list-nav" role="tablist" data-extras="Pages"></ul>
   </div>
 </nav>
 
@@ -100,11 +100,18 @@ Mayfly
   <div class="heading-with-actions top-heading">
     <h1>
       <span translate="no">Mayfly</span> 
-      <small class="app-vsn" translate="no">(Mayfly v0.1.0)</small>
+      <small class="app-vsn" translate="no">(Mayfly v1.0.0-rc.1)</small>
 
     </h1>
 
-      <a href="https://github.com/bmalum/mayfly/blob/main/lib/aws_lambda.ex#L1" title="View Source" class="icon-action" rel="help">
+<a href="Mayfly.md" title="Copy Markdown (hold Ctrl/Cmd and click it to open as Markdown)" class="copy-markdown icon-action" rel="help">
+  <i class="ri-markdown-line" aria-hidden="true"></i>
+  <span class="sr-only">Copy Markdown</span>
+</a>
+
+
+
+      <a href="https://github.com/bmalum/mayfly/blob/v1.0.0-rc.1/lib/mayfly.ex#L1" title="View Source" class="icon-action" rel="help nofollow">
         <i class="ri-code-s-slash-line" aria-hidden="true"></i>
         <span class="sr-only">View Source</span>
       </a>
@@ -113,41 +120,34 @@ Mayfly
 
 
     <section id="moduledoc">
-<p>Mayfly - AWS Lambda Custom Runtime for Elixir.</p><p>This module serves as the main application entry point for the Elixir Lambda runtime.
-It starts the supervision tree and initializes the Lambda event loop.</p>
+<p>Mayfly – an AWS Lambda custom runtime for Elixir.</p><p>Nothing starts automatically. Inside Lambda the generated <code class="inline">bootstrap</code> runs
+<a href="Mayfly.Boot.html#main/0"><code class="inline">Mayfly.Boot.main/0</code></a>, which reads the environment and calls <a href="#start_link/1"><code class="inline">start_link/1</code></a>.
+You can also start the runtime yourself (for example from your own
+supervision tree when using <a href="Mayfly.LocalRuntime.html"><code class="inline">Mayfly.LocalRuntime</code></a> in tests):</p><pre><code class="makeup elixir" translate="no"><span class="nc">Mayfly</span><span class="o">.</span><span class="n">start_link</span><span class="p" data-group-id="group-1">(</span><span class="ss">handler</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;MyApp.Handler&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">runtime_api</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;127.0.0.1:9001&quot;</span><span class="p" data-group-id="group-1">)</span></code></pre><h2 id="module-options" class="section-heading"><a href="#module-options" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a><span class="text">Options</span></h2><ul><li><code class="inline">:handler</code> – <code class="inline">_HANDLER</code> string (module or <code class="inline">Module.function</code>); default
+<code class="inline">System.get_env(&quot;_HANDLER&quot;)</code></li><li><code class="inline">:runtime_api</code> – <code class="inline">host:port</code>; default <code class="inline">System.get_env(&quot;AWS_LAMBDA_RUNTIME_API&quot;)</code></li><li><code class="inline">:concurrency</code> – number of pollers; default <code class="inline">AWS_LAMBDA_MAX_CONCURRENCY</code> or 1</li><li><code class="inline">:handler_opts</code> – passed to the handler's <code class="inline">init/1</code>; default <code class="inline">[]</code></li><li><code class="inline">:api</code> – module implementing <a href="Mayfly.RuntimeAPI.html"><code class="inline">Mayfly.RuntimeAPI</code></a> (tests)</li></ul>
     </section>
 
 </div>
 
   <section id="summary" class="details-list">
-    <h1 class="section-heading">
+    <h2 class="section-heading">
       <a class="hover-link" href="#summary">
         <i class="ri-link-m" aria-hidden="true"></i>
       </a>
       <span class="text">Summary</span>
-    </h1>
+    </h2>
 <div class="summary-functions summary">
-  <h2>
+  <h3>
     <a href="#functions">Functions</a>
-  </h2>
+  </h3>
 
     <div class="summary-row">
       <div class="summary-signature">
-        <a href="#hello/0" data-no-tooltip="" translate="no">hello()</a>
+        <a href="#start_link/1" data-no-tooltip="" translate="no">start_link(opts \\ [])</a>
 
       </div>
 
-        <div class="summary-synopsis"><p>Default handler function that can be used for testing.</p></div>
-
-    </div>
-
-    <div class="summary-row">
-      <div class="summary-signature">
-        <a href="#start/2" data-no-tooltip="" translate="no">start(type, args)</a>
-
-      </div>
-
-        <div class="summary-synopsis"><p>Starts the Mayfly application.</p></div>
+        <div class="summary-synopsis"><p>Resolves and initialises the handler, then starts the poller supervisor.</p></div>
 
     </div>
 
@@ -157,48 +157,27 @@ It starts the supervision tree and initializes the Lambda event loop.</p>
 
 
   <section id="functions" class="details-list">
-    <h1 class="section-heading">
+    <h2 class="section-heading">
       <a class="hover-link" href="#functions">
         <i class="ri-link-m" aria-hidden="true"></i>
       </a>
       <span class="text">Functions</span>
-    </h1>
+    </h2>
 
     <div class="functions-list">
-<section class="detail" id="hello/0">
+<section class="detail" id="start_link/1">
+
+    <span id="start_link/0"></span>
 
   <div class="detail-header">
-    <a href="#hello/0" class="detail-link" data-no-tooltip="" aria-label="Link to this function">
+    <a href="#start_link/1" class="detail-link" data-no-tooltip="" aria-label="Link to this function">
       <i class="ri-link-m" aria-hidden="true"></i>
     </a>
     <div class="heading-with-actions">
-      <h1 class="signature" translate="no">hello()</h1>
+      <h1 class="signature" translate="no">start_link(opts \\ [])</h1>
 
 
-        <a href="https://github.com/bmalum/mayfly/blob/main/lib/aws_lambda.ex#L30" class="icon-action" rel="help" aria-label="View Source">
-          <i class="ri-code-s-slash-line" aria-hidden="true"></i>
-        </a>
-
-    </div>
-  </div>
-
-  <section class="docstring">
-
-<p>Default handler function that can be used for testing.</p><h2 id="hello/0-examples" class="section-heading"><a href="#hello/0-examples" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a><span class="text">Examples</span></h2><pre><code class="makeup elixir" translate="no"><span class="gp unselectable">iex&gt; </span><span class="nc">Mayfly</span><span class="o">.</span><span class="n">hello</span><span class="p" data-group-id="2577978279-1">(</span><span class="p" data-group-id="2577978279-1">)</span><span class="w">
-</span><span class="ss">:world</span></code></pre>
-  </section>
-</section>
-<section class="detail" id="start/2">
-
-  <div class="detail-header">
-    <a href="#start/2" class="detail-link" data-no-tooltip="" aria-label="Link to this function">
-      <i class="ri-link-m" aria-hidden="true"></i>
-    </a>
-    <div class="heading-with-actions">
-      <h1 class="signature" translate="no">start(type, args)</h1>
-
-
-        <a href="https://github.com/bmalum/mayfly/blob/main/lib/aws_lambda.ex#L17" class="icon-action" rel="help" aria-label="View Source">
+        <a href="https://github.com/bmalum/mayfly/blob/v1.0.0-rc.1/lib/mayfly.ex#L31" class="icon-action" rel="help nofollow" aria-label="View Source">
           <i class="ri-code-s-slash-line" aria-hidden="true"></i>
         </a>
 
@@ -209,12 +188,14 @@ It starts the supervision tree and initializes the Lambda event loop.</p>
 
       <div class="specs">
 
-          <pre translate="no"><span class="attribute">@spec</span> start(<a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">any</a>(), <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">any</a>()) :: {:ok, <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">pid</a>()} | {:error, <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">any</a>()}</pre>
+          <pre translate="no"><span class="attribute">@spec</span> start_link(<a href="https://elixir.hexdocs.pm/typespecs.html#built-in-types">keyword</a>()) ::
+  <a href="https://elixir.hexdocs.pm/Supervisor.html#t:on_start/0">Supervisor.on_start</a>() | {:error, {:init_error, <a href="Mayfly.ErrorPayload.html#t:t/0">Mayfly.ErrorPayload.t</a>()}}</pre>
 
       </div>
 
-<p>Starts the Mayfly application.</p><p>This function is called automatically by the Elixir runtime when the application starts.
-It initializes the supervision tree and starts the Lambda event loop.</p>
+<p>Resolves and initialises the handler, then starts the poller supervisor.</p><p>Returns <code class="inline">{:error, {:init_error, payload}}</code> when the handler cannot be
+resolved or its <code class="inline">init/1</code> fails; the payload has already been posted to
+<code class="inline">/runtime/init/error</code> at that point.</p>
   </section>
 </section>
 
@@ -222,27 +203,41 @@ It initializes the supervision tree and starts the Lambda event loop.</p>
   </section>
 
     <footer class="footer">
-      <p>
 
-        <span class="line">
-          <button class="a-main footer-button display-quick-switch" title="Search HexDocs packages">
-            Search HexDocs
-          </button>
+        <p>
 
-            <a href="Mayfly.epub" title="ePub version">
-              Download ePub version
-            </a>
+            <span class="line">
+              <a href="https://hex.pm/packages/mayfly/1.0.0-rc.1">Hex Package</a>
 
-        </span>
-      </p>
+              <a href="https://preview.hex.pm/preview/mayfly/1.0.0-rc.1">Hex Preview</a>
 
-      <p class="built-using">
-        Built using
-        <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" target="_blank" rel="help noopener" translate="no">ExDoc</a> (v0.39.1) for the
+            </span>
 
-          <a href="https://elixir-lang.org" title="Elixir" target="_blank" translate="no">Elixir programming language</a>
+          <span class="line">
+            <button class="a-main footer-button display-quick-switch" title="Go to package docs">
+              Go to package docs
+            </button>
 
-      </p>
+              <a href="llms.txt" target="_blank">
+                View llms.txt
+              </a>
+
+
+              <a href="Mayfly.epub">
+                Download ePub version
+              </a>
+
+          </span>
+        </p>
+
+        <p class="built-using">
+          Built using
+          <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" target="_blank" rel="help noopener" translate="no">ExDoc</a> (v0.40.4) for the
+
+            <a href="https://elixir-lang.org" title="Elixir" target="_blank" translate="no">Elixir programming language</a>
+
+        </p>
+
 
     </footer>
   </div>

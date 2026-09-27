@@ -8,11 +8,11 @@
     <meta name="project" content="Mayfly v1.0.0-rc.1">
 
 
-    <title>Mayfly.Supervisor — Mayfly v1.0.0-rc.1</title>
+    <title>Mayfly.LogFormatter — Mayfly v1.0.0-rc.1</title>
 
     <link rel="stylesheet" href="dist/html-elixir-RXHHCTJW.css" />
 
-      <link rel="canonical" href="https://elixir-aws-lambda.dev/docs/Mayfly.Supervisor.html" />
+      <link rel="canonical" href="https://elixir-aws-lambda.dev/docs/Mayfly.LogFormatter.html" />
 
     <script defer src="dist/sidebar_items-B9A7F5BC.js"></script>
     <script defer src="docs_config.js"></script>
@@ -99,19 +99,19 @@ Mayfly
 <div id="top-content">
   <div class="heading-with-actions top-heading">
     <h1>
-      <span translate="no">Mayfly.<wbr />Supervisor</span> 
+      <span translate="no">Mayfly.<wbr />LogFormatter</span> 
       <small class="app-vsn" translate="no">(Mayfly v1.0.0-rc.1)</small>
 
     </h1>
 
-<a href="Mayfly.Supervisor.md" title="Copy Markdown (hold Ctrl/Cmd and click it to open as Markdown)" class="copy-markdown icon-action" rel="help">
+<a href="Mayfly.LogFormatter.md" title="Copy Markdown (hold Ctrl/Cmd and click it to open as Markdown)" class="copy-markdown icon-action" rel="help">
   <i class="ri-markdown-line" aria-hidden="true"></i>
   <span class="sr-only">Copy Markdown</span>
 </a>
 
 
 
-      <a href="https://github.com/bmalum/mayfly/blob/v1.0.0-rc.1/lib/mayfly.ex#L39" title="View Source" class="icon-action" rel="help nofollow">
+      <a href="https://github.com/bmalum/mayfly/blob/v1.0.0-rc.1/lib/mayfly/log_formatter.ex#L1" title="View Source" class="icon-action" rel="help nofollow">
         <i class="ri-code-s-slash-line" aria-hidden="true"></i>
         <span class="sr-only">View Source</span>
       </a>
@@ -120,8 +120,11 @@ Mayfly
 
 
     <section id="moduledoc">
-<p>Starts one <a href="Mayfly.Poller.html"><code class="inline">Mayfly.Poller</code></a> per concurrency slot after the handler has been
-resolved and initialised exactly once.</p>
+<p>Logger formatter that emits one JSON object per line in the shape Lambda's
+<a rel="nofollow" href="https://docs.aws.amazon.com/lambda/latest/dg/monitoring-cloudwatchlogs-advanced.html">advanced logging controls</a>
+expect, so CloudWatch parses level, request id and tenant id:</p><pre><code class="makeup elixir" translate="no"><span class="p" data-group-id="group-1">{</span><span class="s">&quot;timestamp&quot;</span><span class="ss">:&quot;2026-09-27T07:00:00.123Z&quot;</span><span class="p">,</span><span class="s">&quot;level&quot;</span><span class="ss">:&quot;INFO&quot;</span><span class="p">,</span><span class="s">&quot;requestId&quot;</span><span class="ss">:&quot;…&quot;</span><span class="p">,</span><span class="s">&quot;tenantId&quot;</span><span class="ss">:&quot;…&quot;</span><span class="p">,</span><span class="s">&quot;message&quot;</span><span class="ss">:&quot;…&quot;</span><span class="p" data-group-id="group-1">}</span></code></pre><p><a href="Mayfly.Boot.html"><code class="inline">Mayfly.Boot</code></a> installs it when <code class="inline">AWS_LAMBDA_LOG_FORMAT=JSON</code>. To use it
+yourself:</p><pre><code class="makeup elixir" translate="no"><span class="n">config</span><span class="w"> </span><span class="ss">:logger</span><span class="p">,</span><span class="w"> </span><span class="ss">:default_formatter</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="group-1">{</span><span class="nc">Mayfly.LogFormatter</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="group-2">[</span><span class="p" data-group-id="group-2">]</span><span class="p" data-group-id="group-1">}</span></code></pre><p>All Logger metadata except internal keys is included; values that are not
+JSON-encodable are <code class="inline">inspect</code>ed.</p>
     </section>
 
 </div>

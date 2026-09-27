@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="ExDoc v0.40.4">
+    <meta name="project" content="Mayfly v1.0.0-rc.1">
+
+
+    <title>Migrating from 0.x — Mayfly v1.0.0-rc.1</title>
+
+    <link rel="stylesheet" href="dist/html-elixir-RXHHCTJW.css" />
+
+      <link rel="canonical" href="https://elixir-aws-lambda.dev/docs/migrating-from-0-x.html" />
+
+    <script defer src="dist/sidebar_items-B9A7F5BC.js"></script>
+    <script defer src="docs_config.js"></script>
+    <script defer src="dist/html-MI33G4N7.js"></script>
+
+  </head>
+  <body>
+    <script>(()=>{var t="ex_doc:settings",e="dark";var o="dark",s="light";var E="sidebar_state",n="closed";var r="sidebar_width";var a="sidebar-open";var i=new URLSearchParams(window.location.search),S=i.get("theme")||JSON.parse(localStorage.getItem(t)||"{}").theme;(S===o||S!==s&&window.matchMedia("(prefers-color-scheme: dark)").matches)&&document.body.classList.add(e);var d=sessionStorage.getItem(E),A=d!==n&&!window.matchMedia(`screen and (max-width: ${768}px)`).matches;document.body.classList.toggle(a,A);var c=sessionStorage.getItem(r);c&&document.body.style.setProperty("--sidebarWidth",`${c}px`);var p=/(Macintosh|iPhone|iPad|iPod)/.test(window.navigator.userAgent);document.documentElement.classList.toggle("apple-os",p);})();
+</script>
+
+<div class="body-wrapper">
+
+<button id="sidebar-menu" class="sidebar-button sidebar-toggle" aria-label="toggle sidebar" aria-controls="sidebar">
+  <i class="ri-menu-line ri-lg" title="Collapse/expand sidebar"></i>
+</button>
+
+<nav id="sidebar" class="sidebar">
+
+  <div class="sidebar-header">
+    <div class="sidebar-projectInfo">
+
+        <a href="https://github.com/bmalum/mayfly" class="sidebar-projectImage">
+          <img src="assets/logo.png" alt="Mayfly" />
+        </a>
+
+      <div>
+        <a href="https://github.com/bmalum/mayfly" class="sidebar-projectName" translate="no">
+Mayfly
+        </a>
+        <div class="sidebar-projectVersion" translate="no">
+          v1.0.0-rc.1
+        </div>
+      </div>
+    </div>
+    <ul id="sidebar-list-nav" class="sidebar-list-nav" role="tablist" data-extras="Pages"></ul>
+  </div>
+</nav>
+
+<output role="status" id="toast"></output>
+
+<main class="content page-extra" id="main" data-type="extras">
+  <div id="content" class="content-inner">
+    <div class="top-search">
+      <div class="search-settings">
+        <form class="search-bar" action="search.html">
+          <label class="search-label">
+            <span class="sr-only">Search documentation of Mayfly</span>
+            <div class="search-input-wrapper">
+              <input name="q" type="text" class="search-input" placeholder="Press / to search" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" />
+              <button type="button" tabindex="-1" class="search-close-button" aria-hidden="true">
+                <i class="ri-close-line ri-lg" title="Cancel search"></i>
+              </button>
+            </div>
+          </label>
+        </form>
+        <div class="autocomplete">
+        </div>
+        <div class="engine-selector" data-multiple="false">
+          <button type="button" class="engine-button" aria-label="Select search engine" aria-haspopup="true" aria-expanded="false">
+            <i class="ri-search-2-line" aria-hidden="true"></i>
+            <span class="engine-name">Default</span>
+            <i class="ri-arrow-down-s-line" aria-hidden="true"></i>
+          </button>
+          <div class="engine-dropdown" hidden role="menu">
+
+              <button type="button"
+                      class="engine-option"
+                      data-engine-url="search.html?q="
+                      role="menuitemradio"
+                      aria-checked="true">
+                <span class="name">Default</span>
+                <span class="help">In-browser search</span>
+              </button>
+
+          </div>
+        </div>
+        <button class="icon-settings display-settings">
+          <i class="ri-settings-3-line"></i>
+          <span class="sr-only">Settings</span>
+        </button>
+      </div>
+    </div>
+
+<div id="top-content">
+  <div class="heading-with-actions top-heading">
+    <h1>Migrating from 0.x</h1>
+
+<a href="migrating-from-0-x.md" title="Copy Markdown (hold Ctrl/Cmd and click it to open as Markdown)" class="copy-markdown icon-action" rel="help">
+  <i class="ri-markdown-line" aria-hidden="true"></i>
+  <span class="sr-only">Copy Markdown</span>
+</a>
+
+
+      <a href="https://github.com/bmalum/mayfly/blob/v1.0.0-rc.1/guides/migrating-from-0.x.md#L1" title="View Source" class="icon-action" rel="help nofollow">
+        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+        <span class="sr-only">View Source</span>
+      </a>
+
+  </div>
+
+
+<h2 id="summary-of-breaking-changes" class="section-heading"><a href="#summary-of-breaking-changes" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a><span class="text">Summary of breaking changes</span></h2><table><thead><tr><th style="text-align: left;">0.x</th><th style="text-align: left;">1.0</th></tr></thead><tbody><tr><td style="text-align: left;">Elixir ≥ 1.15, Jason dependency</td><td style="text-align: left;">Elixir ≥ 1.18, built-in <a href="https://elixir.hexdocs.pm/JSON.html"><code class="inline">JSON</code></a>, no runtime deps</td></tr><tr><td style="text-align: left;"><code class="inline">_HANDLER=Elixir.MyApp.Handler.handle</code> (MFA)</td><td style="text-align: left;"><code class="inline">_HANDLER=MyApp.Handler</code> (module with <code class="inline">use Mayfly.Handler</code>); MFA still accepted</td></tr><tr><td style="text-align: left;"><code class="inline">def handle(event)</code> returns <code class="inline">{:ok, _}</code></td><td style="text-align: left;"><code class="inline">def handle(event, ctx, state)</code>; bare return values are errors</td></tr><tr><td style="text-align: left;"><code class="inline">mix lambda.build --zip</code> with <code class="inline">MIX_ENV=lambda</code></td><td style="text-align: left;"><code class="inline">mix release lambda</code> with the <a href="Mayfly.Release.html"><code class="inline">Mayfly.Release</code></a> steps; <a href="Mix.Tasks.Lambda.Build.html"><code class="inline">mix lambda.build</code></a> only orchestrates Docker</td></tr><tr><td style="text-align: left;"><code class="inline">:mayfly</code> application auto-started the loop</td><td style="text-align: left;">Nothing starts implicitly; <code class="inline">bootstrap</code> runs <a href="Mayfly.Boot.html#main/0"><code class="inline">Mayfly.Boot.main/0</code></a></td></tr><tr><td style="text-align: left;"><code class="inline">errorType: &quot;Elixir.KeyError&quot;</code>, <code class="inline">stackTrace: &quot;…&quot;</code></td><td style="text-align: left;"><code class="inline">&quot;KeyError&quot;</code>, <code class="inline">stackTrace: [...]</code></td></tr><tr><td style="text-align: left;"><code class="inline">{:error, &quot;s&quot;}</code> → <a href="https://elixir.hexdocs.pm/RuntimeError.html"><code class="inline">RuntimeError</code></a></td><td style="text-align: left;"><code class="inline">HandlerError</code></td></tr><tr><td style="text-align: left;"><code class="inline">Mayfly.Error</code>, <code class="inline">Mayfly.Runtime</code>, <code class="inline">Mayfly.Loop</code></td><td style="text-align: left;"><a href="Mayfly.ErrorPayload.html"><code class="inline">Mayfly.ErrorPayload</code></a>, <a href="Mayfly.RuntimeAPI.html"><code class="inline">Mayfly.RuntimeAPI</code></a>, <a href="Mayfly.Poller.html"><code class="inline">Mayfly.Poller</code></a></td></tr></tbody></table><h2 id="step-by-step" class="section-heading"><a href="#step-by-step" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a><span class="text">Step by step</span></h2><h3 id="1-toolchain" class="section-heading"><a href="#1-toolchain" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a><span class="text">1. Toolchain</span></h3><p>Elixir 1.18+ / OTP 27+. Remove <code class="inline">{:jason, ...}</code> if Mayfly was the only user;
+replace <code class="inline">Jason.encode!/decode!</code> in your handlers with <code class="inline">JSON.encode!/decode!</code>.
+(Jason keeps working for your own code if you keep it.)</p><h3 id="2-handler" class="section-heading"><a href="#2-handler" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a><span class="text">2. Handler</span></h3><p>Before:</p><pre><code class="makeup elixir" translate="no"><span class="kd">defmodule</span><span class="w"> </span><span class="nc">MyApp.Handler</span><span class="w"> </span><span class="k" data-group-id="group-1">do</span><span class="w">
+  </span><span class="kd">def</span><span class="w"> </span><span class="nf">handle</span><span class="p" data-group-id="group-2">(</span><span class="n">event</span><span class="p" data-group-id="group-2">)</span><span class="w"> </span><span class="k" data-group-id="group-3">do</span><span class="w">
+    </span><span class="p" data-group-id="group-4">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="group-5">%{</span><span class="ss">ok</span><span class="p">:</span><span class="w"> </span><span class="no">true</span><span class="p" data-group-id="group-5">}</span><span class="p" data-group-id="group-4">}</span><span class="w">
+  </span><span class="k" data-group-id="group-3">end</span><span class="w">
+</span><span class="k" data-group-id="group-1">end</span></code></pre><p>After:</p><pre><code class="makeup elixir" translate="no"><span class="kd">defmodule</span><span class="w"> </span><span class="nc">MyApp.Handler</span><span class="w"> </span><span class="k" data-group-id="group-1">do</span><span class="w">
+  </span><span class="kn">use</span><span class="w"> </span><span class="nc">Mayfly.Handler</span><span class="w">
+
+  </span><span class="na">@impl</span><span class="w"> </span><span class="no">true</span><span class="w">
+  </span><span class="kd">def</span><span class="w"> </span><span class="nf">handle</span><span class="p" data-group-id="group-2">(</span><span class="n">event</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="group-3">%</span><span class="nc" data-group-id="group-3">Mayfly.Context</span><span class="p" data-group-id="group-3">{</span><span class="p" data-group-id="group-3">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="c">_ctx</span><span class="p">,</span><span class="w"> </span><span class="c">_state</span><span class="p" data-group-id="group-2">)</span><span class="w"> </span><span class="k" data-group-id="group-4">do</span><span class="w">
+    </span><span class="p" data-group-id="group-5">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="group-6">%{</span><span class="ss">ok</span><span class="p">:</span><span class="w"> </span><span class="no">true</span><span class="p" data-group-id="group-6">}</span><span class="p" data-group-id="group-5">}</span><span class="w">
+  </span><span class="k" data-group-id="group-4">end</span><span class="w">
+</span><span class="k" data-group-id="group-1">end</span></code></pre><p>Set the Lambda Handler to <code class="inline">MyApp.Handler</code>. If you cannot change the handler
+setting yet, <code class="inline">MyApp.Handler.handle</code> (arity 1 or 2) keeps working.</p><p>Move any one-time setup into <code class="inline">init/1</code> and read it from <code class="inline">state</code>.</p><h3 id="3-build" class="section-heading"><a href="#3-build" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a><span class="text">3. Build</span></h3><p>Before: <code class="inline">mix lambda.build --zip</code> (and a <code class="inline">config/lambda.exs</code> if you imported
+config per env).</p><p>After:</p><pre><code class="makeup elixir" translate="no"><span class="ss">releases</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="group-1">[</span><span class="w">
+  </span><span class="ss">lambda</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="group-2">[</span><span class="ss">steps</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="group-3">[</span><span class="o">&amp;</span><span class="nc">Mayfly.Release</span><span class="o">.</span><span class="n">prepare</span><span class="o">/</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="ss">:assemble</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="nc">Mayfly.Release</span><span class="o">.</span><span class="n">bootstrap</span><span class="o">/</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="nc">Mayfly.Release</span><span class="o">.</span><span class="n">zip</span><span class="o">/</span><span class="mi">1</span><span class="p" data-group-id="group-3">]</span><span class="p">,</span><span class="w"> </span><span class="ss">mayfly</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="group-4">[</span><span class="ss">handler</span><span class="p">:</span><span class="w"> </span><span class="nc">MyApp.Handler</span><span class="p">,</span><span class="w"> </span><span class="ss">layer</span><span class="p">:</span><span class="w"> </span><span class="no">true</span><span class="p" data-group-id="group-4">]</span><span class="p" data-group-id="group-2">]</span><span class="w">
+</span><span class="p" data-group-id="group-1">]</span></code></pre><pre><code class="makeup bash" translate="no"><span class="">MIX_ENV=prod mix release lambda      # _build/prod/rel/lambda/lambda.zip
+</span></code></pre><p>Delete <code class="inline">config/lambda.exs</code> if it only existed for Mayfly. If you bundled ERTS
+via Docker before, keep doing so with <code class="inline">mix lambda.build --docker --arch …</code> and
+drop <code class="inline">layer: true</code>.</p><h3 id="4-error-handling-in-callers" class="section-heading"><a href="#4-error-handling-in-callers" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a><span class="text">4. Error handling in callers</span></h3><p>If downstream code matched on <code class="inline">errorType</code>, update:</p><ul><li><code class="inline">&quot;Elixir.KeyError&quot;</code> → <code class="inline">&quot;KeyError&quot;</code></li><li><code class="inline">&quot;RuntimeError&quot;</code> for <code class="inline">{:error, &quot;string&quot;}</code> → <code class="inline">&quot;HandlerError&quot;</code></li><li><code class="inline">&quot;UnknownError&quot;</code> → <code class="inline">&quot;HandlerError&quot;</code></li><li><code class="inline">stackTrace</code> is now a list</li></ul><p>Handlers that returned bare values (not <code class="inline">{:ok, _}</code>) were silently accepted in
+0.x; they now fail with <code class="inline">Runtime.InvalidResponse</code>. Wrap them in <code class="inline">{:ok, _}</code>.</p><h3 id="5-local-development" class="section-heading"><a href="#5-local-development" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a><span class="text">5. Local development</span></h3><p><a href="https://mix.hexdocs.pm/Mix.Tasks.Test.html"><code class="inline">mix test</code></a> / <code class="inline">iex -S mix</code> no longer start a polling loop. Use
+<code class="inline">mix lambda.invoke MyApp.Handler event.json</code> to run a handler locally, or
+<a href="Mayfly.LocalRuntime.html"><code class="inline">Mayfly.LocalRuntime</code></a> in ExUnit.</p><h3 id="6-optional" class="section-heading"><a href="#6-optional" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a><span class="text">6. Optional</span></h3><ul><li>Add <code class="inline">{:telemetry, &quot;~&gt; 1.0&quot;}</code> for runtime events.</li><li>Switch the function's log format to JSON for structured logs.</li><li>Consider <code class="inline">layer: true</code> to drop Docker from your build.</li></ul>
+
+</div>
+
+<div class="bottom-actions" id="bottom-actions">
+  <div class="bottom-actions-item">
+
+      <a href="observability.html" class="bottom-actions-button" rel="prev">
+        <span class="subheader">
+          ← Previous Page
+        </span>
+        <span class="title">
+Observability
+        </span>
+      </a>
+
+  </div>
+  <div class="bottom-actions-item">
+
+  </div>
+</div>
+    <footer class="footer">
+
+        <p>
+
+            <span class="line">
+              <a href="https://hex.pm/packages/mayfly/1.0.0-rc.1">Hex Package</a>
+
+              <a href="https://preview.hex.pm/preview/mayfly/1.0.0-rc.1">Hex Preview</a>
+
+                (<a href="https://preview.hex.pm/preview/mayfly/1.0.0-rc.1/show/guides/migrating-from-0.x.md">current file</a>)
+
+            </span>
+
+          <span class="line">
+            <button class="a-main footer-button display-quick-switch" title="Go to package docs">
+              Go to package docs
+            </button>
+
+              <a href="llms.txt" target="_blank">
+                View llms.txt
+              </a>
+
+
+              <a href="Mayfly.epub">
+                Download ePub version
+              </a>
+
+          </span>
+        </p>
+
+        <p class="built-using">
+          Built using
+          <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" target="_blank" rel="help noopener" translate="no">ExDoc</a> (v0.40.4) for the
+
+            <a href="https://elixir-lang.org" title="Elixir" target="_blank" translate="no">Elixir programming language</a>
+
+        </p>
+
+
+    </footer>
+  </div>
+</main>
+</div>
+
+  </body>
+</html>

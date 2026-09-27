@@ -8,11 +8,11 @@
     <meta name="project" content="Mayfly v1.0.0-rc.1">
 
 
-    <title>Mayfly.Supervisor — Mayfly v1.0.0-rc.1</title>
+    <title>mix lambda.doctor — Mayfly v1.0.0-rc.1</title>
 
     <link rel="stylesheet" href="dist/html-elixir-RXHHCTJW.css" />
 
-      <link rel="canonical" href="https://elixir-aws-lambda.dev/docs/Mayfly.Supervisor.html" />
+      <link rel="canonical" href="https://elixir-aws-lambda.dev/docs/Mix.Tasks.Lambda.Doctor.html" />
 
     <script defer src="dist/sidebar_items-B9A7F5BC.js"></script>
     <script defer src="docs_config.js"></script>
@@ -53,7 +53,7 @@ Mayfly
 
 <output role="status" id="toast"></output>
 
-<main class="content page-module" id="main" data-type="modules">
+<main class="content page-task" id="main" data-type="tasks">
   <div id="content" class="content-inner">
     <div class="top-search">
       <div class="search-settings">
@@ -99,19 +99,19 @@ Mayfly
 <div id="top-content">
   <div class="heading-with-actions top-heading">
     <h1>
-      <span translate="no">Mayfly.<wbr />Supervisor</span> 
+      <span translate="no">mix lambda.<wbr />doctor</span> 
       <small class="app-vsn" translate="no">(Mayfly v1.0.0-rc.1)</small>
 
     </h1>
 
-<a href="Mayfly.Supervisor.md" title="Copy Markdown (hold Ctrl/Cmd and click it to open as Markdown)" class="copy-markdown icon-action" rel="help">
+<a href="Mix.Tasks.Lambda.Doctor.md" title="Copy Markdown (hold Ctrl/Cmd and click it to open as Markdown)" class="copy-markdown icon-action" rel="help">
   <i class="ri-markdown-line" aria-hidden="true"></i>
   <span class="sr-only">Copy Markdown</span>
 </a>
 
 
 
-      <a href="https://github.com/bmalum/mayfly/blob/v1.0.0-rc.1/lib/mayfly.ex#L39" title="View Source" class="icon-action" rel="help nofollow">
+      <a href="https://github.com/bmalum/mayfly/blob/v1.0.0-rc.1/lib/mix/tasks/lambda.doctor.ex#L1" title="View Source" class="icon-action" rel="help nofollow">
         <i class="ri-code-s-slash-line" aria-hidden="true"></i>
         <span class="sr-only">View Source</span>
       </a>
@@ -120,8 +120,12 @@ Mayfly
 
 
     <section id="moduledoc">
-<p>Starts one <a href="Mayfly.Poller.html"><code class="inline">Mayfly.Poller</code></a> per concurrency slot after the handler has been
-resolved and initialised exactly once.</p>
+<p>Runs a set of checks that catch the common setup mistakes before you deploy:</p><ul><li><p>a release with the <a href="Mayfly.Release.html"><code class="inline">Mayfly.Release</code></a> steps and a <code class="inline">mayfly: [handler: ...]</code>
+option exists;</p></li><li><p>the configured handler resolves (module implements <a href="Mayfly.Handler.html"><code class="inline">Mayfly.Handler</code></a>, or a
+legacy <code class="inline">Module.function</code> exists) and its <code class="inline">init/1</code> succeeds;</p></li><li><p>for <code class="inline">layer: true</code> releases, the local ERTS version matches the layer you
+intend to use (<code class="inline">--layer ARN</code> queries Lambda for the layer's OTP version;
+without it the expected version is printed for you to compare);</p></li><li><p>the Elixir/OTP versions are supported.</p><p>mix lambda.doctor
+mix lambda.doctor --release lambda --layer arn:aws:lambda:eu-central-1:123:layer:mayfly-erlang-27-arm64:1</p></li></ul><p>Exit status is 1 when any check fails.</p>
     </section>
 
 </div>

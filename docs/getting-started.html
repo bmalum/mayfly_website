@@ -4,19 +4,19 @@
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="generator" content="ExDoc v0.39.1">
-    <meta name="project" content="Mayfly v0.1.0">
+    <meta name="generator" content="ExDoc v0.40.4">
+    <meta name="project" content="Mayfly v1.0.0-rc.1">
 
 
-    <title>Getting Started with Mayfly — Mayfly v0.1.0</title>
+    <title>Getting Started — Mayfly v1.0.0-rc.1</title>
 
-    <link rel="stylesheet" href="dist/html-elixir-ZFNMEJKT.css" />
+    <link rel="stylesheet" href="dist/html-elixir-RXHHCTJW.css" />
 
       <link rel="canonical" href="https://elixir-aws-lambda.dev/docs/getting-started.html" />
 
-    <script defer src="dist/sidebar_items-32970337.js"></script>
+    <script defer src="dist/sidebar_items-B9A7F5BC.js"></script>
     <script defer src="docs_config.js"></script>
-    <script defer src="dist/html-HBZYRXZS.js"></script>
+    <script defer src="dist/html-MI33G4N7.js"></script>
 
   </head>
   <body>
@@ -43,11 +43,11 @@
 Mayfly
         </a>
         <div class="sidebar-projectVersion" translate="no">
-          v0.1.0
+          v1.0.0-rc.1
         </div>
       </div>
     </div>
-    <ul id="sidebar-list-nav" class="sidebar-list-nav" role="tablist" data-extras=""></ul>
+    <ul id="sidebar-list-nav" class="sidebar-list-nav" role="tablist" data-extras="Pages"></ul>
   </div>
 </nav>
 
@@ -98,10 +98,15 @@ Mayfly
 
 <div id="top-content">
   <div class="heading-with-actions top-heading">
-    <h1>Getting Started with Mayfly</h1>
+    <h1>Getting Started</h1>
+
+<a href="getting-started.md" title="Copy Markdown (hold Ctrl/Cmd and click it to open as Markdown)" class="copy-markdown icon-action" rel="help">
+  <i class="ri-markdown-line" aria-hidden="true"></i>
+  <span class="sr-only">Copy Markdown</span>
+</a>
 
 
-      <a href="https://github.com/bmalum/mayfly/blob/main/guides/getting-started.md#L1" title="View Source" class="icon-action" rel="help">
+      <a href="https://github.com/bmalum/mayfly/blob/v1.0.0-rc.1/guides/getting-started.md#L1" title="View Source" class="icon-action" rel="help nofollow">
         <i class="ri-code-s-slash-line" aria-hidden="true"></i>
         <span class="sr-only">View Source</span>
       </a>
@@ -109,68 +114,80 @@ Mayfly
   </div>
 
 
-<p>This guide will walk you through creating your first Elixir Lambda function using Mayfly.</p><h2 id="prerequisites" class="section-heading"><a href="#prerequisites" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a><span class="text">Prerequisites</span></h2><ul><li>Elixir ~&gt; 1.15 installed</li><li>Mix build tool</li><li>AWS Account with Lambda access</li><li>AWS CLI configured (optional, for deployment)</li></ul><h2 id="installation" class="section-heading"><a href="#installation" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a><span class="text">Installation</span></h2><p>Add Mayfly to your project's dependencies in <code class="inline">mix.exs</code>:</p><pre><code class="makeup elixir" translate="no"><span class="kd">def</span><span class="w"> </span><span class="nf">deps</span><span class="w"> </span><span class="k" data-group-id="4008962028-1">do</span><span class="w">
-  </span><span class="p" data-group-id="4008962028-2">[</span><span class="w">
-    </span><span class="p" data-group-id="4008962028-3">{</span><span class="ss">:mayfly</span><span class="p">,</span><span class="w"> </span><span class="ss">github</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;bmalum/mayfly&quot;</span><span class="p" data-group-id="4008962028-3">}</span><span class="w">
-  </span><span class="p" data-group-id="4008962028-2">]</span><span class="w">
-</span><span class="k" data-group-id="4008962028-1">end</span></code></pre><p>Then fetch the dependencies:</p><pre><code class="makeup bash" translate="no"><span class="">mix deps.get
-</span></code></pre><h2 id="creating-your-first-lambda-function" class="section-heading"><a href="#creating-your-first-lambda-function" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a><span class="text">Creating Your First Lambda Function</span></h2><h3 id="1-define-your-handler" class="section-heading"><a href="#1-define-your-handler" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a><span class="text">1. Define Your Handler</span></h3><p>Create a new module with a handler function. The handler receives a map (the Lambda event) and returns <code class="inline">{:ok, result}</code> or <code class="inline">{:error, reason}</code>:</p><pre><code class="makeup elixir" translate="no"><span class="kd">defmodule</span><span class="w"> </span><span class="nc">MyApp.HelloHandler</span><span class="w"> </span><span class="k" data-group-id="1869059967-1">do</span><span class="w">
-  </span><span class="na">@moduledoc</span><span class="w"> </span><span class="s">&quot;&quot;&quot;
-  A simple Lambda function that greets the world.
-  &quot;&quot;&quot;</span><span class="w">
+<h2 id="prerequisites" class="section-heading"><a href="#prerequisites" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a><span class="text">Prerequisites</span></h2><ul><li>Elixir 1.18+ and OTP 27+</li><li>An AWS account and the AWS CLI (for deployment)</li><li>Docker only if you bundle ERTS instead of using the layer</li></ul><h2 id="1-add-mayfly-and-a-release" class="section-heading"><a href="#1-add-mayfly-and-a-release" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a><span class="text">1. Add Mayfly and a release</span></h2><pre><code class="makeup elixir" translate="no"><span class="c1"># mix.exs</span><span class="w">
+</span><span class="kd">def</span><span class="w"> </span><span class="nf">project</span><span class="w"> </span><span class="k" data-group-id="group-1">do</span><span class="w">
+  </span><span class="p" data-group-id="group-2">[</span><span class="w">
+    </span><span class="ss">app</span><span class="p">:</span><span class="w"> </span><span class="ss">:hello</span><span class="p">,</span><span class="w">
+    </span><span class="ss">version</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;0.1.0&quot;</span><span class="p">,</span><span class="w">
+    </span><span class="ss">elixir</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;~&gt; 1.18&quot;</span><span class="p">,</span><span class="w">
+    </span><span class="ss">deps</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="group-3">[</span><span class="p" data-group-id="group-4">{</span><span class="ss">:mayfly</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;~&gt; 1.0.0-rc&quot;</span><span class="p" data-group-id="group-4">}</span><span class="p" data-group-id="group-3">]</span><span class="p">,</span><span class="w">
+    </span><span class="ss">releases</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="group-5">[</span><span class="w">
+      </span><span class="ss">lambda</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="group-6">[</span><span class="w">
+        </span><span class="ss">steps</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="group-7">[</span><span class="o">&amp;</span><span class="nc">Mayfly.Release</span><span class="o">.</span><span class="n">prepare</span><span class="o">/</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="ss">:assemble</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="nc">Mayfly.Release</span><span class="o">.</span><span class="n">bootstrap</span><span class="o">/</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="nc">Mayfly.Release</span><span class="o">.</span><span class="n">zip</span><span class="o">/</span><span class="mi">1</span><span class="p" data-group-id="group-7">]</span><span class="p">,</span><span class="w">
+        </span><span class="ss">mayfly</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="group-8">[</span><span class="ss">handler</span><span class="p">:</span><span class="w"> </span><span class="nc">Hello.Handler</span><span class="p">,</span><span class="w"> </span><span class="ss">layer</span><span class="p">:</span><span class="w"> </span><span class="no">true</span><span class="p" data-group-id="group-8">]</span><span class="w">
+      </span><span class="p" data-group-id="group-6">]</span><span class="w">
+    </span><span class="p" data-group-id="group-5">]</span><span class="w">
+  </span><span class="p" data-group-id="group-2">]</span><span class="w">
+</span><span class="k" data-group-id="group-1">end</span></code></pre><p><code class="inline">layer: true</code> means the zip will not contain ERTS; the Mayfly layer provides it.
+Leave it out to bundle ERTS (then build with <code class="inline">mix lambda.build --docker</code>).</p><h2 id="2-write-the-handler" class="section-heading"><a href="#2-write-the-handler" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a><span class="text">2. Write the handler</span></h2><pre><code class="makeup elixir" translate="no"><span class="c1"># lib/hello/handler.ex</span><span class="w">
+</span><span class="kd">defmodule</span><span class="w"> </span><span class="nc">Hello.Handler</span><span class="w"> </span><span class="k" data-group-id="group-1">do</span><span class="w">
+  </span><span class="kn">use</span><span class="w"> </span><span class="nc">Mayfly.Handler</span><span class="w">
 
-  </span><span class="kd">def</span><span class="w"> </span><span class="nf">handle</span><span class="p" data-group-id="1869059967-2">(</span><span class="n">event</span><span class="p" data-group-id="1869059967-2">)</span><span class="w"> </span><span class="k" data-group-id="1869059967-3">do</span><span class="w">
-    </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Map</span><span class="o">.</span><span class="n">get</span><span class="p" data-group-id="1869059967-4">(</span><span class="n">event</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;name&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;World&quot;</span><span class="p" data-group-id="1869059967-4">)</span><span class="w">
-    
-    </span><span class="p" data-group-id="1869059967-5">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="1869059967-6">%{</span><span class="w">
-      </span><span class="ss">message</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Hello, </span><span class="si" data-group-id="1869059967-7">#{</span><span class="n">name</span><span class="si" data-group-id="1869059967-7">}</span><span class="s">!&quot;</span><span class="p">,</span><span class="w">
-      </span><span class="ss">timestamp</span><span class="p">:</span><span class="w"> </span><span class="nc">DateTime</span><span class="o">.</span><span class="n">utc_now</span><span class="p" data-group-id="1869059967-8">(</span><span class="p" data-group-id="1869059967-8">)</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="nc">DateTime</span><span class="o">.</span><span class="n">to_iso8601</span><span class="p" data-group-id="1869059967-9">(</span><span class="p" data-group-id="1869059967-9">)</span><span class="w">
-    </span><span class="p" data-group-id="1869059967-6">}</span><span class="p" data-group-id="1869059967-5">}</span><span class="w">
-  </span><span class="k" data-group-id="1869059967-3">end</span><span class="w">
-</span><span class="k" data-group-id="1869059967-1">end</span></code></pre><h3 id="2-build-your-lambda-package" class="section-heading"><a href="#2-build-your-lambda-package" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a><span class="text">2. Build Your Lambda Package</span></h3><p>Use the provided Mix task to build a deployment package:</p><pre><code class="makeup bash" translate="no"><span class="">mix lambda.build --zip
-</span></code></pre><p>This will:</p><ul><li>Build a release in the <code class="inline">lambda</code> environment</li><li>Generate a <code class="inline">bootstrap</code> script</li><li>Create a <code class="inline">lambda.zip</code> file ready for deployment</li></ul><h3 id="3-deploy-to-aws-lambda" class="section-heading"><a href="#3-deploy-to-aws-lambda" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a><span class="text">3. Deploy to AWS Lambda</span></h3><h4>Using AWS Console</h4><ol><li>Go to the <a href="https://console.aws.amazon.com/lambda">AWS Lambda Console</a></li><li>Click &quot;Create function&quot;</li><li>Choose &quot;Author from scratch&quot;</li><li>Configure:<ul><li><strong>Function name</strong>: <code class="inline">my-elixir-function</code></li><li><strong>Runtime</strong>: Custom runtime on Amazon Linux 2023</li><li><strong>Architecture</strong>: x86_64 (or arm64 if you built with Docker)</li></ul></li><li>Click &quot;Create function&quot;</li><li>In the &quot;Code&quot; section, click &quot;Upload from&quot; → &quot;.zip file&quot;</li><li>Upload your <code class="inline">lambda.zip</code> file</li><li>In &quot;Runtime settings&quot;, click &quot;Edit&quot; and set:<ul><li><strong>Handler</strong>: <code class="inline">Elixir.MyApp.HelloHandler.handle</code></li></ul></li><li>Click &quot;Save&quot;</li></ol><h4>Using AWS CLI</h4><pre><code class="makeup bash" translate="no"><span class=""># Create the function
-</span><span class="">aws lambda create-function \
-</span><span class="">  --function-name my-elixir-function \
-</span><span class="">  --runtime provided.al2023 \
-</span><span class="">  --role arn:aws:iam::YOUR_ACCOUNT_ID:role/lambda-execution-role \
-</span><span class="">  --handler Elixir.MyApp.HelloHandler.handle \
-</span><span class="">  --zip-file fileb://lambda.zip \
-</span><span class="">  --timeout 30 \
-</span><span class="">  --memory-size 512
+  </span><span class="na">@impl</span><span class="w"> </span><span class="no">true</span><span class="w">
+  </span><span class="kd">def</span><span class="w"> </span><span class="nf">handle</span><span class="p" data-group-id="group-2">(</span><span class="n">event</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="group-3">%</span><span class="nc" data-group-id="group-3">Mayfly.Context</span><span class="p" data-group-id="group-3">{</span><span class="p" data-group-id="group-3">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ctx</span><span class="p">,</span><span class="w"> </span><span class="c">_state</span><span class="p" data-group-id="group-2">)</span><span class="w"> </span><span class="k" data-group-id="group-4">do</span><span class="w">
+    </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Map</span><span class="o">.</span><span class="n">get</span><span class="p" data-group-id="group-5">(</span><span class="n">event</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;name&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;World&quot;</span><span class="p" data-group-id="group-5">)</span><span class="w">
+
+    </span><span class="p" data-group-id="group-6">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w">
+     </span><span class="p" data-group-id="group-7">%{</span><span class="w">
+       </span><span class="ss">message</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Hello, </span><span class="si" data-group-id="group-8">#{</span><span class="n">name</span><span class="si" data-group-id="group-8">}</span><span class="s">!&quot;</span><span class="p">,</span><span class="w">
+       </span><span class="ss">request_id</span><span class="p">:</span><span class="w"> </span><span class="n">ctx</span><span class="o">.</span><span class="n">request_id</span><span class="p">,</span><span class="w">
+       </span><span class="ss">remaining_ms</span><span class="p">:</span><span class="w"> </span><span class="nc">Mayfly.Context</span><span class="o">.</span><span class="n">remaining_time_ms</span><span class="p" data-group-id="group-9">(</span><span class="n">ctx</span><span class="p" data-group-id="group-9">)</span><span class="w">
+     </span><span class="p" data-group-id="group-7">}</span><span class="p" data-group-id="group-6">}</span><span class="w">
+  </span><span class="k" data-group-id="group-4">end</span><span class="w">
+</span><span class="k" data-group-id="group-1">end</span></code></pre><h2 id="3-try-it-locally" class="section-heading"><a href="#3-try-it-locally" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a><span class="text">3. Try it locally</span></h2><pre><code class="makeup bash" translate="no"><span class="">mix lambda.invoke Hello.Handler &#39;{&quot;name&quot;:&quot;Elixir&quot;}&#39;
+</span><span class=""># %{&quot;message&quot; =&gt; &quot;Hello, Elixir!&quot;, &quot;remaining_ms&quot; =&gt; 29998, &quot;request_id&quot; =&gt; &quot;local-1-...&quot;}
+</span></code></pre><p>This runs the real runtime against an emulated Runtime API, so errors, the
+context and JSON encoding behave exactly as in Lambda.</p><h2 id="4-build" class="section-heading"><a href="#4-build" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a><span class="text">4. Build</span></h2><pre><code class="makeup bash" translate="no"><span class="">MIX_ENV=prod mix release lambda
+</span><span class=""># * creating _build/prod/rel/lambda/bootstrap
+</span><span class=""># * creating _build/prod/rel/lambda/lambda.zip (2140 KiB)
+</span></code></pre><h2 id="5-deploy" class="section-heading"><a href="#5-deploy" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a><span class="text">5. Deploy</span></h2><pre><code class="makeup bash" translate="no"><span class="">ARCH=arm64                                  # or x86_64 – must match the layer
+</span><span class="">LAYER=arn:aws:lambda:eu-central-1:ACCOUNT:layer:mayfly-erlang-27-3-4-$ARCH:1
 </span><span class="">
-</span><span class=""># Update existing function
-</span><span class="">aws lambda update-function-code \
-</span><span class="">  --function-name my-elixir-function \
-</span><span class="">  --zip-file fileb://lambda.zip
-</span></code></pre><h3 id="4-test-your-function" class="section-heading"><a href="#4-test-your-function" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a><span class="text">4. Test Your Function</span></h3><p>In the AWS Lambda Console:</p><ol><li>Click the &quot;Test&quot; tab</li><li>Create a new test event:<pre><code class="json">{
-&quot;name&quot;: &quot;Elixir Developer&quot;
-}</code></pre></li><li>Click &quot;Test&quot;</li></ol><p>You should see a response like:</p><pre><code class="json">{
-  &quot;message&quot;: &quot;Hello, Elixir Developer!&quot;,
-  &quot;timestamp&quot;: &quot;2025-11-21T10:30:00Z&quot;
-}</code></pre><h2 id="handler-patterns" class="section-heading"><a href="#handler-patterns" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a><span class="text">Handler Patterns</span></h2><h3 id="basic-handler" class="section-heading"><a href="#basic-handler" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a><span class="text">Basic Handler</span></h3><pre><code class="makeup elixir" translate="no"><span class="kd">def</span><span class="w"> </span><span class="nf">handle</span><span class="p" data-group-id="0982836964-1">(</span><span class="n">event</span><span class="p" data-group-id="0982836964-1">)</span><span class="w"> </span><span class="k" data-group-id="0982836964-2">do</span><span class="w">
-  </span><span class="p" data-group-id="0982836964-3">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="0982836964-4">%{</span><span class="ss">result</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;success&quot;</span><span class="p" data-group-id="0982836964-4">}</span><span class="p" data-group-id="0982836964-3">}</span><span class="w">
-</span><span class="k" data-group-id="0982836964-2">end</span></code></pre><h3 id="with-error-handling" class="section-heading"><a href="#with-error-handling" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a><span class="text">With Error Handling</span></h3><pre><code class="makeup elixir" translate="no"><span class="kd">def</span><span class="w"> </span><span class="nf">handle</span><span class="p" data-group-id="7956645050-1">(</span><span class="n">event</span><span class="p" data-group-id="7956645050-1">)</span><span class="w"> </span><span class="k" data-group-id="7956645050-2">do</span><span class="w">
-  </span><span class="k">case</span><span class="w"> </span><span class="n">validate</span><span class="p" data-group-id="7956645050-3">(</span><span class="n">event</span><span class="p" data-group-id="7956645050-3">)</span><span class="w"> </span><span class="k" data-group-id="7956645050-4">do</span><span class="w">
-    </span><span class="ss">:ok</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> 
-      </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">process</span><span class="p" data-group-id="7956645050-5">(</span><span class="n">event</span><span class="p" data-group-id="7956645050-5">)</span><span class="w">
-      </span><span class="p" data-group-id="7956645050-6">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="n">result</span><span class="p" data-group-id="7956645050-6">}</span><span class="w">
-    
-    </span><span class="p" data-group-id="7956645050-7">{</span><span class="ss">:error</span><span class="p">,</span><span class="w"> </span><span class="n">reason</span><span class="p" data-group-id="7956645050-7">}</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> 
-      </span><span class="p" data-group-id="7956645050-8">{</span><span class="ss">:error</span><span class="p">,</span><span class="w"> </span><span class="n">reason</span><span class="p" data-group-id="7956645050-8">}</span><span class="w">
-  </span><span class="k" data-group-id="7956645050-4">end</span><span class="w">
-</span><span class="k" data-group-id="7956645050-2">end</span></code></pre><h3 id="with-pattern-matching" class="section-heading"><a href="#with-pattern-matching" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a><span class="text">With Pattern Matching</span></h3><pre><code class="makeup elixir" translate="no"><span class="kd">def</span><span class="w"> </span><span class="nf">handle</span><span class="p" data-group-id="4725363988-1">(</span><span class="p" data-group-id="4725363988-2">%{</span><span class="s">&quot;action&quot;</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="s">&quot;create&quot;</span><span class="p" data-group-id="4725363988-2">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">event</span><span class="p" data-group-id="4725363988-1">)</span><span class="w"> </span><span class="k" data-group-id="4725363988-3">do</span><span class="w">
-  </span><span class="c1"># Handle create action</span><span class="w">
-  </span><span class="p" data-group-id="4725363988-4">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="4725363988-5">%{</span><span class="ss">status</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;created&quot;</span><span class="p" data-group-id="4725363988-5">}</span><span class="p" data-group-id="4725363988-4">}</span><span class="w">
-</span><span class="k" data-group-id="4725363988-3">end</span><span class="w">
+</span><span class="">aws lambda create-function \
+</span><span class="">  --function-name hello \
+</span><span class="">  --runtime provided.al2023 \
+</span><span class="">  --architectures $ARCH \
+</span><span class="">  --handler Hello.Handler \
+</span><span class="">  --layers $LAYER \
+</span><span class="">  --zip-file fileb://_build/prod/rel/lambda/lambda.zip \
+</span><span class="">  --role arn:aws:iam::ACCOUNT:role/lambda-execution-role \
+</span><span class="">  --timeout 30 --memory-size 512
+</span><span class="">
+</span><span class="">aws lambda invoke --function-name hello \
+</span><span class="">  --cli-binary-format raw-in-base64-out \
+</span><span class="">  --payload &#39;{&quot;name&quot;:&quot;Lambda&quot;}&#39; /dev/stdout
+</span></code></pre><p>Your local OTP must be the layer's exact version (the <code class="inline">bootstrap</code> checks it);
+<code class="inline">mise use erlang@27.3.4.18 elixir@1.18.4-otp-27</code> does it. Public layer ARNs are
+listed in <a href="layers.html">layers.md</a>; to publish your own run
+<code class="inline">layer/build.sh &amp;&amp; layer/publish.sh --region eu-central-1</code>. Or skip the layer
+and bundle ERTS with <code class="inline">mix lambda.build --docker --arch $ARCH</code> (docker or finch).</p><h2 id="6-iterate" class="section-heading"><a href="#6-iterate" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a><span class="text">6. Iterate</span></h2><pre><code class="makeup bash" translate="no"><span class="">MIX_ENV=prod mix release lambda --overwrite
+</span><span class="">aws lambda update-function-code --function-name hello \
+</span><span class="">  --zip-file fileb://_build/prod/rel/lambda/lambda.zip
+</span></code></pre><h2 id="handler-patterns" class="section-heading"><a href="#handler-patterns" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a><span class="text">Handler patterns</span></h2><pre><code class="makeup elixir" translate="no"><span class="c1"># state from init/1</span><span class="w">
+</span><span class="kd">def</span><span class="w"> </span><span class="nf">init</span><span class="p" data-group-id="group-1">(</span><span class="c">_opts</span><span class="p" data-group-id="group-1">)</span><span class="p">,</span><span class="w"> </span><span class="ss">do</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="group-2">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="group-3">%{</span><span class="ss">client</span><span class="p">:</span><span class="w"> </span><span class="nc">MyApp.Client</span><span class="o">.</span><span class="n">new</span><span class="p" data-group-id="group-4">(</span><span class="p" data-group-id="group-4">)</span><span class="p" data-group-id="group-3">}</span><span class="p" data-group-id="group-2">}</span><span class="w">
+</span><span class="kd">def</span><span class="w"> </span><span class="nf">handle</span><span class="p" data-group-id="group-5">(</span><span class="n">event</span><span class="p">,</span><span class="w"> </span><span class="c">_ctx</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="group-6">%{</span><span class="ss">client</span><span class="p">:</span><span class="w"> </span><span class="n">client</span><span class="p" data-group-id="group-6">}</span><span class="p" data-group-id="group-5">)</span><span class="p">,</span><span class="w"> </span><span class="ss">do</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="group-7">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="nc">MyApp.Client</span><span class="o">.</span><span class="n">call</span><span class="p" data-group-id="group-8">(</span><span class="n">client</span><span class="p">,</span><span class="w"> </span><span class="n">event</span><span class="p" data-group-id="group-8">)</span><span class="p" data-group-id="group-7">}</span><span class="w">
 
-</span><span class="kd">def</span><span class="w"> </span><span class="nf">handle</span><span class="p" data-group-id="4725363988-6">(</span><span class="p" data-group-id="4725363988-7">%{</span><span class="s">&quot;action&quot;</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="s">&quot;delete&quot;</span><span class="p" data-group-id="4725363988-7">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">event</span><span class="p" data-group-id="4725363988-6">)</span><span class="w"> </span><span class="k" data-group-id="4725363988-8">do</span><span class="w">
-  </span><span class="c1"># Handle delete action</span><span class="w">
-  </span><span class="p" data-group-id="4725363988-9">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="4725363988-10">%{</span><span class="ss">status</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;deleted&quot;</span><span class="p" data-group-id="4725363988-10">}</span><span class="p" data-group-id="4725363988-9">}</span><span class="w">
-</span><span class="k" data-group-id="4725363988-8">end</span><span class="w">
+</span><span class="c1"># pattern matching on the event</span><span class="w">
+</span><span class="kd">def</span><span class="w"> </span><span class="nf">handle</span><span class="p" data-group-id="group-9">(</span><span class="p" data-group-id="group-10">%{</span><span class="s">&quot;action&quot;</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="s">&quot;create&quot;</span><span class="p" data-group-id="group-10">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">e</span><span class="p">,</span><span class="w"> </span><span class="c">_ctx</span><span class="p">,</span><span class="w"> </span><span class="c">_s</span><span class="p" data-group-id="group-9">)</span><span class="p">,</span><span class="w"> </span><span class="ss">do</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="group-11">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="n">create</span><span class="p" data-group-id="group-12">(</span><span class="n">e</span><span class="p" data-group-id="group-12">)</span><span class="p" data-group-id="group-11">}</span><span class="w">
+</span><span class="kd">def</span><span class="w"> </span><span class="nf">handle</span><span class="p" data-group-id="group-13">(</span><span class="p" data-group-id="group-14">%{</span><span class="s">&quot;action&quot;</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="s">&quot;delete&quot;</span><span class="p" data-group-id="group-14">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">e</span><span class="p">,</span><span class="w"> </span><span class="c">_ctx</span><span class="p">,</span><span class="w"> </span><span class="c">_s</span><span class="p" data-group-id="group-13">)</span><span class="p">,</span><span class="w"> </span><span class="ss">do</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="group-15">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="n">delete</span><span class="p" data-group-id="group-16">(</span><span class="n">e</span><span class="p" data-group-id="group-16">)</span><span class="p" data-group-id="group-15">}</span><span class="w">
+</span><span class="kd">def</span><span class="w"> </span><span class="nf">handle</span><span class="p" data-group-id="group-17">(</span><span class="c">_e</span><span class="p">,</span><span class="w"> </span><span class="c">_ctx</span><span class="p">,</span><span class="w"> </span><span class="c">_s</span><span class="p" data-group-id="group-17">)</span><span class="p">,</span><span class="w"> </span><span class="ss">do</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="group-18">{</span><span class="ss">:error</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="group-19">%{</span><span class="ss">errorType</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;BadRequest&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">errorMessage</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;unknown action&quot;</span><span class="p" data-group-id="group-19">}</span><span class="p" data-group-id="group-18">}</span><span class="w">
 
-</span><span class="kd">def</span><span class="w"> </span><span class="nf">handle</span><span class="p" data-group-id="4725363988-11">(</span><span class="c">_event</span><span class="p" data-group-id="4725363988-11">)</span><span class="w"> </span><span class="k" data-group-id="4725363988-12">do</span><span class="w">
-  </span><span class="p" data-group-id="4725363988-13">{</span><span class="ss">:error</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Unknown action&quot;</span><span class="p" data-group-id="4725363988-13">}</span><span class="w">
-</span><span class="k" data-group-id="4725363988-12">end</span></code></pre><h2 id="environment-variables" class="section-heading"><a href="#environment-variables" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a><span class="text">Environment Variables</span></h2><p>Configure your handler using the <code class="inline">_HANDLER</code> environment variable in Lambda:</p><pre><code class="makeup elixir" translate="no"><span class="c">_HANDLER</span><span class="o">=</span><span class="nc">Elixir.MyApp.HelloHandler</span><span class="o">.</span><span class="n">handle</span></code></pre><p>The format is: <code class="inline">Elixir.ModuleName.function_name</code></p><h2 id="next-steps" class="section-heading"><a href="#next-steps" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a><span class="text">Next Steps</span></h2><ul><li>Learn about <a href="deployment.html">Deployment Strategies</a></li><li>Explore <a href="deployment.html#api-gateway-integration">API Gateway Integration</a></li><li>See <a href="deployment.html#error-handling">Error Handling Best Practices</a></li></ul>
+</span><span class="c1"># Function URL / API Gateway: the payload arrives as event[&quot;body&quot;] (a string)</span><span class="w">
+</span><span class="kd">def</span><span class="w"> </span><span class="nf">handle</span><span class="p" data-group-id="group-20">(</span><span class="p" data-group-id="group-21">%{</span><span class="s">&quot;rawPath&quot;</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="n">path</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;body&quot;</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="n">body</span><span class="p" data-group-id="group-21">}</span><span class="p">,</span><span class="w"> </span><span class="c">_ctx</span><span class="p">,</span><span class="w"> </span><span class="c">_s</span><span class="p" data-group-id="group-20">)</span><span class="w"> </span><span class="k" data-group-id="group-22">do</span><span class="w">
+  </span><span class="p" data-group-id="group-23">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="group-24">%{</span><span class="ss">statusCode</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w"> </span><span class="ss">headers</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="group-25">%{</span><span class="s">&quot;content-type&quot;</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="s">&quot;application/json&quot;</span><span class="p" data-group-id="group-25">}</span><span class="p">,</span><span class="w">
+          </span><span class="ss">body</span><span class="p">:</span><span class="w"> </span><span class="nc">JSON</span><span class="o">.</span><span class="n">encode!</span><span class="p" data-group-id="group-26">(</span><span class="p" data-group-id="group-27">%{</span><span class="ss">path</span><span class="p">:</span><span class="w"> </span><span class="n">path</span><span class="p">,</span><span class="w"> </span><span class="ss">received</span><span class="p">:</span><span class="w"> </span><span class="nc">JSON</span><span class="o">.</span><span class="n">decode!</span><span class="p" data-group-id="group-28">(</span><span class="n">body</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="s">&quot;{}&quot;</span><span class="p" data-group-id="group-28">)</span><span class="p" data-group-id="group-27">}</span><span class="p" data-group-id="group-26">)</span><span class="p" data-group-id="group-24">}</span><span class="p" data-group-id="group-23">}</span><span class="w">
+</span><span class="k" data-group-id="group-22">end</span><span class="w">
+</span><span class="c1"># try it: mix lambda.invoke Hello.Handler &#39;{&quot;a&quot;:1}&#39; --http --path /items</span></code></pre><p>Next: <a href="deployment.html">Deployment</a>, <a href="streaming.html">Streaming</a>, <a href="observability.html">Observability</a>.</p>
 
 </div>
 
@@ -194,34 +211,50 @@ Changelog
           Next Page →
         </span>
         <span class="title">
-Deployment Guide
+Deployment
         </span>
       </a>
 
   </div>
 </div>
     <footer class="footer">
-      <p>
 
-        <span class="line">
-          <button class="a-main footer-button display-quick-switch" title="Search HexDocs packages">
-            Search HexDocs
-          </button>
+        <p>
 
-            <a href="Mayfly.epub" title="ePub version">
-              Download ePub version
-            </a>
+            <span class="line">
+              <a href="https://hex.pm/packages/mayfly/1.0.0-rc.1">Hex Package</a>
 
-        </span>
-      </p>
+              <a href="https://preview.hex.pm/preview/mayfly/1.0.0-rc.1">Hex Preview</a>
 
-      <p class="built-using">
-        Built using
-        <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" target="_blank" rel="help noopener" translate="no">ExDoc</a> (v0.39.1) for the
+                (<a href="https://preview.hex.pm/preview/mayfly/1.0.0-rc.1/show/guides/getting-started.md">current file</a>)
 
-          <a href="https://elixir-lang.org" title="Elixir" target="_blank" translate="no">Elixir programming language</a>
+            </span>
 
-      </p>
+          <span class="line">
+            <button class="a-main footer-button display-quick-switch" title="Go to package docs">
+              Go to package docs
+            </button>
+
+              <a href="llms.txt" target="_blank">
+                View llms.txt
+              </a>
+
+
+              <a href="Mayfly.epub">
+                Download ePub version
+              </a>
+
+          </span>
+        </p>
+
+        <p class="built-using">
+          Built using
+          <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" target="_blank" rel="help noopener" translate="no">ExDoc</a> (v0.40.4) for the
+
+            <a href="https://elixir-lang.org" title="Elixir" target="_blank" translate="no">Elixir programming language</a>
+
+        </p>
+
 
     </footer>
   </div>

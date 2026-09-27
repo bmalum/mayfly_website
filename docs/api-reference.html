@@ -4,19 +4,19 @@
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="generator" content="ExDoc v0.39.1">
-    <meta name="project" content="Mayfly v0.1.0">
+    <meta name="generator" content="ExDoc v0.40.4">
+    <meta name="project" content="Mayfly v1.0.0-rc.1">
 
 
-    <title>API Reference — Mayfly v0.1.0</title>
+    <title>API Reference — Mayfly v1.0.0-rc.1</title>
 
-    <link rel="stylesheet" href="dist/html-elixir-ZFNMEJKT.css" />
+    <link rel="stylesheet" href="dist/html-elixir-RXHHCTJW.css" />
 
       <link rel="canonical" href="https://elixir-aws-lambda.dev/docs/api-reference.html" />
 
-    <script defer src="dist/sidebar_items-32970337.js"></script>
+    <script defer src="dist/sidebar_items-B9A7F5BC.js"></script>
     <script defer src="docs_config.js"></script>
-    <script defer src="dist/html-HBZYRXZS.js"></script>
+    <script defer src="dist/html-MI33G4N7.js"></script>
 
   </head>
   <body>
@@ -43,11 +43,11 @@
 Mayfly
         </a>
         <div class="sidebar-projectVersion" translate="no">
-          v0.1.0
+          v1.0.0-rc.1
         </div>
       </div>
     </div>
-    <ul id="sidebar-list-nav" class="sidebar-list-nav" role="tablist" data-extras=""></ul>
+    <ul id="sidebar-list-nav" class="sidebar-list-nav" role="tablist" data-extras="Pages"></ul>
   </div>
 </nav>
 
@@ -98,9 +98,14 @@ Mayfly
 
 <div id="top-content">
   <div class="heading-with-actions top-heading">
-    <h1>API Reference <small class="app-vsn">Mayfly v#0.1.0</small></h1>
+    <h1>API Reference <small class="app-vsn">Mayfly v#1.0.0-rc.1</small></h1>
+<a href="api-reference.md" title="Copy Markdown (hold Ctrl/Cmd and click it to open as Markdown)" class="copy-markdown icon-action" rel="help">
+  <i class="ri-markdown-line" aria-hidden="true"></i>
+  <span class="sr-only">Copy Markdown</span>
+</a>
 
-      <a href="https://github.com/bmalum/mayfly" title="View Source" class="icon-action" rel="help">
+
+      <a href="https://github.com/bmalum/mayfly" title="View Source" class="icon-action" rel="help nofollow">
         <i class="ri-code-s-slash-line" aria-hidden="true"></i>
         <span class="sr-only">View Source</span>
       </a>
@@ -116,64 +121,132 @@ Mayfly
 
   </div>
 
-    <div class="summary-synopsis"><p>Mayfly - AWS Lambda Custom Runtime for Elixir.</p></div>
+    <div class="summary-synopsis"><p>Mayfly – an AWS Lambda custom runtime for Elixir.</p></div>
 
 </div>
 <div class="summary-row">
   <div class="summary-signature">
-    <a href="Mayfly.Error.html" translate="no">Mayfly.Error</a>
+    <a href="Mayfly.Boot.html" translate="no">Mayfly.<wbr />Boot</a>
 
   </div>
 
-    <div class="summary-synopsis"><p>Error handling utilities for AWS Lambda functions.
-Provides standardized error formatting and conversion functions.</p></div>
+    <div class="summary-synopsis"><p>Entry point used by the generated <code class="inline">bootstrap</code> script</p></div>
 
 </div>
 <div class="summary-row">
   <div class="summary-signature">
-    <a href="Mayfly.Handler.html" translate="no">Mayfly.Handler</a>
+    <a href="Mayfly.Context.html" translate="no">Mayfly.<wbr />Context</a>
 
   </div>
 
-    <div class="summary-synopsis"><p>Handles the resolution and execution of Lambda function handlers.</p></div>
+    <div class="summary-synopsis"><p>Per-invocation metadata, built from the <code class="inline">GET /runtime/invocation/next</code>
+response headers and passed as the second argument to <a href="Mayfly.Handler.html#c:handle/3"><code class="inline">Mayfly.Handler.handle/3</code></a>.</p></div>
 
 </div>
 <div class="summary-row">
   <div class="summary-signature">
-    <a href="Mayfly.Helpers.html" translate="no">Mayfly.Helpers</a>
+    <a href="Mayfly.ErrorPayload.html" translate="no">Mayfly.<wbr />ErrorPayload</a>
 
   </div>
 
-    <div class="summary-synopsis"><p>Helper functions for AWS Lambda runtime.</p></div>
+    <div class="summary-synopsis"><p>Builds the error document Lambda expects on <code class="inline">/runtime/invocation/&lt;id&gt;/error</code>
+and <code class="inline">/runtime/init/error</code></p></div>
 
 </div>
 <div class="summary-row">
   <div class="summary-signature">
-    <a href="Mayfly.Loop.html" translate="no">Mayfly.Loop</a>
+    <a href="Mayfly.HTTP.html" translate="no">Mayfly.<wbr />HTTP</a>
 
   </div>
 
-    <div class="summary-synopsis"><p>GenServer that handles the AWS Lambda event loop.
-Continuously polls for new invocations and processes them.</p></div>
+    <div class="summary-synopsis"><p>Minimal HTTP/1.1 client over <code class="inline">:gen_tcp</code> for the link-local Lambda Runtime API.</p></div>
 
 </div>
 <div class="summary-row">
   <div class="summary-signature">
-    <a href="Mayfly.Runtime.html" translate="no">Mayfly.Runtime</a>
+    <a href="Mayfly.Handler.html" translate="no">Mayfly.<wbr />Handler</a>
 
   </div>
 
-    <div class="summary-synopsis"><p>Handles communication with the AWS Lambda Runtime API.
-Provides functions for fetching invocations and sending responses.</p></div>
+    <div class="summary-synopsis"><p>Behaviour for Lambda function handlers.</p></div>
 
 </div>
 <div class="summary-row">
   <div class="summary-signature">
-    <a href="Mayfly.Supervisor.html" translate="no">Mayfly.Supervisor</a>
+    <a href="Mayfly.LocalRuntime.html" translate="no">Mayfly.<wbr />LocalRuntime</a>
 
   </div>
 
-    <div class="summary-synopsis"><p>Supervisor for the Mayfly application.</p></div>
+    <div class="summary-synopsis"><p>A small Lambda Runtime API emulator for local development and tests.</p></div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="Mayfly.LogFormatter.html" translate="no">Mayfly.<wbr />LogFormatter</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>Logger formatter that emits one JSON object per line in the shape Lambda's
+<a href="https://docs.aws.amazon.com/lambda/latest/dg/monitoring-cloudwatchlogs-advanced.html">advanced logging controls</a>
+expect, so CloudWatch parses level, request id and tenant id</p></div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="Mayfly.Poller.html" translate="no">Mayfly.<wbr />Poller</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>One poller owns one concurrency slot: it long-polls <code class="inline">/runtime/invocation/next</code>,
+runs the handler and posts the result, then polls again.</p></div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="Mayfly.Release.html" translate="no">Mayfly.<wbr />Release</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>Turns <a href="https://mix.hexdocs.pm/Mix.Tasks.Release.html"><code class="inline">mix release</code></a> into a Lambda package builder.</p></div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="Mayfly.Response.html" translate="no">Mayfly.<wbr />Response</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>What a handler may return inside <code class="inline">{:ok, _}</code>.</p></div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="Mayfly.RuntimeAPI.html" translate="no">Mayfly.<wbr />RuntimeAPI</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>Client for the <a href="https://docs.aws.amazon.com/lambda/latest/dg/runtimes-api.html">Lambda Runtime API</a>
+(version 2018-06-01), built on <a href="Mayfly.HTTP.html"><code class="inline">Mayfly.HTTP</code></a>.</p></div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="Mayfly.Supervisor.html" translate="no">Mayfly.<wbr />Supervisor</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>Starts one <a href="Mayfly.Poller.html"><code class="inline">Mayfly.Poller</code></a> per concurrency slot after the handler has been
+resolved and initialised exactly once.</p></div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="Mayfly.Telemetry.html" translate="no">Mayfly.<wbr />Telemetry</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>Telemetry events emitted by the runtime. <code class="inline">:telemetry</code> is an optional
+dependency; when it is not present the calls are no-ops.</p></div>
 
 </div>
 
@@ -186,11 +259,32 @@ Provides functions for fetching invocations and sending responses.</p></div>
       <div class="summary">
 <div class="summary-row">
   <div class="summary-signature">
-    <a href="Mix.Tasks.Lambda.Build.html" translate="no">mix lambda.build</a>
+    <a href="Mix.Tasks.Lambda.Doctor.html" translate="no">mix lambda.<wbr />doctor</a>
 
   </div>
 
-    <div class="summary-synopsis"><p>A Mix task for building AWS Lambda deployment packages for Elixir applications.</p></div>
+    <div class="summary-synopsis"><p>Runs a set of checks that catch the common setup mistakes before you deploy</p></div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="Mix.Tasks.Lambda.Build.html" translate="no">mix lambda.<wbr />build</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>Builds the Lambda package for a release configured with <a href="Mayfly.Release.html"><code class="inline">Mayfly.Release</code></a>
+and copies the resulting <code class="inline">lambda.zip</code> to <code class="inline">--outdir</code>.</p></div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="Mix.Tasks.Lambda.Invoke.html" translate="no">mix lambda.<wbr />invoke</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>Runs your handler exactly as Mayfly would inside Lambda – handler
+resolution, <code class="inline">init/1</code>, JSON decoding, context, error formatting – against
+<a href="Mayfly.LocalRuntime.html"><code class="inline">Mayfly.LocalRuntime</code></a>, and prints the response or error.</p></div>
 
 </div>
 
@@ -199,27 +293,41 @@ Provides functions for fetching invocations and sending responses.</p></div>
 
 </div>
     <footer class="footer">
-      <p>
 
-        <span class="line">
-          <button class="a-main footer-button display-quick-switch" title="Search HexDocs packages">
-            Search HexDocs
-          </button>
+        <p>
 
-            <a href="Mayfly.epub" title="ePub version">
-              Download ePub version
-            </a>
+            <span class="line">
+              <a href="https://hex.pm/packages/mayfly/1.0.0-rc.1">Hex Package</a>
 
-        </span>
-      </p>
+              <a href="https://preview.hex.pm/preview/mayfly/1.0.0-rc.1">Hex Preview</a>
 
-      <p class="built-using">
-        Built using
-        <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" target="_blank" rel="help noopener" translate="no">ExDoc</a> (v0.39.1) for the
+            </span>
 
-          <a href="https://elixir-lang.org" title="Elixir" target="_blank" translate="no">Elixir programming language</a>
+          <span class="line">
+            <button class="a-main footer-button display-quick-switch" title="Go to package docs">
+              Go to package docs
+            </button>
 
-      </p>
+              <a href="llms.txt" target="_blank">
+                View llms.txt
+              </a>
+
+
+              <a href="Mayfly.epub">
+                Download ePub version
+              </a>
+
+          </span>
+        </p>
+
+        <p class="built-using">
+          Built using
+          <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" target="_blank" rel="help noopener" translate="no">ExDoc</a> (v0.40.4) for the
+
+            <a href="https://elixir-lang.org" title="Elixir" target="_blank" translate="no">Elixir programming language</a>
+
+        </p>
+
 
     </footer>
   </div>

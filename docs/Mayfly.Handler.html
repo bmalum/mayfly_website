@@ -4,19 +4,19 @@
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="generator" content="ExDoc v0.39.1">
-    <meta name="project" content="Mayfly v0.1.0">
+    <meta name="generator" content="ExDoc v0.40.4">
+    <meta name="project" content="Mayfly v1.0.0-rc.1">
 
 
-    <title>Mayfly.Handler — Mayfly v0.1.0</title>
+    <title>Mayfly.Handler — Mayfly v1.0.0-rc.1</title>
 
-    <link rel="stylesheet" href="dist/html-elixir-ZFNMEJKT.css" />
+    <link rel="stylesheet" href="dist/html-elixir-RXHHCTJW.css" />
 
       <link rel="canonical" href="https://elixir-aws-lambda.dev/docs/Mayfly.Handler.html" />
 
-    <script defer src="dist/sidebar_items-32970337.js"></script>
+    <script defer src="dist/sidebar_items-B9A7F5BC.js"></script>
     <script defer src="docs_config.js"></script>
-    <script defer src="dist/html-HBZYRXZS.js"></script>
+    <script defer src="dist/html-MI33G4N7.js"></script>
 
   </head>
   <body>
@@ -43,17 +43,17 @@
 Mayfly
         </a>
         <div class="sidebar-projectVersion" translate="no">
-          v0.1.0
+          v1.0.0-rc.1
         </div>
       </div>
     </div>
-    <ul id="sidebar-list-nav" class="sidebar-list-nav" role="tablist" data-extras=""></ul>
+    <ul id="sidebar-list-nav" class="sidebar-list-nav" role="tablist" data-extras="Pages"></ul>
   </div>
 </nav>
 
 <output role="status" id="toast"></output>
 
-<main class="content page-module" id="main" data-type="modules">
+<main class="content page-behaviour" id="main" data-type="modules">
   <div id="content" class="content-inner">
     <div class="top-search">
       <div class="search-settings">
@@ -99,12 +99,19 @@ Mayfly
 <div id="top-content">
   <div class="heading-with-actions top-heading">
     <h1>
-      <span translate="no">Mayfly.Handler</span> 
-      <small class="app-vsn" translate="no">(Mayfly v0.1.0)</small>
+      <span translate="no">Mayfly.<wbr />Handler</span> <small>behaviour</small>
+      <small class="app-vsn" translate="no">(Mayfly v1.0.0-rc.1)</small>
 
     </h1>
 
-      <a href="https://github.com/bmalum/mayfly/blob/main/lib/handler.ex#L1" title="View Source" class="icon-action" rel="help">
+<a href="Mayfly.Handler.md" title="Copy Markdown (hold Ctrl/Cmd and click it to open as Markdown)" class="copy-markdown icon-action" rel="help">
+  <i class="ri-markdown-line" aria-hidden="true"></i>
+  <span class="sr-only">Copy Markdown</span>
+</a>
+
+
+
+      <a href="https://github.com/bmalum/mayfly/blob/v1.0.0-rc.1/lib/mayfly/handler.ex#L1" title="View Source" class="icon-action" rel="help nofollow">
         <i class="ri-code-s-slash-line" aria-hidden="true"></i>
         <span class="sr-only">View Source</span>
       </a>
@@ -113,52 +120,115 @@ Mayfly
 
 
     <section id="moduledoc">
-<p>Handles the resolution and execution of Lambda function handlers.</p>
+<p>Behaviour for Lambda function handlers.</p><pre><code class="makeup elixir" translate="no"><span class="kd">defmodule</span><span class="w"> </span><span class="nc">MyApp.Handler</span><span class="w"> </span><span class="k" data-group-id="group-1">do</span><span class="w">
+  </span><span class="kn">use</span><span class="w"> </span><span class="nc">Mayfly.Handler</span><span class="w">
+
+  </span><span class="na">@impl</span><span class="w"> </span><span class="no">true</span><span class="w">
+  </span><span class="kd">def</span><span class="w"> </span><span class="nf">init</span><span class="p" data-group-id="group-2">(</span><span class="c">_opts</span><span class="p" data-group-id="group-2">)</span><span class="w"> </span><span class="k" data-group-id="group-3">do</span><span class="w">
+    </span><span class="c1"># cold-start work: read config, open a pool, warm a cache</span><span class="w">
+    </span><span class="p" data-group-id="group-4">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="group-5">%{</span><span class="ss">table</span><span class="p">:</span><span class="w"> </span><span class="nc">System</span><span class="o">.</span><span class="n">fetch_env!</span><span class="p" data-group-id="group-6">(</span><span class="s">&quot;TABLE_NAME&quot;</span><span class="p" data-group-id="group-6">)</span><span class="p" data-group-id="group-5">}</span><span class="p" data-group-id="group-4">}</span><span class="w">
+  </span><span class="k" data-group-id="group-3">end</span><span class="w">
+
+  </span><span class="na">@impl</span><span class="w"> </span><span class="no">true</span><span class="w">
+  </span><span class="kd">def</span><span class="w"> </span><span class="nf">handle</span><span class="p" data-group-id="group-7">(</span><span class="n">event</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="group-8">%</span><span class="nc" data-group-id="group-8">Mayfly.Context</span><span class="p" data-group-id="group-8">{</span><span class="p" data-group-id="group-8">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ctx</span><span class="p">,</span><span class="w"> </span><span class="n">state</span><span class="p" data-group-id="group-7">)</span><span class="w"> </span><span class="k" data-group-id="group-9">do</span><span class="w">
+    </span><span class="p" data-group-id="group-10">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="group-11">%{</span><span class="ss">table</span><span class="p">:</span><span class="w"> </span><span class="n">state</span><span class="o">.</span><span class="n">table</span><span class="p">,</span><span class="w"> </span><span class="ss">request_id</span><span class="p">:</span><span class="w"> </span><span class="n">ctx</span><span class="o">.</span><span class="n">request_id</span><span class="p">,</span><span class="w"> </span><span class="ss">event</span><span class="p">:</span><span class="w"> </span><span class="n">event</span><span class="p" data-group-id="group-11">}</span><span class="p" data-group-id="group-10">}</span><span class="w">
+  </span><span class="k" data-group-id="group-9">end</span><span class="w">
+</span><span class="k" data-group-id="group-1">end</span></code></pre><p>Set the Lambda <strong>Handler</strong> (<code class="inline">_HANDLER</code>) to the module name: <code class="inline">MyApp.Handler</code>.</p><h2 id="module-callbacks" class="section-heading"><a href="#module-callbacks" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a><span class="text">Callbacks</span></h2><ul><li><a href="#c:init/1"><code class="inline">init/1</code></a> – optional, runs once per execution environment before the
+first <code class="inline">/next</code> poll. Return <code class="inline">{:ok, state}</code> or <code class="inline">{:error, reason}</code>; an error
+is reported as <code class="inline">Runtime.InitError</code> and the function fails to start. The
+default returns <code class="inline">{:ok, nil}</code>.</li><li><a href="#c:handle/3"><code class="inline">handle/3</code></a> – called for every invocation with the decoded event, the
+<a href="Mayfly.Context.html"><code class="inline">Mayfly.Context</code></a> and the state from <code class="inline">init/1</code>. Return <code class="inline">{:ok, response}</code>
+or <code class="inline">{:error, reason}</code>. See <a href="Mayfly.Response.html"><code class="inline">Mayfly.Response</code></a> for what <code class="inline">response</code> may be.</li></ul><p>On Lambda Managed Instances <code class="inline">handle/3</code> runs concurrently in separate
+processes (up to <code class="inline">AWS_LAMBDA_MAX_CONCURRENCY</code>); state is shared read-only.</p><h2 id="module-legacy-module-function-handlers" class="section-heading"><a href="#module-legacy-module-function-handlers" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a><span class="text">Legacy <code class="inline">Module.function</code> handlers</span></h2><p><code class="inline">_HANDLER=MyApp.Legacy.handle</code> still works: a public function of arity 1
+(<code class="inline">handle(event)</code>) or 2 (<code class="inline">handle(event, context)</code>) is wrapped automatically.
+The <code class="inline">Elixir.</code> prefix is accepted in both forms.</p>
     </section>
 
 </div>
 
   <section id="summary" class="details-list">
-    <h1 class="section-heading">
+    <h2 class="section-heading">
       <a class="hover-link" href="#summary">
         <i class="ri-link-m" aria-hidden="true"></i>
       </a>
       <span class="text">Summary</span>
-    </h1>
+    </h2>
+<div class="summary-types summary">
+  <h3>
+    <a href="#types">Types</a>
+  </h3>
+
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#t:resolved/0" data-no-tooltip="" translate="no">resolved()</a>
+
+      </div>
+
+        <div class="summary-synopsis"><p>A resolved, ready-to-call handler.</p></div>
+
+    </div>
+
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#t:result/0" data-no-tooltip="" translate="no">result()</a>
+
+      </div>
+
+    </div>
+
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#t:state/0" data-no-tooltip="" translate="no">state()</a>
+
+      </div>
+
+    </div>
+
+</div>
+<div class="summary-callbacks summary">
+  <h3>
+    <a href="#callbacks">Callbacks</a>
+  </h3>
+
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#c:handle/3" data-no-tooltip="" translate="no">handle(event, context, state)</a>
+
+      </div>
+
+    </div>
+
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#c:init/1" data-no-tooltip="" translate="no">init(opts)</a>
+
+      </div>
+
+    </div>
+
+</div>
 <div class="summary-functions summary">
-  <h2>
+  <h3>
     <a href="#functions">Functions</a>
-  </h2>
+  </h3>
 
     <div class="summary-row">
       <div class="summary-signature">
-        <a href="#default_handler/1" data-no-tooltip="" translate="no">default_handler(payload)</a>
+        <a href="#invoke/3" data-no-tooltip="" translate="no">invoke(map, event, ctx)</a>
 
       </div>
 
-        <div class="summary-synopsis"><p>Default handler function used when no handler is specified.</p></div>
+        <div class="summary-synopsis"><p>Invokes a resolved handler, converting exceptions, exits and throws into error payloads.</p></div>
 
     </div>
 
     <div class="summary-row">
       <div class="summary-signature">
-        <a href="#execute/2" data-no-tooltip="" translate="no">execute(payload, arg)</a>
+        <a href="#resolve/2" data-no-tooltip="" translate="no">resolve(handler, opts \\ [])</a>
 
       </div>
 
-        <div class="summary-synopsis"><p>Executes the handler function with the given payload.
-Handles proper error conversion and response formatting.</p></div>
-
-    </div>
-
-    <div class="summary-row">
-      <div class="summary-signature">
-        <a href="#resolve/0" data-no-tooltip="" translate="no">resolve()</a>
-
-      </div>
-
-        <div class="summary-synopsis"><p>Resolves the handler module and function from environment variables.
-Returns a tuple with {module, function}.</p></div>
+        <div class="summary-synopsis"><p>Resolves the <code class="inline">_HANDLER</code> string and runs <code class="inline">init/1</code>.</p></div>
 
     </div>
 
@@ -167,26 +237,199 @@ Returns a tuple with {module, function}.</p></div>
   </section>
 
 
+  <section id="types" class="details-list">
+    <h2 class="section-heading">
+      <a class="hover-link" href="#types">
+        <i class="ri-link-m" aria-hidden="true"></i>
+      </a>
+      <span class="text">Types</span>
+    </h2>
+
+    <div class="types-list">
+<section class="detail" id="t:resolved/0">
+
+  <div class="detail-header">
+    <a href="#t:resolved/0" class="detail-link" data-no-tooltip="" aria-label="Link to this type">
+      <i class="ri-link-m" aria-hidden="true"></i>
+    </a>
+    <div class="heading-with-actions">
+      <h1 class="signature" translate="no">resolved()</h1>
+
+
+        <a href="https://github.com/bmalum/mayfly/blob/v1.0.0-rc.1/lib/mayfly/handler.ex#L64" class="icon-action" rel="help nofollow" aria-label="View Source">
+          <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+        </a>
+
+    </div>
+  </div>
+
+  <section class="docstring">
+
+      <div class="specs">
+
+          <pre translate="no"><span class="attribute">@type</span> resolved() :: %{
+  module: <a href="https://elixir.hexdocs.pm/typespecs.html#built-in-types">module</a>(),
+  fun: (<a href="https://elixir.hexdocs.pm/typespecs.html#built-in-types">term</a>(), <a href="Mayfly.Context.html#t:t/0">Mayfly.Context.t</a>(), <a href="#t:state/0">state</a>() -&gt; <a href="#t:result/0">result</a>()),
+  state: <a href="#t:state/0">state</a>()
+}</pre>
+
+      </div>
+
+<p>A resolved, ready-to-call handler.</p>
+  </section>
+</section>
+<section class="detail" id="t:result/0">
+
+  <div class="detail-header">
+    <a href="#t:result/0" class="detail-link" data-no-tooltip="" aria-label="Link to this type">
+      <i class="ri-link-m" aria-hidden="true"></i>
+    </a>
+    <div class="heading-with-actions">
+      <h1 class="signature" translate="no">result()</h1>
+
+
+        <a href="https://github.com/bmalum/mayfly/blob/v1.0.0-rc.1/lib/mayfly/handler.ex#L45" class="icon-action" rel="help nofollow" aria-label="View Source">
+          <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+        </a>
+
+    </div>
+  </div>
+
+  <section class="docstring">
+
+      <div class="specs">
+
+          <pre translate="no"><span class="attribute">@type</span> result() :: {:ok, <a href="Mayfly.Response.html#t:t/0">Mayfly.Response.t</a>() | <a href="https://elixir.hexdocs.pm/typespecs.html#built-in-types">term</a>()} | {:error, <a href="https://elixir.hexdocs.pm/typespecs.html#built-in-types">term</a>()}</pre>
+
+      </div>
+
+
+  </section>
+</section>
+<section class="detail" id="t:state/0">
+
+  <div class="detail-header">
+    <a href="#t:state/0" class="detail-link" data-no-tooltip="" aria-label="Link to this type">
+      <i class="ri-link-m" aria-hidden="true"></i>
+    </a>
+    <div class="heading-with-actions">
+      <h1 class="signature" translate="no">state()</h1>
+
+
+        <a href="https://github.com/bmalum/mayfly/blob/v1.0.0-rc.1/lib/mayfly/handler.ex#L44" class="icon-action" rel="help nofollow" aria-label="View Source">
+          <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+        </a>
+
+    </div>
+  </div>
+
+  <section class="docstring">
+
+      <div class="specs">
+
+          <pre translate="no"><span class="attribute">@type</span> state() :: <a href="https://elixir.hexdocs.pm/typespecs.html#built-in-types">term</a>()</pre>
+
+      </div>
+
+
+  </section>
+</section>
+
+    </div>
+  </section>
+
+  <section id="callbacks" class="details-list">
+    <h2 class="section-heading">
+      <a class="hover-link" href="#callbacks">
+        <i class="ri-link-m" aria-hidden="true"></i>
+      </a>
+      <span class="text">Callbacks</span>
+    </h2>
+
+    <div class="callbacks-list">
+<section class="detail" id="c:handle/3">
+
+  <div class="detail-header">
+    <a href="#c:handle/3" class="detail-link" data-no-tooltip="" aria-label="Link to this callback">
+      <i class="ri-link-m" aria-hidden="true"></i>
+    </a>
+    <div class="heading-with-actions">
+      <h1 class="signature" translate="no">handle(event, context, state)</h1>
+
+
+        <a href="https://github.com/bmalum/mayfly/blob/v1.0.0-rc.1/lib/mayfly/handler.ex#L48" class="icon-action" rel="help nofollow" aria-label="View Source">
+          <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+        </a>
+
+    </div>
+  </div>
+
+  <section class="docstring">
+
+      <div class="specs">
+
+          <pre translate="no"><span class="attribute">@callback</span> handle(event :: <a href="https://elixir.hexdocs.pm/typespecs.html#built-in-types">term</a>(), context :: <a href="Mayfly.Context.html#t:t/0">Mayfly.Context.t</a>(), state :: <a href="#t:state/0">state</a>()) ::
+  <a href="#t:result/0">result</a>()</pre>
+
+      </div>
+
+
+  </section>
+</section>
+<section class="detail" id="c:init/1">
+
+  <div class="detail-header">
+    <a href="#c:init/1" class="detail-link" data-no-tooltip="" aria-label="Link to this callback">
+      <i class="ri-link-m" aria-hidden="true"></i>
+    </a>
+    <div class="heading-with-actions">
+      <h1 class="signature" translate="no">init(opts)</h1>
+
+        <span class="note">(optional)</span>
+
+
+        <a href="https://github.com/bmalum/mayfly/blob/v1.0.0-rc.1/lib/mayfly/handler.ex#L47" class="icon-action" rel="help nofollow" aria-label="View Source">
+          <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+        </a>
+
+    </div>
+  </div>
+
+  <section class="docstring">
+
+      <div class="specs">
+
+          <pre translate="no"><span class="attribute">@callback</span> init(opts :: <a href="https://elixir.hexdocs.pm/typespecs.html#built-in-types">keyword</a>()) :: {:ok, <a href="#t:state/0">state</a>()} | {:error, <a href="https://elixir.hexdocs.pm/typespecs.html#built-in-types">term</a>()}</pre>
+
+      </div>
+
+
+  </section>
+</section>
+
+    </div>
+  </section>
+
   <section id="functions" class="details-list">
-    <h1 class="section-heading">
+    <h2 class="section-heading">
       <a class="hover-link" href="#functions">
         <i class="ri-link-m" aria-hidden="true"></i>
       </a>
       <span class="text">Functions</span>
-    </h1>
+    </h2>
 
     <div class="functions-list">
-<section class="detail" id="default_handler/1">
+<section class="detail" id="invoke/3">
 
   <div class="detail-header">
-    <a href="#default_handler/1" class="detail-link" data-no-tooltip="" aria-label="Link to this function">
+    <a href="#invoke/3" class="detail-link" data-no-tooltip="" aria-label="Link to this function">
       <i class="ri-link-m" aria-hidden="true"></i>
     </a>
     <div class="heading-with-actions">
-      <h1 class="signature" translate="no">default_handler(payload)</h1>
+      <h1 class="signature" translate="no">invoke(map, event, ctx)</h1>
 
 
-        <a href="https://github.com/bmalum/mayfly/blob/main/lib/handler.ex#L74" class="icon-action" rel="help" aria-label="View Source">
+        <a href="https://github.com/bmalum/mayfly/blob/v1.0.0-rc.1/lib/mayfly/handler.ex#L99" class="icon-action" rel="help nofollow" aria-label="View Source">
           <i class="ri-code-s-slash-line" aria-hidden="true"></i>
         </a>
 
@@ -197,24 +440,27 @@ Returns a tuple with {module, function}.</p></div>
 
       <div class="specs">
 
-          <pre translate="no"><span class="attribute">@spec</span> default_handler(<a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">map</a>()) :: {:ok, <a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>()}</pre>
+          <pre translate="no"><span class="attribute">@spec</span> invoke(<a href="#t:resolved/0">resolved</a>(), <a href="https://elixir.hexdocs.pm/typespecs.html#built-in-types">term</a>(), <a href="Mayfly.Context.html#t:t/0">Mayfly.Context.t</a>()) ::
+  {:ok, <a href="Mayfly.Response.html#t:t/0">Mayfly.Response.t</a>()} | {:error, <a href="Mayfly.ErrorPayload.html#t:t/0">Mayfly.ErrorPayload.t</a>()}</pre>
 
       </div>
 
-<p>Default handler function used when no handler is specified.</p>
+<p>Invokes a resolved handler, converting exceptions, exits and throws into error payloads.</p>
   </section>
 </section>
-<section class="detail" id="execute/2">
+<section class="detail" id="resolve/2">
+
+    <span id="resolve/1"></span>
 
   <div class="detail-header">
-    <a href="#execute/2" class="detail-link" data-no-tooltip="" aria-label="Link to this function">
+    <a href="#resolve/2" class="detail-link" data-no-tooltip="" aria-label="Link to this function">
       <i class="ri-link-m" aria-hidden="true"></i>
     </a>
     <div class="heading-with-actions">
-      <h1 class="signature" translate="no">execute(payload, arg)</h1>
+      <h1 class="signature" translate="no">resolve(handler, opts \\ [])</h1>
 
 
-        <a href="https://github.com/bmalum/mayfly/blob/main/lib/handler.ex#L49" class="icon-action" rel="help" aria-label="View Source">
+        <a href="https://github.com/bmalum/mayfly/blob/v1.0.0-rc.1/lib/mayfly/handler.ex#L77" class="icon-action" rel="help nofollow" aria-label="View Source">
           <i class="ri-code-s-slash-line" aria-hidden="true"></i>
         </a>
 
@@ -225,46 +471,13 @@ Returns a tuple with {module, function}.</p></div>
 
       <div class="specs">
 
-          <pre translate="no"><span class="attribute">@spec</span> execute(
-  <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">map</a>(),
-  {<a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">module</a>(), <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">atom</a>()}
-) :: {:ok, <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">any</a>()} | {:error, <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">map</a>()}</pre>
+          <pre translate="no"><span class="attribute">@spec</span> resolve(<a href="https://elixir.hexdocs.pm/String.html#t:t/0">String.t</a>() | nil, <a href="https://elixir.hexdocs.pm/typespecs.html#built-in-types">keyword</a>()) ::
+  {:ok, <a href="#t:resolved/0">resolved</a>()} | {:error, <a href="Mayfly.ErrorPayload.html#t:t/0">Mayfly.ErrorPayload.t</a>()}</pre>
 
       </div>
 
-<p>Executes the handler function with the given payload.
-Handles proper error conversion and response formatting.</p>
-  </section>
-</section>
-<section class="detail" id="resolve/0">
-
-  <div class="detail-header">
-    <a href="#resolve/0" class="detail-link" data-no-tooltip="" aria-label="Link to this function">
-      <i class="ri-link-m" aria-hidden="true"></i>
-    </a>
-    <div class="heading-with-actions">
-      <h1 class="signature" translate="no">resolve()</h1>
-
-
-        <a href="https://github.com/bmalum/mayfly/blob/main/lib/handler.ex#L17" class="icon-action" rel="help" aria-label="View Source">
-          <i class="ri-code-s-slash-line" aria-hidden="true"></i>
-        </a>
-
-    </div>
-  </div>
-
-  <section class="docstring">
-
-      <div class="specs">
-
-          <pre translate="no"><span class="attribute">@spec</span> resolve() :: {<a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">module</a>(), <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">atom</a>()}</pre>
-
-      </div>
-
-<p>Resolves the handler module and function from environment variables.
-Returns a tuple with {module, function}.</p><h2 id="resolve/0-examples" class="section-heading"><a href="#resolve/0-examples" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a><span class="text">Examples</span></h2><pre><code class="makeup elixir" translate="no"><span class="gp unselectable">iex&gt; </span><span class="nc">System</span><span class="o">.</span><span class="n">put_env</span><span class="p" data-group-id="5020179043-1">(</span><span class="s">&quot;_HANDLER&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Elixir.MyModule.my_function&quot;</span><span class="p" data-group-id="5020179043-1">)</span><span class="w">
-</span><span class="gp unselectable">iex&gt; </span><span class="nc">Mayfly.Handler</span><span class="o">.</span><span class="n">resolve</span><span class="p" data-group-id="5020179043-2">(</span><span class="p" data-group-id="5020179043-2">)</span><span class="w">
-</span><span class="p" data-group-id="5020179043-3">{</span><span class="nc">MyModule</span><span class="p">,</span><span class="w"> </span><span class="ss">:my_function</span><span class="p" data-group-id="5020179043-3">}</span></code></pre>
+<p>Resolves the <code class="inline">_HANDLER</code> string and runs <code class="inline">init/1</code>.</p><p>Returns <code class="inline">{:error, %{errorType: &quot;Runtime.NoSuchHandler&quot; | &quot;Runtime.InitError&quot;, ...}}</code>
+on failure so callers can post it to <code class="inline">/runtime/init/error</code> directly.</p>
   </section>
 </section>
 
@@ -272,27 +485,41 @@ Returns a tuple with {module, function}.</p><h2 id="resolve/0-examples" class="s
   </section>
 
     <footer class="footer">
-      <p>
 
-        <span class="line">
-          <button class="a-main footer-button display-quick-switch" title="Search HexDocs packages">
-            Search HexDocs
-          </button>
+        <p>
 
-            <a href="Mayfly.epub" title="ePub version">
-              Download ePub version
-            </a>
+            <span class="line">
+              <a href="https://hex.pm/packages/mayfly/1.0.0-rc.1">Hex Package</a>
 
-        </span>
-      </p>
+              <a href="https://preview.hex.pm/preview/mayfly/1.0.0-rc.1">Hex Preview</a>
 
-      <p class="built-using">
-        Built using
-        <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" target="_blank" rel="help noopener" translate="no">ExDoc</a> (v0.39.1) for the
+            </span>
 
-          <a href="https://elixir-lang.org" title="Elixir" target="_blank" translate="no">Elixir programming language</a>
+          <span class="line">
+            <button class="a-main footer-button display-quick-switch" title="Go to package docs">
+              Go to package docs
+            </button>
 
-      </p>
+              <a href="llms.txt" target="_blank">
+                View llms.txt
+              </a>
+
+
+              <a href="Mayfly.epub">
+                Download ePub version
+              </a>
+
+          </span>
+        </p>
+
+        <p class="built-using">
+          Built using
+          <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" target="_blank" rel="help noopener" translate="no">ExDoc</a> (v0.40.4) for the
+
+            <a href="https://elixir-lang.org" title="Elixir" target="_blank" translate="no">Elixir programming language</a>
+
+        </p>
+
 
     </footer>
   </div>

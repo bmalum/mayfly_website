@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="ExDoc v0.40.4">
+    <meta name="project" content="Mayfly v1.0.0-rc.1">
+
+
+    <title>Mayfly.LocalRuntime — Mayfly v1.0.0-rc.1</title>
+
+    <link rel="stylesheet" href="dist/html-elixir-RXHHCTJW.css" />
+
+      <link rel="canonical" href="https://elixir-aws-lambda.dev/docs/Mayfly.LocalRuntime.html" />
+
+    <script defer src="dist/sidebar_items-B9A7F5BC.js"></script>
+    <script defer src="docs_config.js"></script>
+    <script defer src="dist/html-MI33G4N7.js"></script>
+
+  </head>
+  <body>
+    <script>(()=>{var t="ex_doc:settings",e="dark";var o="dark",s="light";var E="sidebar_state",n="closed";var r="sidebar_width";var a="sidebar-open";var i=new URLSearchParams(window.location.search),S=i.get("theme")||JSON.parse(localStorage.getItem(t)||"{}").theme;(S===o||S!==s&&window.matchMedia("(prefers-color-scheme: dark)").matches)&&document.body.classList.add(e);var d=sessionStorage.getItem(E),A=d!==n&&!window.matchMedia(`screen and (max-width: ${768}px)`).matches;document.body.classList.toggle(a,A);var c=sessionStorage.getItem(r);c&&document.body.style.setProperty("--sidebarWidth",`${c}px`);var p=/(Macintosh|iPhone|iPad|iPod)/.test(window.navigator.userAgent);document.documentElement.classList.toggle("apple-os",p);})();
+</script>
+
+<div class="body-wrapper">
+
+<button id="sidebar-menu" class="sidebar-button sidebar-toggle" aria-label="toggle sidebar" aria-controls="sidebar">
+  <i class="ri-menu-line ri-lg" title="Collapse/expand sidebar"></i>
+</button>
+
+<nav id="sidebar" class="sidebar">
+
+  <div class="sidebar-header">
+    <div class="sidebar-projectInfo">
+
+        <a href="https://github.com/bmalum/mayfly" class="sidebar-projectImage">
+          <img src="assets/logo.png" alt="Mayfly" />
+        </a>
+
+      <div>
+        <a href="https://github.com/bmalum/mayfly" class="sidebar-projectName" translate="no">
+Mayfly
+        </a>
+        <div class="sidebar-projectVersion" translate="no">
+          v1.0.0-rc.1
+        </div>
+      </div>
+    </div>
+    <ul id="sidebar-list-nav" class="sidebar-list-nav" role="tablist" data-extras="Pages"></ul>
+  </div>
+</nav>
+
+<output role="status" id="toast"></output>
+
+<main class="content page-module" id="main" data-type="modules">
+  <div id="content" class="content-inner">
+    <div class="top-search">
+      <div class="search-settings">
+        <form class="search-bar" action="search.html">
+          <label class="search-label">
+            <span class="sr-only">Search documentation of Mayfly</span>
+            <div class="search-input-wrapper">
+              <input name="q" type="text" class="search-input" placeholder="Press / to search" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" />
+              <button type="button" tabindex="-1" class="search-close-button" aria-hidden="true">
+                <i class="ri-close-line ri-lg" title="Cancel search"></i>
+              </button>
+            </div>
+          </label>
+        </form>
+        <div class="autocomplete">
+        </div>
+        <div class="engine-selector" data-multiple="false">
+          <button type="button" class="engine-button" aria-label="Select search engine" aria-haspopup="true" aria-expanded="false">
+            <i class="ri-search-2-line" aria-hidden="true"></i>
+            <span class="engine-name">Default</span>
+            <i class="ri-arrow-down-s-line" aria-hidden="true"></i>
+          </button>
+          <div class="engine-dropdown" hidden role="menu">
+
+              <button type="button"
+                      class="engine-option"
+                      data-engine-url="search.html?q="
+                      role="menuitemradio"
+                      aria-checked="true">
+                <span class="name">Default</span>
+                <span class="help">In-browser search</span>
+              </button>
+
+          </div>
+        </div>
+        <button class="icon-settings display-settings">
+          <i class="ri-settings-3-line"></i>
+          <span class="sr-only">Settings</span>
+        </button>
+      </div>
+    </div>
+
+<div id="top-content">
+  <div class="heading-with-actions top-heading">
+    <h1>
+      <span translate="no">Mayfly.<wbr />LocalRuntime</span> 
+      <small class="app-vsn" translate="no">(Mayfly v1.0.0-rc.1)</small>
+
+    </h1>
+
+<a href="Mayfly.LocalRuntime.md" title="Copy Markdown (hold Ctrl/Cmd and click it to open as Markdown)" class="copy-markdown icon-action" rel="help">
+  <i class="ri-markdown-line" aria-hidden="true"></i>
+  <span class="sr-only">Copy Markdown</span>
+</a>
+
+
+
+      <a href="https://github.com/bmalum/mayfly/blob/v1.0.0-rc.1/lib/mayfly/local_runtime.ex#L1" title="View Source" class="icon-action" rel="help nofollow">
+        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+        <span class="sr-only">View Source</span>
+      </a>
+
+  </div>
+
+
+    <section id="moduledoc">
+<p>A small Lambda Runtime API emulator for local development and tests.</p><p>It speaks enough of the Runtime API for Mayfly (and any other custom
+runtime) to run against it: <code class="inline">GET /next</code> blocks until an event is queued,
+<code class="inline">/response</code> and <code class="inline">/error</code> deliver the outcome to whoever invoked, including
+streamed responses and error trailers.</p><pre><code class="makeup elixir" translate="no"><span class="p" data-group-id="group-1">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="n">rt</span><span class="p" data-group-id="group-1">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Mayfly.LocalRuntime</span><span class="o">.</span><span class="n">start_link</span><span class="p" data-group-id="group-2">(</span><span class="p" data-group-id="group-2">)</span><span class="w">
+</span><span class="p" data-group-id="group-3">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="bp">_</span><span class="p" data-group-id="group-3">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Mayfly</span><span class="o">.</span><span class="n">start_link</span><span class="p" data-group-id="group-4">(</span><span class="ss">handler</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;MyApp.Handler&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">runtime_api</span><span class="p">:</span><span class="w"> </span><span class="nc">Mayfly.LocalRuntime</span><span class="o">.</span><span class="n">address</span><span class="p" data-group-id="group-5">(</span><span class="n">rt</span><span class="p" data-group-id="group-5">)</span><span class="p" data-group-id="group-4">)</span><span class="w">
+
+</span><span class="nc">Mayfly.LocalRuntime</span><span class="o">.</span><span class="n">invoke</span><span class="p" data-group-id="group-6">(</span><span class="n">rt</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="group-7">%{</span><span class="s">&quot;name&quot;</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="s">&quot;world&quot;</span><span class="p" data-group-id="group-7">}</span><span class="p" data-group-id="group-6">)</span><span class="w">
+</span><span class="c1">#=&gt; {:ok, %{status: 200, body: ~s({&quot;hello&quot;:&quot;world&quot;}), headers: [...]}}</span><span class="w">
+
+</span><span class="nc">Mayfly.LocalRuntime</span><span class="o">.</span><span class="n">invoke</span><span class="p" data-group-id="group-8">(</span><span class="n">rt</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="group-9">%{</span><span class="s">&quot;bad&quot;</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="no">true</span><span class="p" data-group-id="group-9">}</span><span class="p" data-group-id="group-8">)</span><span class="w">
+</span><span class="c1">#=&gt; {:error, %{&quot;errorType&quot; =&gt; &quot;KeyError&quot;, &quot;errorMessage&quot; =&gt; ..., &quot;stackTrace&quot; =&gt; [...]}}</span></code></pre><p>Init errors are exposed through <a href="#init_error/1"><code class="inline">init_error/1</code></a>. The emulator is
+single-tenant and does not enforce timeouts; it is a development aid, not a
+faithful Lambda simulation. For that, use
+<a rel="nofollow" href="https://github.com/aws/aws-lambda-runtime-interface-emulator">aws-lambda-rie</a>.</p>
+    </section>
+
+</div>
+
+  <section id="summary" class="details-list">
+    <h2 class="section-heading">
+      <a class="hover-link" href="#summary">
+        <i class="ri-link-m" aria-hidden="true"></i>
+      </a>
+      <span class="text">Summary</span>
+    </h2>
+<div class="summary-types summary">
+  <h3>
+    <a href="#types">Types</a>
+  </h3>
+
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#t:invoke_result/0" data-no-tooltip="" translate="no">invoke_result()</a>
+
+      </div>
+
+    </div>
+
+</div>
+<div class="summary-functions summary">
+  <h3>
+    <a href="#functions">Functions</a>
+  </h3>
+
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#address/1" data-no-tooltip="" translate="no">address(rt)</a>
+
+      </div>
+
+        <div class="summary-synopsis"><p><code class="inline">host:port</code> string suitable for <code class="inline">AWS_LAMBDA_RUNTIME_API</code>.</p></div>
+
+    </div>
+
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#child_spec/1" data-no-tooltip="" translate="no">child_spec(init_arg)</a>
+
+      </div>
+
+        <div class="summary-synopsis"><p>Returns a specification to start this module under a supervisor.</p></div>
+
+    </div>
+
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#init_error/1" data-no-tooltip="" translate="no">init_error(rt)</a>
+
+      </div>
+
+        <div class="summary-synopsis"><p>The payload posted to <code class="inline">/runtime/init/error</code>, if any.</p></div>
+
+    </div>
+
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#invoke/3" data-no-tooltip="" translate="no">invoke(rt, event, opts \\ [])</a>
+
+      </div>
+
+        <div class="summary-synopsis"><p>Queues <code class="inline">event</code> (any JSON-encodable term or a raw binary), waits for the
+runtime to process it and returns the outcome.</p></div>
+
+    </div>
+
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#start_link/1" data-no-tooltip="" translate="no">start_link(opts \\ [])</a>
+
+      </div>
+
+        <div class="summary-synopsis"><p>Starts the emulator on an ephemeral port (or <code class="inline">:port</code>).</p></div>
+
+    </div>
+
+</div>
+
+  </section>
+
+
+  <section id="types" class="details-list">
+    <h2 class="section-heading">
+      <a class="hover-link" href="#types">
+        <i class="ri-link-m" aria-hidden="true"></i>
+      </a>
+      <span class="text">Types</span>
+    </h2>
+
+    <div class="types-list">
+<section class="detail" id="t:invoke_result/0">
+
+  <div class="detail-header">
+    <a href="#t:invoke_result/0" class="detail-link" data-no-tooltip="" aria-label="Link to this type">
+      <i class="ri-link-m" aria-hidden="true"></i>
+    </a>
+    <div class="heading-with-actions">
+      <h1 class="signature" translate="no">invoke_result()</h1>
+
+
+        <a href="https://github.com/bmalum/mayfly/blob/v1.0.0-rc.1/lib/mayfly/local_runtime.ex#L27" class="icon-action" rel="help nofollow" aria-label="View Source">
+          <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+        </a>
+
+    </div>
+  </div>
+
+  <section class="docstring">
+
+      <div class="specs">
+
+          <pre translate="no"><span class="attribute">@type</span> invoke_result() ::
+  {:ok,
+   %{
+     status: 200,
+     headers: [{<a href="https://elixir.hexdocs.pm/String.html#t:t/0">String.t</a>(), <a href="https://elixir.hexdocs.pm/String.html#t:t/0">String.t</a>()}],
+     body: <a href="https://elixir.hexdocs.pm/typespecs.html#built-in-types">binary</a>(),
+     trailers: <a href="https://elixir.hexdocs.pm/typespecs.html#basic-types">map</a>()
+   }}
+  | {:error, <a href="https://elixir.hexdocs.pm/typespecs.html#basic-types">map</a>()}</pre>
+
+      </div>
+
+
+  </section>
+</section>
+
+    </div>
+  </section>
+
+  <section id="functions" class="details-list">
+    <h2 class="section-heading">
+      <a class="hover-link" href="#functions">
+        <i class="ri-link-m" aria-hidden="true"></i>
+      </a>
+      <span class="text">Functions</span>
+    </h2>
+
+    <div class="functions-list">
+<section class="detail" id="address/1">
+
+  <div class="detail-header">
+    <a href="#address/1" class="detail-link" data-no-tooltip="" aria-label="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+    </a>
+    <div class="heading-with-actions">
+      <h1 class="signature" translate="no">address(rt)</h1>
+
+
+        <a href="https://github.com/bmalum/mayfly/blob/v1.0.0-rc.1/lib/mayfly/local_runtime.ex#L49" class="icon-action" rel="help nofollow" aria-label="View Source">
+          <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+        </a>
+
+    </div>
+  </div>
+
+  <section class="docstring">
+
+      <div class="specs">
+
+          <pre translate="no"><span class="attribute">@spec</span> address(<a href="https://elixir.hexdocs.pm/GenServer.html#t:server/0">GenServer.server</a>()) :: <a href="https://elixir.hexdocs.pm/String.html#t:t/0">String.t</a>()</pre>
+
+      </div>
+
+<p><code class="inline">host:port</code> string suitable for <code class="inline">AWS_LAMBDA_RUNTIME_API</code>.</p>
+  </section>
+</section>
+<section class="detail" id="child_spec/1">
+
+  <div class="detail-header">
+    <a href="#child_spec/1" class="detail-link" data-no-tooltip="" aria-label="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+    </a>
+    <div class="heading-with-actions">
+      <h1 class="signature" translate="no">child_spec(init_arg)</h1>
+
+
+        <a href="https://github.com/bmalum/mayfly/blob/v1.0.0-rc.1/lib/mayfly/local_runtime.ex#L25" class="icon-action" rel="help nofollow" aria-label="View Source">
+          <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+        </a>
+
+    </div>
+  </div>
+
+  <section class="docstring">
+
+<p>Returns a specification to start this module under a supervisor.</p><p>See <a href="https://elixir.hexdocs.pm/Supervisor.html"><code class="inline">Supervisor</code></a>.</p>
+  </section>
+</section>
+<section class="detail" id="init_error/1">
+
+  <div class="detail-header">
+    <a href="#init_error/1" class="detail-link" data-no-tooltip="" aria-label="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+    </a>
+    <div class="heading-with-actions">
+      <h1 class="signature" translate="no">init_error(rt)</h1>
+
+
+        <a href="https://github.com/bmalum/mayfly/blob/v1.0.0-rc.1/lib/mayfly/local_runtime.ex#L65" class="icon-action" rel="help nofollow" aria-label="View Source">
+          <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+        </a>
+
+    </div>
+  </div>
+
+  <section class="docstring">
+
+      <div class="specs">
+
+          <pre translate="no"><span class="attribute">@spec</span> init_error(<a href="https://elixir.hexdocs.pm/GenServer.html#t:server/0">GenServer.server</a>()) :: <a href="https://elixir.hexdocs.pm/typespecs.html#basic-types">map</a>() | nil</pre>
+
+      </div>
+
+<p>The payload posted to <code class="inline">/runtime/init/error</code>, if any.</p>
+  </section>
+</section>
+<section class="detail" id="invoke/3">
+
+    <span id="invoke/2"></span>
+
+  <div class="detail-header">
+    <a href="#invoke/3" class="detail-link" data-no-tooltip="" aria-label="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+    </a>
+    <div class="heading-with-actions">
+      <h1 class="signature" translate="no">invoke(rt, event, opts \\ [])</h1>
+
+
+        <a href="https://github.com/bmalum/mayfly/blob/v1.0.0-rc.1/lib/mayfly/local_runtime.ex#L56" class="icon-action" rel="help nofollow" aria-label="View Source">
+          <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+        </a>
+
+    </div>
+  </div>
+
+  <section class="docstring">
+
+      <div class="specs">
+
+          <pre translate="no"><span class="attribute">@spec</span> invoke(<a href="https://elixir.hexdocs.pm/GenServer.html#t:server/0">GenServer.server</a>(), <a href="https://elixir.hexdocs.pm/typespecs.html#built-in-types">term</a>(), <a href="https://elixir.hexdocs.pm/typespecs.html#built-in-types">keyword</a>()) :: <a href="#t:invoke_result/0">invoke_result</a>()</pre>
+
+      </div>
+
+<p>Queues <code class="inline">event</code> (any JSON-encodable term or a raw binary), waits for the
+runtime to process it and returns the outcome.</p>
+  </section>
+</section>
+<section class="detail" id="start_link/1">
+
+    <span id="start_link/0"></span>
+
+  <div class="detail-header">
+    <a href="#start_link/1" class="detail-link" data-no-tooltip="" aria-label="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+    </a>
+    <div class="heading-with-actions">
+      <h1 class="signature" translate="no">start_link(opts \\ [])</h1>
+
+
+        <a href="https://github.com/bmalum/mayfly/blob/v1.0.0-rc.1/lib/mayfly/local_runtime.ex#L43" class="icon-action" rel="help nofollow" aria-label="View Source">
+          <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+        </a>
+
+    </div>
+  </div>
+
+  <section class="docstring">
+
+<p>Starts the emulator on an ephemeral port (or <code class="inline">:port</code>).</p>
+  </section>
+</section>
+
+    </div>
+  </section>
+
+    <footer class="footer">
+
+        <p>
+
+            <span class="line">
+              <a href="https://hex.pm/packages/mayfly/1.0.0-rc.1">Hex Package</a>
+
+              <a href="https://preview.hex.pm/preview/mayfly/1.0.0-rc.1">Hex Preview</a>
+
+            </span>
+
+          <span class="line">
+            <button class="a-main footer-button display-quick-switch" title="Go to package docs">
+              Go to package docs
+            </button>
+
+              <a href="llms.txt" target="_blank">
+                View llms.txt
+              </a>
+
+
+              <a href="Mayfly.epub">
+                Download ePub version
+              </a>
+
+          </span>
+        </p>
+
+        <p class="built-using">
+          Built using
+          <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" target="_blank" rel="help noopener" translate="no">ExDoc</a> (v0.40.4) for the
+
+            <a href="https://elixir-lang.org" title="Elixir" target="_blank" translate="no">Elixir programming language</a>
+
+        </p>
+
+
+    </footer>
+  </div>
+</main>
+</div>
+
+  </body>
+</html>

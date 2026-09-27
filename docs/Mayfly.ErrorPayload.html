@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="ExDoc v0.40.4">
+    <meta name="project" content="Mayfly v1.0.0-rc.1">
+
+
+    <title>Mayfly.ErrorPayload — Mayfly v1.0.0-rc.1</title>
+
+    <link rel="stylesheet" href="dist/html-elixir-RXHHCTJW.css" />
+
+      <link rel="canonical" href="https://elixir-aws-lambda.dev/docs/Mayfly.ErrorPayload.html" />
+
+    <script defer src="dist/sidebar_items-B9A7F5BC.js"></script>
+    <script defer src="docs_config.js"></script>
+    <script defer src="dist/html-MI33G4N7.js"></script>
+
+  </head>
+  <body>
+    <script>(()=>{var t="ex_doc:settings",e="dark";var o="dark",s="light";var E="sidebar_state",n="closed";var r="sidebar_width";var a="sidebar-open";var i=new URLSearchParams(window.location.search),S=i.get("theme")||JSON.parse(localStorage.getItem(t)||"{}").theme;(S===o||S!==s&&window.matchMedia("(prefers-color-scheme: dark)").matches)&&document.body.classList.add(e);var d=sessionStorage.getItem(E),A=d!==n&&!window.matchMedia(`screen and (max-width: ${768}px)`).matches;document.body.classList.toggle(a,A);var c=sessionStorage.getItem(r);c&&document.body.style.setProperty("--sidebarWidth",`${c}px`);var p=/(Macintosh|iPhone|iPad|iPod)/.test(window.navigator.userAgent);document.documentElement.classList.toggle("apple-os",p);})();
+</script>
+
+<div class="body-wrapper">
+
+<button id="sidebar-menu" class="sidebar-button sidebar-toggle" aria-label="toggle sidebar" aria-controls="sidebar">
+  <i class="ri-menu-line ri-lg" title="Collapse/expand sidebar"></i>
+</button>
+
+<nav id="sidebar" class="sidebar">
+
+  <div class="sidebar-header">
+    <div class="sidebar-projectInfo">
+
+        <a href="https://github.com/bmalum/mayfly" class="sidebar-projectImage">
+          <img src="assets/logo.png" alt="Mayfly" />
+        </a>
+
+      <div>
+        <a href="https://github.com/bmalum/mayfly" class="sidebar-projectName" translate="no">
+Mayfly
+        </a>
+        <div class="sidebar-projectVersion" translate="no">
+          v1.0.0-rc.1
+        </div>
+      </div>
+    </div>
+    <ul id="sidebar-list-nav" class="sidebar-list-nav" role="tablist" data-extras="Pages"></ul>
+  </div>
+</nav>
+
+<output role="status" id="toast"></output>
+
+<main class="content page-module" id="main" data-type="modules">
+  <div id="content" class="content-inner">
+    <div class="top-search">
+      <div class="search-settings">
+        <form class="search-bar" action="search.html">
+          <label class="search-label">
+            <span class="sr-only">Search documentation of Mayfly</span>
+            <div class="search-input-wrapper">
+              <input name="q" type="text" class="search-input" placeholder="Press / to search" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" />
+              <button type="button" tabindex="-1" class="search-close-button" aria-hidden="true">
+                <i class="ri-close-line ri-lg" title="Cancel search"></i>
+              </button>
+            </div>
+          </label>
+        </form>
+        <div class="autocomplete">
+        </div>
+        <div class="engine-selector" data-multiple="false">
+          <button type="button" class="engine-button" aria-label="Select search engine" aria-haspopup="true" aria-expanded="false">
+            <i class="ri-search-2-line" aria-hidden="true"></i>
+            <span class="engine-name">Default</span>
+            <i class="ri-arrow-down-s-line" aria-hidden="true"></i>
+          </button>
+          <div class="engine-dropdown" hidden role="menu">
+
+              <button type="button"
+                      class="engine-option"
+                      data-engine-url="search.html?q="
+                      role="menuitemradio"
+                      aria-checked="true">
+                <span class="name">Default</span>
+                <span class="help">In-browser search</span>
+              </button>
+
+          </div>
+        </div>
+        <button class="icon-settings display-settings">
+          <i class="ri-settings-3-line"></i>
+          <span class="sr-only">Settings</span>
+        </button>
+      </div>
+    </div>
+
+<div id="top-content">
+  <div class="heading-with-actions top-heading">
+    <h1>
+      <span translate="no">Mayfly.<wbr />ErrorPayload</span> 
+      <small class="app-vsn" translate="no">(Mayfly v1.0.0-rc.1)</small>
+
+    </h1>
+
+<a href="Mayfly.ErrorPayload.md" title="Copy Markdown (hold Ctrl/Cmd and click it to open as Markdown)" class="copy-markdown icon-action" rel="help">
+  <i class="ri-markdown-line" aria-hidden="true"></i>
+  <span class="sr-only">Copy Markdown</span>
+</a>
+
+
+
+      <a href="https://github.com/bmalum/mayfly/blob/v1.0.0-rc.1/lib/mayfly/error_payload.ex#L1" title="View Source" class="icon-action" rel="help nofollow">
+        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+        <span class="sr-only">View Source</span>
+      </a>
+
+  </div>
+
+
+    <section id="moduledoc">
+<p>Builds the error document Lambda expects on <code class="inline">/runtime/invocation/&lt;id&gt;/error</code>
+and <code class="inline">/runtime/init/error</code>:</p><pre><code class="makeup elixir" translate="no"><span class="p" data-group-id="group-1">%{</span><span class="ss">errorType</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;KeyError&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">errorMessage</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;key :a not found&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">stackTrace</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="group-2">[</span><span class="n">...</span><span class="p" data-group-id="group-2">]</span><span class="p" data-group-id="group-1">}</span></code></pre><h2 id="module-error-types" class="section-heading"><a href="#module-error-types" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a><span class="text">Error types</span></h2><ul><li>Exceptions raised by a handler use their module name
+(<code class="inline">&quot;KeyError&quot;</code>, <code class="inline">&quot;MyApp.ValidationError&quot;</code>).</li><li><code class="inline">{:error, reason}</code> returned by a handler is <code class="inline">&quot;HandlerError&quot;</code>, unless
+<code class="inline">reason</code> is already a map with <code class="inline">errorType</code>/<code class="inline">errorMessage</code> (atom or string
+keys), which is passed through so handlers can emit structured errors.</li><li><a href="https://elixir.hexdocs.pm/Kernel.html#exit/1"><code class="inline">exit/1</code></a> and <a href="https://elixir.hexdocs.pm/Kernel.html#throw/1"><code class="inline">throw/1</code></a> become <code class="inline">&quot;Exit&quot;</code> and <code class="inline">&quot;Throw&quot;</code>.</li><li>Runtime-detected problems use <code class="inline">Runtime.*</code> types
+(<code class="inline">Runtime.InvalidResponse</code>, <code class="inline">Runtime.NoSuchHandler</code>, ...).</li></ul><h2 id="module-header-type" class="section-heading"><a href="#module-header-type" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a><span class="text">Header type</span></h2><p>Lambda classifies errors by the <code class="inline">Lambda-Runtime-Function-Error-Type</code> header
+and normalises anything not shaped like <code class="inline">&lt;Category.Reason&gt;</code> (Category being
+<code class="inline">Runtime</code> or <a href="https://elixir.hexdocs.pm/Function.html"><code class="inline">Function</code></a>) to <code class="inline">Runtime.Unknown</code>/<code class="inline">Function.Unknown</code>.
+<a href="#header_type/1"><code class="inline">header_type/1</code></a> derives a conforming value: <code class="inline">Runtime.*</code> is kept as is, every
+other type is prefixed with <code class="inline">Function.</code> and stripped of dots.</p><p>Whatever a handler returns in <code class="inline">{:error, reason}</code> ends up in the payload,
+which API Gateway may forward to clients. Terms are rendered with a bounded
+<a href="https://elixir.hexdocs.pm/Kernel.html#inspect/2"><code class="inline">inspect/2</code></a>.</p>
+    </section>
+
+</div>
+
+  <section id="summary" class="details-list">
+    <h2 class="section-heading">
+      <a class="hover-link" href="#summary">
+        <i class="ri-link-m" aria-hidden="true"></i>
+      </a>
+      <span class="text">Summary</span>
+    </h2>
+<div class="summary-types summary">
+  <h3>
+    <a href="#types">Types</a>
+  </h3>
+
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#t:t/0" data-no-tooltip="" translate="no">t()</a>
+
+      </div>
+
+    </div>
+
+</div>
+<div class="summary-functions summary">
+  <h3>
+    <a href="#functions">Functions</a>
+  </h3>
+
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#format_stacktrace/1" data-no-tooltip="" translate="no">format_stacktrace(stacktrace)</a>
+
+      </div>
+
+        <div class="summary-synopsis"><p>Formats a stacktrace as a list of lines, dropping frames that belong to
+Mayfly itself so the handler's frames come first.</p></div>
+
+    </div>
+
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#from_caught/3" data-no-tooltip="" translate="no">from_caught(atom, reason, stacktrace)</a>
+
+      </div>
+
+        <div class="summary-synopsis"><p>Builds a payload from a value caught with <code class="inline">catch kind, reason</code>.</p></div>
+
+    </div>
+
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#from_term/2" data-no-tooltip="" translate="no">from_term(term, stacktrace \\ nil)</a>
+
+      </div>
+
+        <div class="summary-synopsis"><p>Builds a payload from an exception, a handler <code class="inline">{:error, reason}</code> value or any term.</p></div>
+
+    </div>
+
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#header_type/1" data-no-tooltip="" translate="no">header_type(type)</a>
+
+      </div>
+
+        <div class="summary-synopsis"><p>Value for the <code class="inline">Lambda-Runtime-Function-Error-Type</code> header.</p></div>
+
+    </div>
+
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#runtime/2" data-no-tooltip="" translate="no">runtime(reason, message)</a>
+
+      </div>
+
+        <div class="summary-synopsis"><p>Builds a runtime error payload with an explicit <code class="inline">Runtime.*</code> type.</p></div>
+
+    </div>
+
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#xray_cause/1" data-no-tooltip="" translate="no">xray_cause(map)</a>
+
+      </div>
+
+        <div class="summary-synopsis"><p>X-Ray cause document (<code class="inline">Lambda-Runtime-Function-Xray-Error-Cause</code>).</p></div>
+
+    </div>
+
+</div>
+
+  </section>
+
+
+  <section id="types" class="details-list">
+    <h2 class="section-heading">
+      <a class="hover-link" href="#types">
+        <i class="ri-link-m" aria-hidden="true"></i>
+      </a>
+      <span class="text">Types</span>
+    </h2>
+
+    <div class="types-list">
+<section class="detail" id="t:t/0">
+
+  <div class="detail-header">
+    <a href="#t:t/0" class="detail-link" data-no-tooltip="" aria-label="Link to this type">
+      <i class="ri-link-m" aria-hidden="true"></i>
+    </a>
+    <div class="heading-with-actions">
+      <h1 class="signature" translate="no">t()</h1>
+
+
+        <a href="https://github.com/bmalum/mayfly/blob/v1.0.0-rc.1/lib/mayfly/error_payload.ex#L32" class="icon-action" rel="help nofollow" aria-label="View Source">
+          <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+        </a>
+
+    </div>
+  </div>
+
+  <section class="docstring">
+
+      <div class="specs">
+
+          <pre translate="no"><span class="attribute">@type</span> t() :: %{
+  errorType: <a href="https://elixir.hexdocs.pm/String.html#t:t/0">String.t</a>(),
+  errorMessage: <a href="https://elixir.hexdocs.pm/String.html#t:t/0">String.t</a>(),
+  stackTrace: [<a href="https://elixir.hexdocs.pm/String.html#t:t/0">String.t</a>()]
+}</pre>
+
+      </div>
+
+
+  </section>
+</section>
+
+    </div>
+  </section>
+
+  <section id="functions" class="details-list">
+    <h2 class="section-heading">
+      <a class="hover-link" href="#functions">
+        <i class="ri-link-m" aria-hidden="true"></i>
+      </a>
+      <span class="text">Functions</span>
+    </h2>
+
+    <div class="functions-list">
+<section class="detail" id="format_stacktrace/1">
+
+  <div class="detail-header">
+    <a href="#format_stacktrace/1" class="detail-link" data-no-tooltip="" aria-label="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+    </a>
+    <div class="heading-with-actions">
+      <h1 class="signature" translate="no">format_stacktrace(stacktrace)</h1>
+
+
+        <a href="https://github.com/bmalum/mayfly/blob/v1.0.0-rc.1/lib/mayfly/error_payload.ex#L110" class="icon-action" rel="help nofollow" aria-label="View Source">
+          <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+        </a>
+
+    </div>
+  </div>
+
+  <section class="docstring">
+
+      <div class="specs">
+
+          <pre translate="no"><span class="attribute">@spec</span> format_stacktrace(<a href="https://elixir.hexdocs.pm/Exception.html#t:stacktrace/0">Exception.stacktrace</a>() | nil) :: [<a href="https://elixir.hexdocs.pm/String.html#t:t/0">String.t</a>()]</pre>
+
+      </div>
+
+<p>Formats a stacktrace as a list of lines, dropping frames that belong to
+Mayfly itself so the handler's frames come first.</p>
+  </section>
+</section>
+<section class="detail" id="from_caught/3">
+
+  <div class="detail-header">
+    <a href="#from_caught/3" class="detail-link" data-no-tooltip="" aria-label="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+    </a>
+    <div class="heading-with-actions">
+      <h1 class="signature" translate="no">from_caught(atom, reason, stacktrace)</h1>
+
+
+        <a href="https://github.com/bmalum/mayfly/blob/v1.0.0-rc.1/lib/mayfly/error_payload.ex#L72" class="icon-action" rel="help nofollow" aria-label="View Source">
+          <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+        </a>
+
+    </div>
+  </div>
+
+  <section class="docstring">
+
+      <div class="specs">
+
+          <pre translate="no"><span class="attribute">@spec</span> from_caught(:exit | :throw | :error, <a href="https://elixir.hexdocs.pm/typespecs.html#built-in-types">term</a>(), <a href="https://elixir.hexdocs.pm/Exception.html#t:stacktrace/0">Exception.stacktrace</a>() | nil) ::
+  <a href="#t:t/0">t</a>()</pre>
+
+      </div>
+
+<p>Builds a payload from a value caught with <code class="inline">catch kind, reason</code>.</p>
+  </section>
+</section>
+<section class="detail" id="from_term/2">
+
+    <span id="from_term/1"></span>
+
+  <div class="detail-header">
+    <a href="#from_term/2" class="detail-link" data-no-tooltip="" aria-label="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+    </a>
+    <div class="heading-with-actions">
+      <h1 class="signature" translate="no">from_term(term, stacktrace \\ nil)</h1>
+
+
+        <a href="https://github.com/bmalum/mayfly/blob/v1.0.0-rc.1/lib/mayfly/error_payload.ex#L48" class="icon-action" rel="help nofollow" aria-label="View Source">
+          <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+        </a>
+
+    </div>
+  </div>
+
+  <section class="docstring">
+
+      <div class="specs">
+
+          <pre translate="no"><span class="attribute">@spec</span> from_term(<a href="https://elixir.hexdocs.pm/typespecs.html#built-in-types">term</a>(), <a href="https://elixir.hexdocs.pm/Exception.html#t:stacktrace/0">Exception.stacktrace</a>() | nil) :: <a href="#t:t/0">t</a>()</pre>
+
+      </div>
+
+<p>Builds a payload from an exception, a handler <code class="inline">{:error, reason}</code> value or any term.</p>
+  </section>
+</section>
+<section class="detail" id="header_type/1">
+
+  <div class="detail-header">
+    <a href="#header_type/1" class="detail-link" data-no-tooltip="" aria-label="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+    </a>
+    <div class="heading-with-actions">
+      <h1 class="signature" translate="no">header_type(type)</h1>
+
+
+        <a href="https://github.com/bmalum/mayfly/blob/v1.0.0-rc.1/lib/mayfly/error_payload.ex#L97" class="icon-action" rel="help nofollow" aria-label="View Source">
+          <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+        </a>
+
+    </div>
+  </div>
+
+  <section class="docstring">
+
+      <div class="specs">
+
+          <pre translate="no"><span class="attribute">@spec</span> header_type(<a href="https://elixir.hexdocs.pm/String.html#t:t/0">String.t</a>()) :: <a href="https://elixir.hexdocs.pm/String.html#t:t/0">String.t</a>()</pre>
+
+      </div>
+
+<p>Value for the <code class="inline">Lambda-Runtime-Function-Error-Type</code> header.</p><pre><code class="makeup elixir" translate="no"><span class="gp unselectable">iex&gt; </span><span class="nc">Mayfly.ErrorPayload</span><span class="o">.</span><span class="n">header_type</span><span class="p" data-group-id="group-1">(</span><span class="s">&quot;Runtime.InvalidResponse&quot;</span><span class="p" data-group-id="group-1">)</span><span class="w">
+</span><span class="s">&quot;Runtime.InvalidResponse&quot;</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="nc">Mayfly.ErrorPayload</span><span class="o">.</span><span class="n">header_type</span><span class="p" data-group-id="group-2">(</span><span class="s">&quot;MyApp.Validation.Error&quot;</span><span class="p" data-group-id="group-2">)</span><span class="w">
+</span><span class="s">&quot;Function.MyAppValidationError&quot;</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="nc">Mayfly.ErrorPayload</span><span class="o">.</span><span class="n">header_type</span><span class="p" data-group-id="group-3">(</span><span class="s">&quot;HandlerError&quot;</span><span class="p" data-group-id="group-3">)</span><span class="w">
+</span><span class="s">&quot;Function.HandlerError&quot;</span></code></pre>
+  </section>
+</section>
+<section class="detail" id="runtime/2">
+
+  <div class="detail-header">
+    <a href="#runtime/2" class="detail-link" data-no-tooltip="" aria-label="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+    </a>
+    <div class="heading-with-actions">
+      <h1 class="signature" translate="no">runtime(reason, message)</h1>
+
+
+        <a href="https://github.com/bmalum/mayfly/blob/v1.0.0-rc.1/lib/mayfly/error_payload.ex#L83" class="icon-action" rel="help nofollow" aria-label="View Source">
+          <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+        </a>
+
+    </div>
+  </div>
+
+  <section class="docstring">
+
+      <div class="specs">
+
+          <pre translate="no"><span class="attribute">@spec</span> runtime(<a href="https://elixir.hexdocs.pm/String.html#t:t/0">String.t</a>(), <a href="https://elixir.hexdocs.pm/String.html#t:t/0">String.t</a>()) :: <a href="#t:t/0">t</a>()</pre>
+
+      </div>
+
+<p>Builds a runtime error payload with an explicit <code class="inline">Runtime.*</code> type.</p>
+  </section>
+</section>
+<section class="detail" id="xray_cause/1">
+
+  <div class="detail-header">
+    <a href="#xray_cause/1" class="detail-link" data-no-tooltip="" aria-label="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+    </a>
+    <div class="heading-with-actions">
+      <h1 class="signature" translate="no">xray_cause(map)</h1>
+
+
+        <a href="https://github.com/bmalum/mayfly/blob/v1.0.0-rc.1/lib/mayfly/error_payload.ex#L120" class="icon-action" rel="help nofollow" aria-label="View Source">
+          <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+        </a>
+
+    </div>
+  </div>
+
+  <section class="docstring">
+
+      <div class="specs">
+
+          <pre translate="no"><span class="attribute">@spec</span> xray_cause(<a href="#t:t/0">t</a>()) :: <a href="https://elixir.hexdocs.pm/typespecs.html#basic-types">map</a>()</pre>
+
+      </div>
+
+<p>X-Ray cause document (<code class="inline">Lambda-Runtime-Function-Xray-Error-Cause</code>).</p>
+  </section>
+</section>
+
+    </div>
+  </section>
+
+    <footer class="footer">
+
+        <p>
+
+            <span class="line">
+              <a href="https://hex.pm/packages/mayfly/1.0.0-rc.1">Hex Package</a>
+
+              <a href="https://preview.hex.pm/preview/mayfly/1.0.0-rc.1">Hex Preview</a>
+
+            </span>
+
+          <span class="line">
+            <button class="a-main footer-button display-quick-switch" title="Go to package docs">
+              Go to package docs
+            </button>
+
+              <a href="llms.txt" target="_blank">
+                View llms.txt
+              </a>
+
+
+              <a href="Mayfly.epub">
+                Download ePub version
+              </a>
+
+          </span>
+        </p>
+
+        <p class="built-using">
+          Built using
+          <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" target="_blank" rel="help noopener" translate="no">ExDoc</a> (v0.40.4) for the
+
+            <a href="https://elixir-lang.org" title="Elixir" target="_blank" translate="no">Elixir programming language</a>
+
+        </p>
+
+
+    </footer>
+  </div>
+</main>
+</div>
+
+  </body>
+</html>

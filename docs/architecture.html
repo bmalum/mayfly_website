@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="ExDoc v0.40.4">
+    <meta name="project" content="Mayfly v1.0.0-rc.1">
+
+
+    <title>Architecture — Mayfly v1.0.0-rc.1</title>
+
+    <link rel="stylesheet" href="dist/html-elixir-RXHHCTJW.css" />
+
+      <link rel="canonical" href="https://elixir-aws-lambda.dev/docs/architecture.html" />
+
+    <script defer src="dist/sidebar_items-B9A7F5BC.js"></script>
+    <script defer src="docs_config.js"></script>
+    <script defer src="dist/html-MI33G4N7.js"></script>
+
+  </head>
+  <body>
+    <script>(()=>{var t="ex_doc:settings",e="dark";var o="dark",s="light";var E="sidebar_state",n="closed";var r="sidebar_width";var a="sidebar-open";var i=new URLSearchParams(window.location.search),S=i.get("theme")||JSON.parse(localStorage.getItem(t)||"{}").theme;(S===o||S!==s&&window.matchMedia("(prefers-color-scheme: dark)").matches)&&document.body.classList.add(e);var d=sessionStorage.getItem(E),A=d!==n&&!window.matchMedia(`screen and (max-width: ${768}px)`).matches;document.body.classList.toggle(a,A);var c=sessionStorage.getItem(r);c&&document.body.style.setProperty("--sidebarWidth",`${c}px`);var p=/(Macintosh|iPhone|iPad|iPod)/.test(window.navigator.userAgent);document.documentElement.classList.toggle("apple-os",p);})();
+</script>
+
+<div class="body-wrapper">
+
+<button id="sidebar-menu" class="sidebar-button sidebar-toggle" aria-label="toggle sidebar" aria-controls="sidebar">
+  <i class="ri-menu-line ri-lg" title="Collapse/expand sidebar"></i>
+</button>
+
+<nav id="sidebar" class="sidebar">
+
+  <div class="sidebar-header">
+    <div class="sidebar-projectInfo">
+
+        <a href="https://github.com/bmalum/mayfly" class="sidebar-projectImage">
+          <img src="assets/logo.png" alt="Mayfly" />
+        </a>
+
+      <div>
+        <a href="https://github.com/bmalum/mayfly" class="sidebar-projectName" translate="no">
+Mayfly
+        </a>
+        <div class="sidebar-projectVersion" translate="no">
+          v1.0.0-rc.1
+        </div>
+      </div>
+    </div>
+    <ul id="sidebar-list-nav" class="sidebar-list-nav" role="tablist" data-extras="Pages"></ul>
+  </div>
+</nav>
+
+<output role="status" id="toast"></output>
+
+<main class="content page-extra" id="main" data-type="extras">
+  <div id="content" class="content-inner">
+    <div class="top-search">
+      <div class="search-settings">
+        <form class="search-bar" action="search.html">
+          <label class="search-label">
+            <span class="sr-only">Search documentation of Mayfly</span>
+            <div class="search-input-wrapper">
+              <input name="q" type="text" class="search-input" placeholder="Press / to search" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" />
+              <button type="button" tabindex="-1" class="search-close-button" aria-hidden="true">
+                <i class="ri-close-line ri-lg" title="Cancel search"></i>
+              </button>
+            </div>
+          </label>
+        </form>
+        <div class="autocomplete">
+        </div>
+        <div class="engine-selector" data-multiple="false">
+          <button type="button" class="engine-button" aria-label="Select search engine" aria-haspopup="true" aria-expanded="false">
+            <i class="ri-search-2-line" aria-hidden="true"></i>
+            <span class="engine-name">Default</span>
+            <i class="ri-arrow-down-s-line" aria-hidden="true"></i>
+          </button>
+          <div class="engine-dropdown" hidden role="menu">
+
+              <button type="button"
+                      class="engine-option"
+                      data-engine-url="search.html?q="
+                      role="menuitemradio"
+                      aria-checked="true">
+                <span class="name">Default</span>
+                <span class="help">In-browser search</span>
+              </button>
+
+          </div>
+        </div>
+        <button class="icon-settings display-settings">
+          <i class="ri-settings-3-line"></i>
+          <span class="sr-only">Settings</span>
+        </button>
+      </div>
+    </div>
+
+<div id="top-content">
+  <div class="heading-with-actions top-heading">
+    <h1>Architecture</h1>
+
+<a href="architecture.md" title="Copy Markdown (hold Ctrl/Cmd and click it to open as Markdown)" class="copy-markdown icon-action" rel="help">
+  <i class="ri-markdown-line" aria-hidden="true"></i>
+  <span class="sr-only">Copy Markdown</span>
+</a>
+
+
+      <a href="https://github.com/bmalum/mayfly/blob/v1.0.0-rc.1/guides/architecture.md#L1" title="View Source" class="icon-action" rel="help nofollow">
+        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+        <span class="sr-only">View Source</span>
+      </a>
+
+  </div>
+
+
+<p>Mayfly implements the <a rel="nofollow" href="https://docs.aws.amazon.com/lambda/latest/dg/runtimes-api.html">Lambda Runtime API</a>
+(2018-06-01) so an Elixir release runs on the <code class="inline">provided.al2023</code> runtime.</p><h2 id="lifecycle" class="section-heading"><a href="#lifecycle" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a><span class="text">Lifecycle</span></h2><ol><li>Lambda executes <code class="inline">bootstrap</code> (generated by <a href="Mayfly.Release.html#bootstrap/1"><code class="inline">Mayfly.Release.bootstrap/1</code></a>).
+For layer builds it first verifies that <code class="inline">/opt/erlang/bin/erl</code> exists and
+that the layer's ERTS version equals <code class="inline">releases/start_erl.data</code>, then runs
+<code class="inline">bin/&lt;release&gt; eval &quot;Mayfly.Boot.main()&quot;</code>.</li><li><a href="Mayfly.Boot.html"><code class="inline">Mayfly.Boot</code></a> configures the Logger from <code class="inline">AWS_LAMBDA_LOG_FORMAT</code> /
+<code class="inline">AWS_LAMBDA_LOG_LEVEL</code>, starts every application in the release, then
+calls <a href="Mayfly.html#start_link/0"><code class="inline">Mayfly.start_link/0</code></a>.</li><li><a href="Mayfly.Supervisor.html"><code class="inline">Mayfly.Supervisor</code></a> resolves <code class="inline">_HANDLER</code> <strong>once</strong> and runs the handler's
+<code class="inline">init/1</code>. On failure it posts to <code class="inline">/runtime/init/error</code> and the VM exits
+with status 1 – Lambda marks the function as failed.</li><li>It starts <code class="inline">AWS_LAMBDA_MAX_CONCURRENCY</code> (default 1) <a href="Mayfly.Poller.html"><code class="inline">Mayfly.Poller</code></a>
+processes. Each poller long-polls <code class="inline">/runtime/invocation/next</code>, decodes the
+event, builds a <a href="Mayfly.Context.html"><code class="inline">Mayfly.Context</code></a>, calls <code class="inline">handle/3</code> and posts the result
+(<code class="inline">/response</code>, buffered or streamed) or the error (<code class="inline">/error</code>), then polls
+again.</li></ol><p>Nothing in this chain runs unless <code class="inline">bootstrap</code> (or your code) starts it:
+<a href="https://mix.hexdocs.pm/Mix.Tasks.Test.html"><code class="inline">mix test</code></a> and <code class="inline">iex -S mix</code> in a project depending on Mayfly are unaffected.</p><h2 id="modules" class="section-heading"><a href="#modules" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a><span class="text">Modules</span></h2><table><thead><tr><th style="text-align: left;">Module</th><th style="text-align: left;">Role</th></tr></thead><tbody><tr><td style="text-align: left;"><a href="Mayfly.html"><code class="inline">Mayfly</code></a></td><td style="text-align: left;"><code class="inline">start_link/1</code> – the public entry point</td></tr><tr><td style="text-align: left;"><a href="Mayfly.Boot.html"><code class="inline">Mayfly.Boot</code></a></td><td style="text-align: left;"><code class="inline">main/0</code> used by <code class="inline">bootstrap</code>; logger setup, app start, exit codes</td></tr><tr><td style="text-align: left;"><a href="Mayfly.Supervisor.html"><code class="inline">Mayfly.Supervisor</code></a></td><td style="text-align: left;">resolves + inits the handler, supervises pollers</td></tr><tr><td style="text-align: left;"><a href="Mayfly.Poller.html"><code class="inline">Mayfly.Poller</code></a></td><td style="text-align: left;">one concurrency slot: poll → invoke → respond, with backoff</td></tr><tr><td style="text-align: left;"><a href="Mayfly.Handler.html"><code class="inline">Mayfly.Handler</code></a></td><td style="text-align: left;">behaviour, <code class="inline">_HANDLER</code> resolution (module or legacy MFA), invocation with rescue/catch</td></tr><tr><td style="text-align: left;"><a href="Mayfly.Context.html"><code class="inline">Mayfly.Context</code></a></td><td style="text-align: left;">per-invocation metadata from headers</td></tr><tr><td style="text-align: left;"><a href="Mayfly.Response.html"><code class="inline">Mayfly.Response</code></a></td><td style="text-align: left;">buffered/streamed responses, Function URL prelude</td></tr><tr><td style="text-align: left;"><a href="Mayfly.ErrorPayload.html"><code class="inline">Mayfly.ErrorPayload</code></a></td><td style="text-align: left;">error documents, header type normalisation, X-Ray cause</td></tr><tr><td style="text-align: left;"><a href="Mayfly.RuntimeAPI.html"><code class="inline">Mayfly.RuntimeAPI</code></a></td><td style="text-align: left;">the four API calls; a behaviour so tests can fake it</td></tr><tr><td style="text-align: left;"><a href="Mayfly.HTTP.html"><code class="inline">Mayfly.HTTP</code></a></td><td style="text-align: left;">HTTP/1.1 over <code class="inline">:gen_tcp</code>: content-length, chunked (both directions), trailers</td></tr><tr><td style="text-align: left;"><a href="Mayfly.Telemetry.html"><code class="inline">Mayfly.Telemetry</code></a></td><td style="text-align: left;">optional <code class="inline">:telemetry</code> events</td></tr><tr><td style="text-align: left;"><a href="Mayfly.LogFormatter.html"><code class="inline">Mayfly.LogFormatter</code></a></td><td style="text-align: left;">JSON lines for advanced logging controls</td></tr><tr><td style="text-align: left;"><a href="Mayfly.Release.html"><code class="inline">Mayfly.Release</code></a></td><td style="text-align: left;">release steps: prepare, bootstrap, zip</td></tr><tr><td style="text-align: left;"><a href="Mayfly.LocalRuntime.html"><code class="inline">Mayfly.LocalRuntime</code></a></td><td style="text-align: left;">Runtime API emulator for <a href="Mix.Tasks.Lambda.Invoke.html"><code class="inline">mix lambda.invoke</code></a> and tests</td></tr><tr><td style="text-align: left;"><a href="Mix.Tasks.Lambda.Build.html"><code class="inline">Mix.Tasks.Lambda.Build</code></a> / <code class="inline">.Invoke</code></td><td style="text-align: left;">Docker build orchestration; local invoke</td></tr></tbody></table><h2 id="why-no-httpc" class="section-heading"><a href="#why-no-httpc" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a><span class="text">Why no <code class="inline">:httpc</code></span></h2><p><code class="inline">:httpc</code> needs <code class="inline">:inets</code> and <code class="inline">:ssl</code> at boot (slower cold start), returns
+charlists (8–16× memory for large payloads), honours proxy settings the
+link-local Runtime API must never see, and cannot send chunked request bodies
+with trailers – which response streaming requires. A 250-line <code class="inline">:gen_tcp</code>
+client covers exactly what the Runtime API needs.</p><h2 id="concurrency-model" class="section-heading"><a href="#concurrency-model" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a><span class="text">Concurrency model</span></h2><p>One BEAM process per concurrency slot; no shared mutable state in the runtime.
+The only shared value is the handler <code class="inline">state</code> from <code class="inline">init/1</code>, passed immutably
+to every <code class="inline">handle/3</code>. On standard Lambda there is one slot; on Managed
+Instances there are <code class="inline">AWS_LAMBDA_MAX_CONCURRENCY</code>. A poller dies only on a
+Runtime API container error (HTTP 500), which terminates the supervisor and,
+via <a href="Mayfly.Boot.html"><code class="inline">Mayfly.Boot</code></a>, the VM – as the Runtime API contract demands.</p><h2 id="error-contract" class="section-heading"><a href="#error-contract" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a><span class="text">Error contract</span></h2><table><thead><tr><th style="text-align: left;">Where</th><th style="text-align: left;"><code class="inline">errorType</code></th><th style="text-align: left;">Header</th></tr></thead><tbody><tr><td style="text-align: left;">Handler exception</td><td style="text-align: left;">exception module</td><td style="text-align: left;"><code class="inline">Function.&lt;Module&gt;</code></td></tr><tr><td style="text-align: left;"><code class="inline">{:error, term}</code></td><td style="text-align: left;"><code class="inline">HandlerError</code> or the map's <code class="inline">errorType</code></td><td style="text-align: left;"><code class="inline">Function.&lt;Type&gt;</code></td></tr><tr><td style="text-align: left;"><code class="inline">exit</code> / <code class="inline">throw</code></td><td style="text-align: left;"><code class="inline">Exit</code> / <code class="inline">Throw</code></td><td style="text-align: left;"><code class="inline">Function.Exit</code> / <code class="inline">Function.Throw</code></td></tr><tr><td style="text-align: left;">Bad return / unencodable</td><td style="text-align: left;"><code class="inline">Runtime.InvalidResponse</code></td><td style="text-align: left;">same</td></tr><tr><td style="text-align: left;">Bad JSON event</td><td style="text-align: left;"><code class="inline">Runtime.InvalidEvent</code></td><td style="text-align: left;">same</td></tr><tr><td style="text-align: left;">Bad <code class="inline">_HANDLER</code></td><td style="text-align: left;"><code class="inline">Runtime.NoSuchHandler</code> (init)</td><td style="text-align: left;">same</td></tr><tr><td style="text-align: left;"><code class="inline">init/1</code> failure</td><td style="text-align: left;"><code class="inline">Runtime.InitError</code> (init)</td><td style="text-align: left;">same</td></tr><tr><td style="text-align: left;">Error after streaming started</td><td style="text-align: left;">trailers <code class="inline">Lambda-Runtime-Function-Error-Type/-Body</code></td><td style="text-align: left;">–</td></tr></tbody></table><p><code class="inline">Lambda-Runtime-Function-Error-Type</code> must look like <code class="inline">&lt;Category.Reason&gt;</code> or
+Lambda normalises it to <code class="inline">Runtime.Unknown</code>/<code class="inline">Function.Unknown</code>; <code class="inline">ErrorPayload.header_type/1</code>
+guarantees the shape. <code class="inline">Lambda-Runtime-Invocation-Id</code> is echoed on every
+<code class="inline">/response</code> and <code class="inline">/error</code> call.</p><h2 id="environment-variables" class="section-heading"><a href="#environment-variables" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a><span class="text">Environment variables</span></h2><table><thead><tr><th style="text-align: left;">Variable</th><th style="text-align: left;">Set by</th><th style="text-align: left;">Use</th></tr></thead><tbody><tr><td style="text-align: left;"><code class="inline">AWS_LAMBDA_RUNTIME_API</code></td><td style="text-align: left;">Lambda</td><td style="text-align: left;">Runtime API host:port</td></tr><tr><td style="text-align: left;"><code class="inline">_HANDLER</code></td><td style="text-align: left;">Lambda Handler setting, default from <code class="inline">bootstrap</code></td><td style="text-align: left;"><a href="https://elixir.hexdocs.pm/Module.html"><code class="inline">Module</code></a> or <code class="inline">Module.function</code></td></tr><tr><td style="text-align: left;"><code class="inline">AWS_LAMBDA_MAX_CONCURRENCY</code></td><td style="text-align: left;">Lambda (Managed Instances)</td><td style="text-align: left;">number of pollers; also switches <code class="inline">bootstrap</code> from <code class="inline">+S 1:1</code> to all vCPUs</td></tr><tr><td style="text-align: left;"><code class="inline">AWS_LAMBDA_LOG_FORMAT</code>, <code class="inline">AWS_LAMBDA_LOG_LEVEL</code></td><td style="text-align: left;">Lambda logging config</td><td style="text-align: left;">JSON formatter, level</td></tr><tr><td style="text-align: left;"><code class="inline">LOGLEVEL</code></td><td style="text-align: left;">you</td><td style="text-align: left;">overrides the level</td></tr><tr><td style="text-align: left;"><code class="inline">_X_AMZN_TRACE_ID</code></td><td style="text-align: left;">Mayfly, per invocation</td><td style="text-align: left;">X-Ray</td></tr><tr><td style="text-align: left;"><code class="inline">RELEASE_TMP</code>, <code class="inline">RELEASE_DISTRIBUTION</code></td><td style="text-align: left;"><code class="inline">bootstrap</code></td><td style="text-align: left;"><code class="inline">/tmp</code>, <code class="inline">none</code></td></tr><tr><td style="text-align: left;"><code class="inline">MAYFLY_ERTS</code></td><td style="text-align: left;">you (layer builds)</td><td style="text-align: left;">ERTS location, default <code class="inline">/opt/erlang</code></td></tr></tbody></table>
+
+</div>
+
+<div class="bottom-actions" id="bottom-actions">
+  <div class="bottom-actions-item">
+
+      <a href="layers.html" class="bottom-actions-button" rel="prev">
+        <span class="subheader">
+          ← Previous Page
+        </span>
+        <span class="title">
+Erlang runtime layers
+        </span>
+      </a>
+
+  </div>
+  <div class="bottom-actions-item">
+
+      <a href="streaming.html" class="bottom-actions-button" rel="next">
+        <span class="subheader">
+          Next Page →
+        </span>
+        <span class="title">
+Response streaming
+        </span>
+      </a>
+
+  </div>
+</div>
+    <footer class="footer">
+
+        <p>
+
+            <span class="line">
+              <a href="https://hex.pm/packages/mayfly/1.0.0-rc.1">Hex Package</a>
+
+              <a href="https://preview.hex.pm/preview/mayfly/1.0.0-rc.1">Hex Preview</a>
+
+                (<a href="https://preview.hex.pm/preview/mayfly/1.0.0-rc.1/show/guides/architecture.md">current file</a>)
+
+            </span>
+
+          <span class="line">
+            <button class="a-main footer-button display-quick-switch" title="Go to package docs">
+              Go to package docs
+            </button>
+
+              <a href="llms.txt" target="_blank">
+                View llms.txt
+              </a>
+
+
+              <a href="Mayfly.epub">
+                Download ePub version
+              </a>
+
+          </span>
+        </p>
+
+        <p class="built-using">
+          Built using
+          <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" target="_blank" rel="help noopener" translate="no">ExDoc</a> (v0.40.4) for the
+
+            <a href="https://elixir-lang.org" title="Elixir" target="_blank" translate="no">Elixir programming language</a>
+
+        </p>
+
+
+    </footer>
+  </div>
+</main>
+</div>
+
+  </body>
+</html>

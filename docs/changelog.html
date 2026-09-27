@@ -4,19 +4,19 @@
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="generator" content="ExDoc v0.39.1">
-    <meta name="project" content="Mayfly v0.1.0">
+    <meta name="generator" content="ExDoc v0.40.4">
+    <meta name="project" content="Mayfly v1.0.0-rc.1">
 
 
-    <title>Changelog — Mayfly v0.1.0</title>
+    <title>Changelog — Mayfly v1.0.0-rc.1</title>
 
-    <link rel="stylesheet" href="dist/html-elixir-ZFNMEJKT.css" />
+    <link rel="stylesheet" href="dist/html-elixir-RXHHCTJW.css" />
 
       <link rel="canonical" href="https://elixir-aws-lambda.dev/docs/changelog.html" />
 
-    <script defer src="dist/sidebar_items-32970337.js"></script>
+    <script defer src="dist/sidebar_items-B9A7F5BC.js"></script>
     <script defer src="docs_config.js"></script>
-    <script defer src="dist/html-HBZYRXZS.js"></script>
+    <script defer src="dist/html-MI33G4N7.js"></script>
 
   </head>
   <body>
@@ -43,11 +43,11 @@
 Mayfly
         </a>
         <div class="sidebar-projectVersion" translate="no">
-          v0.1.0
+          v1.0.0-rc.1
         </div>
       </div>
     </div>
-    <ul id="sidebar-list-nav" class="sidebar-list-nav" role="tablist" data-extras=""></ul>
+    <ul id="sidebar-list-nav" class="sidebar-list-nav" role="tablist" data-extras="Pages"></ul>
   </div>
 </nav>
 
@@ -100,8 +100,13 @@ Mayfly
   <div class="heading-with-actions top-heading">
     <h1>Changelog</h1>
 
+<a href="changelog.md" title="Copy Markdown (hold Ctrl/Cmd and click it to open as Markdown)" class="copy-markdown icon-action" rel="help">
+  <i class="ri-markdown-line" aria-hidden="true"></i>
+  <span class="sr-only">Copy Markdown</span>
+</a>
 
-      <a href="https://github.com/bmalum/mayfly/blob/main/CHANGELOG.md#L1" title="View Source" class="icon-action" rel="help">
+
+      <a href="https://github.com/bmalum/mayfly/blob/v1.0.0-rc.1/CHANGELOG.md#L1" title="View Source" class="icon-action" rel="help nofollow">
         <i class="ri-code-s-slash-line" aria-hidden="true"></i>
         <span class="sr-only">View Source</span>
       </a>
@@ -109,8 +114,38 @@ Mayfly
   </div>
 
 
-<p>All notable changes to this project will be documented in this file.</p><p>The format is based on <a href="https://keepachangelog.com/en/1.0.0/">Keep a Changelog</a>,
-and this project adheres to <a href="https://semver.org/spec/v2.0.0.html">Semantic Versioning</a>.</p><h2 id="0-1-0-2025-11-21" class="section-heading"><a href="#0-1-0-2025-11-21" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a><span class="text">[0.1.0] - 2025-11-21</span></h2><h3 id="added" class="section-heading"><a href="#added" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a><span class="text">Added</span></h3><ul><li>Initial release of Mayfly - AWS Lambda Custom Runtime for Elixir</li><li>Core Lambda Runtime API integration with long-polling support</li><li>Handler resolution and execution with proper error handling</li><li>Comprehensive error formatting with stacktraces</li><li>Mix task <code class="inline">lambda.build</code> for creating deployment packages</li><li>Docker build support for cross-platform compatibility</li><li>ZIP archive creation for Lambda deployment</li><li>Bootstrap script generation</li><li>Security: Using <a href="https://hexdocs.pm/elixir/String.html#to_existing_atom/1"><code class="inline">String.to_existing_atom/1</code></a> to prevent atom exhaustion</li><li>Timeout configuration: 5s for responses, infinite for long-polling</li><li>Graceful error handling for missing request IDs and malformed JSON</li><li>OTP supervision tree for fault tolerance</li><li>Comprehensive documentation and README with examples</li></ul><h3 id="features" class="section-heading"><a href="#features" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a><span class="text">Features</span></h3><ul><li>Zero boilerplate Lambda function development</li><li>Native Elixir experience with standard <code class="inline">{:ok, result}</code> / <code class="inline">{:error, reason}</code> patterns</li><li>Support for API Gateway, S3, EventBridge and other AWS event sources</li><li>Proper Elixir stacktraces in Lambda error responses</li><li>Flexible handler configuration via <code class="inline">_HANDLER</code> environment variable</li><li>Build tooling with <code class="inline">--zip</code>, <code class="inline">--docker</code>, and <code class="inline">--outdir</code> options</li></ul><h3 id="technical-details" class="section-heading"><a href="#technical-details" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a><span class="text">Technical Details</span></h3><ul><li>Elixir ~&gt; 1.15 support</li><li>Single dependency: Jason for JSON encoding/decoding</li><li>Uses Erlang's <code class="inline">:httpc</code> for Lambda Runtime API communication</li><li>GenServer-based event loop for continuous invocation processing</li></ul>
+<p>All notable changes to this project will be documented in this file.</p><p>The format is based on <a rel="nofollow" href="https://keepachangelog.com/en/1.0.0/">Keep a Changelog</a>,
+and this project adheres to <a rel="nofollow" href="https://semver.org/spec/v2.0.0.html">Semantic Versioning</a>.</p><h2 id="1-0-0-rc-1-2026-09-27" class="section-heading"><a href="#1-0-0-rc-1-2026-09-27" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a><span class="text">[1.0.0-rc.1] - 2026-09-27</span></h2><p>A redesign. See <code class="inline">guides/migrating-from-0.x.md</code> for the upgrade path.</p><h3 id="added" class="section-heading"><a href="#added" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a><span class="text">Added</span></h3><ul><li><a href="Mayfly.Handler.html"><code class="inline">Mayfly.Handler</code></a> behaviour with <code class="inline">init/1</code> (cold-start state) and <code class="inline">handle/3</code>;
+<code class="inline">_HANDLER</code> now names a module. Legacy <code class="inline">Module.function</code> handlers still work.</li><li><a href="Mayfly.Release.html"><code class="inline">Mayfly.Release</code></a>: <code class="inline">prepare/1</code>, <code class="inline">bootstrap/1</code>, <code class="inline">zip/1</code> release steps – the Lambda
+package is produced by <a href="https://mix.hexdocs.pm/Mix.Tasks.Release.html"><code class="inline">mix release</code></a>. <code class="inline">mayfly: [layer: true]</code> builds
+ERTS-less zips for the Mayfly Erlang layer.</li><li>ERTS layer tooling in <code class="inline">layer/</code> (<code class="inline">build.sh</code> with an OTP version matrix,
+<code class="inline">publish.sh</code> with pinned + major-alias layer names, idempotent re-runs,
+<code class="inline">--public</code>/<code class="inline">--org</code> sharing, <code class="inline">latest-otp.sh</code>, <code class="inline">publisher-role.yml</code>) and a
+weekly GitHub Actions workflow that publishes public layers for the latest
+patch of each supported OTP major to 16 regions on native runners.</li><li><code class="inline">bootstrap</code> for layer builds verifies the layer is present and its ERTS
+version matches the release before starting the VM.</li><li><code class="inline">mix lambda.invoke --http [--method M --path P]</code> wraps the event like a
+Function URL / API Gateway v2 request.</li><li><code class="inline">mix lambda.build --docker</code> works with <code class="inline">finch</code> when docker is absent and
+mounts external <code class="inline">path:</code> dependencies into the container.</li><li><a href="Mix.Tasks.Lambda.Doctor.html"><code class="inline">mix lambda.doctor</code></a> checks the release configuration, resolves the handler
+and runs its <code class="inline">init/1</code>, and compares the local OTP with a layer's
+(<code class="inline">--layer ARN</code>).</li><li><a href="Mayfly.Response.html#stream/2"><code class="inline">Mayfly.Response.stream/2</code></a> accepts <code class="inline">send_timeout:</code> to bound a stalled
+streaming write (default 30 s).</li><li><code class="inline">bootstrap</code> uses a single scheduler (<code class="inline">+S 1:1</code>) only on standard Lambda;
+on Managed Instances (<code class="inline">AWS_LAMBDA_MAX_CONCURRENCY &gt; 1</code>) the VM sizes
+schedulers to the vCPUs. Managed Instances verified on real hardware.</li><li>Dialyzer runs in CI; a <code class="inline">Publish</code> workflow releases to Hex.pm on <code class="inline">v*</code> tags.</li><li><a href="Mayfly.Response.html"><code class="inline">Mayfly.Response</code></a>: custom content types, response streaming with chunked
+transfer encoding, error trailers and the Function URL HTTP prelude
+(<a href="Mayfly.Response.html#http/2"><code class="inline">Mayfly.Response.http/2</code></a>).</li><li><a href="Mayfly.Context.html"><code class="inline">Mayfly.Context</code></a>: <code class="inline">invocation_id</code>, <code class="inline">tenant_id</code>, <code class="inline">env</code>; <code class="inline">remaining_time_ms/1</code>,
+<code class="inline">logger_metadata/1</code>.</li><li>Lambda Managed Instances: <code class="inline">AWS_LAMBDA_MAX_CONCURRENCY</code> pollers run
+invocations concurrently in isolated processes.</li><li>Runtime API: <code class="inline">Lambda-Runtime-Invocation-Id</code> echo, error-type header
+normalised to <code class="inline">Category.Reason</code>, <code class="inline">Lambda-Runtime-Function-Xray-Error-Cause</code>,
+<code class="inline">User-Agent</code>.</li><li><a href="Mayfly.LogFormatter.html"><code class="inline">Mayfly.LogFormatter</code></a> (JSON lines for advanced logging controls) installed
+automatically when <code class="inline">AWS_LAMBDA_LOG_FORMAT=JSON</code>; <code class="inline">AWS_LAMBDA_LOG_LEVEL</code> /
+<code class="inline">LOGLEVEL</code> honoured.</li><li><code class="inline">:telemetry</code> events (optional dependency).</li><li><a href="Mayfly.LocalRuntime.html"><code class="inline">Mayfly.LocalRuntime</code></a> emulator and <a href="Mix.Tasks.Lambda.Invoke.html"><code class="inline">mix lambda.invoke</code></a>.</li><li><a href="Mayfly.Boot.html#main/0"><code class="inline">Mayfly.Boot.main/0</code></a> explicit entry point; <a href="Mayfly.html#start_link/1"><code class="inline">Mayfly.start_link/1</code></a> public API.</li><li><code class="inline">Runtime.InitError</code>, <code class="inline">Runtime.InvalidEvent</code> error types.</li></ul><h3 id="changed" class="section-heading"><a href="#changed" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a><span class="text">Changed</span></h3><ul><li>Requires Elixir 1.18+; uses the built-in <a href="https://elixir.hexdocs.pm/JSON.html"><code class="inline">JSON</code></a> module. Jason removed.</li><li><a href="Mayfly.HTTP.html"><code class="inline">Mayfly.HTTP</code></a> (<code class="inline">:gen_tcp</code>) replaces <code class="inline">:httpc</code>; <code class="inline">:inets</code>/<code class="inline">:ssl</code> no longer
+required at boot.</li><li><a href="Mix.Tasks.Lambda.Build.html"><code class="inline">mix lambda.build</code></a> only builds the configured release (optionally in
+Docker) and copies <code class="inline">lambda.zip</code>; no <code class="inline">MIX_ENV=lambda</code>, defaults to <code class="inline">prod</code>.</li><li><code class="inline">errorType</code> has no <code class="inline">Elixir.</code> prefix; <code class="inline">stackTrace</code> is a list; <code class="inline">{:error, &quot;s&quot;}</code>
+is <code class="inline">HandlerError</code>; non-<code class="inline">{:ok,_}/{:error,_}</code> returns are <code class="inline">Runtime.InvalidResponse</code>.</li><li><code class="inline">Runtime.HandlerNotFound</code> renamed to <code class="inline">Runtime.NoSuchHandler</code> (AWS-recommended).</li><li>Modules renamed: <code class="inline">Mayfly.Error</code> → <a href="Mayfly.ErrorPayload.html"><code class="inline">Mayfly.ErrorPayload</code></a>, <code class="inline">Mayfly.Runtime</code> →
+<a href="Mayfly.RuntimeAPI.html"><code class="inline">Mayfly.RuntimeAPI</code></a>, <code class="inline">Mayfly.Loop</code> → <a href="Mayfly.Poller.html"><code class="inline">Mayfly.Poller</code></a>.</li><li><code class="inline">bootstrap</code> uses <code class="inline">bin/&lt;release&gt; eval &quot;Mayfly.Boot.main()&quot;</code>, sets
+<code class="inline">RELEASE_TMP=/tmp</code>, <code class="inline">RELEASE_DISTRIBUTION=none</code>; <code class="inline">vm.args</code> tuned for Lambda.</li><li><code class="inline">lambda.Dockerfile</code> pins OTP 27.3.4 / Elixir 1.18.4, is multi-target and
+architecture-neutral.</li></ul><h3 id="removed" class="section-heading"><a href="#removed" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a><span class="text">Removed</span></h3><ul><li>Application callback (<code class="inline">mod:</code>) – nothing starts implicitly.</li><li><code class="inline">config :mayfly, start_loop</code>, <code class="inline">Mayfly.Handler.default_handler</code>, <code class="inline">Mayfly.hello</code>, <code class="inline">Mayfly.Helpers</code>, the committed <code class="inline">bootstrap</code> file.</li></ul><h3 id="fixed-relative-to-0-1-0" class="section-heading"><a href="#fixed-relative-to-0-1-0" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a><span class="text">Fixed (relative to 0.1.0)</span></h3><ul><li>Misconfigured handlers were reported as successful invocations.</li><li>Unencodable results left invocations hanging until timeout.</li><li><code class="inline">exit</code>/<code class="inline">throw</code> in handlers crashed the event loop.</li><li><a href="https://elixir.hexdocs.pm/KeyError.html"><code class="inline">KeyError</code></a> and friends produced <code class="inline">errorMessage: null</code>.</li><li>Poll failures spun without backoff; HTTP status codes were ignored;
+bodies were charlists.</li><li><code class="inline">zip</code> binary dependency, paths with spaces, <code class="inline">--outdir</code> ignored for Docker.</li></ul><h2 id="0-1-0-2025-11-21" class="section-heading"><a href="#0-1-0-2025-11-21" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a><span class="text">[0.1.0] - 2025-11-21</span></h2><h3 id="added-1" class="section-heading"><a href="#added-1" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a><span class="text">Added</span></h3><ul><li>Initial release of Mayfly - AWS Lambda Custom Runtime for Elixir</li><li>Core Lambda Runtime API integration with long-polling support</li><li>Handler resolution and execution with proper error handling</li><li>Comprehensive error formatting with stacktraces</li><li>Mix task <code class="inline">lambda.build</code> for creating deployment packages</li><li>Docker build support for cross-platform compatibility</li><li>ZIP archive creation for Lambda deployment</li><li>Bootstrap script generation</li><li>Security: Using <a href="https://elixir.hexdocs.pm/String.html#to_existing_atom/1"><code class="inline">String.to_existing_atom/1</code></a> to prevent atom exhaustion</li><li>Timeout configuration: 5s for responses, infinite for long-polling</li><li>Graceful error handling for missing request IDs and malformed JSON</li><li>OTP supervision tree for fault tolerance</li><li>Comprehensive documentation and README with examples</li></ul><h3 id="features" class="section-heading"><a href="#features" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a><span class="text">Features</span></h3><ul><li>Zero boilerplate Lambda function development</li><li>Native Elixir experience with standard <code class="inline">{:ok, result}</code> / <code class="inline">{:error, reason}</code> patterns</li><li>Support for API Gateway, S3, EventBridge and other AWS event sources</li><li>Proper Elixir stacktraces in Lambda error responses</li><li>Flexible handler configuration via <code class="inline">_HANDLER</code> environment variable</li><li>Build tooling with <code class="inline">--zip</code>, <code class="inline">--docker</code>, and <code class="inline">--outdir</code> options</li></ul><h3 id="technical-details" class="section-heading"><a href="#technical-details" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a><span class="text">Technical Details</span></h3><ul><li>Elixir ~&gt; 1.15 support</li><li>Single dependency: Jason for JSON encoding/decoding</li><li>Uses Erlang's <code class="inline">:httpc</code> for Lambda Runtime API communication</li><li>GenServer-based event loop for continuous invocation processing</li></ul>
 
 </div>
 
@@ -134,34 +169,50 @@ and this project adheres to <a href="https://semver.org/spec/v2.0.0.html">Semant
           Next Page →
         </span>
         <span class="title">
-Getting Started with Mayfly
+Getting Started
         </span>
       </a>
 
   </div>
 </div>
     <footer class="footer">
-      <p>
 
-        <span class="line">
-          <button class="a-main footer-button display-quick-switch" title="Search HexDocs packages">
-            Search HexDocs
-          </button>
+        <p>
 
-            <a href="Mayfly.epub" title="ePub version">
-              Download ePub version
-            </a>
+            <span class="line">
+              <a href="https://hex.pm/packages/mayfly/1.0.0-rc.1">Hex Package</a>
 
-        </span>
-      </p>
+              <a href="https://preview.hex.pm/preview/mayfly/1.0.0-rc.1">Hex Preview</a>
 
-      <p class="built-using">
-        Built using
-        <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" target="_blank" rel="help noopener" translate="no">ExDoc</a> (v0.39.1) for the
+                (<a href="https://preview.hex.pm/preview/mayfly/1.0.0-rc.1/show/CHANGELOG.md">current file</a>)
 
-          <a href="https://elixir-lang.org" title="Elixir" target="_blank" translate="no">Elixir programming language</a>
+            </span>
 
-      </p>
+          <span class="line">
+            <button class="a-main footer-button display-quick-switch" title="Go to package docs">
+              Go to package docs
+            </button>
+
+              <a href="llms.txt" target="_blank">
+                View llms.txt
+              </a>
+
+
+              <a href="Mayfly.epub">
+                Download ePub version
+              </a>
+
+          </span>
+        </p>
+
+        <p class="built-using">
+          Built using
+          <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" target="_blank" rel="help noopener" translate="no">ExDoc</a> (v0.40.4) for the
+
+            <a href="https://elixir-lang.org" title="Elixir" target="_blank" translate="no">Elixir programming language</a>
+
+        </p>
+
 
     </footer>
   </div>

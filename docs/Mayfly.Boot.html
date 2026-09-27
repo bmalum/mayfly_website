@@ -4,19 +4,19 @@
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="generator" content="ExDoc v0.39.1">
-    <meta name="project" content="Mayfly v0.1.0">
+    <meta name="generator" content="ExDoc v0.40.4">
+    <meta name="project" content="Mayfly v1.0.0-rc.1">
 
 
-    <title>Mayfly.Error — Mayfly v0.1.0</title>
+    <title>Mayfly.Boot — Mayfly v1.0.0-rc.1</title>
 
-    <link rel="stylesheet" href="dist/html-elixir-ZFNMEJKT.css" />
+    <link rel="stylesheet" href="dist/html-elixir-RXHHCTJW.css" />
 
-      <link rel="canonical" href="https://elixir-aws-lambda.dev/docs/Mayfly.Error.html" />
+      <link rel="canonical" href="https://elixir-aws-lambda.dev/docs/Mayfly.Boot.html" />
 
-    <script defer src="dist/sidebar_items-32970337.js"></script>
+    <script defer src="dist/sidebar_items-B9A7F5BC.js"></script>
     <script defer src="docs_config.js"></script>
-    <script defer src="dist/html-HBZYRXZS.js"></script>
+    <script defer src="dist/html-MI33G4N7.js"></script>
 
   </head>
   <body>
@@ -43,11 +43,11 @@
 Mayfly
         </a>
         <div class="sidebar-projectVersion" translate="no">
-          v0.1.0
+          v1.0.0-rc.1
         </div>
       </div>
     </div>
-    <ul id="sidebar-list-nav" class="sidebar-list-nav" role="tablist" data-extras=""></ul>
+    <ul id="sidebar-list-nav" class="sidebar-list-nav" role="tablist" data-extras="Pages"></ul>
   </div>
 </nav>
 
@@ -99,12 +99,19 @@ Mayfly
 <div id="top-content">
   <div class="heading-with-actions top-heading">
     <h1>
-      <span translate="no">Mayfly.Error</span> 
-      <small class="app-vsn" translate="no">(Mayfly v0.1.0)</small>
+      <span translate="no">Mayfly.<wbr />Boot</span> 
+      <small class="app-vsn" translate="no">(Mayfly v1.0.0-rc.1)</small>
 
     </h1>
 
-      <a href="https://github.com/bmalum/mayfly/blob/main/lib/error.ex#L1" title="View Source" class="icon-action" rel="help">
+<a href="Mayfly.Boot.md" title="Copy Markdown (hold Ctrl/Cmd and click it to open as Markdown)" class="copy-markdown icon-action" rel="help">
+  <i class="ri-markdown-line" aria-hidden="true"></i>
+  <span class="sr-only">Copy Markdown</span>
+</a>
+
+
+
+      <a href="https://github.com/bmalum/mayfly/blob/v1.0.0-rc.1/lib/mayfly/boot.ex#L1" title="View Source" class="icon-action" rel="help nofollow">
         <i class="ri-code-s-slash-line" aria-hidden="true"></i>
         <span class="sr-only">View Source</span>
       </a>
@@ -113,42 +120,33 @@ Mayfly
 
 
     <section id="moduledoc">
-<p>Error handling utilities for AWS Lambda functions.
-Provides standardized error formatting and conversion functions.</p>
+<p>Entry point used by the generated <code class="inline">bootstrap</code> script:</p><pre><code class="makeup elixir" translate="no"><span class="n">bin</span><span class="o">/</span><span class="n">my_app</span><span class="w"> </span><span class="n">eval</span><span class="w"> </span><span class="s">&quot;Mayfly.Boot.main()&quot;</span></code></pre><p><a href="#main/0"><code class="inline">main/0</code></a> configures logging from Lambda's environment
+(<code class="inline">AWS_LAMBDA_LOG_FORMAT</code>, <code class="inline">AWS_LAMBDA_LOG_LEVEL</code>, <code class="inline">LOGLEVEL</code>), starts the
+user's OTP application(s) and then the runtime, and blocks forever. If the
+runtime cannot initialise (bad handler, failing <code class="inline">init/1</code>) the error has been
+reported to Lambda and the VM exits with status 1.</p><p>Nothing in Mayfly starts implicitly: adding the dependency has no effect on
+<a href="https://mix.hexdocs.pm/Mix.Tasks.Test.html"><code class="inline">mix test</code></a> or <code class="inline">iex -S mix</code> in your project.</p>
     </section>
 
 </div>
 
   <section id="summary" class="details-list">
-    <h1 class="section-heading">
+    <h2 class="section-heading">
       <a class="hover-link" href="#summary">
         <i class="ri-link-m" aria-hidden="true"></i>
       </a>
       <span class="text">Summary</span>
-    </h1>
+    </h2>
 <div class="summary-functions summary">
-  <h2>
+  <h3>
     <a href="#functions">Functions</a>
-  </h2>
+  </h3>
 
     <div class="summary-row">
       <div class="summary-signature">
-        <a href="#format_error/2" data-no-tooltip="" translate="no">format_error(error, stacktrace \\ nil)</a>
+        <a href="#main/1" data-no-tooltip="" translate="no">main(args \\ [])</a>
 
       </div>
-
-        <div class="summary-synopsis"><p>Converts various error types to a standardized Lambda error format.</p></div>
-
-    </div>
-
-    <div class="summary-row">
-      <div class="summary-signature">
-        <a href="#format_stacktrace/1" data-no-tooltip="" translate="no">format_stacktrace(stacktrace)</a>
-
-      </div>
-
-        <div class="summary-synopsis"><p>Formats stacktrace into a string representation.
-Returns empty string if stacktrace is nil.</p></div>
 
     </div>
 
@@ -158,27 +156,27 @@ Returns empty string if stacktrace is nil.</p></div>
 
 
   <section id="functions" class="details-list">
-    <h1 class="section-heading">
+    <h2 class="section-heading">
       <a class="hover-link" href="#functions">
         <i class="ri-link-m" aria-hidden="true"></i>
       </a>
       <span class="text">Functions</span>
-    </h1>
+    </h2>
 
     <div class="functions-list">
-<section class="detail" id="format_error/2">
+<section class="detail" id="main/1">
 
-    <span id="format_error/1"></span>
+    <span id="main/0"></span>
 
   <div class="detail-header">
-    <a href="#format_error/2" class="detail-link" data-no-tooltip="" aria-label="Link to this function">
+    <a href="#main/1" class="detail-link" data-no-tooltip="" aria-label="Link to this function">
       <i class="ri-link-m" aria-hidden="true"></i>
     </a>
     <div class="heading-with-actions">
-      <h1 class="signature" translate="no">format_error(error, stacktrace \\ nil)</h1>
+      <h1 class="signature" translate="no">main(args \\ [])</h1>
 
 
-        <a href="https://github.com/bmalum/mayfly/blob/main/lib/error.ex#L11" class="icon-action" rel="help" aria-label="View Source">
+        <a href="https://github.com/bmalum/mayfly/blob/v1.0.0-rc.1/lib/mayfly/boot.ex#L20" class="icon-action" rel="help nofollow" aria-label="View Source">
           <i class="ri-code-s-slash-line" aria-hidden="true"></i>
         </a>
 
@@ -189,40 +187,11 @@ Returns empty string if stacktrace is nil.</p></div>
 
       <div class="specs">
 
-          <pre translate="no"><span class="attribute">@spec</span> format_error(<a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">any</a>(), <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">list</a>() | nil) :: <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">map</a>()</pre>
+          <pre translate="no"><span class="attribute">@spec</span> main([<a href="https://elixir.hexdocs.pm/String.html#t:t/0">String.t</a>()]) :: <a href="https://elixir.hexdocs.pm/typespecs.html#built-in-types">no_return</a>()</pre>
 
       </div>
 
-<p>Converts various error types to a standardized Lambda error format.</p>
-  </section>
-</section>
-<section class="detail" id="format_stacktrace/1">
 
-  <div class="detail-header">
-    <a href="#format_stacktrace/1" class="detail-link" data-no-tooltip="" aria-label="Link to this function">
-      <i class="ri-link-m" aria-hidden="true"></i>
-    </a>
-    <div class="heading-with-actions">
-      <h1 class="signature" translate="no">format_stacktrace(stacktrace)</h1>
-
-
-        <a href="https://github.com/bmalum/mayfly/blob/main/lib/error.ex#L50" class="icon-action" rel="help" aria-label="View Source">
-          <i class="ri-code-s-slash-line" aria-hidden="true"></i>
-        </a>
-
-    </div>
-  </div>
-
-  <section class="docstring">
-
-      <div class="specs">
-
-          <pre translate="no"><span class="attribute">@spec</span> format_stacktrace(<a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">list</a>() | nil) :: <a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>()</pre>
-
-      </div>
-
-<p>Formats stacktrace into a string representation.
-Returns empty string if stacktrace is nil.</p>
   </section>
 </section>
 
@@ -230,27 +199,41 @@ Returns empty string if stacktrace is nil.</p>
   </section>
 
     <footer class="footer">
-      <p>
 
-        <span class="line">
-          <button class="a-main footer-button display-quick-switch" title="Search HexDocs packages">
-            Search HexDocs
-          </button>
+        <p>
 
-            <a href="Mayfly.epub" title="ePub version">
-              Download ePub version
-            </a>
+            <span class="line">
+              <a href="https://hex.pm/packages/mayfly/1.0.0-rc.1">Hex Package</a>
 
-        </span>
-      </p>
+              <a href="https://preview.hex.pm/preview/mayfly/1.0.0-rc.1">Hex Preview</a>
 
-      <p class="built-using">
-        Built using
-        <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" target="_blank" rel="help noopener" translate="no">ExDoc</a> (v0.39.1) for the
+            </span>
 
-          <a href="https://elixir-lang.org" title="Elixir" target="_blank" translate="no">Elixir programming language</a>
+          <span class="line">
+            <button class="a-main footer-button display-quick-switch" title="Go to package docs">
+              Go to package docs
+            </button>
 
-      </p>
+              <a href="llms.txt" target="_blank">
+                View llms.txt
+              </a>
+
+
+              <a href="Mayfly.epub">
+                Download ePub version
+              </a>
+
+          </span>
+        </p>
+
+        <p class="built-using">
+          Built using
+          <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" target="_blank" rel="help noopener" translate="no">ExDoc</a> (v0.40.4) for the
+
+            <a href="https://elixir-lang.org" title="Elixir" target="_blank" translate="no">Elixir programming language</a>
+
+        </p>
+
 
     </footer>
   </div>
