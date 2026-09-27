@@ -1,0 +1,9 @@
+# Mayfly – Elixir on AWS Lambda
+
+> Mayfly is an open-source (MIT) AWS Lambda custom runtime for Elixir. Handler behaviour, mix release build, Erlang runtime layers, response streaming, Managed Instances, structured logs.
+
+- Docs index (Markdown): https://elixir-aws-lambda.dev/docs/llms.txt
+- Agent Skill: https://github.com/bmalum/mayfly/tree/main/skills/mayfly-elixir-lambda
+- Source: https://github.com/bmalum/mayfly
+- Layer ARNs: https://github.com/bmalum/mayfly/releases/tag/layers
+- Author: https://karrer.solutions

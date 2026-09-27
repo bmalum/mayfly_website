@@ -17,6 +17,21 @@
     <script defer src="dist/sidebar_items-B9A7F5BC.js"></script>
     <script defer src="docs_config.js"></script>
     <script defer src="dist/html-MI33G4N7.js"></script>
+<meta name="description" content="Mayfly documentation: run Elixir on AWS Lambda with a lightweight custom runtime. Handler behaviour, mix release build, Erlang layers, response streaming, Managed Instances, observability.">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#5b21b6">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Mayfly – Elixir on AWS Lambda">
+<meta property="og:title" content="Mayfly documentation – Elixir AWS Lambda runtime">
+<meta property="og:description" content="Run Elixir on AWS Lambda: handler behaviour, mix release build, Erlang layers, response streaming, Managed Instances.">
+<meta property="og:image" content="https://elixir-aws-lambda.dev/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/png" href="https://elixir-aws-lambda.dev/elixir-drop-only.png">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"TechArticle","isPartOf":{"@type":"WebSite","name":"Mayfly","url":"https://elixir-aws-lambda.dev/"},
+ "about":{"@type":"SoftwareSourceCode","name":"Mayfly","codeRepository":"https://github.com/bmalum/mayfly","programmingLanguage":"Elixir","runtimePlatform":"AWS Lambda provided.al2023"},
+ "author":{"@type":"Organization","name":"Karrer","url":"https://karrer.solutions"}}
+</script>
 
   </head>
   <body>
@@ -130,7 +145,8 @@ and runs its <code class="inline">init/1</code>, and compares the local OTP with
 (<code class="inline">--layer ARN</code>).</li><li><a href="Mayfly.Response.html#stream/2"><code class="inline">Mayfly.Response.stream/2</code></a> accepts <code class="inline">send_timeout:</code> to bound a stalled
 streaming write (default 30 s).</li><li><code class="inline">bootstrap</code> uses a single scheduler (<code class="inline">+S 1:1</code>) only on standard Lambda;
 on Managed Instances (<code class="inline">AWS_LAMBDA_MAX_CONCURRENCY &gt; 1</code>) the VM sizes
-schedulers to the vCPUs. Managed Instances verified on real hardware.</li><li>Dialyzer runs in CI; a <code class="inline">Publish</code> workflow releases to Hex.pm on <code class="inline">v*</code> tags.</li><li><a href="Mayfly.Response.html"><code class="inline">Mayfly.Response</code></a>: custom content types, response streaming with chunked
+schedulers to the vCPUs. Managed Instances verified on real hardware.</li><li>Dialyzer runs in CI; a <code class="inline">Publish</code> workflow releases to Hex.pm on <code class="inline">v*</code> tags.</li><li><code class="inline">skills/mayfly-elixir-lambda</code>: an Agent Skill for coding agents, shipped in
+the Hex package.</li><li><a href="Mayfly.Response.html"><code class="inline">Mayfly.Response</code></a>: custom content types, response streaming with chunked
 transfer encoding, error trailers and the Function URL HTTP prelude
 (<a href="Mayfly.Response.html#http/2"><code class="inline">Mayfly.Response.http/2</code></a>).</li><li><a href="Mayfly.Context.html"><code class="inline">Mayfly.Context</code></a>: <code class="inline">invocation_id</code>, <code class="inline">tenant_id</code>, <code class="inline">env</code>; <code class="inline">remaining_time_ms/1</code>,
 <code class="inline">logger_metadata/1</code>.</li><li>Lambda Managed Instances: <code class="inline">AWS_LAMBDA_MAX_CONCURRENCY</code> pollers run

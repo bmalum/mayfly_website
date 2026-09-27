@@ -4,42 +4,51 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#5b21b6">
 
   <!-- Primary Meta Tags -->
-  <title>Mayfly - Elixir AWS Lambda Runtime | Serverless Elixir Functions</title>
-  <meta name="title" content="Mayfly - Elixir AWS Lambda Runtime | Serverless Elixir Functions">
-  <meta name="description" content="Mayfly is a lightweight AWS Lambda custom runtime for Elixir: a handler behaviour, mix release as the build, an Erlang layer so you never need Docker, response streaming, Managed Instances concurrency and honest error reporting.">
-  <meta name="keywords" content="Elixir, AWS Lambda, Serverless, Custom Runtime, Elixir Lambda, Lambda Layer, Response Streaming, Managed Instances, Mayfly">
+  <title>Mayfly – Run Elixir on AWS Lambda | Elixir Lambda Custom Runtime</title>
+  <meta name="title" content="Mayfly – Run Elixir on AWS Lambda | Elixir Lambda Custom Runtime">
+  <meta name="description" content="Mayfly is an open-source AWS Lambda custom runtime for Elixir. Write a handler module, build with mix release, attach the Erlang layer: no Docker, response streaming, Managed Instances concurrency, real Elixir stack traces. MIT licensed.">
+  <meta name="keywords" content="Elixir AWS Lambda, Elixir Lambda runtime, Elixir serverless, AWS Lambda custom runtime Elixir, provided.al2023 Elixir, Elixir Lambda layer, Erlang Lambda layer, BEAM on Lambda, Phoenix serverless, Lambda response streaming Elixir, Mayfly">
   <meta name="author" content="Karrer, https://karrer.solutions">
-  <meta name="robots" content="index, follow">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <meta name="googlebot" content="index, follow">
 
-  <!-- Open Graph / Facebook -->
+  <!-- Open Graph -->
   <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Mayfly – Elixir on AWS Lambda">
+  <meta property="og:locale" content="en_US">
   <meta property="og:url" content="https://elixir-aws-lambda.dev/">
-  <meta property="og:title" content="Mayfly - Elixir AWS Lambda Runtime">
-  <meta property="og:description" content="A lightweight AWS Lambda custom runtime for Elixir. mix release is the build, an Erlang layer replaces Docker, errors arrive as real Elixir stack traces.">
+  <meta property="og:title" content="Mayfly – Run Elixir on AWS Lambda">
+  <meta property="og:description" content="Open-source Lambda custom runtime for Elixir. mix release is the build, an Erlang layer replaces Docker, errors arrive as real Elixir stack traces.">
   <meta property="og:image" content="https://elixir-aws-lambda.dev/og-image.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Mayfly – a lightweight AWS Lambda custom runtime for Elixir">
 
   <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:url" content="https://elixir-aws-lambda.dev/">
-  <meta name="twitter:title" content="Mayfly - Elixir AWS Lambda Runtime">
-  <meta name="twitter:description" content="A lightweight AWS Lambda custom runtime for Elixir. mix release is the build, an Erlang layer replaces Docker, errors arrive as real Elixir stack traces.">
+  <meta name="twitter:title" content="Mayfly – Run Elixir on AWS Lambda">
+  <meta name="twitter:description" content="Open-source Lambda custom runtime for Elixir. mix release is the build, an Erlang layer replaces Docker, errors arrive as real Elixir stack traces.">
   <meta name="twitter:image" content="https://elixir-aws-lambda.dev/og-image.png">
 
   <link rel="canonical" href="https://elixir-aws-lambda.dev/">
+  <link rel="alternate" type="application/rss+xml" title="Mayfly releases" href="https://github.com/bmalum/mayfly/releases.atom">
   <link rel="icon" type="image/png" href="elixir-drop-only.png">
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link rel="sitemap" type="application/xml" href="/sitemap.xml">
 
+  <link rel="preload" href="fonts/PTSans-Regular.ttf" as="font" type="font/ttf" crossorigin>
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
   <link href="output.css" rel="stylesheet">
   <link rel="stylesheet" href="theme.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/languages/elixir.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/languages/elixir.min.js"></script>
   <script>
     document.addEventListener("DOMContentLoaded", function () {
-      document.querySelectorAll('pre code').forEach((block) => hljs.highlightElement(block));
+      if (window.hljs) document.querySelectorAll('pre code').forEach((b) => hljs.highlightElement(b));
     });
   </script>
 
@@ -47,127 +56,203 @@
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
-    "name": "Mayfly",
-    "applicationCategory": "DeveloperApplication",
-    "description": "A lightweight AWS Lambda custom runtime for Elixir",
-    "operatingSystem": "AWS Lambda (provided.al2023)",
-    "softwareVersion": "1.0.0-rc.1",
-    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
-    "programmingLanguage": "Elixir",
-    "url": "https://elixir-aws-lambda.dev/",
-    "codeRepository": "https://github.com/bmalum/mayfly",
-    "license": "https://opensource.org/licenses/MIT",
-    "author": { "@type": "Organization", "name": "Karrer", "url": "https://karrer.solutions" }
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": "https://elixir-aws-lambda.dev/#website",
+        "url": "https://elixir-aws-lambda.dev/",
+        "name": "Mayfly – Elixir on AWS Lambda",
+        "publisher": { "@id": "https://karrer.solutions/#organization" },
+        "inLanguage": "en"
+      },
+      {
+        "@type": "Organization",
+        "@id": "https://karrer.solutions/#organization",
+        "name": "Karrer",
+        "url": "https://karrer.solutions",
+        "sameAs": ["https://github.com/bmalum"]
+      },
+      {
+        "@type": "SoftwareApplication",
+        "@id": "https://elixir-aws-lambda.dev/#software",
+        "name": "Mayfly",
+        "alternateName": "Mayfly Elixir Lambda Runtime",
+        "applicationCategory": "DeveloperApplication",
+        "applicationSubCategory": "Serverless runtime",
+        "description": "A lightweight AWS Lambda custom runtime for Elixir: handler behaviour, mix release build, Erlang runtime layers, response streaming, Managed Instances concurrency, structured logging.",
+        "operatingSystem": "AWS Lambda (provided.al2023, x86_64 and arm64)",
+        "softwareVersion": "1.0.0-rc.1",
+        "softwareRequirements": "Elixir 1.18+, Erlang/OTP 27+",
+        "license": "https://opensource.org/licenses/MIT",
+        "isAccessibleForFree": true,
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "programmingLanguage": "Elixir",
+        "url": "https://elixir-aws-lambda.dev/",
+        "downloadUrl": "https://github.com/bmalum/mayfly",
+        "softwareHelp": { "@type": "CreativeWork", "url": "https://elixir-aws-lambda.dev/docs/" },
+        "author": { "@id": "https://karrer.solutions/#organization" },
+        "image": "https://elixir-aws-lambda.dev/og-image.png"
+      },
+      {
+        "@type": "SoftwareSourceCode",
+        "name": "Mayfly",
+        "codeRepository": "https://github.com/bmalum/mayfly",
+        "programmingLanguage": "Elixir",
+        "runtimePlatform": "AWS Lambda provided.al2023",
+        "license": "https://opensource.org/licenses/MIT",
+        "targetProduct": { "@id": "https://elixir-aws-lambda.dev/#software" }
+      },
+      {
+        "@type": "HowTo",
+        "name": "Deploy an Elixir function to AWS Lambda with Mayfly",
+        "totalTime": "PT10M",
+        "tool": ["Elixir 1.18+", "Erlang/OTP 27+", "AWS CLI"],
+        "step": [
+          { "@type": "HowToStep", "name": "Add the dependency and a release", "text": "Add {:mayfly, \"~> 1.0.0-rc\"} to deps and a release with the Mayfly.Release steps and mayfly: [handler: MyApp.Handler, layer: true] to mix.exs.", "url": "https://elixir-aws-lambda.dev/#step-1" },
+          { "@type": "HowToStep", "name": "Write and test the handler", "text": "Create a module with use Mayfly.Handler and a handle/3 callback. Run mix lambda.invoke locally.", "url": "https://elixir-aws-lambda.dev/#step-2" },
+          { "@type": "HowToStep", "name": "Build", "text": "MIX_ENV=prod mix release lambda produces lambda.zip.", "url": "https://elixir-aws-lambda.dev/#step-3" },
+          { "@type": "HowToStep", "name": "Deploy", "text": "aws lambda create-function with runtime provided.al2023, the Mayfly Erlang layer and the handler module name.", "url": "https://elixir-aws-lambda.dev/#step-4" }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          { "@type": "Question", "name": "Can you run Elixir on AWS Lambda?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. AWS Lambda has no managed Elixir runtime, but its OS-only runtime (provided.al2023) runs any binary that speaks the Lambda Runtime API. Mayfly implements that API in Elixir, so an ordinary Mix release runs as a Lambda function." } },
+          { "@type": "Question", "name": "How fast does Elixir cold start on Lambda?", "acceptedAnswer": { "@type": "Answer", "text": "With Mayfly and the Erlang layer a stripped release cold-starts in roughly 500–600 ms on arm64; warm invocations take single-digit milliseconds and use about 85 MB of memory." } },
+          { "@type": "Question", "name": "Do I need Docker to build an Elixir Lambda function?", "acceptedAnswer": { "@type": "Answer", "text": "No. With the Mayfly Erlang layer the deployment zip contains only architecture-independent BEAM files and is produced by mix release on macOS, Linux or Windows. Docker (or finch) is only needed if you bundle ERTS yourself or have native NIF dependencies." } },
+          { "@type": "Question", "name": "Does Mayfly support Lambda response streaming?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Return any Enumerable in a Mayfly.Response with stream/1; Mayfly uses chunked transfer encoding, adds the Function URL HTTP prelude and reports mid-stream errors via trailers." } },
+          { "@type": "Question", "name": "Does Mayfly work with Lambda Managed Instances?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Mayfly starts one poller process per AWS_LAMBDA_MAX_CONCURRENCY slot so a single execution environment handles that many invocations in parallel, verified on real Managed Instances." } },
+          { "@type": "Question", "name": "Which Elixir and OTP versions does Mayfly require?", "acceptedAnswer": { "@type": "Answer", "text": "Elixir 1.18 or newer and Erlang/OTP 27 or newer. With the layer, the OTP version of your build toolchain must match the layer's OTP version exactly; mix lambda.doctor checks this." } }
+        ]
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Mayfly", "item": "https://elixir-aws-lambda.dev/" },
+          { "@type": "ListItem", "position": 2, "name": "Documentation", "item": "https://elixir-aws-lambda.dev/docs/" }
+        ]
+      }
+    ]
   }
   </script>
 </head>
 
 <body class="bg-gradient-to-b from-white to-violet-50 text-zinc-700">
 
+  <a href="#main" class="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 bg-violet-800 text-white px-3 py-2 rounded">Skip to content</a>
+
   <!-- Navigation -->
   <nav class="sticky top-0 bg-white/90 backdrop-blur-sm border-b border-violet-100 z-50" role="navigation" aria-label="Main navigation">
     <div class="max-w-6xl mx-auto px-4 py-4">
       <div class="flex items-center justify-between">
         <a href="#home" class="flex items-center gap-3" aria-label="Mayfly home">
-          <img src="elixir-drop-only.png" class="h-10" alt="Elixir programming language logo" />
+          <img src="elixir-drop-only.png" class="h-10" width="40" height="40" alt="Elixir logo" />
           <span class="text-2xl font-bold text-violet-800">Mayfly</span>
         </a>
-        <ul class="flex gap-6 text-sm font-medium">
-          <li><a href="#install" class="hover:text-violet-800 transition">START</a></li>
-          <li><a href="#features" class="hover:text-violet-800 transition">FEATURES</a></li>
-          <li><a href="#layers" class="hover:text-violet-800 transition">LAYERS</a></li>
-          <li><a href="/docs/index.html" class="hover:text-violet-800 transition" aria-label="View documentation">DOCS</a></li>
-          <li><a href="https://github.com/bmalum/mayfly" target="_blank" rel="noopener noreferrer" class="hover:text-violet-800 transition" aria-label="GitHub repository (opens in new tab)">GITHUB</a></li>
+        <ul class="flex gap-4 md:gap-6 text-sm font-medium">
+          <li><a href="#install" class="hover:text-violet-800 transition">Start</a></li>
+          <li class="hidden sm:block"><a href="#features" class="hover:text-violet-800 transition">Features</a></li>
+          <li class="hidden sm:block"><a href="#layers" class="hover:text-violet-800 transition">Layers</a></li>
+          <li class="hidden md:block"><a href="#faq" class="hover:text-violet-800 transition">FAQ</a></li>
+          <li><a href="/docs/index.html" class="hover:text-violet-800 transition">Docs</a></li>
+          <li><a href="https://github.com/bmalum/mayfly" target="_blank" rel="noopener noreferrer" class="hover:text-violet-800 transition">GitHub</a></li>
         </ul>
       </div>
     </div>
   </nav>
 
+  <main id="main">
+
   <!-- Hero -->
-  <section id="home" class="max-w-6xl mx-auto px-4 py-20 relative" aria-labelledby="hero-heading">
-    <div class="fixed top-0 right-0 z-50 pointer-events-none" role="status" aria-label="Current version">
-      <div class="bg-violet-800 text-white px-12 py-1 text-xs font-semibold shadow-lg transform rotate-45 translate-x-8 translate-y-6">
-        v1.0.0-rc.1
-      </div>
+  <section id="home" class="max-w-6xl mx-auto px-4 pt-20 pb-12 relative" aria-labelledby="hero-heading">
+    <div class="fixed top-0 right-0 z-40 pointer-events-none hidden sm:block" role="status" aria-label="Current version">
+      <div class="bg-violet-800 text-white px-12 py-1 text-xs font-semibold shadow-lg transform rotate-45 translate-x-8 translate-y-6">v1.0.0-rc.1</div>
     </div>
 
-    <div class="text-center mb-12">
+    <div class="text-center">
       <div class="inline-block mb-6" role="img" aria-label="Mayfly icon"><span class="text-6xl">🪰</span></div>
-      <h1 id="hero-heading" class="text-5xl md:text-6xl font-bold text-zinc-800 mb-4">Mayfly</h1>
-      <p class="text-xl md:text-2xl text-zinc-600 mb-3">A lightweight AWS Lambda Custom Runtime for Elixir</p>
-      <p class="text-base text-zinc-500 mb-8 max-w-2xl mx-auto">
+      <h1 id="hero-heading" class="text-4xl md:text-6xl font-bold text-zinc-800 mb-4">Run Elixir on AWS Lambda</h1>
+      <p class="text-xl md:text-2xl text-zinc-600 mb-3">Mayfly is a lightweight, open-source Lambda custom runtime for Elixir.</p>
+      <p class="text-base text-zinc-500 mb-6 max-w-2xl mx-auto">
         Write a handler module, run <code class="bg-violet-100 text-violet-800 px-2 py-0.5 rounded">mix release</code>, attach the Erlang layer.
         No Docker, no boilerplate, no silent failures.
       </p>
       <p class="text-sm text-zinc-500 mb-8">
-        Built and used in production by <a href="https://karrer.solutions" rel="author" class="text-violet-800 underline hover:text-violet-900">Karrer</a>,
-        an Elixir-on-AWS shop in Germany. Open source under MIT.
+        Built and used in production by <a href="https://karrer.solutions" rel="author" class="text-violet-800 underline hover:text-violet-900">Karrer</a>, an Elixir-on-AWS shop in Germany. MIT licensed.
       </p>
       <div class="flex gap-4 justify-center flex-wrap">
-        <a href="#install" class="bg-violet-800 text-white px-8 py-3 rounded-lg font-semibold hover:bg-violet-900 transition">Get Started</a>
-        <a href="/docs/getting-started.html" class="border-2 border-violet-800 text-violet-800 px-8 py-3 rounded-lg font-semibold hover:bg-violet-50 transition">Read the Guide</a>
+        <a href="#install" class="bg-violet-800 text-white px-8 py-3 rounded-lg font-semibold hover:bg-violet-900 transition">Get started</a>
+        <a href="/docs/getting-started.html" class="border-2 border-violet-800 text-violet-800 px-8 py-3 rounded-lg font-semibold hover:bg-violet-50 transition">Read the guide</a>
       </div>
+      <dl class="mt-12 grid grid-cols-2 md:grid-cols-4 gap-6 max-w-3xl mx-auto text-center">
+        <div><dt class="text-xs uppercase tracking-wide text-zinc-500">Cold start</dt><dd class="text-2xl font-bold text-violet-800">~0.5 s</dd></div>
+        <div><dt class="text-xs uppercase tracking-wide text-zinc-500">Warm invoke</dt><dd class="text-2xl font-bold text-violet-800">2 ms</dd></div>
+        <div><dt class="text-xs uppercase tracking-wide text-zinc-500">Package size</dt><dd class="text-2xl font-bold text-violet-800">1.5 MB</dd></div>
+        <div><dt class="text-xs uppercase tracking-wide text-zinc-500">Runtime deps</dt><dd class="text-2xl font-bold text-violet-800">0</dd></div>
+      </dl>
+      <p class="mt-3 text-xs text-zinc-400">Measured September 2026 on arm64, 512 MB, eu-central-1, with the Erlang layer. Cold starts vary with package size, memory and region.</p>
     </div>
+  </section>
 
-    <!-- Feature Grid -->
-    <div id="features" class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mt-16">
-      <div class="bg-white p-6 rounded-lg shadow-sm border border-violet-100">
-        <div class="text-3xl mb-3">🧩</div>
+  <!-- Features -->
+  <section id="features" class="max-w-6xl mx-auto px-4 py-16" aria-labelledby="features-heading">
+    <h2 id="features-heading" class="text-3xl font-bold text-center mb-10">Everything Lambda offers, in idiomatic Elixir</h2>
+    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <article class="bg-white p-6 rounded-lg shadow-sm border border-violet-100">
+        <div class="text-3xl mb-3" aria-hidden="true">🧩</div>
         <h3 class="font-bold text-lg mb-2">A behaviour, not a string</h3>
-        <p class="text-sm text-zinc-600"><code>use Mayfly.Handler</code>, implement <code>handle/3</code>, keep cold-start work in <code>init/1</code>. Compile-time checked.</p>
-      </div>
-      <div class="bg-white p-6 rounded-lg shadow-sm border border-violet-100">
-        <div class="text-3xl mb-3">📦</div>
+        <p class="text-sm text-zinc-600"><code>use Mayfly.Handler</code>, implement <code>handle/3</code>, keep cold-start work in <code>init/1</code>. Compile-time checked; the Lambda handler setting is just the module name.</p>
+      </article>
+      <article class="bg-white p-6 rounded-lg shadow-sm border border-violet-100">
+        <div class="text-3xl mb-3" aria-hidden="true">📦</div>
         <h3 class="font-bold text-lg mb-2">mix release is the build</h3>
-        <p class="text-sm text-zinc-600">Three release steps produce <code>lambda.zip</code>. Umbrellas, multiple releases and <code>runtime.exs</code> just work.</p>
-      </div>
-      <div class="bg-white p-6 rounded-lg shadow-sm border border-violet-100">
-        <div class="text-3xl mb-3">🪶</div>
+        <p class="text-sm text-zinc-600">Three release steps produce <code>lambda.zip</code>. Umbrellas, multiple releases and <code>config/runtime.exs</code> work as they always did.</p>
+      </article>
+      <article class="bg-white p-6 rounded-lg shadow-sm border border-violet-100">
+        <div class="text-3xl mb-3" aria-hidden="true">🪶</div>
         <h3 class="font-bold text-lg mb-2">Erlang layer, no Docker</h3>
-        <p class="text-sm text-zinc-600">Public layers ship ERTS. Your zip is a few MB of BEAM files and builds on any OS in seconds.</p>
-      </div>
-      <div class="bg-white p-6 rounded-lg shadow-sm border border-violet-100">
-        <div class="text-3xl mb-3">🛡️</div>
+        <p class="text-sm text-zinc-600">Public Lambda layers ship the Erlang runtime. Your zip is a few MB of BEAM files and builds on macOS, Linux or Windows in seconds.</p>
+      </article>
+      <article class="bg-white p-6 rounded-lg shadow-sm border border-violet-100">
+        <div class="text-3xl mb-3" aria-hidden="true">🛡️</div>
         <h3 class="font-bold text-lg mb-2">Honest errors</h3>
-        <p class="text-sm text-zinc-600">Exceptions, exits, bad return values, unencodable results and wrong handlers all reach Lambda as proper errors with Elixir stack traces.</p>
-      </div>
-      <div class="bg-white p-6 rounded-lg shadow-sm border border-violet-100">
-        <div class="text-3xl mb-3">🌊</div>
+        <p class="text-sm text-zinc-600">Exceptions, exits, bad return values, unencodable results and misconfigured handlers all reach Lambda as proper errors with Elixir stack traces.</p>
+      </article>
+      <article class="bg-white p-6 rounded-lg shadow-sm border border-violet-100">
+        <div class="text-3xl mb-3" aria-hidden="true">🌊</div>
         <h3 class="font-bold text-lg mb-2">Response streaming</h3>
-        <p class="text-sm text-zinc-600">Return any <code>Enumerable</code>. Function URL preludes and mid-stream error trailers included.</p>
-      </div>
-      <div class="bg-white p-6 rounded-lg shadow-sm border border-violet-100">
-        <div class="text-3xl mb-3">🧵</div>
+        <p class="text-sm text-zinc-600">Return any <code>Enumerable</code>. Function URL preludes, chunked encoding, mid-stream error trailers and backpressure are handled for you.</p>
+      </article>
+      <article class="bg-white p-6 rounded-lg shadow-sm border border-violet-100">
+        <div class="text-3xl mb-3" aria-hidden="true">🧵</div>
         <h3 class="font-bold text-lg mb-2">Managed Instances</h3>
-        <p class="text-sm text-zinc-600">One poller process per concurrency slot. Invocations run in parallel on the BEAM, isolated by design.</p>
-      </div>
-      <div class="bg-white p-6 rounded-lg shadow-sm border border-violet-100">
-        <div class="text-3xl mb-3">🔍</div>
+        <p class="text-sm text-zinc-600">One poller process per concurrency slot. Invocations run in parallel on the BEAM, isolated by design, up to 32 GB of memory.</p>
+      </article>
+      <article class="bg-white p-6 rounded-lg shadow-sm border border-violet-100">
+        <div class="text-3xl mb-3" aria-hidden="true">🔍</div>
         <h3 class="font-bold text-lg mb-2">Observable</h3>
-        <p class="text-sm text-zinc-600">JSON logs with request and tenant ids, <code>:telemetry</code> events, X-Ray trace propagation.</p>
-      </div>
-      <div class="bg-white p-6 rounded-lg shadow-sm border border-violet-100">
-        <div class="text-3xl mb-3">🪶</div>
-        <h3 class="font-bold text-lg mb-2">Zero dependencies</h3>
-        <p class="text-sm text-zinc-600">Built-in <code>JSON</code>, own HTTP client over <code>:gen_tcp</code>. Nothing starts in <code>mix test</code> or <code>iex</code>.</p>
-      </div>
+        <p class="text-sm text-zinc-600">JSON logs with request and tenant ids for CloudWatch, <code>:telemetry</code> events, X-Ray trace propagation.</p>
+      </article>
+      <article class="bg-white p-6 rounded-lg shadow-sm border border-violet-100">
+        <div class="text-3xl mb-3" aria-hidden="true">🧪</div>
+        <h3 class="font-bold text-lg mb-2">Local first, agent friendly</h3>
+        <p class="text-sm text-zinc-600"><code>mix lambda.invoke</code> runs the real runtime against an emulated Runtime API; <code>mix lambda.doctor</code> catches setup mistakes. An <a href="https://github.com/bmalum/mayfly/tree/main/skills/mayfly-elixir-lambda" class="text-violet-800 underline">Agent Skill</a> and <a href="/docs/llms.txt" class="text-violet-800 underline">llms.txt</a> teach coding agents the library.</p>
+      </article>
     </div>
   </section>
 
   <!-- Code Example -->
   <section class="bg-white py-16" aria-labelledby="code-example-heading">
     <div class="max-w-6xl mx-auto px-4">
-      <h2 id="code-example-heading" class="text-3xl font-bold text-center mb-3">Plain Elixir</h2>
-      <p class="text-center text-zinc-600 mb-8">The event is a decoded map, the context carries request id, deadline and tenant, the result is JSON.</p>
-
+      <h2 id="code-example-heading" class="text-3xl font-bold text-center mb-3">An Elixir Lambda function is a module</h2>
+      <p class="text-center text-zinc-600 mb-8">The event is a decoded map, the context carries request id, deadline and tenant, the result becomes JSON.</p>
       <div class="max-w-3xl mx-auto">
-        <pre class="rounded-lg overflow-hidden shadow-lg" role="region" aria-label="Handler example"><code class="language-elixir">defmodule MyApp.Handler do
+        <pre class="rounded-lg overflow-hidden shadow-lg" aria-label="Elixir Lambda handler example"><code class="language-elixir">defmodule MyApp.Handler do
   use Mayfly.Handler
 
   @impl true
   def init(_opts) do
-    # runs once per execution environment
+    # runs once per execution environment (cold start)
     {:ok, %{table: System.fetch_env!("TABLE_NAME")}}
   end
 
@@ -190,11 +275,10 @@ end</code></pre>
     <h2 id="install-heading" class="text-3xl font-bold text-center mb-3">From zero to Lambda in four steps</h2>
     <p class="text-center text-zinc-600 mb-12">Requires Elixir 1.18+ and OTP 27+. Pin your OTP to the layer's version, e.g. <code class="bg-violet-100 text-violet-800 px-2 py-0.5 rounded">mise use erlang@27.3.4.18</code>.</p>
 
-    <div class="max-w-3xl mx-auto space-y-8">
-
-      <div class="bg-white p-6 rounded-lg shadow-sm border border-violet-100">
+    <ol class="max-w-3xl mx-auto space-y-8 list-none">
+      <li id="step-1" class="bg-white p-6 rounded-lg shadow-sm border border-violet-100">
         <div class="flex items-start gap-4">
-          <div class="bg-violet-800 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold flex-shrink-0">1</div>
+          <div class="bg-violet-800 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold flex-shrink-0" aria-hidden="true">1</div>
           <div class="flex-1 min-w-0">
             <h3 class="font-bold text-lg mb-3">Add the dependency and a release</h3>
             <pre class="text-sm"><code class="language-elixir"># mix.exs
@@ -213,36 +297,36 @@ def project do
 end</code></pre>
           </div>
         </div>
-      </div>
+      </li>
 
-      <div class="bg-white p-6 rounded-lg shadow-sm border border-violet-100">
+      <li id="step-2" class="bg-white p-6 rounded-lg shadow-sm border border-violet-100">
         <div class="flex items-start gap-4">
-          <div class="bg-violet-800 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold flex-shrink-0">2</div>
+          <div class="bg-violet-800 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold flex-shrink-0" aria-hidden="true">2</div>
           <div class="flex-1 min-w-0">
             <h3 class="font-bold text-lg mb-3">Write the handler and try it locally</h3>
             <pre class="text-sm"><code class="language-bash">mix lambda.invoke MyApp.Handler '{"name":"world"}'
-mix lambda.doctor        # checks release config, handler and OTP vs. layer</code></pre>
-            <p class="mt-3 text-sm text-zinc-600"><code class="bg-violet-100 text-violet-800 px-2 py-1 rounded">mix lambda.invoke</code> runs the real runtime against an in-process Runtime API emulator, so errors, context and streaming behave exactly as in Lambda.</p>
+mix lambda.doctor        # release config, handler, OTP vs. layer</code></pre>
+            <p class="mt-3 text-sm text-zinc-600"><code class="bg-violet-100 text-violet-800 px-2 py-1 rounded">mix lambda.invoke</code> runs the real runtime against an in-process Runtime API emulator, so errors, context and streaming behave exactly as in Lambda. Add <code class="bg-violet-100 text-violet-800 px-2 py-1 rounded">--http</code> to simulate a Function URL request.</p>
           </div>
         </div>
-      </div>
+      </li>
 
-      <div class="bg-white p-6 rounded-lg shadow-sm border border-violet-100">
+      <li id="step-3" class="bg-white p-6 rounded-lg shadow-sm border border-violet-100">
         <div class="flex items-start gap-4">
-          <div class="bg-violet-800 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold flex-shrink-0">3</div>
+          <div class="bg-violet-800 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold flex-shrink-0" aria-hidden="true">3</div>
           <div class="flex-1 min-w-0">
             <h3 class="font-bold text-lg mb-3">Build</h3>
             <pre class="text-sm"><code class="language-bash">MIX_ENV=prod mix release lambda
 # * creating _build/prod/rel/lambda/bootstrap
 # * creating _build/prod/rel/lambda/lambda.zip (1570 KiB)</code></pre>
-            <p class="mt-3 text-sm text-zinc-600">Prefer to bundle ERTS instead of using a layer? Drop <code class="bg-violet-100 text-violet-800 px-2 py-1 rounded">layer: true</code> and run <code class="bg-violet-100 text-violet-800 px-2 py-1 rounded">mix lambda.build --docker --arch arm64</code> (docker or finch).</p>
+            <p class="mt-3 text-sm text-zinc-600">Prefer to bundle the Erlang runtime instead of using a layer? Drop <code class="bg-violet-100 text-violet-800 px-2 py-1 rounded">layer: true</code> and run <code class="bg-violet-100 text-violet-800 px-2 py-1 rounded">mix lambda.build --docker --arch arm64</code> (docker or finch).</p>
           </div>
         </div>
-      </div>
+      </li>
 
-      <div class="bg-white p-6 rounded-lg shadow-sm border border-violet-100">
+      <li id="step-4" class="bg-white p-6 rounded-lg shadow-sm border border-violet-100">
         <div class="flex items-start gap-4">
-          <div class="bg-violet-800 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold flex-shrink-0">4</div>
+          <div class="bg-violet-800 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold flex-shrink-0" aria-hidden="true">4</div>
           <div class="flex-1 min-w-0">
             <h3 class="font-bold text-lg mb-3">Deploy</h3>
             <pre class="text-sm"><code class="language-bash">aws lambda create-function --function-name hello \
@@ -251,27 +335,26 @@ mix lambda.doctor        # checks release config, handler and OTP vs. layer</cod
   --layers arn:aws:lambda:REGION:ACCOUNT:layer:mayfly-erlang-27-arm64:1 \
   --zip-file fileb://_build/prod/rel/lambda/lambda.zip \
   --role arn:aws:iam::ACCOUNT:role/lambda-role</code></pre>
-            <p class="mt-3 text-sm text-zinc-600">Handler is the module name. Works with SAM, CDK and Terraform; snippets are in the <a href="/docs/deployment.html" class="text-violet-800 underline">deployment guide</a>.</p>
+            <p class="mt-3 text-sm text-zinc-600">The handler setting is the module name. SAM, CDK and Terraform snippets are in the <a href="/docs/deployment.html" class="text-violet-800 underline">deployment guide</a>.</p>
           </div>
         </div>
-      </div>
-
-    </div>
+      </li>
+    </ol>
   </section>
 
   <!-- Layers -->
   <section id="layers" class="bg-white py-16" aria-labelledby="layers-heading">
     <div class="max-w-6xl mx-auto px-4">
-      <h2 id="layers-heading" class="text-3xl font-bold text-center mb-3">Erlang runtime layers</h2>
+      <h2 id="layers-heading" class="text-3xl font-bold text-center mb-3">Erlang runtime layers for AWS Lambda</h2>
       <p class="text-center text-zinc-600 mb-10 max-w-3xl mx-auto">
         BEAM files are architecture independent; only the Erlang runtime is not. Mayfly ships it as a Lambda layer,
-        rebuilt weekly for the latest patch of each supported OTP major, both architectures, 16 regions.
+        rebuilt weekly for the latest patch of each supported OTP major, for x86_64 and arm64, in 16 regions.
       </p>
       <div class="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
         <div class="p-6 rounded-lg border border-violet-100 bg-violet-50/40">
           <h3 class="font-bold mb-2">Pinned</h3>
           <code class="text-sm text-violet-800 break-all">mayfly-erlang-27-3-4-18-arm64</code>
-          <p class="text-sm text-zinc-600 mt-2">One OTP patch release. Pin the full ARN in your infrastructure.</p>
+          <p class="text-sm text-zinc-600 mt-2">One OTP patch release. Pin the full ARN in your infrastructure code.</p>
         </div>
         <div class="p-6 rounded-lg border border-violet-100 bg-violet-50/40">
           <h3 class="font-bold mb-2">Alias</h3>
@@ -292,18 +375,54 @@ mix lambda.doctor        # checks release config, handler and OTP vs. layer</cod
     </div>
   </section>
 
+  <!-- Comparison -->
+  <section class="max-w-6xl mx-auto px-4 py-16" aria-labelledby="compare-heading">
+    <h2 id="compare-heading" class="text-3xl font-bold text-center mb-3">How Mayfly compares</h2>
+    <p class="text-center text-zinc-600 mb-10 max-w-3xl mx-auto">Other ways to put Elixir on Lambda exist. This is where Mayfly differs.</p>
+    <div class="overflow-x-auto max-w-4xl mx-auto">
+      <table class="w-full text-sm bg-white rounded-lg shadow-sm border border-violet-100">
+        <thead class="bg-violet-50 text-left">
+          <tr><th class="p-3">Approach</th><th class="p-3">Build</th><th class="p-3">Package</th><th class="p-3">Streaming</th><th class="p-3">Errors</th></tr>
+        </thead>
+        <tbody class="divide-y divide-violet-100">
+          <tr><td class="p-3 font-semibold text-violet-800">Mayfly + Erlang layer</td><td class="p-3">mix release on any OS</td><td class="p-3">1–5 MB</td><td class="p-3">yes, incl. Function URL prelude</td><td class="p-3">Elixir stack traces, typed</td></tr>
+          <tr><td class="p-3 font-semibold">Mayfly, bundled ERTS</td><td class="p-3">docker/finch, AL2023</td><td class="p-3">25–50 MB</td><td class="p-3">yes</td><td class="p-3">same</td></tr>
+          <tr><td class="p-3 font-semibold">Container image + Web Adapter</td><td class="p-3">Docker, Phoenix app</td><td class="p-3">100+ MB image</td><td class="p-3">yes</td><td class="p-3">HTTP status codes</td></tr>
+          <tr><td class="p-3 font-semibold">Hand-written bootstrap script</td><td class="p-3">manual</td><td class="p-3">varies</td><td class="p-3">no</td><td class="p-3">whatever you implement</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
   <!-- Why -->
   <section class="bg-violet-800 text-white py-16" aria-labelledby="why-mayfly-heading">
     <div class="max-w-6xl mx-auto px-4">
       <h2 id="why-mayfly-heading" class="text-3xl font-bold text-center mb-8">Built for how Lambda works today</h2>
       <div class="max-w-3xl mx-auto grid md:grid-cols-2 gap-6 text-violet-100 text-sm">
         <p>Implements the current Runtime API: invocation ids are echoed, tenant ids land in the context, error types follow Lambda's <code>Category.Reason</code> convention so the console classifies them correctly.</p>
-        <p>On Lambda Managed Instances a single environment serves <code>AWS_LAMBDA_MAX_CONCURRENCY</code> invocations in parallel, each in its own process. Verified on real hardware: eight concurrent invocations, one VM.</p>
+        <p>On Lambda Managed Instances a single environment serves <code>AWS_LAMBDA_MAX_CONCURRENCY</code> invocations in parallel, each in its own process. Verified on real hardware: eight concurrent invocations, one VM, 0.13 s wall time.</p>
         <p>Cold start is BEAM boot: about half a second from the layer with a stripped release, single-digit milliseconds warm, ~85 MB resident.</p>
-        <p>Misconfigured handler? The function fails to start and Lambda says <code>Runtime.NoSuchHandler</code>. Nothing is ever reported as a success that was not one.</p>
+        <p>Misconfigured handler? The function fails to start and Lambda reports <code>Runtime.NoSuchHandler</code>. Nothing is ever reported as a success that was not one.</p>
       </div>
     </div>
   </section>
+
+  <!-- FAQ -->
+  <section id="faq" class="max-w-6xl mx-auto px-4 py-16" aria-labelledby="faq-heading">
+    <h2 id="faq-heading" class="text-3xl font-bold text-center mb-10">Frequently asked questions</h2>
+    <div class="max-w-3xl mx-auto space-y-4">
+      <details class="bg-white p-5 rounded-lg shadow-sm border border-violet-100"><summary class="font-semibold cursor-pointer">Can you run Elixir on AWS Lambda?</summary><p class="mt-3 text-sm text-zinc-600">Yes. AWS Lambda has no managed Elixir runtime, but its OS-only runtime (<code>provided.al2023</code>) runs any program that speaks the Lambda Runtime API. Mayfly implements that API in Elixir, so an ordinary Mix release runs as a Lambda function.</p></details>
+      <details class="bg-white p-5 rounded-lg shadow-sm border border-violet-100"><summary class="font-semibold cursor-pointer">How fast does Elixir cold start on Lambda?</summary><p class="mt-3 text-sm text-zinc-600">With Mayfly and the Erlang layer a stripped release cold-starts in roughly 500–600 ms on arm64; warm invocations take single-digit milliseconds and use about 85 MB of memory. Keep <code>init/1</code> lean and the package small.</p></details>
+      <details class="bg-white p-5 rounded-lg shadow-sm border border-violet-100"><summary class="font-semibold cursor-pointer">Do I need Docker to build an Elixir Lambda function?</summary><p class="mt-3 text-sm text-zinc-600">No. With the Mayfly Erlang layer the deployment zip contains only architecture-independent BEAM files and is produced by <code>mix release</code> on any OS. Docker (or finch) is only needed if you bundle ERTS yourself or have native NIF dependencies.</p></details>
+      <details class="bg-white p-5 rounded-lg shadow-sm border border-violet-100"><summary class="font-semibold cursor-pointer">Does Mayfly support Lambda response streaming?</summary><p class="mt-3 text-sm text-zinc-600">Yes. Return any <code>Enumerable</code> in a <code>Mayfly.Response</code> with <code>stream/1</code>; Mayfly uses chunked transfer encoding, adds the Function URL HTTP prelude and reports mid-stream errors via trailers. See the <a href="/docs/streaming.html" class="text-violet-800 underline">streaming guide</a>.</p></details>
+      <details class="bg-white p-5 rounded-lg shadow-sm border border-violet-100"><summary class="font-semibold cursor-pointer">Does Mayfly work with Lambda Managed Instances?</summary><p class="mt-3 text-sm text-zinc-600">Yes. Mayfly starts one poller process per <code>AWS_LAMBDA_MAX_CONCURRENCY</code> slot so a single execution environment handles that many invocations in parallel. Handler state from <code>init/1</code> is shared read-only.</p></details>
+      <details class="bg-white p-5 rounded-lg shadow-sm border border-violet-100"><summary class="font-semibold cursor-pointer">Which Elixir and OTP versions does Mayfly require?</summary><p class="mt-3 text-sm text-zinc-600">Elixir 1.18 or newer and Erlang/OTP 27 or newer. With the layer, your build toolchain's OTP must match the layer's OTP version exactly; <code>mix lambda.doctor --layer ARN</code> checks this and the bootstrap enforces it at start.</p></details>
+      <details class="bg-white p-5 rounded-lg shadow-sm border border-violet-100"><summary class="font-semibold cursor-pointer">Can I run a Phoenix app on Lambda with Mayfly?</summary><p class="mt-3 text-sm text-zinc-600">Mayfly is a function runtime: it hands your handler the Lambda event (API Gateway / Function URL payloads included). Plain Phoenix routing and LiveView expect a long-running HTTP server; for those the Lambda Web Adapter with a container image is the better fit. Mayfly shines for event-driven functions, APIs built on the proxy event, streaming responses and background jobs.</p></details>
+      <details class="bg-white p-5 rounded-lg shadow-sm border border-violet-100"><summary class="font-semibold cursor-pointer">I'm on Mayfly 0.x. What changes?</summary><p class="mt-3 text-sm text-zinc-600">The handler is a module with <code>use Mayfly.Handler</code> instead of a <code>Module.function</code> string (the old form still works), the build is <code>mix release</code>, and Elixir 1.18+ is required. The <a href="/docs/migrating-from-0-x.html" class="text-violet-800 underline">migration guide</a> lists every change.</p></details>
+    </div>
+  </section>
+
+  </main>
 
   <!-- Footer -->
   <footer class="bg-zinc-900 text-zinc-400 py-12" role="contentinfo">
@@ -311,7 +430,8 @@ mix lambda.doctor        # checks release config, handler and OTP vs. layer</cod
       <div class="grid md:grid-cols-3 gap-8 mb-8">
         <div>
           <h3 class="text-white font-bold mb-4">Mayfly</h3>
-          <p class="text-sm">A lightweight AWS Lambda Custom Runtime for Elixir. Elixir 1.18+, OTP 27+, <code>provided.al2023</code>.</p>
+          <p class="text-sm">A lightweight AWS Lambda custom runtime for Elixir. Elixir 1.18+, OTP 27+, <code>provided.al2023</code>, x86_64 and arm64.</p>
+          <p class="text-sm mt-3"><a href="https://hex.pm/packages/mayfly" target="_blank" rel="noopener noreferrer" class="hover:text-white transition">hex.pm/packages/mayfly</a></p>
         </div>
         <div>
           <h3 class="text-white font-bold mb-4">Documentation</h3>
@@ -321,8 +441,11 @@ mix lambda.doctor        # checks release config, handler and OTP vs. layer</cod
             <li><a href="/docs/layers.html" class="hover:text-white transition">Erlang runtime layers</a></li>
             <li><a href="/docs/streaming.html" class="hover:text-white transition">Response streaming</a></li>
             <li><a href="/docs/observability.html" class="hover:text-white transition">Observability</a></li>
+            <li><a href="/docs/architecture.html" class="hover:text-white transition">Architecture</a></li>
             <li><a href="/docs/migrating-from-0-x.html" class="hover:text-white transition">Migrating from 0.x</a></li>
             <li><a href="/docs/api-reference.html" class="hover:text-white transition">API reference</a></li>
+            <li><a href="https://github.com/bmalum/mayfly/tree/main/skills/mayfly-elixir-lambda" target="_blank" rel="noopener noreferrer" class="hover:text-white transition">Agent Skill for coding agents</a></li>
+            <li><a href="/docs/llms.txt" class="hover:text-white transition">llms.txt</a></li>
           </ul>
         </div>
         <div>
@@ -343,9 +466,11 @@ mix lambda.doctor        # checks release config, handler and OTP vs. layer</cod
     </div>
   </footer>
 
-  <script src="utils.js"></script>
+  <script src="utils.js" defer></script>
   <script>
-    const tracker = new Tracker({ apiUrl: 'https://finger.cloud.kiwi/data' });
+    window.addEventListener("load", function () {
+      if (window.Tracker) new Tracker({ apiUrl: 'https://finger.cloud.kiwi/data' });
+    });
   </script>
 
 </body>

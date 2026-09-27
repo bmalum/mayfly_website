@@ -1,15 +1,15 @@
 {
   "name": "mayfly_website",
   "version": "1.0.0",
-  "description": "",
+  "description": "Landing page and documentation for Mayfly, the Elixir AWS Lambda runtime (elixir-aws-lambda.dev)",
   "main": "index.js",
   "scripts": {
-    "build": "npx tailwindcss -i ./src/input.css -o ./dist/output.css && cp -r src/* dist/ && rm dist/input.css && cp -r docs dist/docs",
+    "build": "rm -rf dist && npx tailwindcss -i ./src/input.css -o ./dist/output.css --minify && cp -r src/. dist/ && rm dist/input.css && cp -r docs dist/docs && node sitemap.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "autoprefixer": "^10.4.16",
     "postcss": "^8.4.33",
