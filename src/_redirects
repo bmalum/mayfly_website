@@ -1,5 +1,5 @@
-/docs            /docs/index.html   200
-/docs/           /docs/index.html   200
-/guide           /docs/getting-started.html  301
-/layers          /docs/layers.html  301
-/changelog       /docs/changelog.html  301
+# Cloudflare Pages serves /docs/ as docs/index.html and strips .html itself;
+# do not add rewrites for those (they loop). Only vanity paths here.
+/guide       /docs/getting-started   301
+/layers      /docs/layers            301
+/changelog   /docs/changelog         301

@@ -154,7 +154,7 @@
           <li class="hidden sm:block"><a href="#features" class="hover:text-violet-800 transition">Features</a></li>
           <li class="hidden sm:block"><a href="#layers" class="hover:text-violet-800 transition">Layers</a></li>
           <li class="hidden md:block"><a href="#faq" class="hover:text-violet-800 transition">FAQ</a></li>
-          <li><a href="/docs/index.html" class="hover:text-violet-800 transition">Docs</a></li>
+          <li><a href="/docs/" class="hover:text-violet-800 transition">Docs</a></li>
           <li><a href="https://github.com/bmalum/mayfly" target="_blank" rel="noopener noreferrer" class="hover:text-violet-800 transition">GitHub</a></li>
         </ul>
       </div>
@@ -182,7 +182,7 @@
       </p>
       <div class="flex gap-4 justify-center flex-wrap">
         <a href="#install" class="bg-violet-800 text-white px-8 py-3 rounded-lg font-semibold hover:bg-violet-900 transition">Get started</a>
-        <a href="/docs/getting-started.html" class="border-2 border-violet-800 text-violet-800 px-8 py-3 rounded-lg font-semibold hover:bg-violet-50 transition">Read the guide</a>
+        <a href="/docs/getting-started" class="border-2 border-violet-800 text-violet-800 px-8 py-3 rounded-lg font-semibold hover:bg-violet-50 transition">Read the guide</a>
       </div>
       <dl class="mt-12 grid grid-cols-2 md:grid-cols-4 gap-6 max-w-3xl mx-auto text-center">
         <div><dt class="text-xs uppercase tracking-wide text-zinc-500">Cold start</dt><dd class="text-2xl font-bold text-violet-800">~0.5 s</dd></div>
@@ -335,7 +335,7 @@ mix lambda.doctor        # release config, handler, OTP vs. layer</code></pre>
   --layers arn:aws:lambda:REGION:ACCOUNT:layer:mayfly-erlang-27-arm64:1 \
   --zip-file fileb://_build/prod/rel/lambda/lambda.zip \
   --role arn:aws:iam::ACCOUNT:role/lambda-role</code></pre>
-            <p class="mt-3 text-sm text-zinc-600">The handler setting is the module name. SAM, CDK and Terraform snippets are in the <a href="/docs/deployment.html" class="text-violet-800 underline">deployment guide</a>.</p>
+            <p class="mt-3 text-sm text-zinc-600">The handler setting is the module name. SAM, CDK and Terraform snippets are in the <a href="/docs/deployment" class="text-violet-800 underline">deployment guide</a>.</p>
           </div>
         </div>
       </li>
@@ -370,7 +370,7 @@ mix lambda.doctor        # release config, handler, OTP vs. layer</code></pre>
       <p class="text-center text-sm text-zinc-500 mt-8">
         The bootstrap verifies the layer's ERTS matches your build before starting the VM, so a version mismatch fails with a readable message.
         Current ARNs: <a href="https://github.com/bmalum/mayfly/releases/tag/layers" target="_blank" rel="noopener noreferrer" class="text-violet-800 underline">ARNS.md on the layers release</a> ·
-        <a href="/docs/layers.html" class="text-violet-800 underline">layer guide</a>
+        <a href="/docs/layers" class="text-violet-800 underline">layer guide</a>
       </p>
     </div>
   </section>
@@ -414,11 +414,11 @@ mix lambda.doctor        # release config, handler, OTP vs. layer</code></pre>
       <details class="bg-white p-5 rounded-lg shadow-sm border border-violet-100"><summary class="font-semibold cursor-pointer">Can you run Elixir on AWS Lambda?</summary><p class="mt-3 text-sm text-zinc-600">Yes. AWS Lambda has no managed Elixir runtime, but its OS-only runtime (<code>provided.al2023</code>) runs any program that speaks the Lambda Runtime API. Mayfly implements that API in Elixir, so an ordinary Mix release runs as a Lambda function.</p></details>
       <details class="bg-white p-5 rounded-lg shadow-sm border border-violet-100"><summary class="font-semibold cursor-pointer">How fast does Elixir cold start on Lambda?</summary><p class="mt-3 text-sm text-zinc-600">With Mayfly and the Erlang layer a stripped release cold-starts in roughly 500–600 ms on arm64; warm invocations take single-digit milliseconds and use about 85 MB of memory. Keep <code>init/1</code> lean and the package small.</p></details>
       <details class="bg-white p-5 rounded-lg shadow-sm border border-violet-100"><summary class="font-semibold cursor-pointer">Do I need Docker to build an Elixir Lambda function?</summary><p class="mt-3 text-sm text-zinc-600">No. With the Mayfly Erlang layer the deployment zip contains only architecture-independent BEAM files and is produced by <code>mix release</code> on any OS. Docker (or finch) is only needed if you bundle ERTS yourself or have native NIF dependencies.</p></details>
-      <details class="bg-white p-5 rounded-lg shadow-sm border border-violet-100"><summary class="font-semibold cursor-pointer">Does Mayfly support Lambda response streaming?</summary><p class="mt-3 text-sm text-zinc-600">Yes. Return any <code>Enumerable</code> in a <code>Mayfly.Response</code> with <code>stream/1</code>; Mayfly uses chunked transfer encoding, adds the Function URL HTTP prelude and reports mid-stream errors via trailers. See the <a href="/docs/streaming.html" class="text-violet-800 underline">streaming guide</a>.</p></details>
+      <details class="bg-white p-5 rounded-lg shadow-sm border border-violet-100"><summary class="font-semibold cursor-pointer">Does Mayfly support Lambda response streaming?</summary><p class="mt-3 text-sm text-zinc-600">Yes. Return any <code>Enumerable</code> in a <code>Mayfly.Response</code> with <code>stream/1</code>; Mayfly uses chunked transfer encoding, adds the Function URL HTTP prelude and reports mid-stream errors via trailers. See the <a href="/docs/streaming" class="text-violet-800 underline">streaming guide</a>.</p></details>
       <details class="bg-white p-5 rounded-lg shadow-sm border border-violet-100"><summary class="font-semibold cursor-pointer">Does Mayfly work with Lambda Managed Instances?</summary><p class="mt-3 text-sm text-zinc-600">Yes. Mayfly starts one poller process per <code>AWS_LAMBDA_MAX_CONCURRENCY</code> slot so a single execution environment handles that many invocations in parallel. Handler state from <code>init/1</code> is shared read-only.</p></details>
       <details class="bg-white p-5 rounded-lg shadow-sm border border-violet-100"><summary class="font-semibold cursor-pointer">Which Elixir and OTP versions does Mayfly require?</summary><p class="mt-3 text-sm text-zinc-600">Elixir 1.18 or newer and Erlang/OTP 27 or newer. With the layer, your build toolchain's OTP must match the layer's OTP version exactly; <code>mix lambda.doctor --layer ARN</code> checks this and the bootstrap enforces it at start.</p></details>
       <details class="bg-white p-5 rounded-lg shadow-sm border border-violet-100"><summary class="font-semibold cursor-pointer">Can I run a Phoenix app on Lambda with Mayfly?</summary><p class="mt-3 text-sm text-zinc-600">Mayfly is a function runtime: it hands your handler the Lambda event (API Gateway / Function URL payloads included). Plain Phoenix routing and LiveView expect a long-running HTTP server; for those the Lambda Web Adapter with a container image is the better fit. Mayfly shines for event-driven functions, APIs built on the proxy event, streaming responses and background jobs.</p></details>
-      <details class="bg-white p-5 rounded-lg shadow-sm border border-violet-100"><summary class="font-semibold cursor-pointer">I'm on Mayfly 0.x. What changes?</summary><p class="mt-3 text-sm text-zinc-600">The handler is a module with <code>use Mayfly.Handler</code> instead of a <code>Module.function</code> string (the old form still works), the build is <code>mix release</code>, and Elixir 1.18+ is required. The <a href="/docs/migrating-from-0-x.html" class="text-violet-800 underline">migration guide</a> lists every change.</p></details>
+      <details class="bg-white p-5 rounded-lg shadow-sm border border-violet-100"><summary class="font-semibold cursor-pointer">I'm on Mayfly 0.x. What changes?</summary><p class="mt-3 text-sm text-zinc-600">The handler is a module with <code>use Mayfly.Handler</code> instead of a <code>Module.function</code> string (the old form still works), the build is <code>mix release</code>, and Elixir 1.18+ is required. The <a href="/docs/migrating-from-0-x" class="text-violet-800 underline">migration guide</a> lists every change.</p></details>
     </div>
   </section>
 
@@ -436,14 +436,14 @@ mix lambda.doctor        # release config, handler, OTP vs. layer</code></pre>
         <div>
           <h3 class="text-white font-bold mb-4">Documentation</h3>
           <ul class="space-y-2 text-sm">
-            <li><a href="/docs/getting-started.html" class="hover:text-white transition">Getting started</a></li>
-            <li><a href="/docs/deployment.html" class="hover:text-white transition">Deployment</a></li>
-            <li><a href="/docs/layers.html" class="hover:text-white transition">Erlang runtime layers</a></li>
-            <li><a href="/docs/streaming.html" class="hover:text-white transition">Response streaming</a></li>
-            <li><a href="/docs/observability.html" class="hover:text-white transition">Observability</a></li>
-            <li><a href="/docs/architecture.html" class="hover:text-white transition">Architecture</a></li>
-            <li><a href="/docs/migrating-from-0-x.html" class="hover:text-white transition">Migrating from 0.x</a></li>
-            <li><a href="/docs/api-reference.html" class="hover:text-white transition">API reference</a></li>
+            <li><a href="/docs/getting-started" class="hover:text-white transition">Getting started</a></li>
+            <li><a href="/docs/deployment" class="hover:text-white transition">Deployment</a></li>
+            <li><a href="/docs/layers" class="hover:text-white transition">Erlang runtime layers</a></li>
+            <li><a href="/docs/streaming" class="hover:text-white transition">Response streaming</a></li>
+            <li><a href="/docs/observability" class="hover:text-white transition">Observability</a></li>
+            <li><a href="/docs/architecture" class="hover:text-white transition">Architecture</a></li>
+            <li><a href="/docs/migrating-from-0-x" class="hover:text-white transition">Migrating from 0.x</a></li>
+            <li><a href="/docs/api-reference" class="hover:text-white transition">API reference</a></li>
             <li><a href="https://github.com/bmalum/mayfly/tree/main/skills/mayfly-elixir-lambda" target="_blank" rel="noopener noreferrer" class="hover:text-white transition">Agent Skill for coding agents</a></li>
             <li><a href="/docs/llms.txt" class="hover:text-white transition">llms.txt</a></li>
           </ul>
@@ -454,7 +454,7 @@ mix lambda.doctor        # release config, handler, OTP vs. layer</code></pre>
             <li><a href="https://github.com/bmalum/mayfly" target="_blank" rel="noopener noreferrer" class="hover:text-white transition">GitHub</a></li>
             <li><a href="https://github.com/bmalum/mayfly/releases/tag/layers" target="_blank" rel="noopener noreferrer" class="hover:text-white transition">Layer ARNs</a></li>
             <li><a href="https://github.com/bmalum/mayfly/issues" target="_blank" rel="noopener noreferrer" class="hover:text-white transition">Issues</a></li>
-            <li><a href="/docs/changelog.html" class="hover:text-white transition">Changelog</a></li>
+            <li><a href="/docs/changelog" class="hover:text-white transition">Changelog</a></li>
             <li><a href="https://elixir-dynamodb.dev" target="_blank" rel="noopener noreferrer" class="hover:text-white transition">Dynamo – DynamoDB for Elixir</a></li>
           </ul>
         </div>
