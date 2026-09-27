@@ -10,7 +10,7 @@
   <meta name="title" content="Mayfly - Elixir AWS Lambda Runtime | Serverless Elixir Functions">
   <meta name="description" content="Mayfly is a lightweight AWS Lambda custom runtime for Elixir: a handler behaviour, mix release as the build, an Erlang layer so you never need Docker, response streaming, Managed Instances concurrency and honest error reporting.">
   <meta name="keywords" content="Elixir, AWS Lambda, Serverless, Custom Runtime, Elixir Lambda, Lambda Layer, Response Streaming, Managed Instances, Mayfly">
-  <meta name="author" content="Mayfly">
+  <meta name="author" content="Karrer, https://karrer.solutions">
   <meta name="robots" content="index, follow">
 
   <!-- Open Graph / Facebook -->
@@ -57,7 +57,8 @@
     "programmingLanguage": "Elixir",
     "url": "https://elixir-aws-lambda.dev/",
     "codeRepository": "https://github.com/bmalum/mayfly",
-    "license": "https://opensource.org/licenses/MIT"
+    "license": "https://opensource.org/licenses/MIT",
+    "author": { "@type": "Organization", "name": "Karrer", "url": "https://karrer.solutions" }
   }
   </script>
 </head>
@@ -98,6 +99,10 @@
       <p class="text-base text-zinc-500 mb-8 max-w-2xl mx-auto">
         Write a handler module, run <code class="bg-violet-100 text-violet-800 px-2 py-0.5 rounded">mix release</code>, attach the Erlang layer.
         No Docker, no boilerplate, no silent failures.
+      </p>
+      <p class="text-sm text-zinc-500 mb-8">
+        Built and used in production by <a href="https://karrer.solutions" rel="author" class="text-violet-800 underline hover:text-violet-900">Karrer</a>,
+        an Elixir-on-AWS shop in Germany. Open source under MIT.
       </p>
       <div class="flex gap-4 justify-center flex-wrap">
         <a href="#install" class="bg-violet-800 text-white px-8 py-3 rounded-lg font-semibold hover:bg-violet-900 transition">Get Started</a>
@@ -327,11 +332,13 @@ mix lambda.doctor        # checks release config, handler and OTP vs. layer</cod
             <li><a href="https://github.com/bmalum/mayfly/releases/tag/layers" target="_blank" rel="noopener noreferrer" class="hover:text-white transition">Layer ARNs</a></li>
             <li><a href="https://github.com/bmalum/mayfly/issues" target="_blank" rel="noopener noreferrer" class="hover:text-white transition">Issues</a></li>
             <li><a href="/docs/changelog.html" class="hover:text-white transition">Changelog</a></li>
+            <li><a href="https://elixir-dynamodb.dev" target="_blank" rel="noopener noreferrer" class="hover:text-white transition">Dynamo – DynamoDB for Elixir</a></li>
           </ul>
         </div>
       </div>
       <div class="border-t border-zinc-800 pt-8 text-center text-sm">
-        <p>© 2025–2026 Mayfly. Licensed under the MIT License.</p>
+        <p>© 2025–2026 <a href="https://karrer.solutions" rel="author" class="hover:text-white transition underline">Karrer</a>. Licensed under the MIT License.</p>
+        <p class="mt-2 text-zinc-500">Need help running Elixir on AWS? <a href="https://karrer.solutions" class="hover:text-white transition underline">karrer.solutions</a> builds and operates Elixir/Phoenix applications on AWS and contributes to Mayfly and Dynamo on request.</p>
       </div>
     </div>
   </footer>
