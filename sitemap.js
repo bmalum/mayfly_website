@@ -4,7 +4,7 @@ const path = require("path");
 const base = "https://elixir-aws-lambda.dev";
 const today = new Date().toISOString().slice(0, 10);
 const guides = ["getting-started", "deployment", "layers", "streaming", "observability", "architecture", "migrating-from-0-x"];
-const urls = [{ loc: "/", pri: "1.0", freq: "weekly" }, { loc: "/docs/", pri: "0.9", freq: "weekly" }];
+const urls = [{ loc: "/", pri: "1.0", freq: "weekly" }, { loc: "/layers/", pri: "0.9", freq: "weekly" }, { loc: "/docs/", pri: "0.9", freq: "weekly" }];
 for (const f of fs.readdirSync("docs")) {
   if (!f.endsWith(".html") || ["index.html", "404.html", "search.html"].includes(f)) continue;
   const stem0 = f.replace(/\.html$/, ""); if (!stem0) continue;

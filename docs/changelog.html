@@ -142,7 +142,9 @@ version matches the release before starting the VM.</li><li><code class="inline"
 Function URL / API Gateway v2 request.</li><li><code class="inline">mix lambda.build --docker</code> works with <code class="inline">finch</code> when docker is absent and
 mounts external <code class="inline">path:</code> dependencies into the container.</li><li><a href="Mix.Tasks.Lambda.Doctor.html"><code class="inline">mix lambda.doctor</code></a> checks the release configuration, resolves the handler
 and runs its <code class="inline">init/1</code>, and compares the local OTP with a layer's
-(<code class="inline">--layer ARN</code>).</li><li><a href="Mayfly.Response.html#stream/2"><code class="inline">Mayfly.Response.stream/2</code></a> accepts <code class="inline">send_timeout:</code> to bound a stalled
+(<code class="inline">--layer ARN</code>); without <code class="inline">--layer</code> it looks the matching public layer up in
+the catalog at elixir-aws-lambda.dev/layers for <code class="inline">--arch</code>/<code class="inline">--region</code>.</li><li>The Layers workflow publishes the ARN index to the website catalog
+(<code class="inline">/layers/</code> page and static JSON resolver).</li><li><a href="Mayfly.Response.html#stream/2"><code class="inline">Mayfly.Response.stream/2</code></a> accepts <code class="inline">send_timeout:</code> to bound a stalled
 streaming write (default 30 s).</li><li><code class="inline">bootstrap</code> uses a single scheduler (<code class="inline">+S 1:1</code>) only on standard Lambda;
 on Managed Instances (<code class="inline">AWS_LAMBDA_MAX_CONCURRENCY &gt; 1</code>) the VM sizes
 schedulers to the vCPUs. Managed Instances verified on real hardware.</li><li>Dialyzer runs in CI; a <code class="inline">Publish</code> workflow releases to Hex.pm on <code class="inline">v*</code> tags.</li><li><code class="inline">skills/mayfly-elixir-lambda</code>: an Agent Skill for coding agents, shipped in
