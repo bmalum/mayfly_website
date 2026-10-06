@@ -62,3 +62,7 @@ curl -s  https://elixir-aws-lambda.dev/sitemap.xml | grep -c "<loc>"
 cd ../mayfly && mix docs -o ../mayfly_website/docs
 cd ../mayfly_website && npm run build && git add -A docs && git commit -m "docs: regenerate for <version>" && git push
 ```
+
+## Deploy latency
+
+Cloudflare Pages normally deploys a push within 1–3 minutes, including the bot commits made over the SSH deploy key. If a commit has not deployed after ~10 minutes, push any commit to re-trigger the build.
