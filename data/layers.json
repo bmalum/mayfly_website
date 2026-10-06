@@ -3,512 +3,768 @@
     "region": "ap-northeast-1",
     "otp": "27.3.4.18",
     "arch": "arm64",
-    "arn": "arn:aws:lambda:ap-northeast-1:651236577491:layer:mayfly-erlang-27-3-4-18-arm64:3",
-    "alias_arn": "arn:aws:lambda:ap-northeast-1:651236577491:layer:mayfly-erlang-27-arm64:3",
-    "sha256": "11b228aa9c34d0bc446b1971f46222433438d36874c3ccb8f5fdb57d90bbb635"
+    "arn": "arn:aws:lambda:ap-northeast-1:651236577491:layer:mayfly-erlang-27-3-4-18-arm64:4",
+    "alias_arn": "arn:aws:lambda:ap-northeast-1:651236577491:layer:mayfly-erlang-27-arm64:4",
+    "sha256": "92df5221d184e6f3d1ecf8405991abe6fdfb4a5f4ff1c9824345b46fe4270571"
   },
   {
     "region": "ap-northeast-1",
     "otp": "27.3.4.18",
     "arch": "x86_64",
-    "arn": "arn:aws:lambda:ap-northeast-1:651236577491:layer:mayfly-erlang-27-3-4-18-x86_64:3",
-    "alias_arn": "arn:aws:lambda:ap-northeast-1:651236577491:layer:mayfly-erlang-27-x86_64:3",
-    "sha256": "9c1c7f70a3c7e3b171692f0d1e275226f9166671414ca80088b706049e434249"
+    "arn": "arn:aws:lambda:ap-northeast-1:651236577491:layer:mayfly-erlang-27-3-4-18-x86_64:4",
+    "alias_arn": "arn:aws:lambda:ap-northeast-1:651236577491:layer:mayfly-erlang-27-x86_64:4",
+    "sha256": "07f01f8137117b5fb59ba1a9d85eb24ddb4ad4462b120a7c6f1750aa222de66e"
   },
   {
     "region": "ap-northeast-1",
     "otp": "28.5.0.7",
     "arch": "arm64",
-    "arn": "arn:aws:lambda:ap-northeast-1:651236577491:layer:mayfly-erlang-28-5-0-7-arm64:3",
-    "alias_arn": "arn:aws:lambda:ap-northeast-1:651236577491:layer:mayfly-erlang-28-arm64:3",
-    "sha256": "95aa2229dbfbef5bf6d29979dde5a6ff7871ba7a316016399ef51aa55a0ca55d"
+    "arn": "arn:aws:lambda:ap-northeast-1:651236577491:layer:mayfly-erlang-28-5-0-7-arm64:4",
+    "alias_arn": "arn:aws:lambda:ap-northeast-1:651236577491:layer:mayfly-erlang-28-arm64:4",
+    "sha256": "df816b7fd94d19175aa4bd4b516ce83351f9fb668484d7bc7afbcc9991161844"
   },
   {
     "region": "ap-northeast-1",
     "otp": "28.5.0.7",
     "arch": "x86_64",
-    "arn": "arn:aws:lambda:ap-northeast-1:651236577491:layer:mayfly-erlang-28-5-0-7-x86_64:3",
-    "alias_arn": "arn:aws:lambda:ap-northeast-1:651236577491:layer:mayfly-erlang-28-x86_64:3",
-    "sha256": "0494484d984c7bc5534c7189ea7bbb7f02f383a59697b7ff010e1ae06badb59c"
+    "arn": "arn:aws:lambda:ap-northeast-1:651236577491:layer:mayfly-erlang-28-5-0-7-x86_64:4",
+    "alias_arn": "arn:aws:lambda:ap-northeast-1:651236577491:layer:mayfly-erlang-28-x86_64:4",
+    "sha256": "026ef24f2dcc33cbbcc70d0d609ac78e20949cffc5e30ac1f304829fa6229c81"
+  },
+  {
+    "region": "ap-northeast-1",
+    "otp": "29.1.1",
+    "arch": "arm64",
+    "arn": "arn:aws:lambda:ap-northeast-1:651236577491:layer:mayfly-erlang-29-1-1-arm64:1",
+    "alias_arn": "arn:aws:lambda:ap-northeast-1:651236577491:layer:mayfly-erlang-29-arm64:1",
+    "sha256": "4c8caa03eb437efa52003e757f33e28a77ebfb161fdc29ad21e7ae66db3f4868"
+  },
+  {
+    "region": "ap-northeast-1",
+    "otp": "29.1.1",
+    "arch": "x86_64",
+    "arn": "arn:aws:lambda:ap-northeast-1:651236577491:layer:mayfly-erlang-29-1-1-x86_64:1",
+    "alias_arn": "arn:aws:lambda:ap-northeast-1:651236577491:layer:mayfly-erlang-29-x86_64:1",
+    "sha256": "057f8f09bc3b09564a1c0ff9a7908e56b1eaec15f5bb86e6aef537706e5ae1f4"
   },
   {
     "region": "ap-northeast-2",
     "otp": "27.3.4.18",
     "arch": "arm64",
-    "arn": "arn:aws:lambda:ap-northeast-2:651236577491:layer:mayfly-erlang-27-3-4-18-arm64:3",
-    "alias_arn": "arn:aws:lambda:ap-northeast-2:651236577491:layer:mayfly-erlang-27-arm64:3",
-    "sha256": "11b228aa9c34d0bc446b1971f46222433438d36874c3ccb8f5fdb57d90bbb635"
+    "arn": "arn:aws:lambda:ap-northeast-2:651236577491:layer:mayfly-erlang-27-3-4-18-arm64:4",
+    "alias_arn": "arn:aws:lambda:ap-northeast-2:651236577491:layer:mayfly-erlang-27-arm64:4",
+    "sha256": "92df5221d184e6f3d1ecf8405991abe6fdfb4a5f4ff1c9824345b46fe4270571"
   },
   {
     "region": "ap-northeast-2",
     "otp": "27.3.4.18",
     "arch": "x86_64",
-    "arn": "arn:aws:lambda:ap-northeast-2:651236577491:layer:mayfly-erlang-27-3-4-18-x86_64:3",
-    "alias_arn": "arn:aws:lambda:ap-northeast-2:651236577491:layer:mayfly-erlang-27-x86_64:3",
-    "sha256": "9c1c7f70a3c7e3b171692f0d1e275226f9166671414ca80088b706049e434249"
+    "arn": "arn:aws:lambda:ap-northeast-2:651236577491:layer:mayfly-erlang-27-3-4-18-x86_64:4",
+    "alias_arn": "arn:aws:lambda:ap-northeast-2:651236577491:layer:mayfly-erlang-27-x86_64:4",
+    "sha256": "07f01f8137117b5fb59ba1a9d85eb24ddb4ad4462b120a7c6f1750aa222de66e"
   },
   {
     "region": "ap-northeast-2",
     "otp": "28.5.0.7",
     "arch": "arm64",
-    "arn": "arn:aws:lambda:ap-northeast-2:651236577491:layer:mayfly-erlang-28-5-0-7-arm64:3",
-    "alias_arn": "arn:aws:lambda:ap-northeast-2:651236577491:layer:mayfly-erlang-28-arm64:3",
-    "sha256": "95aa2229dbfbef5bf6d29979dde5a6ff7871ba7a316016399ef51aa55a0ca55d"
+    "arn": "arn:aws:lambda:ap-northeast-2:651236577491:layer:mayfly-erlang-28-5-0-7-arm64:4",
+    "alias_arn": "arn:aws:lambda:ap-northeast-2:651236577491:layer:mayfly-erlang-28-arm64:4",
+    "sha256": "df816b7fd94d19175aa4bd4b516ce83351f9fb668484d7bc7afbcc9991161844"
   },
   {
     "region": "ap-northeast-2",
     "otp": "28.5.0.7",
     "arch": "x86_64",
-    "arn": "arn:aws:lambda:ap-northeast-2:651236577491:layer:mayfly-erlang-28-5-0-7-x86_64:3",
-    "alias_arn": "arn:aws:lambda:ap-northeast-2:651236577491:layer:mayfly-erlang-28-x86_64:3",
-    "sha256": "0494484d984c7bc5534c7189ea7bbb7f02f383a59697b7ff010e1ae06badb59c"
+    "arn": "arn:aws:lambda:ap-northeast-2:651236577491:layer:mayfly-erlang-28-5-0-7-x86_64:4",
+    "alias_arn": "arn:aws:lambda:ap-northeast-2:651236577491:layer:mayfly-erlang-28-x86_64:4",
+    "sha256": "026ef24f2dcc33cbbcc70d0d609ac78e20949cffc5e30ac1f304829fa6229c81"
+  },
+  {
+    "region": "ap-northeast-2",
+    "otp": "29.1.1",
+    "arch": "arm64",
+    "arn": "arn:aws:lambda:ap-northeast-2:651236577491:layer:mayfly-erlang-29-1-1-arm64:1",
+    "alias_arn": "arn:aws:lambda:ap-northeast-2:651236577491:layer:mayfly-erlang-29-arm64:1",
+    "sha256": "4c8caa03eb437efa52003e757f33e28a77ebfb161fdc29ad21e7ae66db3f4868"
+  },
+  {
+    "region": "ap-northeast-2",
+    "otp": "29.1.1",
+    "arch": "x86_64",
+    "arn": "arn:aws:lambda:ap-northeast-2:651236577491:layer:mayfly-erlang-29-1-1-x86_64:1",
+    "alias_arn": "arn:aws:lambda:ap-northeast-2:651236577491:layer:mayfly-erlang-29-x86_64:1",
+    "sha256": "057f8f09bc3b09564a1c0ff9a7908e56b1eaec15f5bb86e6aef537706e5ae1f4"
   },
   {
     "region": "ap-south-1",
     "otp": "27.3.4.18",
     "arch": "arm64",
-    "arn": "arn:aws:lambda:ap-south-1:651236577491:layer:mayfly-erlang-27-3-4-18-arm64:3",
-    "alias_arn": "arn:aws:lambda:ap-south-1:651236577491:layer:mayfly-erlang-27-arm64:3",
-    "sha256": "11b228aa9c34d0bc446b1971f46222433438d36874c3ccb8f5fdb57d90bbb635"
+    "arn": "arn:aws:lambda:ap-south-1:651236577491:layer:mayfly-erlang-27-3-4-18-arm64:4",
+    "alias_arn": "arn:aws:lambda:ap-south-1:651236577491:layer:mayfly-erlang-27-arm64:4",
+    "sha256": "92df5221d184e6f3d1ecf8405991abe6fdfb4a5f4ff1c9824345b46fe4270571"
   },
   {
     "region": "ap-south-1",
     "otp": "27.3.4.18",
     "arch": "x86_64",
-    "arn": "arn:aws:lambda:ap-south-1:651236577491:layer:mayfly-erlang-27-3-4-18-x86_64:3",
-    "alias_arn": "arn:aws:lambda:ap-south-1:651236577491:layer:mayfly-erlang-27-x86_64:3",
-    "sha256": "9c1c7f70a3c7e3b171692f0d1e275226f9166671414ca80088b706049e434249"
+    "arn": "arn:aws:lambda:ap-south-1:651236577491:layer:mayfly-erlang-27-3-4-18-x86_64:4",
+    "alias_arn": "arn:aws:lambda:ap-south-1:651236577491:layer:mayfly-erlang-27-x86_64:4",
+    "sha256": "07f01f8137117b5fb59ba1a9d85eb24ddb4ad4462b120a7c6f1750aa222de66e"
   },
   {
     "region": "ap-south-1",
     "otp": "28.5.0.7",
     "arch": "arm64",
-    "arn": "arn:aws:lambda:ap-south-1:651236577491:layer:mayfly-erlang-28-5-0-7-arm64:3",
-    "alias_arn": "arn:aws:lambda:ap-south-1:651236577491:layer:mayfly-erlang-28-arm64:3",
-    "sha256": "95aa2229dbfbef5bf6d29979dde5a6ff7871ba7a316016399ef51aa55a0ca55d"
+    "arn": "arn:aws:lambda:ap-south-1:651236577491:layer:mayfly-erlang-28-5-0-7-arm64:4",
+    "alias_arn": "arn:aws:lambda:ap-south-1:651236577491:layer:mayfly-erlang-28-arm64:4",
+    "sha256": "df816b7fd94d19175aa4bd4b516ce83351f9fb668484d7bc7afbcc9991161844"
   },
   {
     "region": "ap-south-1",
     "otp": "28.5.0.7",
     "arch": "x86_64",
-    "arn": "arn:aws:lambda:ap-south-1:651236577491:layer:mayfly-erlang-28-5-0-7-x86_64:3",
-    "alias_arn": "arn:aws:lambda:ap-south-1:651236577491:layer:mayfly-erlang-28-x86_64:3",
-    "sha256": "0494484d984c7bc5534c7189ea7bbb7f02f383a59697b7ff010e1ae06badb59c"
+    "arn": "arn:aws:lambda:ap-south-1:651236577491:layer:mayfly-erlang-28-5-0-7-x86_64:4",
+    "alias_arn": "arn:aws:lambda:ap-south-1:651236577491:layer:mayfly-erlang-28-x86_64:4",
+    "sha256": "026ef24f2dcc33cbbcc70d0d609ac78e20949cffc5e30ac1f304829fa6229c81"
+  },
+  {
+    "region": "ap-south-1",
+    "otp": "29.1.1",
+    "arch": "arm64",
+    "arn": "arn:aws:lambda:ap-south-1:651236577491:layer:mayfly-erlang-29-1-1-arm64:1",
+    "alias_arn": "arn:aws:lambda:ap-south-1:651236577491:layer:mayfly-erlang-29-arm64:1",
+    "sha256": "4c8caa03eb437efa52003e757f33e28a77ebfb161fdc29ad21e7ae66db3f4868"
+  },
+  {
+    "region": "ap-south-1",
+    "otp": "29.1.1",
+    "arch": "x86_64",
+    "arn": "arn:aws:lambda:ap-south-1:651236577491:layer:mayfly-erlang-29-1-1-x86_64:1",
+    "alias_arn": "arn:aws:lambda:ap-south-1:651236577491:layer:mayfly-erlang-29-x86_64:1",
+    "sha256": "057f8f09bc3b09564a1c0ff9a7908e56b1eaec15f5bb86e6aef537706e5ae1f4"
   },
   {
     "region": "ap-southeast-1",
     "otp": "27.3.4.18",
     "arch": "arm64",
-    "arn": "arn:aws:lambda:ap-southeast-1:651236577491:layer:mayfly-erlang-27-3-4-18-arm64:3",
-    "alias_arn": "arn:aws:lambda:ap-southeast-1:651236577491:layer:mayfly-erlang-27-arm64:3",
-    "sha256": "11b228aa9c34d0bc446b1971f46222433438d36874c3ccb8f5fdb57d90bbb635"
+    "arn": "arn:aws:lambda:ap-southeast-1:651236577491:layer:mayfly-erlang-27-3-4-18-arm64:4",
+    "alias_arn": "arn:aws:lambda:ap-southeast-1:651236577491:layer:mayfly-erlang-27-arm64:4",
+    "sha256": "92df5221d184e6f3d1ecf8405991abe6fdfb4a5f4ff1c9824345b46fe4270571"
   },
   {
     "region": "ap-southeast-1",
     "otp": "27.3.4.18",
     "arch": "x86_64",
-    "arn": "arn:aws:lambda:ap-southeast-1:651236577491:layer:mayfly-erlang-27-3-4-18-x86_64:3",
-    "alias_arn": "arn:aws:lambda:ap-southeast-1:651236577491:layer:mayfly-erlang-27-x86_64:3",
-    "sha256": "9c1c7f70a3c7e3b171692f0d1e275226f9166671414ca80088b706049e434249"
+    "arn": "arn:aws:lambda:ap-southeast-1:651236577491:layer:mayfly-erlang-27-3-4-18-x86_64:4",
+    "alias_arn": "arn:aws:lambda:ap-southeast-1:651236577491:layer:mayfly-erlang-27-x86_64:4",
+    "sha256": "07f01f8137117b5fb59ba1a9d85eb24ddb4ad4462b120a7c6f1750aa222de66e"
   },
   {
     "region": "ap-southeast-1",
     "otp": "28.5.0.7",
     "arch": "arm64",
-    "arn": "arn:aws:lambda:ap-southeast-1:651236577491:layer:mayfly-erlang-28-5-0-7-arm64:3",
-    "alias_arn": "arn:aws:lambda:ap-southeast-1:651236577491:layer:mayfly-erlang-28-arm64:3",
-    "sha256": "95aa2229dbfbef5bf6d29979dde5a6ff7871ba7a316016399ef51aa55a0ca55d"
+    "arn": "arn:aws:lambda:ap-southeast-1:651236577491:layer:mayfly-erlang-28-5-0-7-arm64:4",
+    "alias_arn": "arn:aws:lambda:ap-southeast-1:651236577491:layer:mayfly-erlang-28-arm64:4",
+    "sha256": "df816b7fd94d19175aa4bd4b516ce83351f9fb668484d7bc7afbcc9991161844"
   },
   {
     "region": "ap-southeast-1",
     "otp": "28.5.0.7",
     "arch": "x86_64",
-    "arn": "arn:aws:lambda:ap-southeast-1:651236577491:layer:mayfly-erlang-28-5-0-7-x86_64:3",
-    "alias_arn": "arn:aws:lambda:ap-southeast-1:651236577491:layer:mayfly-erlang-28-x86_64:3",
-    "sha256": "0494484d984c7bc5534c7189ea7bbb7f02f383a59697b7ff010e1ae06badb59c"
+    "arn": "arn:aws:lambda:ap-southeast-1:651236577491:layer:mayfly-erlang-28-5-0-7-x86_64:4",
+    "alias_arn": "arn:aws:lambda:ap-southeast-1:651236577491:layer:mayfly-erlang-28-x86_64:4",
+    "sha256": "026ef24f2dcc33cbbcc70d0d609ac78e20949cffc5e30ac1f304829fa6229c81"
+  },
+  {
+    "region": "ap-southeast-1",
+    "otp": "29.1.1",
+    "arch": "arm64",
+    "arn": "arn:aws:lambda:ap-southeast-1:651236577491:layer:mayfly-erlang-29-1-1-arm64:1",
+    "alias_arn": "arn:aws:lambda:ap-southeast-1:651236577491:layer:mayfly-erlang-29-arm64:1",
+    "sha256": "4c8caa03eb437efa52003e757f33e28a77ebfb161fdc29ad21e7ae66db3f4868"
+  },
+  {
+    "region": "ap-southeast-1",
+    "otp": "29.1.1",
+    "arch": "x86_64",
+    "arn": "arn:aws:lambda:ap-southeast-1:651236577491:layer:mayfly-erlang-29-1-1-x86_64:1",
+    "alias_arn": "arn:aws:lambda:ap-southeast-1:651236577491:layer:mayfly-erlang-29-x86_64:1",
+    "sha256": "057f8f09bc3b09564a1c0ff9a7908e56b1eaec15f5bb86e6aef537706e5ae1f4"
   },
   {
     "region": "ap-southeast-2",
     "otp": "27.3.4.18",
     "arch": "arm64",
-    "arn": "arn:aws:lambda:ap-southeast-2:651236577491:layer:mayfly-erlang-27-3-4-18-arm64:3",
-    "alias_arn": "arn:aws:lambda:ap-southeast-2:651236577491:layer:mayfly-erlang-27-arm64:3",
-    "sha256": "11b228aa9c34d0bc446b1971f46222433438d36874c3ccb8f5fdb57d90bbb635"
+    "arn": "arn:aws:lambda:ap-southeast-2:651236577491:layer:mayfly-erlang-27-3-4-18-arm64:4",
+    "alias_arn": "arn:aws:lambda:ap-southeast-2:651236577491:layer:mayfly-erlang-27-arm64:4",
+    "sha256": "92df5221d184e6f3d1ecf8405991abe6fdfb4a5f4ff1c9824345b46fe4270571"
   },
   {
     "region": "ap-southeast-2",
     "otp": "27.3.4.18",
     "arch": "x86_64",
-    "arn": "arn:aws:lambda:ap-southeast-2:651236577491:layer:mayfly-erlang-27-3-4-18-x86_64:3",
-    "alias_arn": "arn:aws:lambda:ap-southeast-2:651236577491:layer:mayfly-erlang-27-x86_64:3",
-    "sha256": "9c1c7f70a3c7e3b171692f0d1e275226f9166671414ca80088b706049e434249"
+    "arn": "arn:aws:lambda:ap-southeast-2:651236577491:layer:mayfly-erlang-27-3-4-18-x86_64:4",
+    "alias_arn": "arn:aws:lambda:ap-southeast-2:651236577491:layer:mayfly-erlang-27-x86_64:4",
+    "sha256": "07f01f8137117b5fb59ba1a9d85eb24ddb4ad4462b120a7c6f1750aa222de66e"
   },
   {
     "region": "ap-southeast-2",
     "otp": "28.5.0.7",
     "arch": "arm64",
-    "arn": "arn:aws:lambda:ap-southeast-2:651236577491:layer:mayfly-erlang-28-5-0-7-arm64:3",
-    "alias_arn": "arn:aws:lambda:ap-southeast-2:651236577491:layer:mayfly-erlang-28-arm64:3",
-    "sha256": "95aa2229dbfbef5bf6d29979dde5a6ff7871ba7a316016399ef51aa55a0ca55d"
+    "arn": "arn:aws:lambda:ap-southeast-2:651236577491:layer:mayfly-erlang-28-5-0-7-arm64:4",
+    "alias_arn": "arn:aws:lambda:ap-southeast-2:651236577491:layer:mayfly-erlang-28-arm64:4",
+    "sha256": "df816b7fd94d19175aa4bd4b516ce83351f9fb668484d7bc7afbcc9991161844"
   },
   {
     "region": "ap-southeast-2",
     "otp": "28.5.0.7",
     "arch": "x86_64",
-    "arn": "arn:aws:lambda:ap-southeast-2:651236577491:layer:mayfly-erlang-28-5-0-7-x86_64:3",
-    "alias_arn": "arn:aws:lambda:ap-southeast-2:651236577491:layer:mayfly-erlang-28-x86_64:3",
-    "sha256": "0494484d984c7bc5534c7189ea7bbb7f02f383a59697b7ff010e1ae06badb59c"
+    "arn": "arn:aws:lambda:ap-southeast-2:651236577491:layer:mayfly-erlang-28-5-0-7-x86_64:4",
+    "alias_arn": "arn:aws:lambda:ap-southeast-2:651236577491:layer:mayfly-erlang-28-x86_64:4",
+    "sha256": "026ef24f2dcc33cbbcc70d0d609ac78e20949cffc5e30ac1f304829fa6229c81"
+  },
+  {
+    "region": "ap-southeast-2",
+    "otp": "29.1.1",
+    "arch": "arm64",
+    "arn": "arn:aws:lambda:ap-southeast-2:651236577491:layer:mayfly-erlang-29-1-1-arm64:1",
+    "alias_arn": "arn:aws:lambda:ap-southeast-2:651236577491:layer:mayfly-erlang-29-arm64:1",
+    "sha256": "4c8caa03eb437efa52003e757f33e28a77ebfb161fdc29ad21e7ae66db3f4868"
+  },
+  {
+    "region": "ap-southeast-2",
+    "otp": "29.1.1",
+    "arch": "x86_64",
+    "arn": "arn:aws:lambda:ap-southeast-2:651236577491:layer:mayfly-erlang-29-1-1-x86_64:1",
+    "alias_arn": "arn:aws:lambda:ap-southeast-2:651236577491:layer:mayfly-erlang-29-x86_64:1",
+    "sha256": "057f8f09bc3b09564a1c0ff9a7908e56b1eaec15f5bb86e6aef537706e5ae1f4"
   },
   {
     "region": "ca-central-1",
     "otp": "27.3.4.18",
     "arch": "arm64",
-    "arn": "arn:aws:lambda:ca-central-1:651236577491:layer:mayfly-erlang-27-3-4-18-arm64:3",
-    "alias_arn": "arn:aws:lambda:ca-central-1:651236577491:layer:mayfly-erlang-27-arm64:3",
-    "sha256": "11b228aa9c34d0bc446b1971f46222433438d36874c3ccb8f5fdb57d90bbb635"
+    "arn": "arn:aws:lambda:ca-central-1:651236577491:layer:mayfly-erlang-27-3-4-18-arm64:4",
+    "alias_arn": "arn:aws:lambda:ca-central-1:651236577491:layer:mayfly-erlang-27-arm64:4",
+    "sha256": "92df5221d184e6f3d1ecf8405991abe6fdfb4a5f4ff1c9824345b46fe4270571"
   },
   {
     "region": "ca-central-1",
     "otp": "27.3.4.18",
     "arch": "x86_64",
-    "arn": "arn:aws:lambda:ca-central-1:651236577491:layer:mayfly-erlang-27-3-4-18-x86_64:3",
-    "alias_arn": "arn:aws:lambda:ca-central-1:651236577491:layer:mayfly-erlang-27-x86_64:3",
-    "sha256": "9c1c7f70a3c7e3b171692f0d1e275226f9166671414ca80088b706049e434249"
+    "arn": "arn:aws:lambda:ca-central-1:651236577491:layer:mayfly-erlang-27-3-4-18-x86_64:4",
+    "alias_arn": "arn:aws:lambda:ca-central-1:651236577491:layer:mayfly-erlang-27-x86_64:4",
+    "sha256": "07f01f8137117b5fb59ba1a9d85eb24ddb4ad4462b120a7c6f1750aa222de66e"
   },
   {
     "region": "ca-central-1",
     "otp": "28.5.0.7",
     "arch": "arm64",
-    "arn": "arn:aws:lambda:ca-central-1:651236577491:layer:mayfly-erlang-28-5-0-7-arm64:3",
-    "alias_arn": "arn:aws:lambda:ca-central-1:651236577491:layer:mayfly-erlang-28-arm64:3",
-    "sha256": "95aa2229dbfbef5bf6d29979dde5a6ff7871ba7a316016399ef51aa55a0ca55d"
+    "arn": "arn:aws:lambda:ca-central-1:651236577491:layer:mayfly-erlang-28-5-0-7-arm64:4",
+    "alias_arn": "arn:aws:lambda:ca-central-1:651236577491:layer:mayfly-erlang-28-arm64:4",
+    "sha256": "df816b7fd94d19175aa4bd4b516ce83351f9fb668484d7bc7afbcc9991161844"
   },
   {
     "region": "ca-central-1",
     "otp": "28.5.0.7",
     "arch": "x86_64",
-    "arn": "arn:aws:lambda:ca-central-1:651236577491:layer:mayfly-erlang-28-5-0-7-x86_64:3",
-    "alias_arn": "arn:aws:lambda:ca-central-1:651236577491:layer:mayfly-erlang-28-x86_64:3",
-    "sha256": "0494484d984c7bc5534c7189ea7bbb7f02f383a59697b7ff010e1ae06badb59c"
+    "arn": "arn:aws:lambda:ca-central-1:651236577491:layer:mayfly-erlang-28-5-0-7-x86_64:4",
+    "alias_arn": "arn:aws:lambda:ca-central-1:651236577491:layer:mayfly-erlang-28-x86_64:4",
+    "sha256": "026ef24f2dcc33cbbcc70d0d609ac78e20949cffc5e30ac1f304829fa6229c81"
+  },
+  {
+    "region": "ca-central-1",
+    "otp": "29.1.1",
+    "arch": "arm64",
+    "arn": "arn:aws:lambda:ca-central-1:651236577491:layer:mayfly-erlang-29-1-1-arm64:1",
+    "alias_arn": "arn:aws:lambda:ca-central-1:651236577491:layer:mayfly-erlang-29-arm64:1",
+    "sha256": "4c8caa03eb437efa52003e757f33e28a77ebfb161fdc29ad21e7ae66db3f4868"
+  },
+  {
+    "region": "ca-central-1",
+    "otp": "29.1.1",
+    "arch": "x86_64",
+    "arn": "arn:aws:lambda:ca-central-1:651236577491:layer:mayfly-erlang-29-1-1-x86_64:1",
+    "alias_arn": "arn:aws:lambda:ca-central-1:651236577491:layer:mayfly-erlang-29-x86_64:1",
+    "sha256": "057f8f09bc3b09564a1c0ff9a7908e56b1eaec15f5bb86e6aef537706e5ae1f4"
   },
   {
     "region": "eu-central-1",
     "otp": "27.3.4.18",
     "arch": "arm64",
-    "arn": "arn:aws:lambda:eu-central-1:651236577491:layer:mayfly-erlang-27-3-4-18-arm64:3",
-    "alias_arn": "arn:aws:lambda:eu-central-1:651236577491:layer:mayfly-erlang-27-arm64:3",
-    "sha256": "11b228aa9c34d0bc446b1971f46222433438d36874c3ccb8f5fdb57d90bbb635"
+    "arn": "arn:aws:lambda:eu-central-1:651236577491:layer:mayfly-erlang-27-3-4-18-arm64:4",
+    "alias_arn": "arn:aws:lambda:eu-central-1:651236577491:layer:mayfly-erlang-27-arm64:4",
+    "sha256": "92df5221d184e6f3d1ecf8405991abe6fdfb4a5f4ff1c9824345b46fe4270571"
   },
   {
     "region": "eu-central-1",
     "otp": "27.3.4.18",
     "arch": "x86_64",
-    "arn": "arn:aws:lambda:eu-central-1:651236577491:layer:mayfly-erlang-27-3-4-18-x86_64:3",
-    "alias_arn": "arn:aws:lambda:eu-central-1:651236577491:layer:mayfly-erlang-27-x86_64:3",
-    "sha256": "9c1c7f70a3c7e3b171692f0d1e275226f9166671414ca80088b706049e434249"
+    "arn": "arn:aws:lambda:eu-central-1:651236577491:layer:mayfly-erlang-27-3-4-18-x86_64:4",
+    "alias_arn": "arn:aws:lambda:eu-central-1:651236577491:layer:mayfly-erlang-27-x86_64:4",
+    "sha256": "07f01f8137117b5fb59ba1a9d85eb24ddb4ad4462b120a7c6f1750aa222de66e"
   },
   {
     "region": "eu-central-1",
     "otp": "28.5.0.7",
     "arch": "arm64",
-    "arn": "arn:aws:lambda:eu-central-1:651236577491:layer:mayfly-erlang-28-5-0-7-arm64:3",
-    "alias_arn": "arn:aws:lambda:eu-central-1:651236577491:layer:mayfly-erlang-28-arm64:3",
-    "sha256": "95aa2229dbfbef5bf6d29979dde5a6ff7871ba7a316016399ef51aa55a0ca55d"
+    "arn": "arn:aws:lambda:eu-central-1:651236577491:layer:mayfly-erlang-28-5-0-7-arm64:4",
+    "alias_arn": "arn:aws:lambda:eu-central-1:651236577491:layer:mayfly-erlang-28-arm64:4",
+    "sha256": "df816b7fd94d19175aa4bd4b516ce83351f9fb668484d7bc7afbcc9991161844"
   },
   {
     "region": "eu-central-1",
     "otp": "28.5.0.7",
     "arch": "x86_64",
-    "arn": "arn:aws:lambda:eu-central-1:651236577491:layer:mayfly-erlang-28-5-0-7-x86_64:3",
-    "alias_arn": "arn:aws:lambda:eu-central-1:651236577491:layer:mayfly-erlang-28-x86_64:3",
-    "sha256": "0494484d984c7bc5534c7189ea7bbb7f02f383a59697b7ff010e1ae06badb59c"
+    "arn": "arn:aws:lambda:eu-central-1:651236577491:layer:mayfly-erlang-28-5-0-7-x86_64:4",
+    "alias_arn": "arn:aws:lambda:eu-central-1:651236577491:layer:mayfly-erlang-28-x86_64:4",
+    "sha256": "026ef24f2dcc33cbbcc70d0d609ac78e20949cffc5e30ac1f304829fa6229c81"
+  },
+  {
+    "region": "eu-central-1",
+    "otp": "29.1.1",
+    "arch": "arm64",
+    "arn": "arn:aws:lambda:eu-central-1:651236577491:layer:mayfly-erlang-29-1-1-arm64:1",
+    "alias_arn": "arn:aws:lambda:eu-central-1:651236577491:layer:mayfly-erlang-29-arm64:1",
+    "sha256": "4c8caa03eb437efa52003e757f33e28a77ebfb161fdc29ad21e7ae66db3f4868"
+  },
+  {
+    "region": "eu-central-1",
+    "otp": "29.1.1",
+    "arch": "x86_64",
+    "arn": "arn:aws:lambda:eu-central-1:651236577491:layer:mayfly-erlang-29-1-1-x86_64:1",
+    "alias_arn": "arn:aws:lambda:eu-central-1:651236577491:layer:mayfly-erlang-29-x86_64:1",
+    "sha256": "057f8f09bc3b09564a1c0ff9a7908e56b1eaec15f5bb86e6aef537706e5ae1f4"
   },
   {
     "region": "eu-north-1",
     "otp": "27.3.4.18",
     "arch": "arm64",
-    "arn": "arn:aws:lambda:eu-north-1:651236577491:layer:mayfly-erlang-27-3-4-18-arm64:3",
-    "alias_arn": "arn:aws:lambda:eu-north-1:651236577491:layer:mayfly-erlang-27-arm64:3",
-    "sha256": "11b228aa9c34d0bc446b1971f46222433438d36874c3ccb8f5fdb57d90bbb635"
+    "arn": "arn:aws:lambda:eu-north-1:651236577491:layer:mayfly-erlang-27-3-4-18-arm64:4",
+    "alias_arn": "arn:aws:lambda:eu-north-1:651236577491:layer:mayfly-erlang-27-arm64:4",
+    "sha256": "92df5221d184e6f3d1ecf8405991abe6fdfb4a5f4ff1c9824345b46fe4270571"
   },
   {
     "region": "eu-north-1",
     "otp": "27.3.4.18",
     "arch": "x86_64",
-    "arn": "arn:aws:lambda:eu-north-1:651236577491:layer:mayfly-erlang-27-3-4-18-x86_64:3",
-    "alias_arn": "arn:aws:lambda:eu-north-1:651236577491:layer:mayfly-erlang-27-x86_64:3",
-    "sha256": "9c1c7f70a3c7e3b171692f0d1e275226f9166671414ca80088b706049e434249"
+    "arn": "arn:aws:lambda:eu-north-1:651236577491:layer:mayfly-erlang-27-3-4-18-x86_64:4",
+    "alias_arn": "arn:aws:lambda:eu-north-1:651236577491:layer:mayfly-erlang-27-x86_64:4",
+    "sha256": "07f01f8137117b5fb59ba1a9d85eb24ddb4ad4462b120a7c6f1750aa222de66e"
   },
   {
     "region": "eu-north-1",
     "otp": "28.5.0.7",
     "arch": "arm64",
-    "arn": "arn:aws:lambda:eu-north-1:651236577491:layer:mayfly-erlang-28-5-0-7-arm64:3",
-    "alias_arn": "arn:aws:lambda:eu-north-1:651236577491:layer:mayfly-erlang-28-arm64:3",
-    "sha256": "95aa2229dbfbef5bf6d29979dde5a6ff7871ba7a316016399ef51aa55a0ca55d"
+    "arn": "arn:aws:lambda:eu-north-1:651236577491:layer:mayfly-erlang-28-5-0-7-arm64:4",
+    "alias_arn": "arn:aws:lambda:eu-north-1:651236577491:layer:mayfly-erlang-28-arm64:4",
+    "sha256": "df816b7fd94d19175aa4bd4b516ce83351f9fb668484d7bc7afbcc9991161844"
   },
   {
     "region": "eu-north-1",
     "otp": "28.5.0.7",
     "arch": "x86_64",
-    "arn": "arn:aws:lambda:eu-north-1:651236577491:layer:mayfly-erlang-28-5-0-7-x86_64:3",
-    "alias_arn": "arn:aws:lambda:eu-north-1:651236577491:layer:mayfly-erlang-28-x86_64:3",
-    "sha256": "0494484d984c7bc5534c7189ea7bbb7f02f383a59697b7ff010e1ae06badb59c"
+    "arn": "arn:aws:lambda:eu-north-1:651236577491:layer:mayfly-erlang-28-5-0-7-x86_64:4",
+    "alias_arn": "arn:aws:lambda:eu-north-1:651236577491:layer:mayfly-erlang-28-x86_64:4",
+    "sha256": "026ef24f2dcc33cbbcc70d0d609ac78e20949cffc5e30ac1f304829fa6229c81"
+  },
+  {
+    "region": "eu-north-1",
+    "otp": "29.1.1",
+    "arch": "arm64",
+    "arn": "arn:aws:lambda:eu-north-1:651236577491:layer:mayfly-erlang-29-1-1-arm64:1",
+    "alias_arn": "arn:aws:lambda:eu-north-1:651236577491:layer:mayfly-erlang-29-arm64:1",
+    "sha256": "4c8caa03eb437efa52003e757f33e28a77ebfb161fdc29ad21e7ae66db3f4868"
+  },
+  {
+    "region": "eu-north-1",
+    "otp": "29.1.1",
+    "arch": "x86_64",
+    "arn": "arn:aws:lambda:eu-north-1:651236577491:layer:mayfly-erlang-29-1-1-x86_64:1",
+    "alias_arn": "arn:aws:lambda:eu-north-1:651236577491:layer:mayfly-erlang-29-x86_64:1",
+    "sha256": "057f8f09bc3b09564a1c0ff9a7908e56b1eaec15f5bb86e6aef537706e5ae1f4"
   },
   {
     "region": "eu-west-1",
     "otp": "27.3.4.18",
     "arch": "arm64",
-    "arn": "arn:aws:lambda:eu-west-1:651236577491:layer:mayfly-erlang-27-3-4-18-arm64:3",
-    "alias_arn": "arn:aws:lambda:eu-west-1:651236577491:layer:mayfly-erlang-27-arm64:3",
-    "sha256": "11b228aa9c34d0bc446b1971f46222433438d36874c3ccb8f5fdb57d90bbb635"
+    "arn": "arn:aws:lambda:eu-west-1:651236577491:layer:mayfly-erlang-27-3-4-18-arm64:4",
+    "alias_arn": "arn:aws:lambda:eu-west-1:651236577491:layer:mayfly-erlang-27-arm64:4",
+    "sha256": "92df5221d184e6f3d1ecf8405991abe6fdfb4a5f4ff1c9824345b46fe4270571"
   },
   {
     "region": "eu-west-1",
     "otp": "27.3.4.18",
     "arch": "x86_64",
-    "arn": "arn:aws:lambda:eu-west-1:651236577491:layer:mayfly-erlang-27-3-4-18-x86_64:3",
-    "alias_arn": "arn:aws:lambda:eu-west-1:651236577491:layer:mayfly-erlang-27-x86_64:3",
-    "sha256": "9c1c7f70a3c7e3b171692f0d1e275226f9166671414ca80088b706049e434249"
+    "arn": "arn:aws:lambda:eu-west-1:651236577491:layer:mayfly-erlang-27-3-4-18-x86_64:4",
+    "alias_arn": "arn:aws:lambda:eu-west-1:651236577491:layer:mayfly-erlang-27-x86_64:4",
+    "sha256": "07f01f8137117b5fb59ba1a9d85eb24ddb4ad4462b120a7c6f1750aa222de66e"
   },
   {
     "region": "eu-west-1",
     "otp": "28.5.0.7",
     "arch": "arm64",
-    "arn": "arn:aws:lambda:eu-west-1:651236577491:layer:mayfly-erlang-28-5-0-7-arm64:3",
-    "alias_arn": "arn:aws:lambda:eu-west-1:651236577491:layer:mayfly-erlang-28-arm64:3",
-    "sha256": "95aa2229dbfbef5bf6d29979dde5a6ff7871ba7a316016399ef51aa55a0ca55d"
+    "arn": "arn:aws:lambda:eu-west-1:651236577491:layer:mayfly-erlang-28-5-0-7-arm64:4",
+    "alias_arn": "arn:aws:lambda:eu-west-1:651236577491:layer:mayfly-erlang-28-arm64:4",
+    "sha256": "df816b7fd94d19175aa4bd4b516ce83351f9fb668484d7bc7afbcc9991161844"
   },
   {
     "region": "eu-west-1",
     "otp": "28.5.0.7",
     "arch": "x86_64",
-    "arn": "arn:aws:lambda:eu-west-1:651236577491:layer:mayfly-erlang-28-5-0-7-x86_64:3",
-    "alias_arn": "arn:aws:lambda:eu-west-1:651236577491:layer:mayfly-erlang-28-x86_64:3",
-    "sha256": "0494484d984c7bc5534c7189ea7bbb7f02f383a59697b7ff010e1ae06badb59c"
+    "arn": "arn:aws:lambda:eu-west-1:651236577491:layer:mayfly-erlang-28-5-0-7-x86_64:4",
+    "alias_arn": "arn:aws:lambda:eu-west-1:651236577491:layer:mayfly-erlang-28-x86_64:4",
+    "sha256": "026ef24f2dcc33cbbcc70d0d609ac78e20949cffc5e30ac1f304829fa6229c81"
+  },
+  {
+    "region": "eu-west-1",
+    "otp": "29.1.1",
+    "arch": "arm64",
+    "arn": "arn:aws:lambda:eu-west-1:651236577491:layer:mayfly-erlang-29-1-1-arm64:1",
+    "alias_arn": "arn:aws:lambda:eu-west-1:651236577491:layer:mayfly-erlang-29-arm64:1",
+    "sha256": "4c8caa03eb437efa52003e757f33e28a77ebfb161fdc29ad21e7ae66db3f4868"
+  },
+  {
+    "region": "eu-west-1",
+    "otp": "29.1.1",
+    "arch": "x86_64",
+    "arn": "arn:aws:lambda:eu-west-1:651236577491:layer:mayfly-erlang-29-1-1-x86_64:1",
+    "alias_arn": "arn:aws:lambda:eu-west-1:651236577491:layer:mayfly-erlang-29-x86_64:1",
+    "sha256": "057f8f09bc3b09564a1c0ff9a7908e56b1eaec15f5bb86e6aef537706e5ae1f4"
   },
   {
     "region": "eu-west-2",
     "otp": "27.3.4.18",
     "arch": "arm64",
-    "arn": "arn:aws:lambda:eu-west-2:651236577491:layer:mayfly-erlang-27-3-4-18-arm64:3",
-    "alias_arn": "arn:aws:lambda:eu-west-2:651236577491:layer:mayfly-erlang-27-arm64:3",
-    "sha256": "11b228aa9c34d0bc446b1971f46222433438d36874c3ccb8f5fdb57d90bbb635"
+    "arn": "arn:aws:lambda:eu-west-2:651236577491:layer:mayfly-erlang-27-3-4-18-arm64:4",
+    "alias_arn": "arn:aws:lambda:eu-west-2:651236577491:layer:mayfly-erlang-27-arm64:4",
+    "sha256": "92df5221d184e6f3d1ecf8405991abe6fdfb4a5f4ff1c9824345b46fe4270571"
   },
   {
     "region": "eu-west-2",
     "otp": "27.3.4.18",
     "arch": "x86_64",
-    "arn": "arn:aws:lambda:eu-west-2:651236577491:layer:mayfly-erlang-27-3-4-18-x86_64:3",
-    "alias_arn": "arn:aws:lambda:eu-west-2:651236577491:layer:mayfly-erlang-27-x86_64:3",
-    "sha256": "9c1c7f70a3c7e3b171692f0d1e275226f9166671414ca80088b706049e434249"
+    "arn": "arn:aws:lambda:eu-west-2:651236577491:layer:mayfly-erlang-27-3-4-18-x86_64:4",
+    "alias_arn": "arn:aws:lambda:eu-west-2:651236577491:layer:mayfly-erlang-27-x86_64:4",
+    "sha256": "07f01f8137117b5fb59ba1a9d85eb24ddb4ad4462b120a7c6f1750aa222de66e"
   },
   {
     "region": "eu-west-2",
     "otp": "28.5.0.7",
     "arch": "arm64",
-    "arn": "arn:aws:lambda:eu-west-2:651236577491:layer:mayfly-erlang-28-5-0-7-arm64:3",
-    "alias_arn": "arn:aws:lambda:eu-west-2:651236577491:layer:mayfly-erlang-28-arm64:3",
-    "sha256": "95aa2229dbfbef5bf6d29979dde5a6ff7871ba7a316016399ef51aa55a0ca55d"
+    "arn": "arn:aws:lambda:eu-west-2:651236577491:layer:mayfly-erlang-28-5-0-7-arm64:4",
+    "alias_arn": "arn:aws:lambda:eu-west-2:651236577491:layer:mayfly-erlang-28-arm64:4",
+    "sha256": "df816b7fd94d19175aa4bd4b516ce83351f9fb668484d7bc7afbcc9991161844"
   },
   {
     "region": "eu-west-2",
     "otp": "28.5.0.7",
     "arch": "x86_64",
-    "arn": "arn:aws:lambda:eu-west-2:651236577491:layer:mayfly-erlang-28-5-0-7-x86_64:3",
-    "alias_arn": "arn:aws:lambda:eu-west-2:651236577491:layer:mayfly-erlang-28-x86_64:3",
-    "sha256": "0494484d984c7bc5534c7189ea7bbb7f02f383a59697b7ff010e1ae06badb59c"
+    "arn": "arn:aws:lambda:eu-west-2:651236577491:layer:mayfly-erlang-28-5-0-7-x86_64:4",
+    "alias_arn": "arn:aws:lambda:eu-west-2:651236577491:layer:mayfly-erlang-28-x86_64:4",
+    "sha256": "026ef24f2dcc33cbbcc70d0d609ac78e20949cffc5e30ac1f304829fa6229c81"
+  },
+  {
+    "region": "eu-west-2",
+    "otp": "29.1.1",
+    "arch": "arm64",
+    "arn": "arn:aws:lambda:eu-west-2:651236577491:layer:mayfly-erlang-29-1-1-arm64:1",
+    "alias_arn": "arn:aws:lambda:eu-west-2:651236577491:layer:mayfly-erlang-29-arm64:1",
+    "sha256": "4c8caa03eb437efa52003e757f33e28a77ebfb161fdc29ad21e7ae66db3f4868"
+  },
+  {
+    "region": "eu-west-2",
+    "otp": "29.1.1",
+    "arch": "x86_64",
+    "arn": "arn:aws:lambda:eu-west-2:651236577491:layer:mayfly-erlang-29-1-1-x86_64:1",
+    "alias_arn": "arn:aws:lambda:eu-west-2:651236577491:layer:mayfly-erlang-29-x86_64:1",
+    "sha256": "057f8f09bc3b09564a1c0ff9a7908e56b1eaec15f5bb86e6aef537706e5ae1f4"
   },
   {
     "region": "eu-west-3",
     "otp": "27.3.4.18",
     "arch": "arm64",
-    "arn": "arn:aws:lambda:eu-west-3:651236577491:layer:mayfly-erlang-27-3-4-18-arm64:3",
-    "alias_arn": "arn:aws:lambda:eu-west-3:651236577491:layer:mayfly-erlang-27-arm64:3",
-    "sha256": "11b228aa9c34d0bc446b1971f46222433438d36874c3ccb8f5fdb57d90bbb635"
+    "arn": "arn:aws:lambda:eu-west-3:651236577491:layer:mayfly-erlang-27-3-4-18-arm64:4",
+    "alias_arn": "arn:aws:lambda:eu-west-3:651236577491:layer:mayfly-erlang-27-arm64:4",
+    "sha256": "92df5221d184e6f3d1ecf8405991abe6fdfb4a5f4ff1c9824345b46fe4270571"
   },
   {
     "region": "eu-west-3",
     "otp": "27.3.4.18",
     "arch": "x86_64",
-    "arn": "arn:aws:lambda:eu-west-3:651236577491:layer:mayfly-erlang-27-3-4-18-x86_64:3",
-    "alias_arn": "arn:aws:lambda:eu-west-3:651236577491:layer:mayfly-erlang-27-x86_64:3",
-    "sha256": "9c1c7f70a3c7e3b171692f0d1e275226f9166671414ca80088b706049e434249"
+    "arn": "arn:aws:lambda:eu-west-3:651236577491:layer:mayfly-erlang-27-3-4-18-x86_64:4",
+    "alias_arn": "arn:aws:lambda:eu-west-3:651236577491:layer:mayfly-erlang-27-x86_64:4",
+    "sha256": "07f01f8137117b5fb59ba1a9d85eb24ddb4ad4462b120a7c6f1750aa222de66e"
   },
   {
     "region": "eu-west-3",
     "otp": "28.5.0.7",
     "arch": "arm64",
-    "arn": "arn:aws:lambda:eu-west-3:651236577491:layer:mayfly-erlang-28-5-0-7-arm64:3",
-    "alias_arn": "arn:aws:lambda:eu-west-3:651236577491:layer:mayfly-erlang-28-arm64:3",
-    "sha256": "95aa2229dbfbef5bf6d29979dde5a6ff7871ba7a316016399ef51aa55a0ca55d"
+    "arn": "arn:aws:lambda:eu-west-3:651236577491:layer:mayfly-erlang-28-5-0-7-arm64:4",
+    "alias_arn": "arn:aws:lambda:eu-west-3:651236577491:layer:mayfly-erlang-28-arm64:4",
+    "sha256": "df816b7fd94d19175aa4bd4b516ce83351f9fb668484d7bc7afbcc9991161844"
   },
   {
     "region": "eu-west-3",
     "otp": "28.5.0.7",
     "arch": "x86_64",
-    "arn": "arn:aws:lambda:eu-west-3:651236577491:layer:mayfly-erlang-28-5-0-7-x86_64:3",
-    "alias_arn": "arn:aws:lambda:eu-west-3:651236577491:layer:mayfly-erlang-28-x86_64:3",
-    "sha256": "0494484d984c7bc5534c7189ea7bbb7f02f383a59697b7ff010e1ae06badb59c"
+    "arn": "arn:aws:lambda:eu-west-3:651236577491:layer:mayfly-erlang-28-5-0-7-x86_64:4",
+    "alias_arn": "arn:aws:lambda:eu-west-3:651236577491:layer:mayfly-erlang-28-x86_64:4",
+    "sha256": "026ef24f2dcc33cbbcc70d0d609ac78e20949cffc5e30ac1f304829fa6229c81"
+  },
+  {
+    "region": "eu-west-3",
+    "otp": "29.1.1",
+    "arch": "arm64",
+    "arn": "arn:aws:lambda:eu-west-3:651236577491:layer:mayfly-erlang-29-1-1-arm64:1",
+    "alias_arn": "arn:aws:lambda:eu-west-3:651236577491:layer:mayfly-erlang-29-arm64:1",
+    "sha256": "4c8caa03eb437efa52003e757f33e28a77ebfb161fdc29ad21e7ae66db3f4868"
+  },
+  {
+    "region": "eu-west-3",
+    "otp": "29.1.1",
+    "arch": "x86_64",
+    "arn": "arn:aws:lambda:eu-west-3:651236577491:layer:mayfly-erlang-29-1-1-x86_64:1",
+    "alias_arn": "arn:aws:lambda:eu-west-3:651236577491:layer:mayfly-erlang-29-x86_64:1",
+    "sha256": "057f8f09bc3b09564a1c0ff9a7908e56b1eaec15f5bb86e6aef537706e5ae1f4"
   },
   {
     "region": "sa-east-1",
     "otp": "27.3.4.18",
     "arch": "arm64",
-    "arn": "arn:aws:lambda:sa-east-1:651236577491:layer:mayfly-erlang-27-3-4-18-arm64:3",
-    "alias_arn": "arn:aws:lambda:sa-east-1:651236577491:layer:mayfly-erlang-27-arm64:3",
-    "sha256": "11b228aa9c34d0bc446b1971f46222433438d36874c3ccb8f5fdb57d90bbb635"
+    "arn": "arn:aws:lambda:sa-east-1:651236577491:layer:mayfly-erlang-27-3-4-18-arm64:4",
+    "alias_arn": "arn:aws:lambda:sa-east-1:651236577491:layer:mayfly-erlang-27-arm64:4",
+    "sha256": "92df5221d184e6f3d1ecf8405991abe6fdfb4a5f4ff1c9824345b46fe4270571"
   },
   {
     "region": "sa-east-1",
     "otp": "27.3.4.18",
     "arch": "x86_64",
-    "arn": "arn:aws:lambda:sa-east-1:651236577491:layer:mayfly-erlang-27-3-4-18-x86_64:3",
-    "alias_arn": "arn:aws:lambda:sa-east-1:651236577491:layer:mayfly-erlang-27-x86_64:3",
-    "sha256": "9c1c7f70a3c7e3b171692f0d1e275226f9166671414ca80088b706049e434249"
+    "arn": "arn:aws:lambda:sa-east-1:651236577491:layer:mayfly-erlang-27-3-4-18-x86_64:4",
+    "alias_arn": "arn:aws:lambda:sa-east-1:651236577491:layer:mayfly-erlang-27-x86_64:4",
+    "sha256": "07f01f8137117b5fb59ba1a9d85eb24ddb4ad4462b120a7c6f1750aa222de66e"
   },
   {
     "region": "sa-east-1",
     "otp": "28.5.0.7",
     "arch": "arm64",
-    "arn": "arn:aws:lambda:sa-east-1:651236577491:layer:mayfly-erlang-28-5-0-7-arm64:3",
-    "alias_arn": "arn:aws:lambda:sa-east-1:651236577491:layer:mayfly-erlang-28-arm64:3",
-    "sha256": "95aa2229dbfbef5bf6d29979dde5a6ff7871ba7a316016399ef51aa55a0ca55d"
+    "arn": "arn:aws:lambda:sa-east-1:651236577491:layer:mayfly-erlang-28-5-0-7-arm64:4",
+    "alias_arn": "arn:aws:lambda:sa-east-1:651236577491:layer:mayfly-erlang-28-arm64:4",
+    "sha256": "df816b7fd94d19175aa4bd4b516ce83351f9fb668484d7bc7afbcc9991161844"
   },
   {
     "region": "sa-east-1",
     "otp": "28.5.0.7",
     "arch": "x86_64",
-    "arn": "arn:aws:lambda:sa-east-1:651236577491:layer:mayfly-erlang-28-5-0-7-x86_64:3",
-    "alias_arn": "arn:aws:lambda:sa-east-1:651236577491:layer:mayfly-erlang-28-x86_64:3",
-    "sha256": "0494484d984c7bc5534c7189ea7bbb7f02f383a59697b7ff010e1ae06badb59c"
+    "arn": "arn:aws:lambda:sa-east-1:651236577491:layer:mayfly-erlang-28-5-0-7-x86_64:4",
+    "alias_arn": "arn:aws:lambda:sa-east-1:651236577491:layer:mayfly-erlang-28-x86_64:4",
+    "sha256": "026ef24f2dcc33cbbcc70d0d609ac78e20949cffc5e30ac1f304829fa6229c81"
+  },
+  {
+    "region": "sa-east-1",
+    "otp": "29.1.1",
+    "arch": "arm64",
+    "arn": "arn:aws:lambda:sa-east-1:651236577491:layer:mayfly-erlang-29-1-1-arm64:1",
+    "alias_arn": "arn:aws:lambda:sa-east-1:651236577491:layer:mayfly-erlang-29-arm64:1",
+    "sha256": "4c8caa03eb437efa52003e757f33e28a77ebfb161fdc29ad21e7ae66db3f4868"
+  },
+  {
+    "region": "sa-east-1",
+    "otp": "29.1.1",
+    "arch": "x86_64",
+    "arn": "arn:aws:lambda:sa-east-1:651236577491:layer:mayfly-erlang-29-1-1-x86_64:1",
+    "alias_arn": "arn:aws:lambda:sa-east-1:651236577491:layer:mayfly-erlang-29-x86_64:1",
+    "sha256": "057f8f09bc3b09564a1c0ff9a7908e56b1eaec15f5bb86e6aef537706e5ae1f4"
   },
   {
     "region": "us-east-1",
     "otp": "27.3.4.18",
     "arch": "arm64",
-    "arn": "arn:aws:lambda:us-east-1:651236577491:layer:mayfly-erlang-27-3-4-18-arm64:3",
-    "alias_arn": "arn:aws:lambda:us-east-1:651236577491:layer:mayfly-erlang-27-arm64:3",
-    "sha256": "11b228aa9c34d0bc446b1971f46222433438d36874c3ccb8f5fdb57d90bbb635"
+    "arn": "arn:aws:lambda:us-east-1:651236577491:layer:mayfly-erlang-27-3-4-18-arm64:4",
+    "alias_arn": "arn:aws:lambda:us-east-1:651236577491:layer:mayfly-erlang-27-arm64:4",
+    "sha256": "92df5221d184e6f3d1ecf8405991abe6fdfb4a5f4ff1c9824345b46fe4270571"
   },
   {
     "region": "us-east-1",
     "otp": "27.3.4.18",
     "arch": "x86_64",
-    "arn": "arn:aws:lambda:us-east-1:651236577491:layer:mayfly-erlang-27-3-4-18-x86_64:3",
-    "alias_arn": "arn:aws:lambda:us-east-1:651236577491:layer:mayfly-erlang-27-x86_64:3",
-    "sha256": "9c1c7f70a3c7e3b171692f0d1e275226f9166671414ca80088b706049e434249"
+    "arn": "arn:aws:lambda:us-east-1:651236577491:layer:mayfly-erlang-27-3-4-18-x86_64:4",
+    "alias_arn": "arn:aws:lambda:us-east-1:651236577491:layer:mayfly-erlang-27-x86_64:4",
+    "sha256": "07f01f8137117b5fb59ba1a9d85eb24ddb4ad4462b120a7c6f1750aa222de66e"
   },
   {
     "region": "us-east-1",
     "otp": "28.5.0.7",
     "arch": "arm64",
-    "arn": "arn:aws:lambda:us-east-1:651236577491:layer:mayfly-erlang-28-5-0-7-arm64:3",
-    "alias_arn": "arn:aws:lambda:us-east-1:651236577491:layer:mayfly-erlang-28-arm64:3",
-    "sha256": "95aa2229dbfbef5bf6d29979dde5a6ff7871ba7a316016399ef51aa55a0ca55d"
+    "arn": "arn:aws:lambda:us-east-1:651236577491:layer:mayfly-erlang-28-5-0-7-arm64:4",
+    "alias_arn": "arn:aws:lambda:us-east-1:651236577491:layer:mayfly-erlang-28-arm64:4",
+    "sha256": "df816b7fd94d19175aa4bd4b516ce83351f9fb668484d7bc7afbcc9991161844"
   },
   {
     "region": "us-east-1",
     "otp": "28.5.0.7",
     "arch": "x86_64",
-    "arn": "arn:aws:lambda:us-east-1:651236577491:layer:mayfly-erlang-28-5-0-7-x86_64:3",
-    "alias_arn": "arn:aws:lambda:us-east-1:651236577491:layer:mayfly-erlang-28-x86_64:3",
-    "sha256": "0494484d984c7bc5534c7189ea7bbb7f02f383a59697b7ff010e1ae06badb59c"
+    "arn": "arn:aws:lambda:us-east-1:651236577491:layer:mayfly-erlang-28-5-0-7-x86_64:4",
+    "alias_arn": "arn:aws:lambda:us-east-1:651236577491:layer:mayfly-erlang-28-x86_64:4",
+    "sha256": "026ef24f2dcc33cbbcc70d0d609ac78e20949cffc5e30ac1f304829fa6229c81"
+  },
+  {
+    "region": "us-east-1",
+    "otp": "29.1.1",
+    "arch": "arm64",
+    "arn": "arn:aws:lambda:us-east-1:651236577491:layer:mayfly-erlang-29-1-1-arm64:1",
+    "alias_arn": "arn:aws:lambda:us-east-1:651236577491:layer:mayfly-erlang-29-arm64:1",
+    "sha256": "4c8caa03eb437efa52003e757f33e28a77ebfb161fdc29ad21e7ae66db3f4868"
+  },
+  {
+    "region": "us-east-1",
+    "otp": "29.1.1",
+    "arch": "x86_64",
+    "arn": "arn:aws:lambda:us-east-1:651236577491:layer:mayfly-erlang-29-1-1-x86_64:1",
+    "alias_arn": "arn:aws:lambda:us-east-1:651236577491:layer:mayfly-erlang-29-x86_64:1",
+    "sha256": "057f8f09bc3b09564a1c0ff9a7908e56b1eaec15f5bb86e6aef537706e5ae1f4"
   },
   {
     "region": "us-east-2",
     "otp": "27.3.4.18",
     "arch": "arm64",
-    "arn": "arn:aws:lambda:us-east-2:651236577491:layer:mayfly-erlang-27-3-4-18-arm64:3",
-    "alias_arn": "arn:aws:lambda:us-east-2:651236577491:layer:mayfly-erlang-27-arm64:3",
-    "sha256": "11b228aa9c34d0bc446b1971f46222433438d36874c3ccb8f5fdb57d90bbb635"
+    "arn": "arn:aws:lambda:us-east-2:651236577491:layer:mayfly-erlang-27-3-4-18-arm64:4",
+    "alias_arn": "arn:aws:lambda:us-east-2:651236577491:layer:mayfly-erlang-27-arm64:4",
+    "sha256": "92df5221d184e6f3d1ecf8405991abe6fdfb4a5f4ff1c9824345b46fe4270571"
   },
   {
     "region": "us-east-2",
     "otp": "27.3.4.18",
     "arch": "x86_64",
-    "arn": "arn:aws:lambda:us-east-2:651236577491:layer:mayfly-erlang-27-3-4-18-x86_64:3",
-    "alias_arn": "arn:aws:lambda:us-east-2:651236577491:layer:mayfly-erlang-27-x86_64:3",
-    "sha256": "9c1c7f70a3c7e3b171692f0d1e275226f9166671414ca80088b706049e434249"
+    "arn": "arn:aws:lambda:us-east-2:651236577491:layer:mayfly-erlang-27-3-4-18-x86_64:4",
+    "alias_arn": "arn:aws:lambda:us-east-2:651236577491:layer:mayfly-erlang-27-x86_64:4",
+    "sha256": "07f01f8137117b5fb59ba1a9d85eb24ddb4ad4462b120a7c6f1750aa222de66e"
   },
   {
     "region": "us-east-2",
     "otp": "28.5.0.7",
     "arch": "arm64",
-    "arn": "arn:aws:lambda:us-east-2:651236577491:layer:mayfly-erlang-28-5-0-7-arm64:3",
-    "alias_arn": "arn:aws:lambda:us-east-2:651236577491:layer:mayfly-erlang-28-arm64:3",
-    "sha256": "95aa2229dbfbef5bf6d29979dde5a6ff7871ba7a316016399ef51aa55a0ca55d"
+    "arn": "arn:aws:lambda:us-east-2:651236577491:layer:mayfly-erlang-28-5-0-7-arm64:4",
+    "alias_arn": "arn:aws:lambda:us-east-2:651236577491:layer:mayfly-erlang-28-arm64:4",
+    "sha256": "df816b7fd94d19175aa4bd4b516ce83351f9fb668484d7bc7afbcc9991161844"
   },
   {
     "region": "us-east-2",
     "otp": "28.5.0.7",
     "arch": "x86_64",
-    "arn": "arn:aws:lambda:us-east-2:651236577491:layer:mayfly-erlang-28-5-0-7-x86_64:3",
-    "alias_arn": "arn:aws:lambda:us-east-2:651236577491:layer:mayfly-erlang-28-x86_64:3",
-    "sha256": "0494484d984c7bc5534c7189ea7bbb7f02f383a59697b7ff010e1ae06badb59c"
+    "arn": "arn:aws:lambda:us-east-2:651236577491:layer:mayfly-erlang-28-5-0-7-x86_64:4",
+    "alias_arn": "arn:aws:lambda:us-east-2:651236577491:layer:mayfly-erlang-28-x86_64:4",
+    "sha256": "026ef24f2dcc33cbbcc70d0d609ac78e20949cffc5e30ac1f304829fa6229c81"
+  },
+  {
+    "region": "us-east-2",
+    "otp": "29.1.1",
+    "arch": "arm64",
+    "arn": "arn:aws:lambda:us-east-2:651236577491:layer:mayfly-erlang-29-1-1-arm64:1",
+    "alias_arn": "arn:aws:lambda:us-east-2:651236577491:layer:mayfly-erlang-29-arm64:1",
+    "sha256": "4c8caa03eb437efa52003e757f33e28a77ebfb161fdc29ad21e7ae66db3f4868"
+  },
+  {
+    "region": "us-east-2",
+    "otp": "29.1.1",
+    "arch": "x86_64",
+    "arn": "arn:aws:lambda:us-east-2:651236577491:layer:mayfly-erlang-29-1-1-x86_64:1",
+    "alias_arn": "arn:aws:lambda:us-east-2:651236577491:layer:mayfly-erlang-29-x86_64:1",
+    "sha256": "057f8f09bc3b09564a1c0ff9a7908e56b1eaec15f5bb86e6aef537706e5ae1f4"
   },
   {
     "region": "us-west-1",
     "otp": "27.3.4.18",
     "arch": "arm64",
-    "arn": "arn:aws:lambda:us-west-1:651236577491:layer:mayfly-erlang-27-3-4-18-arm64:3",
-    "alias_arn": "arn:aws:lambda:us-west-1:651236577491:layer:mayfly-erlang-27-arm64:3",
-    "sha256": "11b228aa9c34d0bc446b1971f46222433438d36874c3ccb8f5fdb57d90bbb635"
+    "arn": "arn:aws:lambda:us-west-1:651236577491:layer:mayfly-erlang-27-3-4-18-arm64:4",
+    "alias_arn": "arn:aws:lambda:us-west-1:651236577491:layer:mayfly-erlang-27-arm64:4",
+    "sha256": "92df5221d184e6f3d1ecf8405991abe6fdfb4a5f4ff1c9824345b46fe4270571"
   },
   {
     "region": "us-west-1",
     "otp": "27.3.4.18",
     "arch": "x86_64",
-    "arn": "arn:aws:lambda:us-west-1:651236577491:layer:mayfly-erlang-27-3-4-18-x86_64:3",
-    "alias_arn": "arn:aws:lambda:us-west-1:651236577491:layer:mayfly-erlang-27-x86_64:3",
-    "sha256": "9c1c7f70a3c7e3b171692f0d1e275226f9166671414ca80088b706049e434249"
+    "arn": "arn:aws:lambda:us-west-1:651236577491:layer:mayfly-erlang-27-3-4-18-x86_64:4",
+    "alias_arn": "arn:aws:lambda:us-west-1:651236577491:layer:mayfly-erlang-27-x86_64:4",
+    "sha256": "07f01f8137117b5fb59ba1a9d85eb24ddb4ad4462b120a7c6f1750aa222de66e"
   },
   {
     "region": "us-west-1",
     "otp": "28.5.0.7",
     "arch": "arm64",
-    "arn": "arn:aws:lambda:us-west-1:651236577491:layer:mayfly-erlang-28-5-0-7-arm64:3",
-    "alias_arn": "arn:aws:lambda:us-west-1:651236577491:layer:mayfly-erlang-28-arm64:3",
-    "sha256": "95aa2229dbfbef5bf6d29979dde5a6ff7871ba7a316016399ef51aa55a0ca55d"
+    "arn": "arn:aws:lambda:us-west-1:651236577491:layer:mayfly-erlang-28-5-0-7-arm64:4",
+    "alias_arn": "arn:aws:lambda:us-west-1:651236577491:layer:mayfly-erlang-28-arm64:4",
+    "sha256": "df816b7fd94d19175aa4bd4b516ce83351f9fb668484d7bc7afbcc9991161844"
   },
   {
     "region": "us-west-1",
     "otp": "28.5.0.7",
     "arch": "x86_64",
-    "arn": "arn:aws:lambda:us-west-1:651236577491:layer:mayfly-erlang-28-5-0-7-x86_64:3",
-    "alias_arn": "arn:aws:lambda:us-west-1:651236577491:layer:mayfly-erlang-28-x86_64:3",
-    "sha256": "0494484d984c7bc5534c7189ea7bbb7f02f383a59697b7ff010e1ae06badb59c"
+    "arn": "arn:aws:lambda:us-west-1:651236577491:layer:mayfly-erlang-28-5-0-7-x86_64:4",
+    "alias_arn": "arn:aws:lambda:us-west-1:651236577491:layer:mayfly-erlang-28-x86_64:4",
+    "sha256": "026ef24f2dcc33cbbcc70d0d609ac78e20949cffc5e30ac1f304829fa6229c81"
+  },
+  {
+    "region": "us-west-1",
+    "otp": "29.1.1",
+    "arch": "arm64",
+    "arn": "arn:aws:lambda:us-west-1:651236577491:layer:mayfly-erlang-29-1-1-arm64:1",
+    "alias_arn": "arn:aws:lambda:us-west-1:651236577491:layer:mayfly-erlang-29-arm64:1",
+    "sha256": "4c8caa03eb437efa52003e757f33e28a77ebfb161fdc29ad21e7ae66db3f4868"
+  },
+  {
+    "region": "us-west-1",
+    "otp": "29.1.1",
+    "arch": "x86_64",
+    "arn": "arn:aws:lambda:us-west-1:651236577491:layer:mayfly-erlang-29-1-1-x86_64:1",
+    "alias_arn": "arn:aws:lambda:us-west-1:651236577491:layer:mayfly-erlang-29-x86_64:1",
+    "sha256": "057f8f09bc3b09564a1c0ff9a7908e56b1eaec15f5bb86e6aef537706e5ae1f4"
   },
   {
     "region": "us-west-2",
     "otp": "27.3.4.18",
     "arch": "arm64",
-    "arn": "arn:aws:lambda:us-west-2:651236577491:layer:mayfly-erlang-27-3-4-18-arm64:3",
-    "alias_arn": "arn:aws:lambda:us-west-2:651236577491:layer:mayfly-erlang-27-arm64:3",
-    "sha256": "11b228aa9c34d0bc446b1971f46222433438d36874c3ccb8f5fdb57d90bbb635"
+    "arn": "arn:aws:lambda:us-west-2:651236577491:layer:mayfly-erlang-27-3-4-18-arm64:4",
+    "alias_arn": "arn:aws:lambda:us-west-2:651236577491:layer:mayfly-erlang-27-arm64:4",
+    "sha256": "92df5221d184e6f3d1ecf8405991abe6fdfb4a5f4ff1c9824345b46fe4270571"
   },
   {
     "region": "us-west-2",
     "otp": "27.3.4.18",
     "arch": "x86_64",
-    "arn": "arn:aws:lambda:us-west-2:651236577491:layer:mayfly-erlang-27-3-4-18-x86_64:3",
-    "alias_arn": "arn:aws:lambda:us-west-2:651236577491:layer:mayfly-erlang-27-x86_64:3",
-    "sha256": "9c1c7f70a3c7e3b171692f0d1e275226f9166671414ca80088b706049e434249"
+    "arn": "arn:aws:lambda:us-west-2:651236577491:layer:mayfly-erlang-27-3-4-18-x86_64:4",
+    "alias_arn": "arn:aws:lambda:us-west-2:651236577491:layer:mayfly-erlang-27-x86_64:4",
+    "sha256": "07f01f8137117b5fb59ba1a9d85eb24ddb4ad4462b120a7c6f1750aa222de66e"
   },
   {
     "region": "us-west-2",
     "otp": "28.5.0.7",
     "arch": "arm64",
-    "arn": "arn:aws:lambda:us-west-2:651236577491:layer:mayfly-erlang-28-5-0-7-arm64:3",
-    "alias_arn": "arn:aws:lambda:us-west-2:651236577491:layer:mayfly-erlang-28-arm64:3",
-    "sha256": "95aa2229dbfbef5bf6d29979dde5a6ff7871ba7a316016399ef51aa55a0ca55d"
+    "arn": "arn:aws:lambda:us-west-2:651236577491:layer:mayfly-erlang-28-5-0-7-arm64:4",
+    "alias_arn": "arn:aws:lambda:us-west-2:651236577491:layer:mayfly-erlang-28-arm64:4",
+    "sha256": "df816b7fd94d19175aa4bd4b516ce83351f9fb668484d7bc7afbcc9991161844"
   },
   {
     "region": "us-west-2",
     "otp": "28.5.0.7",
     "arch": "x86_64",
-    "arn": "arn:aws:lambda:us-west-2:651236577491:layer:mayfly-erlang-28-5-0-7-x86_64:3",
-    "alias_arn": "arn:aws:lambda:us-west-2:651236577491:layer:mayfly-erlang-28-x86_64:3",
-    "sha256": "0494484d984c7bc5534c7189ea7bbb7f02f383a59697b7ff010e1ae06badb59c"
+    "arn": "arn:aws:lambda:us-west-2:651236577491:layer:mayfly-erlang-28-5-0-7-x86_64:4",
+    "alias_arn": "arn:aws:lambda:us-west-2:651236577491:layer:mayfly-erlang-28-x86_64:4",
+    "sha256": "026ef24f2dcc33cbbcc70d0d609ac78e20949cffc5e30ac1f304829fa6229c81"
+  },
+  {
+    "region": "us-west-2",
+    "otp": "29.1.1",
+    "arch": "arm64",
+    "arn": "arn:aws:lambda:us-west-2:651236577491:layer:mayfly-erlang-29-1-1-arm64:1",
+    "alias_arn": "arn:aws:lambda:us-west-2:651236577491:layer:mayfly-erlang-29-arm64:1",
+    "sha256": "4c8caa03eb437efa52003e757f33e28a77ebfb161fdc29ad21e7ae66db3f4868"
+  },
+  {
+    "region": "us-west-2",
+    "otp": "29.1.1",
+    "arch": "x86_64",
+    "arn": "arn:aws:lambda:us-west-2:651236577491:layer:mayfly-erlang-29-1-1-x86_64:1",
+    "alias_arn": "arn:aws:lambda:us-west-2:651236577491:layer:mayfly-erlang-29-x86_64:1",
+    "sha256": "057f8f09bc3b09564a1c0ff9a7908e56b1eaec15f5bb86e6aef537706e5ae1f4"
   }
 ]
