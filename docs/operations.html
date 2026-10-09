@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="ExDoc v0.40.4">
+    <meta name="project" content="Mayfly v1.0.0-rc.1">
+
+
+    <title>Operations — Mayfly v1.0.0-rc.1</title>
+
+    <link rel="stylesheet" href="dist/html-elixir-RXHHCTJW.css" />
+
+      <link rel="canonical" href="https://elixir-aws-lambda.dev/docs/operations.html" />
+
+    <script defer src="dist/sidebar_items-EC992EFC.js"></script>
+    <script defer src="docs_config.js"></script>
+    <script defer src="dist/html-MI33G4N7.js"></script>
+<meta name="description" content="Mayfly documentation: run Elixir on AWS Lambda with a lightweight custom runtime. Handler behaviour, mix release build, Erlang layers, response streaming, Managed Instances, observability.">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#5b21b6">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Mayfly – Elixir on AWS Lambda">
+<meta property="og:title" content="Mayfly documentation – Elixir AWS Lambda runtime">
+<meta property="og:description" content="Run Elixir on AWS Lambda: handler behaviour, mix release build, Erlang layers, response streaming, Managed Instances.">
+<meta property="og:image" content="https://elixir-aws-lambda.dev/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/png" href="https://elixir-aws-lambda.dev/elixir-drop-only.png">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"TechArticle","isPartOf":{"@type":"WebSite","name":"Mayfly","url":"https://elixir-aws-lambda.dev/"},
+ "about":{"@type":"SoftwareSourceCode","name":"Mayfly","codeRepository":"https://github.com/bmalum/mayfly","programmingLanguage":"Elixir","runtimePlatform":"AWS Lambda provided.al2023"},
+ "author":{"@type":"Organization","name":"Karrer","url":"https://karrer.solutions"}}
+</script>
+
+  </head>
+  <body>
+    <script>(()=>{var t="ex_doc:settings",e="dark";var o="dark",s="light";var E="sidebar_state",n="closed";var r="sidebar_width";var a="sidebar-open";var i=new URLSearchParams(window.location.search),S=i.get("theme")||JSON.parse(localStorage.getItem(t)||"{}").theme;(S===o||S!==s&&window.matchMedia("(prefers-color-scheme: dark)").matches)&&document.body.classList.add(e);var d=sessionStorage.getItem(E),A=d!==n&&!window.matchMedia(`screen and (max-width: ${768}px)`).matches;document.body.classList.toggle(a,A);var c=sessionStorage.getItem(r);c&&document.body.style.setProperty("--sidebarWidth",`${c}px`);var p=/(Macintosh|iPhone|iPad|iPod)/.test(window.navigator.userAgent);document.documentElement.classList.toggle("apple-os",p);})();
+</script>
+
+<div class="body-wrapper">
+
+<button id="sidebar-menu" class="sidebar-button sidebar-toggle" aria-label="toggle sidebar" aria-controls="sidebar">
+  <i class="ri-menu-line ri-lg" title="Collapse/expand sidebar"></i>
+</button>
+
+<nav id="sidebar" class="sidebar">
+
+  <div class="sidebar-header">
+    <div class="sidebar-projectInfo">
+
+        <a href="https://github.com/bmalum/mayfly" class="sidebar-projectImage">
+          <img src="assets/logo.png" alt="Mayfly" />
+        </a>
+
+      <div>
+        <a href="https://github.com/bmalum/mayfly" class="sidebar-projectName" translate="no">
+Mayfly
+        </a>
+        <div class="sidebar-projectVersion" translate="no">
+          v1.0.0-rc.1
+        </div>
+      </div>
+    </div>
+    <ul id="sidebar-list-nav" class="sidebar-list-nav" role="tablist" data-extras="Pages"></ul>
+  </div>
+</nav>
+
+<output role="status" id="toast"></output>
+
+<main class="content page-extra" id="main" data-type="extras">
+  <div id="content" class="content-inner">
+    <div class="top-search">
+      <div class="search-settings">
+        <form class="search-bar" action="search.html">
+          <label class="search-label">
+            <span class="sr-only">Search documentation of Mayfly</span>
+            <div class="search-input-wrapper">
+              <input name="q" type="text" class="search-input" placeholder="Press / to search" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" />
+              <button type="button" tabindex="-1" class="search-close-button" aria-hidden="true">
+                <i class="ri-close-line ri-lg" title="Cancel search"></i>
+              </button>
+            </div>
+          </label>
+        </form>
+        <div class="autocomplete">
+        </div>
+        <div class="engine-selector" data-multiple="false">
+          <button type="button" class="engine-button" aria-label="Select search engine" aria-haspopup="true" aria-expanded="false">
+            <i class="ri-search-2-line" aria-hidden="true"></i>
+            <span class="engine-name">Default</span>
+            <i class="ri-arrow-down-s-line" aria-hidden="true"></i>
+          </button>
+          <div class="engine-dropdown" hidden role="menu">
+
+              <button type="button"
+                      class="engine-option"
+                      data-engine-url="search.html?q="
+                      role="menuitemradio"
+                      aria-checked="true">
+                <span class="name">Default</span>
+                <span class="help">In-browser search</span>
+              </button>
+
+          </div>
+        </div>
+        <button class="icon-settings display-settings">
+          <i class="ri-settings-3-line"></i>
+          <span class="sr-only">Settings</span>
+        </button>
+      </div>
+    </div>
+
+<div id="top-content">
+  <div class="heading-with-actions top-heading">
+    <h1>Operations</h1>
+
+<a href="operations.md" title="Copy Markdown (hold Ctrl/Cmd and click it to open as Markdown)" class="copy-markdown icon-action" rel="help">
+  <i class="ri-markdown-line" aria-hidden="true"></i>
+  <span class="sr-only">Copy Markdown</span>
+</a>
+
+
+      <a href="https://github.com/bmalum/mayfly/blob/v1.0.0-rc.1/guides/operations.md#L1" title="View Source" class="icon-action" rel="help nofollow">
+        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+        <span class="sr-only">View Source</span>
+      </a>
+
+  </div>
+
+
+<p>Running Mayfly functions in production: what to alarm on, how to read the
+logs, what it costs, how to size Managed Instances, and what to do when
+something is wrong. Everything here uses only what the runtime already emits;
+nothing needs an agent or a vendor.</p><h2 id="what-the-runtime-emits" class="section-heading"><a href="#what-the-runtime-emits" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a><span class="text">What the runtime emits</span></h2><table><thead><tr><th style="text-align: left;">Signal</th><th style="text-align: left;">Where</th><th style="text-align: left;">Enabled by</th></tr></thead><tbody><tr><td style="text-align: left;">Lambda's own metrics (<code class="inline">Invocations</code>, <code class="inline">Errors</code>, <a href="https://elixir.hexdocs.pm/Duration.html"><code class="inline">Duration</code></a>, <code class="inline">Throttles</code>, <code class="inline">ConcurrentExecutions</code>)</td><td style="text-align: left;">CloudWatch <code class="inline">AWS/Lambda</code></td><td style="text-align: left;">always</td></tr><tr><td style="text-align: left;">JSON log lines with <code class="inline">requestId</code>, <code class="inline">tenantId</code>, <code class="inline">level</code>, <code class="inline">message</code>, your metadata</td><td style="text-align: left;">CloudWatch Logs</td><td style="text-align: left;">function log format <a href="https://elixir.hexdocs.pm/JSON.html"><code class="inline">JSON</code></a> (see <a href="observability.html">observability</a>)</td></tr><tr><td style="text-align: left;"><code class="inline">platform.*</code> records (<code class="inline">initDurationMs</code>, <code class="inline">billedDurationMs</code>, <code class="inline">maxMemoryUsedMB</code>, timeouts)</td><td style="text-align: left;">CloudWatch Logs, same group</td><td style="text-align: left;">always (JSON format)</td></tr><tr><td style="text-align: left;">EMF metrics from <a href="Mayfly.Metrics.html"><code class="inline">Mayfly.Metrics</code></a> (<a href="https://elixir.hexdocs.pm/Duration.html"><code class="inline">Duration</code></a>, <code class="inline">Errors</code>, <code class="inline">ColdStart</code> per invocation; your own)</td><td style="text-align: left;">CloudWatch, your namespace</td><td style="text-align: left;"><code class="inline">attach_invocation_metrics/1</code>, <code class="inline">count/4</code>, …</td></tr><tr><td style="text-align: left;">Billed duration / max memory as EMF</td><td style="text-align: left;">CloudWatch, your namespace</td><td style="text-align: left;"><code class="inline">MAYFLY_EXTENSION=1</code> + <code class="inline">attach_platform_metrics/1</code></td></tr><tr><td style="text-align: left;"><code class="inline">:telemetry</code> events</td><td style="text-align: left;">in-process</td><td style="text-align: left;"><code class="inline">{:telemetry, ...}</code> dependency</td></tr><tr><td style="text-align: left;">Shutdown hooks</td><td style="text-align: left;">your code</td><td style="text-align: left;"><code class="inline">mayfly-shutdown</code> layer</td></tr></tbody></table><h2 id="alarms" class="section-heading"><a href="#alarms" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a><span class="text">Alarms</span></h2><p>Start with four alarms per function. Values are starting points; tune after a
+week of traffic.</p><pre><code class="makeup bash" translate="no"><span class="">FN=my-fn; TOPIC=arn:aws:sns:eu-central-1:123456789012:alerts
+</span><span class="">
+</span><span class=""># 1. Error rate &gt; 1 % over 5 minutes (math expression on Lambda&#39;s own metrics)
+</span><span class="">aws cloudwatch put-metric-alarm --alarm-name &quot;$FN-error-rate&quot; --alarm-actions $TOPIC \
+</span><span class="">  --evaluation-periods 2 --datapoints-to-alarm 2 --threshold 1 --comparison-operator GreaterThanThreshold \
+</span><span class="">  --treat-missing-data notBreaching \
+</span><span class="">  --metrics &#39;[
+</span><span class="">    {&quot;Id&quot;:&quot;errors&quot;,&quot;MetricStat&quot;:{&quot;Metric&quot;:{&quot;Namespace&quot;:&quot;AWS/Lambda&quot;,&quot;MetricName&quot;:&quot;Errors&quot;,&quot;Dimensions&quot;:[{&quot;Name&quot;:&quot;FunctionName&quot;,&quot;Value&quot;:&quot;&#39;$FN&#39;&quot;}]},&quot;Period&quot;:300,&quot;Stat&quot;:&quot;Sum&quot;},&quot;ReturnData&quot;:false},
+</span><span class="">    {&quot;Id&quot;:&quot;invocations&quot;,&quot;MetricStat&quot;:{&quot;Metric&quot;:{&quot;Namespace&quot;:&quot;AWS/Lambda&quot;,&quot;MetricName&quot;:&quot;Invocations&quot;,&quot;Dimensions&quot;:[{&quot;Name&quot;:&quot;FunctionName&quot;,&quot;Value&quot;:&quot;&#39;$FN&#39;&quot;}]},&quot;Period&quot;:300,&quot;Stat&quot;:&quot;Sum&quot;},&quot;ReturnData&quot;:false},
+</span><span class="">    {&quot;Id&quot;:&quot;rate&quot;,&quot;Expression&quot;:&quot;100 * errors / MAX([invocations, 1])&quot;,&quot;Label&quot;:&quot;error %&quot;}]&#39;
+</span><span class="">
+</span><span class=""># 2. p99 duration above 80 % of the timeout (timeout 30 s -&gt; 24 s)
+</span><span class="">aws cloudwatch put-metric-alarm --alarm-name &quot;$FN-p99-duration&quot; --alarm-actions $TOPIC \
+</span><span class="">  --namespace AWS/Lambda --metric-name Duration --dimensions Name=FunctionName,Value=$FN \
+</span><span class="">  --extended-statistic p99 --period 300 --evaluation-periods 3 --threshold 24000 \
+</span><span class="">  --comparison-operator GreaterThanThreshold --treat-missing-data notBreaching
+</span><span class="">
+</span><span class=""># 3. Throttles (any)
+</span><span class="">aws cloudwatch put-metric-alarm --alarm-name &quot;$FN-throttles&quot; --alarm-actions $TOPIC \
+</span><span class="">  --namespace AWS/Lambda --metric-name Throttles --dimensions Name=FunctionName,Value=$FN \
+</span><span class="">  --statistic Sum --period 60 --evaluation-periods 1 --threshold 0 --comparison-operator GreaterThanThreshold
+</span><span class="">
+</span><span class=""># 4. Cold starts above 5 % of invocations (EMF from attach_invocation_metrics(&quot;MyApp&quot;))
+</span><span class="">aws cloudwatch put-metric-alarm --alarm-name &quot;$FN-cold-starts&quot; --alarm-actions $TOPIC \
+</span><span class="">  --evaluation-periods 3 --threshold 5 --comparison-operator GreaterThanThreshold --treat-missing-data notBreaching \
+</span><span class="">  --metrics &#39;[
+</span><span class="">    {&quot;Id&quot;:&quot;cold&quot;,&quot;MetricStat&quot;:{&quot;Metric&quot;:{&quot;Namespace&quot;:&quot;MyApp&quot;,&quot;MetricName&quot;:&quot;ColdStart&quot;,&quot;Dimensions&quot;:[{&quot;Name&quot;:&quot;FunctionName&quot;,&quot;Value&quot;:&quot;&#39;$FN&#39;&quot;}]},&quot;Period&quot;:300,&quot;Stat&quot;:&quot;Sum&quot;},&quot;ReturnData&quot;:false},
+</span><span class="">    {&quot;Id&quot;:&quot;all&quot;,&quot;MetricStat&quot;:{&quot;Metric&quot;:{&quot;Namespace&quot;:&quot;MyApp&quot;,&quot;MetricName&quot;:&quot;Duration&quot;,&quot;Dimensions&quot;:[{&quot;Name&quot;:&quot;FunctionName&quot;,&quot;Value&quot;:&quot;&#39;$FN&#39;&quot;}]},&quot;Period&quot;:300,&quot;Stat&quot;:&quot;SampleCount&quot;},&quot;ReturnData&quot;:false},
+</span><span class="">    {&quot;Id&quot;:&quot;pct&quot;,&quot;Expression&quot;:&quot;100 * cold / MAX([all, 1])&quot;,&quot;Label&quot;:&quot;cold start %&quot;}]&#39;
+</span></code></pre><p>Worth adding when they apply:</p><ul><li><strong>Memory headroom</strong>: <code class="inline">MaxMemoryUsed</code> (EMF via <code class="inline">attach_platform_metrics/1</code>)
+<code class="inline">Maximum</code> above 85 % of the configured size. Lambda does not expose this as
+a metric itself; Mayfly's extension does.</li><li><strong>Init errors</strong>: a Logs metric filter on <code class="inline">{ $.type = &quot;platform.initReport&quot; &amp;&amp; $.record.status = &quot;error&quot; }</code>;
+a function that fails in <code class="inline">init/1</code> never produces an <code class="inline">Errors</code> datapoint for the
+handler, so the error-rate alarm stays quiet.</li><li><strong>Streaming</strong>: <a href="https://elixir.hexdocs.pm/Duration.html"><code class="inline">Duration</code></a> is wall time until the last chunk; alarm on your own
+<code class="inline">timing/4</code> metric for the part you control.</li><li><strong>Dead-letter / failure destinations</strong>: for async invokes, configure
+<code class="inline">--dead-letter-config</code> or an on-failure destination and alarm on the queue
+depth; Lambda retries twice and then drops the event.</li></ul><h2 id="reading-the-logs" class="section-heading"><a href="#reading-the-logs" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a><span class="text">Reading the logs</span></h2><p>With the function's log format set to JSON every line is an object, so Logs
+Insights queries can filter on fields instead of regexes.</p><pre><code class="sql">-- Errors with their stack traces, newest first
+fields @timestamp, requestId, message
+| filter level = &quot;ERROR&quot;
+| sort @timestamp desc
+| limit 50
+
+-- Everything one invocation logged (yours + the platform records)
+fields @timestamp, level, message, type, record.status
+| filter requestId = &quot;8f4c4018-c0a5-42dc-8c20-7ba4619311f0&quot; or record.requestId = &quot;8f4c4018-c0a5-42dc-8c20-7ba4619311f0&quot;
+| sort @timestamp asc
+
+-- Cold starts: init duration distribution
+filter type = &quot;platform.initReport&quot; and record.status = &quot;success&quot;
+| stats count(), avg(record.metrics.durationMs), pct(record.metrics.durationMs, 50), pct(record.metrics.durationMs, 95) by bin(1h)
+
+-- Billed duration and memory by hour (from platform.report)
+filter type = &quot;platform.report&quot;
+| stats sum(record.metrics.billedDurationMs) / 1000 as billed_seconds,
+        max(record.metrics.maxMemoryUsedMB) as max_mb,
+        count() as invocations by bin(1h)
+
+-- Timeouts and runtime failures (the ones your handler never saw)
+filter type = &quot;platform.report&quot; and record.status != &quot;success&quot;
+| fields @timestamp, record.requestId, record.status, record.errorType
+
+-- Per-tenant volume (tenantId is set from the Lambda-Runtime-Aws-Tenant-Id header)
+stats count() by tenantId
+| sort count() desc
+
+-- Slow invocations with what they logged last
+filter type = &quot;platform.report&quot; and record.metrics.durationMs &gt; 5000
+| fields record.requestId as rid, record.metrics.durationMs</code></pre><p>Field names: Mayfly writes <code class="inline">requestId</code>, <code class="inline">tenantId</code>, <code class="inline">level</code>, <code class="inline">message</code>,
+<code class="inline">timestamp</code> plus every <code class="inline">Logger.metadata</code> key; Lambda's records have <code class="inline">type</code>
+and <code class="inline">record.*</code>. Your own metadata (<code class="inline">Logger.info(&quot;x&quot;, order_id: 1)</code>) becomes
+<code class="inline">order_id</code>.</p><h2 id="cost" class="section-heading"><a href="#cost" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a><span class="text">Cost</span></h2><p>Lambda bills GB-seconds (duration × memory) plus requests; the Erlang layer,
+EMF metrics and JSON logs change the picture only through log volume.</p><p>Measured on arm64 (see <a href="deployment.html">deployment</a> for the raw numbers):</p><table><thead><tr><th style="text-align: left;"></th><th style="text-align: left;">Typical</th></tr></thead><tbody><tr><td style="text-align: left;">Cold start (<code class="inline">initDurationMs</code>)</td><td style="text-align: left;">450–600 ms at 512 MB; billed as part of the first invocation</td></tr><tr><td style="text-align: left;">Warm invocation, trivial handler</td><td style="text-align: left;">2–10 ms, billed 1 ms granularity</td></tr><tr><td style="text-align: left;">Memory used, idle runtime</td><td style="text-align: left;">~85 MB (so 128 MB works for small handlers; 512 MB is the sane default for CPU)</td></tr><tr><td style="text-align: left;">Phoenix JSON API</td><td style="text-align: left;">0.6–0.75 s cold, 3–10 ms warm, ~95 MB</td></tr></tbody></table><p>Rules of thumb:</p><ul><li>A function doing 1 M invocations/month at 10 ms × 512 MB costs about
+<strong>$0.20 + $0.08 = $0.28</strong>; 1 M cold starts at 550 ms would add ~$4.60. Cold
+starts, not warm duration, dominate the bill for low-traffic functions;
+for high-traffic ones memory size × duration does.</li><li>arm64 is ~20 % cheaper per GB-second than x86_64 and Mayfly's cold starts
+are equal or better there. Default to arm64.</li><li>CloudWatch Logs ingestion ($0.50/GB) is the hidden cost of chatty JSON
+logging. One 300-byte line per invocation at 1 M/month is 0.3 GB ($0.15);
+<code class="inline">LOGLEVEL=warning</code> in production plus an <code class="inline">Errors</code> alarm is cheaper than
+info-level everything. Set a retention (<code class="inline">--log-retention</code> in the IaC
+templates defaults to 14 days).</li><li>EMF metrics cost per metric per month (first 10 000 free, then $0.30 each
+after tiers), not per datapoint; a <a href="https://elixir.hexdocs.pm/Duration.html"><code class="inline">Duration</code></a> metric with the <code class="inline">FunctionName</code>
+dimension is one metric. High-cardinality dimensions (<code class="inline">requestId</code>, user ids)
+are a cost bug: use properties, not dimensions.</li><li>The public Erlang layers cost you nothing; layer storage counts against the
+publisher's quota, not yours.</li><li>Managed Instances bill the EC2 instances, not GB-seconds: a <code class="inline">m7g.large</code>
+(~$0.08/h on-demand) running 8 concurrent invocations replaces up to 8 ×
+2 GB of classic Lambda. It pays off above roughly 30–40 % sustained
+utilisation of that capacity; below, classic Lambda is cheaper.</li></ul><h2 id="sizing-managed-instances" class="section-heading"><a href="#sizing-managed-instances" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a><span class="text">Sizing Managed Instances</span></h2><p>Mayfly starts one poller per <code class="inline">AWS_LAMBDA_MAX_CONCURRENCY</code> slot and the VM
+keeps all vCPUs as schedulers, so a Managed Instances environment is a normal
+multi-core BEAM node serving <code class="inline">PerExecutionEnvironmentMaxConcurrency</code> requests
+in parallel.</p><ul><li><strong>Memory</strong>: <code class="inline">ExecutionEnvironmentMemoryGiBPerVCpu</code> × vCPUs is the
+environment's memory. The runtime itself needs ~90 MB; budget per-invocation
+working set × concurrency on top. 2 GiB/vCPU is a good start for API work.</li><li><strong>Concurrency per environment</strong>: start at vCPUs × 2 for I/O-bound handlers
+(the BEAM parks processes waiting on sockets cheaply) and vCPUs × 1 for
+CPU-bound ones. Verified: 8 concurrent invocations on one m7g.large
+(2 vCPU) finished in 0.13 s wall time.</li><li><strong>Instance type</strong>: <code class="inline">m7g.large</code> is the smallest sensible arm64 choice;
+<code class="inline">MaxVCpuCount</code> on the capacity provider caps spend. <code class="inline">c7g</code> for CPU-heavy,
+<code class="inline">r7g</code> for cache-heavy handlers.</li><li><strong>Deadlines</strong>: Managed Instances do not kill a handler at the function
+timeout. Long loops must check <a href="Mayfly.Context.html#remaining_time_ms/1"><code class="inline">Mayfly.Context.remaining_time_ms/1</code></a> and
+stop themselves, or they keep a slot busy forever.</li><li><strong>State</strong>: <code class="inline">init/1</code> state is shared read-only across the pollers. Anything
+mutable belongs in a named process (<a href="https://elixir.hexdocs.pm/Agent.html"><code class="inline">Agent</code></a>, <a href="https://elixir.hexdocs.pm/GenServer.html"><code class="inline">GenServer</code></a>) started from
+<code class="inline">init/1</code>; it is one BEAM node, so OTP works as usual, including ETS caches
+shared by all concurrent invocations.</li><li><strong>Extensions</strong>: internal extensions cannot register for <code class="inline">INVOKE</code> on
+Managed Instances; <a href="Mayfly.Extension.html"><code class="inline">Mayfly.Extension</code></a> still receives <code class="inline">platform.report</code>
+through the Telemetry API, which is what <code class="inline">attach_platform_metrics/1</code> uses.</li></ul><h2 id="runbook" class="section-heading"><a href="#runbook" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a><span class="text">Runbook</span></h2><p><strong>Error rate alarm fired.</strong> Logs Insights: <code class="inline">filter level = &quot;ERROR&quot;</code> and group
+by <code class="inline">message</code> prefix to see whether it is one exception type. Mayfly's error
+lines include <code class="inline">errorType</code> and the first stack frame; if the type is
+<code class="inline">Runtime.InvalidResponse</code> the handler returned something unencodable, if
+<code class="inline">HandlerError</code> it returned <code class="inline">{:error, _}</code> deliberately.</p><p><strong>Latency alarm fired, errors flat.</strong> Check cold-start percentage (EMF
+<code class="inline">ColdStart</code>) first: a deploy or a traffic spike creates new environments.
+Then <code class="inline">platform.report</code> durations vs your own <code class="inline">timing/4</code> metrics to see whether
+the time is yours or a downstream call's. If it is yours and CPU-bound,
+increase memory (more vCPU).</p><p><strong>Function times out.</strong> <code class="inline">platform.report</code> with <code class="inline">record.status = &quot;timeout&quot;</code>
+and <code class="inline">record.metrics.durationMs ≈ timeout</code>. There is no handler log for the
+end because the environment was killed. If the handler blocks on a downstream
+call, set socket timeouts below the function timeout so the error is yours
+and carries context. On Managed Instances a timeout does not kill the handler
+(see above).</p><p><strong>Init error / <code class="inline">Runtime.InitError</code>.</strong> The function never served a request;
+<code class="inline">platform.initReport</code> has <code class="inline">status: error</code>. The payload posted to
+<code class="inline">/runtime/init/error</code> is in the logs as an ERROR line with the exception from
+<code class="inline">init/1</code>. Common causes: a missing environment variable read with
+<a href="https://elixir.hexdocs.pm/System.html#fetch_env!/1"><code class="inline">System.fetch_env!/1</code></a>, a dependency's application failing to start (check
+<code class="inline">included_applications</code> / <code class="inline">extra_applications</code>), or the layer OTP mismatch
+message from <code class="inline">bootstrap</code>.</p><p><strong><code class="inline">Mayfly: release was built for ERTS X but the layer provides Y</code>.</strong> Build
+toolchain and layer disagree. <a href="Mix.Tasks.Lambda.Doctor.html"><code class="inline">mix lambda.doctor</code></a> tells you which; fix the
+<code class="inline">.tool-versions</code> or the layer ARN in the IaC (doctor checks both).</p><p><strong>Retries and duplicates.</strong> Async invokes retry twice; SQS redelivers after
+the visibility timeout; EventBridge retries for up to 24 h. If an operation
+must not run twice, wrap it in <code class="inline">Mayfly.Idempotency.run/3</code> (companion package
+<code class="inline">mayfly_aws</code>) with a business key; see the <a href="idempotency.html">idempotency guide</a>.</p><p><strong>Lost log lines at shutdown.</strong> Without the <code class="inline">mayfly-shutdown</code> layer Lambda
+freezes and discards the environment silently; buffered log handlers lose
+their tail. Attach the layer and register <a href="Mayfly.Shutdown.html"><code class="inline">Mayfly.Shutdown</code></a> hooks for anything
+that must flush (see <a href="observability.html">observability</a>).</p><p><strong>Rolling back.</strong> Functions are versioned; alias <code class="inline">live</code> → version N. <code class="inline">aws lambda update-alias --name live --function-version N-1</code> is the rollback;
+with SAM/CDK the stack rollback does the same. Layers are immutable, so a
+rollback of the function also rolls back the layer it pointed to.</p><p><strong>Deploying a new OTP major.</strong> Switch the layer ARN <em>and</em> the toolchain
+together (<code class="inline">mise use erlang@…</code>, <code class="inline">--otp</code> in the IaC, or <code class="inline">mix lambda.new --otp</code>).
+Build, <a href="Mix.Tasks.Lambda.Doctor.html"><code class="inline">mix lambda.doctor</code></a>, deploy to a new version, shift the alias. The
+runtime verifies the match at boot, so a half-switch fails loudly rather than
+running a mismatched ERTS.</p>
+
+</div>
+
+<div class="bottom-actions" id="bottom-actions">
+  <div class="bottom-actions-item">
+
+      <a href="iac.html" class="bottom-actions-button" rel="prev">
+        <span class="subheader">
+          ← Previous Page
+        </span>
+        <span class="title">
+Infrastructure as code
+        </span>
+      </a>
+
+  </div>
+  <div class="bottom-actions-item">
+
+      <a href="layers.html" class="bottom-actions-button" rel="next">
+        <span class="subheader">
+          Next Page →
+        </span>
+        <span class="title">
+Erlang runtime layers
+        </span>
+      </a>
+
+  </div>
+</div>
+    <footer class="footer">
+
+        <p>
+
+            <span class="line">
+              <a href="https://hex.pm/packages/mayfly/1.0.0-rc.1">Hex Package</a>
+
+              <a href="https://preview.hex.pm/preview/mayfly/1.0.0-rc.1">Hex Preview</a>
+
+                (<a href="https://preview.hex.pm/preview/mayfly/1.0.0-rc.1/show/guides/operations.md">current file</a>)
+
+            </span>
+
+          <span class="line">
+            <button class="a-main footer-button display-quick-switch" title="Go to package docs">
+              Go to package docs
+            </button>
+
+              <a href="llms.txt" target="_blank">
+                View llms.txt
+              </a>
+
+
+              <a href="Mayfly.epub">
+                Download ePub version
+              </a>
+
+          </span>
+        </p>
+
+        <p class="built-using">
+          Built using
+          <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" target="_blank" rel="help noopener" translate="no">ExDoc</a> (v0.40.4) for the
+
+            <a href="https://elixir-lang.org" title="Elixir" target="_blank" translate="no">Elixir programming language</a>
+
+        </p>
+
+
+    </footer>
+  </div>
+</main>
+</div>
+
+  </body>
+</html>

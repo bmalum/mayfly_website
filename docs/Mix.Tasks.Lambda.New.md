@@ -29,6 +29,8 @@ or run it from a checkout of Mayfly.
 ## Options
 
     --iac       sam | terraform | cdk | none (default none)
+    --http-api  add an API Gateway HTTP API (`$default` route, access logs) in
+                front of the function; without it the IaC creates a Function URL only
     --arch      arm64 (default) | x86_64
     --otp       27 (default) | 28 | 29 – OTP major of the layer and the toolchain
     --region    AWS region for the IaC defaults (default $AWS_REGION or eu-central-1)

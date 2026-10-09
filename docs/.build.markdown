@@ -39,11 +39,13 @@ changelog.md
 deployment.md
 events.md
 getting-started.md
+iac.md
 idempotency.md
 layers.md
 llms.txt
 migrating-from-0-x.md
 observability.md
+operations.md
 phoenix.md
 readme.md
 roadmap.md

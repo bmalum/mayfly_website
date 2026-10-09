@@ -14,7 +14,7 @@
 
       <link rel="canonical" href="https://elixir-aws-lambda.dev/docs/Mix.Tasks.Lambda.Doctor.html" />
 
-    <script defer src="dist/sidebar_items-169B0767.js"></script>
+    <script defer src="dist/sidebar_items-EC992EFC.js"></script>
     <script defer src="docs_config.js"></script>
     <script defer src="dist/html-MI33G4N7.js"></script>
 <meta name="description" content="Mayfly documentation: run Elixir on AWS Lambda with a lightweight custom runtime. Handler behaviour, mix release build, Erlang layers, response streaming, Managed Instances, observability.">
@@ -142,7 +142,9 @@ intend to use: <code class="inline">--layer ARN</code> queries Lambda for that l
 without it the public layer catalog at elixir-aws-lambda.dev is consulted
 for your OTP, <code class="inline">--arch</code> (default arm64) and <code class="inline">--region</code> (default
 <code class="inline">AWS_REGION</code>/<code class="inline">AWS_DEFAULT_REGION</code> or eu-central-1) and the matching ARN
-is printed;</p></li><li><p>the Elixir/OTP versions are supported.</p><p>mix lambda.doctor
+is printed;</p></li><li><p>the Elixir/OTP versions are supported;</p></li><li><p>infrastructure files from <a href="Mix.Tasks.Lambda.New.html"><code class="inline">mix lambda.new</code></a> (<code class="inline">template.yaml</code>, <code class="inline">infra/*.tf</code>,
+<code class="inline">infra/bin/app.ts</code>) agree with the toolchain: OTP major, pinned layer
+ARNs, architecture, runtime.</p><p>mix lambda.doctor
 mix lambda.doctor --arch x86_64 --region us-east-1
 mix lambda.doctor --release lambda --layer arn:aws:lambda:eu-central-1:123:layer:mayfly-erlang-27-arm64:1</p></li></ul><p>Exit status is 1 when any check fails.</p>
     </section>

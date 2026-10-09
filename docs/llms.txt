@@ -12,6 +12,8 @@
   - [Getting Started](getting-started.md)
   - [Event sources](events.md)
   - [Deployment](deployment.md)
+  - [Infrastructure as code](iac.md)
+  - [Operations](operations.md)
   - [Erlang runtime layers](layers.md)
   - [Architecture](architecture.md)
   - [Response streaming](streaming.md)

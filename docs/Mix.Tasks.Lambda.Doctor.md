@@ -13,7 +13,10 @@ Runs a set of checks that catch the common setup mistakes before you deploy:
     for your OTP, `--arch` (default arm64) and `--region` (default
     `AWS_REGION`/`AWS_DEFAULT_REGION` or eu-central-1) and the matching ARN
     is printed;
-  * the Elixir/OTP versions are supported.
+  * the Elixir/OTP versions are supported;
+  * infrastructure files from `mix lambda.new` (`template.yaml`, `infra/*.tf`,
+    `infra/bin/app.ts`) agree with the toolchain: OTP major, pinned layer
+    ARNs, architecture, runtime.
 
     mix lambda.doctor
     mix lambda.doctor --arch x86_64 --region us-east-1

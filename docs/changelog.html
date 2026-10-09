@@ -14,7 +14,7 @@
 
       <link rel="canonical" href="https://elixir-aws-lambda.dev/docs/changelog.html" />
 
-    <script defer src="dist/sidebar_items-169B0767.js"></script>
+    <script defer src="dist/sidebar_items-EC992EFC.js"></script>
     <script defer src="docs_config.js"></script>
     <script defer src="dist/html-MI33G4N7.js"></script>
 <meta name="description" content="Mayfly documentation: run Elixir on AWS Lambda with a lightweight custom runtime. Handler behaviour, mix release build, Erlang layers, response streaming, Managed Instances, observability.">
@@ -156,7 +156,12 @@ helpers <code class="inline">json/4</code>, <code class="inline">text/4</code>, 
 DynamoDB Streams (attribute values converted to terms); <code class="inline">process_batch/2</code>
 partial-batch helpers for SQS, Kinesis and DynamoDB; <a href="Mayfly.Events.html#decode/1"><code class="inline">Mayfly.Events.decode/1</code></a>
 dispatcher. Verified on Lambda with a Function URL, SQS
-<code class="inline">ReportBatchItemFailures</code>, S3 notifications, EventBridge and DynamoDB Streams.</li><li><a href="Mayfly.Shutdown.html"><code class="inline">Mayfly.Shutdown</code></a> + the <code class="inline">mayfly-shutdown</code> external extension layer: with the
+<code class="inline">ReportBatchItemFailures</code>, S3 notifications, EventBridge and DynamoDB Streams.</li><li><code class="inline">mix lambda.new --http-api</code>: API Gateway HTTP API (<code class="inline">$default</code> route, JSON
+access logs, permission) in the SAM, Terraform and CDK templates; deployed
+and exercised on Lambda.</li><li><a href="Mix.Tasks.Lambda.Doctor.html"><code class="inline">mix lambda.doctor</code></a> reads the IaC files <a href="Mix.Tasks.Lambda.New.html"><code class="inline">mix lambda.new</code></a> generates and
+checks OTP major, selected layer ARN, architecture and runtime against the
+toolchain.</li><li>Guides: new <code class="inline">operations.md</code> (alarms, Logs Insights queries, cost, Managed
+Instances sizing, runbook) and <code class="inline">iac.md</code> (split out of the deployment guide).</li><li><a href="Mayfly.Shutdown.html"><code class="inline">Mayfly.Shutdown</code></a> + the <code class="inline">mayfly-shutdown</code> external extension layer: with the
 layer attached Lambda sends SIGTERM before discarding the environment; Mayfly
 emits <code class="inline">[:mayfly, :shutdown]</code>, runs registered hooks (1 s each), flushes
 Logger and halts. Verified on Lambda; no measurable cold-start cost.

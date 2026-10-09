@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="ExDoc v0.40.4">
+    <meta name="project" content="Mayfly v1.0.0-rc.1">
+
+
+    <title>Infrastructure as code — Mayfly v1.0.0-rc.1</title>
+
+    <link rel="stylesheet" href="dist/html-elixir-RXHHCTJW.css" />
+
+      <link rel="canonical" href="https://elixir-aws-lambda.dev/docs/iac.html" />
+
+    <script defer src="dist/sidebar_items-EC992EFC.js"></script>
+    <script defer src="docs_config.js"></script>
+    <script defer src="dist/html-MI33G4N7.js"></script>
+<meta name="description" content="Mayfly documentation: run Elixir on AWS Lambda with a lightweight custom runtime. Handler behaviour, mix release build, Erlang layers, response streaming, Managed Instances, observability.">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#5b21b6">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Mayfly – Elixir on AWS Lambda">
+<meta property="og:title" content="Mayfly documentation – Elixir AWS Lambda runtime">
+<meta property="og:description" content="Run Elixir on AWS Lambda: handler behaviour, mix release build, Erlang layers, response streaming, Managed Instances.">
+<meta property="og:image" content="https://elixir-aws-lambda.dev/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/png" href="https://elixir-aws-lambda.dev/elixir-drop-only.png">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"TechArticle","isPartOf":{"@type":"WebSite","name":"Mayfly","url":"https://elixir-aws-lambda.dev/"},
+ "about":{"@type":"SoftwareSourceCode","name":"Mayfly","codeRepository":"https://github.com/bmalum/mayfly","programmingLanguage":"Elixir","runtimePlatform":"AWS Lambda provided.al2023"},
+ "author":{"@type":"Organization","name":"Karrer","url":"https://karrer.solutions"}}
+</script>
+
+  </head>
+  <body>
+    <script>(()=>{var t="ex_doc:settings",e="dark";var o="dark",s="light";var E="sidebar_state",n="closed";var r="sidebar_width";var a="sidebar-open";var i=new URLSearchParams(window.location.search),S=i.get("theme")||JSON.parse(localStorage.getItem(t)||"{}").theme;(S===o||S!==s&&window.matchMedia("(prefers-color-scheme: dark)").matches)&&document.body.classList.add(e);var d=sessionStorage.getItem(E),A=d!==n&&!window.matchMedia(`screen and (max-width: ${768}px)`).matches;document.body.classList.toggle(a,A);var c=sessionStorage.getItem(r);c&&document.body.style.setProperty("--sidebarWidth",`${c}px`);var p=/(Macintosh|iPhone|iPad|iPod)/.test(window.navigator.userAgent);document.documentElement.classList.toggle("apple-os",p);})();
+</script>
+
+<div class="body-wrapper">
+
+<button id="sidebar-menu" class="sidebar-button sidebar-toggle" aria-label="toggle sidebar" aria-controls="sidebar">
+  <i class="ri-menu-line ri-lg" title="Collapse/expand sidebar"></i>
+</button>
+
+<nav id="sidebar" class="sidebar">
+
+  <div class="sidebar-header">
+    <div class="sidebar-projectInfo">
+
+        <a href="https://github.com/bmalum/mayfly" class="sidebar-projectImage">
+          <img src="assets/logo.png" alt="Mayfly" />
+        </a>
+
+      <div>
+        <a href="https://github.com/bmalum/mayfly" class="sidebar-projectName" translate="no">
+Mayfly
+        </a>
+        <div class="sidebar-projectVersion" translate="no">
+          v1.0.0-rc.1
+        </div>
+      </div>
+    </div>
+    <ul id="sidebar-list-nav" class="sidebar-list-nav" role="tablist" data-extras="Pages"></ul>
+  </div>
+</nav>
+
+<output role="status" id="toast"></output>
+
+<main class="content page-extra" id="main" data-type="extras">
+  <div id="content" class="content-inner">
+    <div class="top-search">
+      <div class="search-settings">
+        <form class="search-bar" action="search.html">
+          <label class="search-label">
+            <span class="sr-only">Search documentation of Mayfly</span>
+            <div class="search-input-wrapper">
+              <input name="q" type="text" class="search-input" placeholder="Press / to search" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" />
+              <button type="button" tabindex="-1" class="search-close-button" aria-hidden="true">
+                <i class="ri-close-line ri-lg" title="Cancel search"></i>
+              </button>
+            </div>
+          </label>
+        </form>
+        <div class="autocomplete">
+        </div>
+        <div class="engine-selector" data-multiple="false">
+          <button type="button" class="engine-button" aria-label="Select search engine" aria-haspopup="true" aria-expanded="false">
+            <i class="ri-search-2-line" aria-hidden="true"></i>
+            <span class="engine-name">Default</span>
+            <i class="ri-arrow-down-s-line" aria-hidden="true"></i>
+          </button>
+          <div class="engine-dropdown" hidden role="menu">
+
+              <button type="button"
+                      class="engine-option"
+                      data-engine-url="search.html?q="
+                      role="menuitemradio"
+                      aria-checked="true">
+                <span class="name">Default</span>
+                <span class="help">In-browser search</span>
+              </button>
+
+          </div>
+        </div>
+        <button class="icon-settings display-settings">
+          <i class="ri-settings-3-line"></i>
+          <span class="sr-only">Settings</span>
+        </button>
+      </div>
+    </div>
+
+<div id="top-content">
+  <div class="heading-with-actions top-heading">
+    <h1>Infrastructure as code</h1>
+
+<a href="iac.md" title="Copy Markdown (hold Ctrl/Cmd and click it to open as Markdown)" class="copy-markdown icon-action" rel="help">
+  <i class="ri-markdown-line" aria-hidden="true"></i>
+  <span class="sr-only">Copy Markdown</span>
+</a>
+
+
+      <a href="https://github.com/bmalum/mayfly/blob/v1.0.0-rc.1/guides/iac.md#L1" title="View Source" class="icon-action" rel="help nofollow">
+        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+        <span class="sr-only">View Source</span>
+      </a>
+
+  </div>
+
+
+<p>Mayfly ships working SAM, Terraform and CDK definitions in
+<a rel="nofollow" href="https://github.com/bmalum/mayfly/tree/main/templates"><code class="inline">templates/</code></a> (also in
+the Hex package under <code class="inline">deps/mayfly/templates</code>). Each resolves the public Erlang
+layer for the deployment region from an embedded map covering all 16 regions ×
+OTP 27/28/29 × both architectures; the map is re-rendered by the weekly layer
+workflow (<code class="inline">layer/render-templates.sh</code>), so the templates in <code class="inline">main</code> always carry
+current ARNs. The quickest way to get them is the generator:</p><pre><code class="makeup bash" translate="no"><span class="">mix lambda.new hello --iac sam                 # or terraform | cdk; --arch x86_64, --otp 28, --region us-east-1
+</span><span class="">mix lambda.new hello --iac terraform --http-api  # add an API Gateway HTTP API in front of the function
+</span></code></pre><p>It creates the Mix project (handler with an HTTP branch, release config,
+<code class="inline">.tool-versions</code> pinned to the layer's exact OTP from the catalog, an ExUnit
+test through <a href="Mayfly.LocalRuntime.html"><code class="inline">Mayfly.LocalRuntime</code></a>, README) plus the IaC files with the
+function name, handler, architecture and OTP filled in. All three were
+deployed, invoked and destroyed from the generated projects on 2026-10-09.</p><h3 id="function-url-or-api-gateway" class="section-heading"><a href="#function-url-or-api-gateway" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a><span class="text">Function URL or API Gateway?</span></h3><p>By default every template exposes the function through a <strong>Function URL</strong>
+(IAM auth, <code class="inline">BUFFERED</code> or <code class="inline">RESPONSE_STREAM</code>): no extra service, no cost,
+streaming supported. <code class="inline">--http-api</code> adds an <strong>API Gateway HTTP API</strong> with a
+<code class="inline">$default</code> route, a JSON access log group and the Lambda permission: use it
+when you need custom domains, JWT authorizers, usage plans, WAF, or several
+functions behind one host. The handler code is identical (<a href="Mayfly.Events.HTTP.html"><code class="inline">Mayfly.Events.HTTP</code></a>
+decodes both payload shapes); only the IaC changes, and <a href="Mix.Tasks.Lambda.Doctor.html"><code class="inline">mix lambda.doctor</code></a>
+reads whichever you generated. Verified: the SAM variant deployed, <code class="inline">GET /hello?name=…</code> and <code class="inline">POST /items</code> with a JSON body returned 200 through the
+API endpoint, access log line present.</p><h3 id="aws-sam-template-yaml-samconfig-toml-makefile-in-the-project-root" class="section-heading"><a href="#aws-sam-template-yaml-samconfig-toml-makefile-in-the-project-root" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a><span class="text">AWS SAM (<code class="inline">template.yaml</code>, <code class="inline">samconfig.toml</code>, <code class="inline">Makefile</code> in the project root)</span></h3><pre><code class="makeup bash" translate="no"><span class="">sam build        # BuildMethod: makefile -&gt; MIX_ENV=prod mix release lambda, no Docker
+</span><span class="">sam deploy --guided   # afterwards: sam deploy
+</span><span class="">sam delete
+</span></code></pre><p><code class="inline">AWS::Serverless::Function</code> with <code class="inline">provided.al2023</code>, <code class="inline">Architectures</code>,
+<code class="inline">LoggingConfig: JSON</code>, <code class="inline">Tracing: Active</code>, a Function URL (parameters
+<code class="inline">FunctionUrlAuthType</code>, <code class="inline">FunctionUrlInvokeMode</code>), a log group with retention,
+and <code class="inline">Layers</code> chosen via <code class="inline">Mappings.MayflyLayers[region][otp&lt;major&gt;&lt;arch&gt;]</code>
+(<code class="inline">x86_64</code> is written <code class="inline">x8664</code>: mapping keys must be alphanumeric). Parameters
+<code class="inline">Architecture</code> and <code class="inline">OtpMajor</code> select the layer; <code class="inline">OtpMajor</code> must match the OTP
+you build with.</p><h3 id="terraform-infra-main-tf-variables-tf-locals-tf" class="section-heading"><a href="#terraform-infra-main-tf-variables-tf-locals-tf" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a><span class="text">Terraform (<code class="inline">infra/main.tf</code>, <code class="inline">variables.tf</code>, <code class="inline">locals.tf</code>)</span></h3><pre><code class="makeup bash" translate="no"><span class="">MIX_ENV=prod mix release lambda
+</span><span class="">cd infra &amp;&amp; terraform init &amp;&amp; terraform apply -auto-approve
+</span><span class="">terraform destroy -auto-approve
+</span></code></pre><p><code class="inline">aws_lambda_function</code> + IAM role with <code class="inline">AWSLambdaBasicExecutionRole</code>, log group,
+optional <code class="inline">aws_lambda_function_url</code>. <code class="inline">locals.tf</code> holds the static layer map
+(reproducible plans); <code class="inline">var.layer_arn</code> overrides it, and the file documents a
+<code class="inline">data &quot;http&quot;</code> variant that resolves the catalog at plan time.</p><h3 id="cdk-infra-lib-mayfly-function-ts-bin-app-ts" class="section-heading"><a href="#cdk-infra-lib-mayfly-function-ts-bin-app-ts" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a><span class="text">CDK (<code class="inline">infra/lib/mayfly-function.ts</code>, <code class="inline">bin/app.ts</code>)</span></h3><pre><code class="makeup bash" translate="no"><span class="">MIX_ENV=prod mix release lambda
+</span><span class="">cd infra &amp;&amp; npm install &amp;&amp; npx cdk bootstrap &amp;&amp; npx cdk deploy --require-approval never
+</span><span class="">npx cdk destroy --force
+</span></code></pre><p><code class="inline">MayflyFunction</code> extends <code class="inline">lambda.Function</code>: runtime, architecture, handler,
+layer, JSON logs, tracing and sane memory/timeout defaults; every other
+<code class="inline">FunctionProps</code> passes through. With an explicit stack region the layer ARN is
+resolved at synth time; environment-agnostic stacks get a CloudFormation
+<code class="inline">Mapping</code> and <code class="inline">Fn::FindInMap</code>. <code class="inline">MayflyFunction.layerArn(region, arch, otpMajor)</code>
+is a plain lookup for other constructs.</p><h3 id="minimal-hand-written-snippets" class="section-heading"><a href="#minimal-hand-written-snippets" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a><span class="text">Minimal hand-written snippets</span></h3><pre><code class="yaml"># SAM
+Hello:
+  Type: AWS::Serverless::Function
+  Properties:
+    Runtime: provided.al2023
+    Architectures: [arm64]
+    Handler: MyApp.Handler
+    CodeUri: _build/prod/rel/lambda/lambda.zip
+    Layers: [arn:aws:lambda:eu-central-1:651236577491:layer:mayfly-erlang-27-arm64:4]
+    LoggingConfig: { LogFormat: JSON }</code></pre><pre><code class="hcl"># Terraform
+resource &quot;aws_lambda_function&quot; &quot;hello&quot; {
+  function_name    = &quot;hello&quot;
+  runtime          = &quot;provided.al2023&quot;
+  architectures    = [&quot;arm64&quot;]
+  handler          = &quot;MyApp.Handler&quot;
+  filename         = &quot;_build/prod/rel/lambda/lambda.zip&quot;
+  source_code_hash = filebase64sha256(&quot;_build/prod/rel/lambda/lambda.zip&quot;)
+  layers           = [var.mayfly_layer_arn]
+  role             = aws_iam_role.lambda.arn
+  logging_config { log_format = &quot;JSON&quot; }
+}</code></pre><pre><code class="ts">// CDK
+new lambda.Function(this, &quot;Hello&quot;, {
+  runtime: lambda.Runtime.PROVIDED_AL2023,
+  architecture: lambda.Architecture.ARM_64,
+  handler: &quot;MyApp.Handler&quot;,
+  code: lambda.Code.fromAsset(&quot;_build/prod/rel/lambda/lambda.zip&quot;),
+  layers: [lambda.LayerVersion.fromLayerVersionArn(this, &quot;Erlang&quot;, mayflyLayerArn)],
+  loggingFormat: lambda.LoggingFormat.JSON,
+});</code></pre><p><a href="Mix.Tasks.Lambda.Doctor.html"><code class="inline">mix lambda.doctor</code></a> checks the generated files: the OTP major parameter,
+the layer ARN the file selects for its architecture, the architecture and the
+runtime, against your toolchain, so a <code class="inline">--otp 28</code> project built with OTP 27
+fails doctor before it fails at boot.</p><p>Container images: <code class="inline">PackageType: Image</code> / <code class="inline">package_type = &quot;Image&quot;</code> /
+<code class="inline">lambda.DockerImageFunction</code> with the URI printed by <code class="inline">mix lambda.build --image --push</code>;
+no runtime, layers or handler setting (see <a href="#container-image">Container image</a>).</p>
+
+</div>
+
+<div class="bottom-actions" id="bottom-actions">
+  <div class="bottom-actions-item">
+
+      <a href="deployment.html" class="bottom-actions-button" rel="prev">
+        <span class="subheader">
+          ← Previous Page
+        </span>
+        <span class="title">
+Deployment
+        </span>
+      </a>
+
+  </div>
+  <div class="bottom-actions-item">
+
+      <a href="operations.html" class="bottom-actions-button" rel="next">
+        <span class="subheader">
+          Next Page →
+        </span>
+        <span class="title">
+Operations
+        </span>
+      </a>
+
+  </div>
+</div>
+    <footer class="footer">
+
+        <p>
+
+            <span class="line">
+              <a href="https://hex.pm/packages/mayfly/1.0.0-rc.1">Hex Package</a>
+
+              <a href="https://preview.hex.pm/preview/mayfly/1.0.0-rc.1">Hex Preview</a>
+
+                (<a href="https://preview.hex.pm/preview/mayfly/1.0.0-rc.1/show/guides/iac.md">current file</a>)
+
+            </span>
+
+          <span class="line">
+            <button class="a-main footer-button display-quick-switch" title="Go to package docs">
+              Go to package docs
+            </button>
+
+              <a href="llms.txt" target="_blank">
+                View llms.txt
+              </a>
+
+
+              <a href="Mayfly.epub">
+                Download ePub version
+              </a>
+
+          </span>
+        </p>
+
+        <p class="built-using">
+          Built using
+          <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" target="_blank" rel="help noopener" translate="no">ExDoc</a> (v0.40.4) for the
+
+            <a href="https://elixir-lang.org" title="Elixir" target="_blank" translate="no">Elixir programming language</a>
+
+        </p>
+
+
+    </footer>
+  </div>
+</main>
+</div>
+
+  </body>
+</html>
