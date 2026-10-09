@@ -41,5 +41,6 @@ layers.md
 llms.txt
 migrating-from-0-x.md
 observability.md
+phoenix.md
 readme.md
 streaming.md

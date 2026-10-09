@@ -14,7 +14,7 @@
 
       <link rel="canonical" href="https://elixir-aws-lambda.dev/docs/changelog.html" />
 
-    <script defer src="dist/sidebar_items-16A5EDB9.js"></script>
+    <script defer src="dist/sidebar_items-9D45FB8F.js"></script>
     <script defer src="docs_config.js"></script>
     <script defer src="dist/html-MI33G4N7.js"></script>
 <meta name="description" content="Mayfly documentation: run Elixir on AWS Lambda with a lightweight custom runtime. Handler behaviour, mix release build, Erlang layers, response streaming, Managed Instances, observability.">
@@ -159,7 +159,11 @@ dispatcher. Verified on Lambda with a Function URL, SQS
 <code class="inline">ReportBatchItemFailures</code>, S3 notifications, EventBridge and DynamoDB Streams.</li><li><a href="Mayfly.Metrics.html"><code class="inline">Mayfly.Metrics</code></a>: CloudWatch Embedded Metric Format (<code class="inline">emit/3</code>, <code class="inline">count/4</code>,
 <code class="inline">timing/4</code>, <code class="inline">build/3</code>) and <code class="inline">attach_invocation_metrics/2</code> emitting
 <a href="https://elixir.hexdocs.pm/Duration.html"><code class="inline">Duration</code></a>/<code class="inline">Errors</code>/<code class="inline">ColdStart</code> per invocation. Verified end to end:
-datapoints appear in CloudWatch under the namespace.</li><li>Companion package <a rel="nofollow" href="https://github.com/bmalum/mayfly_aws"><code class="inline">mayfly_aws</code></a> with
+datapoints appear in CloudWatch under the namespace.</li><li>Companion package <a rel="nofollow" href="https://github.com/bmalum/mayfly_plug"><code class="inline">mayfly_plug</code></a>:
+<code class="inline">Mayfly.Plug.Adapter</code> (<code class="inline">Plug.Conn.Adapter</code> for API Gateway v1/v2, Function
+URL and ALB events) and <code class="inline">use Mayfly.Plug.Handler, plug: …</code> to run Plug
+routers and Phoenix endpoints as handlers, with response streaming for
+<code class="inline">send_chunked</code>; <code class="inline">guides/phoenix.md</code> with measured cold starts.</li><li>Companion package <a rel="nofollow" href="https://github.com/bmalum/mayfly_aws"><code class="inline">mayfly_aws</code></a> with
 <code class="inline">Mayfly.Idempotency</code> (DynamoDB-backed exactly-once execution), a minimal
 signed DynamoDB client and <code class="inline">Mayfly.AWS.SigV4</code>; <code class="inline">guides/idempotency.md</code>.</li><li>Optional <code class="inline">:telemetry</code> calls go through <a href="https://elixir.hexdocs.pm/Kernel.html#apply/3"><code class="inline">apply/3</code></a>, so consumers without the
 dependency compile warning-free.</li><li><code class="inline">mix lambda.invoke --event SOURCE</code> wraps a payload in a realistic envelope

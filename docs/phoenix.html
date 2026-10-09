@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="ExDoc v0.40.4">
+    <meta name="project" content="Mayfly v1.0.0-rc.1">
+
+
+    <title>Plug and Phoenix on Lambda — Mayfly v1.0.0-rc.1</title>
+
+    <link rel="stylesheet" href="dist/html-elixir-RXHHCTJW.css" />
+
+      <link rel="canonical" href="https://elixir-aws-lambda.dev/docs/phoenix.html" />
+
+    <script defer src="dist/sidebar_items-9D45FB8F.js"></script>
+    <script defer src="docs_config.js"></script>
+    <script defer src="dist/html-MI33G4N7.js"></script>
+<meta name="description" content="Mayfly documentation: run Elixir on AWS Lambda with a lightweight custom runtime. Handler behaviour, mix release build, Erlang layers, response streaming, Managed Instances, observability.">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#5b21b6">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Mayfly – Elixir on AWS Lambda">
+<meta property="og:title" content="Mayfly documentation – Elixir AWS Lambda runtime">
+<meta property="og:description" content="Run Elixir on AWS Lambda: handler behaviour, mix release build, Erlang layers, response streaming, Managed Instances.">
+<meta property="og:image" content="https://elixir-aws-lambda.dev/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/png" href="https://elixir-aws-lambda.dev/elixir-drop-only.png">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"TechArticle","isPartOf":{"@type":"WebSite","name":"Mayfly","url":"https://elixir-aws-lambda.dev/"},
+ "about":{"@type":"SoftwareSourceCode","name":"Mayfly","codeRepository":"https://github.com/bmalum/mayfly","programmingLanguage":"Elixir","runtimePlatform":"AWS Lambda provided.al2023"},
+ "author":{"@type":"Organization","name":"Karrer","url":"https://karrer.solutions"}}
+</script>
+
+  </head>
+  <body>
+    <script>(()=>{var t="ex_doc:settings",e="dark";var o="dark",s="light";var E="sidebar_state",n="closed";var r="sidebar_width";var a="sidebar-open";var i=new URLSearchParams(window.location.search),S=i.get("theme")||JSON.parse(localStorage.getItem(t)||"{}").theme;(S===o||S!==s&&window.matchMedia("(prefers-color-scheme: dark)").matches)&&document.body.classList.add(e);var d=sessionStorage.getItem(E),A=d!==n&&!window.matchMedia(`screen and (max-width: ${768}px)`).matches;document.body.classList.toggle(a,A);var c=sessionStorage.getItem(r);c&&document.body.style.setProperty("--sidebarWidth",`${c}px`);var p=/(Macintosh|iPhone|iPad|iPod)/.test(window.navigator.userAgent);document.documentElement.classList.toggle("apple-os",p);})();
+</script>
+
+<div class="body-wrapper">
+
+<button id="sidebar-menu" class="sidebar-button sidebar-toggle" aria-label="toggle sidebar" aria-controls="sidebar">
+  <i class="ri-menu-line ri-lg" title="Collapse/expand sidebar"></i>
+</button>
+
+<nav id="sidebar" class="sidebar">
+
+  <div class="sidebar-header">
+    <div class="sidebar-projectInfo">
+
+        <a href="https://github.com/bmalum/mayfly" class="sidebar-projectImage">
+          <img src="assets/logo.png" alt="Mayfly" />
+        </a>
+
+      <div>
+        <a href="https://github.com/bmalum/mayfly" class="sidebar-projectName" translate="no">
+Mayfly
+        </a>
+        <div class="sidebar-projectVersion" translate="no">
+          v1.0.0-rc.1
+        </div>
+      </div>
+    </div>
+    <ul id="sidebar-list-nav" class="sidebar-list-nav" role="tablist" data-extras="Pages"></ul>
+  </div>
+</nav>
+
+<output role="status" id="toast"></output>
+
+<main class="content page-extra" id="main" data-type="extras">
+  <div id="content" class="content-inner">
+    <div class="top-search">
+      <div class="search-settings">
+        <form class="search-bar" action="search.html">
+          <label class="search-label">
+            <span class="sr-only">Search documentation of Mayfly</span>
+            <div class="search-input-wrapper">
+              <input name="q" type="text" class="search-input" placeholder="Press / to search" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" />
+              <button type="button" tabindex="-1" class="search-close-button" aria-hidden="true">
+                <i class="ri-close-line ri-lg" title="Cancel search"></i>
+              </button>
+            </div>
+          </label>
+        </form>
+        <div class="autocomplete">
+        </div>
+        <div class="engine-selector" data-multiple="false">
+          <button type="button" class="engine-button" aria-label="Select search engine" aria-haspopup="true" aria-expanded="false">
+            <i class="ri-search-2-line" aria-hidden="true"></i>
+            <span class="engine-name">Default</span>
+            <i class="ri-arrow-down-s-line" aria-hidden="true"></i>
+          </button>
+          <div class="engine-dropdown" hidden role="menu">
+
+              <button type="button"
+                      class="engine-option"
+                      data-engine-url="search.html?q="
+                      role="menuitemradio"
+                      aria-checked="true">
+                <span class="name">Default</span>
+                <span class="help">In-browser search</span>
+              </button>
+
+          </div>
+        </div>
+        <button class="icon-settings display-settings">
+          <i class="ri-settings-3-line"></i>
+          <span class="sr-only">Settings</span>
+        </button>
+      </div>
+    </div>
+
+<div id="top-content">
+  <div class="heading-with-actions top-heading">
+    <h1>Plug and Phoenix on Lambda</h1>
+
+<a href="phoenix.md" title="Copy Markdown (hold Ctrl/Cmd and click it to open as Markdown)" class="copy-markdown icon-action" rel="help">
+  <i class="ri-markdown-line" aria-hidden="true"></i>
+  <span class="sr-only">Copy Markdown</span>
+</a>
+
+
+      <a href="https://github.com/bmalum/mayfly/blob/v1.0.0-rc.1/guides/phoenix.md#L1" title="View Source" class="icon-action" rel="help nofollow">
+        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+        <span class="sr-only">View Source</span>
+      </a>
+
+  </div>
+
+
+<p>&quot;Can I run Phoenix on Lambda?&quot; – the HTTP/API part, yes: one adapter, no HTTP
+server. The companion package <a rel="nofollow" href="https://github.com/bmalum/mayfly_plug"><code class="inline">mayfly_plug</code></a>
+turns API Gateway (v1/v2), Function URL and ALB events into <code class="inline">%Plug.Conn{}</code>s,
+runs your router or endpoint, and returns the proxy response. LiveView and
+channels need a WebSocket and stay out of scope.</p><pre><code class="makeup elixir" translate="no"><span class="c1"># mix.exs</span><span class="w">
+</span><span class="ss">deps</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="group-1">[</span><span class="p" data-group-id="group-2">{</span><span class="ss">:mayfly</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;~&gt; 1.0.0-rc&quot;</span><span class="p" data-group-id="group-2">}</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="group-3">{</span><span class="ss">:mayfly_plug</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;~&gt; 0.1&quot;</span><span class="p" data-group-id="group-3">}</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="group-4">{</span><span class="ss">:phoenix</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;~&gt; 1.8&quot;</span><span class="p" data-group-id="group-4">}</span><span class="p">,</span><span class="w"> </span><span class="n">...</span><span class="p" data-group-id="group-1">]</span><span class="w">
+
+</span><span class="ss">releases</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="group-5">[</span><span class="w">
+  </span><span class="ss">lambda</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="group-6">[</span><span class="w">
+    </span><span class="ss">steps</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="group-7">[</span><span class="o">&amp;</span><span class="nc">Mayfly.Release</span><span class="o">.</span><span class="n">prepare</span><span class="o">/</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="ss">:assemble</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="nc">Mayfly.Release</span><span class="o">.</span><span class="n">bootstrap</span><span class="o">/</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="nc">Mayfly.Release</span><span class="o">.</span><span class="n">zip</span><span class="o">/</span><span class="mi">1</span><span class="p" data-group-id="group-7">]</span><span class="p">,</span><span class="w">
+    </span><span class="ss">mayfly</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="group-8">[</span><span class="ss">handler</span><span class="p">:</span><span class="w"> </span><span class="nc">MyApp.Lambda</span><span class="p">,</span><span class="w"> </span><span class="ss">layer</span><span class="p">:</span><span class="w"> </span><span class="no">true</span><span class="p" data-group-id="group-8">]</span><span class="w">
+  </span><span class="p" data-group-id="group-6">]</span><span class="w">
+</span><span class="p" data-group-id="group-5">]</span></code></pre><pre><code class="makeup elixir" translate="no"><span class="kd">defmodule</span><span class="w"> </span><span class="nc">MyApp.Lambda</span><span class="w"> </span><span class="k" data-group-id="group-1">do</span><span class="w">
+  </span><span class="kn">use</span><span class="w"> </span><span class="nc">Mayfly.Plug.Handler</span><span class="p">,</span><span class="w"> </span><span class="ss">plug</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="group-2">{</span><span class="nc">MyAppWeb.Endpoint</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="group-3">[</span><span class="p" data-group-id="group-3">]</span><span class="p" data-group-id="group-2">}</span><span class="w">
+</span><span class="k" data-group-id="group-1">end</span></code></pre><p>That is the whole integration. A plain <code class="inline">Plug.Router</code> works the same way with
+<code class="inline">plug: MyApp.Router</code>.</p><h2 id="phoenix-configuration" class="section-heading"><a href="#phoenix-configuration" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a><span class="text">Phoenix configuration</span></h2><p>Generate the app without the parts that assume a server:</p><pre><code class="makeup bash" translate="no"><span class="">mix phx.new my_app --no-html --no-assets --no-ecto --no-live --no-mailer --no-dashboard
+</span></code></pre><p>Then:</p><ul><li><strong>No server.</strong> In <code class="inline">config/runtime.exs</code> set <code class="inline">server: false</code> for the endpoint
+and drop the <code class="inline">http:</code> block (Lambda never opens a port). Keep
+<code class="inline">url: [host: System.get_env(&quot;PHX_HOST&quot;), port: 443, scheme: &quot;https&quot;]</code> so
+generated URLs are right. Move <code class="inline">{:bandit, ...}</code> to <code class="inline">only: [:dev, :test]</code>; it is
+not needed in the release.</li><li><strong>Remove <code class="inline">DNSCluster</code></strong> from the supervision tree and the <code class="inline">dns_cluster</code> dep;
+there is no cluster.</li><li><strong><code class="inline">SECRET_KEY_BASE</code></strong> and <code class="inline">PHX_HOST</code> become Lambda environment variables.
+The application (Endpoint, PubSub, Telemetry) starts normally when
+<a href="Mayfly.Boot.html"><code class="inline">Mayfly.Boot</code></a> boots the release; your <code class="inline">init/1</code> runs after that.</li><li><strong>Logging</strong>: Phoenix's <code class="inline">Plug.Telemetry</code> log lines go through
+<a href="Mayfly.LogFormatter.html"><code class="inline">Mayfly.LogFormatter</code></a> and show up in CloudWatch as JSON with the Lambda
+<code class="inline">requestId</code> when the function's log format is JSON.</li></ul><p>What works: controllers, JSON views, pipelines and plugs, <code class="inline">Plug.Parsers</code>,
+sessions in signed/encrypted cookies (<code class="inline">Plug.Session</code> with the <code class="inline">:cookie</code>
+store), <code class="inline">Plug.Static</code> for files in <code class="inline">priv/static</code> (prefer S3/CloudFront for
+assets), <code class="inline">Phoenix.PubSub</code> within one execution environment.</p><p>What does not: LiveView, channels and anything else that needs a WebSocket or
+a long-lived connection; <code class="inline">Phoenix.PubSub</code> across instances; the live dashboard.</p><p>Ecto: start the Repo as usual, <code class="inline">pool_size: 1</code> or <code class="inline">2</code> (one invocation at a time
+per environment; more on Managed Instances), and use RDS Proxy or Aurora DSQL
+so thousands of environments do not open thousands of connections.</p><h2 id="streaming" class="section-heading"><a href="#streaming" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a><span class="text">Streaming</span></h2><p>A second handler module with <code class="inline">streaming: true</code> serves <code class="inline">send_chunked</code>/<code class="inline">chunk</code>
+responses through Lambda response streaming:</p><pre><code class="makeup elixir" translate="no"><span class="kd">defmodule</span><span class="w"> </span><span class="nc">MyApp.StreamingLambda</span><span class="w"> </span><span class="k" data-group-id="group-1">do</span><span class="w">
+  </span><span class="kn">use</span><span class="w"> </span><span class="nc">Mayfly.Plug.Handler</span><span class="p">,</span><span class="w"> </span><span class="ss">plug</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="group-2">{</span><span class="nc">MyAppWeb.Endpoint</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="group-3">[</span><span class="p" data-group-id="group-3">]</span><span class="p" data-group-id="group-2">}</span><span class="p">,</span><span class="w"> </span><span class="ss">streaming</span><span class="p">:</span><span class="w"> </span><span class="no">true</span><span class="w">
+</span><span class="k" data-group-id="group-1">end</span></code></pre><p>Deploy it as its own function (same zip, different handler) behind a Function
+URL in <code class="inline">RESPONSE_STREAM</code> mode. Every chunk is sent as it is produced; plain
+routes still work through that function. Buffered functions concatenate chunks
+into one response.</p><h2 id="errors" class="section-heading"><a href="#errors" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a><span class="text">Errors</span></h2><p>Phoenix renders a 500 through <code class="inline">Phoenix.Endpoint.RenderErrors</code> and re-raises.
+<code class="inline">mayfly_plug</code> returns the rendered 500 to the client and logs the exception
+(what Bandit does), so API Gateway shows your error JSON instead of a generic</p><ol start="502"><li>Pass <code class="inline">on_error: :propagate</code> if you prefer Lambda to record a function
+error. Exceptions raised before any response was sent always propagate.</li></ol><h2 id="measured" class="section-heading"><a href="#measured" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a><span class="text">Measured</span></h2><p>Phoenix 1.8.15 JSON API, Erlang layer, arm64, 1024 MB, eu-central-1:</p><table><thead><tr><th style="text-align: left;"></th><th style="text-align: left;"></th></tr></thead><tbody><tr><td style="text-align: left;">zip (BEAM files only)</td><td style="text-align: left;">2.8 MB</td></tr><tr><td style="text-align: left;"><code class="inline">Init Duration</code> (cold start)</td><td style="text-align: left;">586 ms / 739 ms</td></tr><tr><td style="text-align: left;">warm <code class="inline">GET /api/hello</code></td><td style="text-align: left;">3–10 ms function time, ~100–180 ms end to end via Function URL</td></tr><tr><td style="text-align: left;">memory</td><td style="text-align: left;">94 MB</td></tr><tr><td style="text-align: left;">streamed route, 4 chunks 300 ms apart</td><td style="text-align: left;">chunks arrived at +1.61 s (cold), +1.91 s, +2.21 s, +2.52 s</td></tr></tbody></table><h2 id="local-testing" class="section-heading"><a href="#local-testing" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a><span class="text">Local testing</span></h2><pre><code class="makeup bash" translate="no"><span class="">mix lambda.invoke MyApp.Lambda &#39;{}&#39; --http --method GET --path /api/hello
+</span><span class="">mix lambda.invoke MyApp.Lambda &#39;{&quot;name&quot;:&quot;Ada&quot;}&#39; --http --path /api/users     # JSON body
+</span><span class="">mix lambda.invoke MyApp.StreamingLambda &#39;{}&#39; --http --method GET --path /api/stream --raw
+</span></code></pre><p><a href="https://mix.hexdocs.pm/Mix.Tasks.Test.html"><code class="inline">mix test</code></a> in your Phoenix app is untouched: <code class="inline">Phoenix.ConnTest</code> keeps using
+<code class="inline">Plug.Test</code>; the Lambda adapter is only used inside the function.</p>
+
+</div>
+
+<div class="bottom-actions" id="bottom-actions">
+  <div class="bottom-actions-item">
+
+      <a href="streaming.html" class="bottom-actions-button" rel="prev">
+        <span class="subheader">
+          ← Previous Page
+        </span>
+        <span class="title">
+Response streaming
+        </span>
+      </a>
+
+  </div>
+  <div class="bottom-actions-item">
+
+      <a href="observability.html" class="bottom-actions-button" rel="next">
+        <span class="subheader">
+          Next Page →
+        </span>
+        <span class="title">
+Observability
+        </span>
+      </a>
+
+  </div>
+</div>
+    <footer class="footer">
+
+        <p>
+
+            <span class="line">
+              <a href="https://hex.pm/packages/mayfly/1.0.0-rc.1">Hex Package</a>
+
+              <a href="https://preview.hex.pm/preview/mayfly/1.0.0-rc.1">Hex Preview</a>
+
+                (<a href="https://preview.hex.pm/preview/mayfly/1.0.0-rc.1/show/guides/phoenix.md">current file</a>)
+
+            </span>
+
+          <span class="line">
+            <button class="a-main footer-button display-quick-switch" title="Go to package docs">
+              Go to package docs
+            </button>
+
+              <a href="llms.txt" target="_blank">
+                View llms.txt
+              </a>
+
+
+              <a href="Mayfly.epub">
+                Download ePub version
+              </a>
+
+          </span>
+        </p>
+
+        <p class="built-using">
+          Built using
+          <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" target="_blank" rel="help noopener" translate="no">ExDoc</a> (v0.40.4) for the
+
+            <a href="https://elixir-lang.org" title="Elixir" target="_blank" translate="no">Elixir programming language</a>
+
+        </p>
+
+
+    </footer>
+  </div>
+</main>
+</div>
+
+  </body>
+</html>

@@ -14,6 +14,7 @@
   - [Erlang runtime layers](layers.md)
   - [Architecture](architecture.md)
   - [Response streaming](streaming.md)
+  - [Plug and Phoenix on Lambda](phoenix.md)
   - [Observability](observability.md)
   - [Idempotency](idempotency.md)
   - [Migrating from 0.x](migrating-from-0-x.md)

@@ -43,8 +43,8 @@ dist/lato-latin-700-normal-2XVSBPG4.woff2
 dist/lato-latin-ext-400-normal-N27NCBWW.woff2
 dist/lato-latin-ext-700-normal-Q2L5DVMW.woff2
 dist/remixicon-ZWU5GQ4X.woff2
-dist/search_data-05FEC6CC.js
-dist/sidebar_items-16A5EDB9.js
+dist/search_data-4424881A.js
+dist/sidebar_items-9D45FB8F.js
 events.html
 getting-started.html
 idempotency.html
@@ -52,6 +52,7 @@ index.html
 layers.html
 migrating-from-0-x.html
 observability.html
+phoenix.html
 readme.html
 search.html
 streaming.html
