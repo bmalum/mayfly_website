@@ -14,7 +14,7 @@
 
       <link rel="canonical" href="https://elixir-aws-lambda.dev/docs/layers.html" />
 
-    <script defer src="dist/sidebar_items-9D45FB8F.js"></script>
+    <script defer src="dist/sidebar_items-CDB82FD9.js"></script>
     <script defer src="docs_config.js"></script>
     <script defer src="dist/html-MI33G4N7.js"></script>
 <meta name="description" content="Mayfly documentation: run Elixir on AWS Lambda with a lightweight custom runtime. Handler behaviour, mix release build, Erlang layers, response streaming, Managed Instances, observability.">
@@ -170,7 +170,26 @@ catalog and resolver at <code class="inline">/layers/</code> reflect the new ver
 </span><span class="">  --template-file layer/publisher-role.yml --capabilities CAPABILITY_NAMED_IAM \
 </span><span class="">  --parameter-overrides GitHubRepo=&lt;owner&gt;/&lt;repo&gt;
 </span><span class=""># -&gt; Outputs.RoleArn becomes the GitHub secret LAYERS_ROLE_ARN
-</span></code></pre><h2 id="security-notes" class="section-heading"><a href="#security-notes" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a><span class="text">Security notes</span></h2><ul><li>A layer is code that runs inside your function. Pin ARNs by version, verify
+</span></code></pre><h2 id="why-there-is-no-elixir-layer" class="section-heading"><a href="#why-there-is-no-elixir-layer" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a><span class="text">Why there is no Elixir layer</span></h2><p>Elixir's own applications (<code class="inline">elixir</code>, <code class="inline">logger</code>, <code class="inline">iex</code>) make up about 1.4 MB of
+a 1.6 MB layer-mode zip, so a second layer family (<code class="inline">mayfly-elixir-&lt;vsn&gt;-otp-&lt;major&gt;</code>,
+unpacking to <code class="inline">/opt/elixir</code>) looked attractive. We built it and measured it
+rather than argue: a prototype <code class="inline">strip_elixir</code> release step removed the three
+applications from the release, rewrote the boot scripts to load them from a
+<code class="inline">$MAYFLY_ELIXIR</code> boot variable, and <code class="inline">bootstrap</code> verified the layer's Elixir
+version the way it verifies ERTS. The same handler was then deployed three
+ways to the playground (arm64, 512 MB, JSON logs, Erlang/OTP 27.3.4.18,
+Elixir 1.18.4) and cold-started 21 times each by changing an environment
+variable between invocations. <code class="inline">initDurationMs</code> from <code class="inline">platform.report</code>:</p><table><thead><tr><th style="text-align: left;">Variant</th><th style="text-align: left;">Zip</th><th style="text-align: left;"><code class="inline">update-function-code</code></th><th style="text-align: left;">Cold start median</th><th style="text-align: left;">p90</th><th style="text-align: left;">min–max</th></tr></thead><tbody><tr><td style="text-align: left;">1. bundled ERTS</td><td style="text-align: left;">22.4 MB</td><td style="text-align: left;">10–14 s</td><td style="text-align: left;">506 ms</td><td style="text-align: left;">659 ms</td><td style="text-align: left;">407–673 ms</td></tr><tr><td style="text-align: left;">2. ERTS layer (default)</td><td style="text-align: left;">1.6 MB</td><td style="text-align: left;">2.5–4.5 s</td><td style="text-align: left;">543 ms</td><td style="text-align: left;">709 ms</td><td style="text-align: left;">399–728 ms</td></tr><tr><td style="text-align: left;">3. ERTS layer + Elixir layer</td><td style="text-align: left;">0.16 MB</td><td style="text-align: left;">1.8–2.5 s</td><td style="text-align: left;">511 ms</td><td style="text-align: left;">541 ms</td><td style="text-align: left;">415–642 ms</td></tr></tbody></table><p>The Elixir layer improves the median cold start by about 30 ms over today's
+default, under the 50 ms bar we set for shipping it, and saves roughly one
+second per deploy. Against that it adds a second version axis (every Elixir
+patch × every OTP major as a layer, matched exactly by <code class="inline">bootstrap</code>), a second
+ARN to attach, and a release step that edits boot scripts. The variance
+between runs (p90 differences of 100–170 ms in both directions) is larger
+than the effect. The bundled-ERTS variant, for what it is worth, cold-starts
+as fast as the layer variants; the layer buys build portability and a small
+upload, not speed.</p><p>Decision: not shipped. If your fleet deploys dozens of functions per commit
+and the upload time matters, open an issue with numbers; the prototype is
+small and can be revived.</p><h2 id="security-notes" class="section-heading"><a href="#security-notes" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a><span class="text">Security notes</span></h2><ul><li>A layer is code that runs inside your function. Pin ARNs by version, verify
 the checksum against the release assets if you need to, or publish your own.</li><li>The publishing role can only touch layers named <code class="inline">mayfly-erlang-*</code> in its
 account and is only assumable from the configured repository and ref.</li><li>Layers should live in a long-lived account you control, not in a personal
 sandbox: functions referencing a deleted layer can no longer be created or
