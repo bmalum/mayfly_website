@@ -14,7 +14,7 @@
 
       <link rel="canonical" href="https://elixir-aws-lambda.dev/docs/deployment.html" />
 
-    <script defer src="dist/sidebar_items-A9737C8F.js"></script>
+    <script defer src="dist/sidebar_items-D7238B79.js"></script>
     <script defer src="docs_config.js"></script>
     <script defer src="dist/html-MI33G4N7.js"></script>
 <meta name="description" content="Mayfly documentation: run Elixir on AWS Lambda with a lightweight custom runtime. Handler behaviour, mix release build, Erlang layers, response streaming, Managed Instances, observability.">
@@ -209,44 +209,71 @@ wrap it in an HTTP event (<code class="inline">&quot;version&quot;: &quot;2.0&qu
   </span><span class="k" data-group-id="group-8">else</span><span class="w">
     </span><span class="bp">_</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p" data-group-id="group-10">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="group-11">%{</span><span class="ss">statusCode</span><span class="p">:</span><span class="w"> </span><span class="mi">400</span><span class="p">,</span><span class="w"> </span><span class="ss">body</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;invalid JSON&quot;</span><span class="p" data-group-id="group-11">}</span><span class="p" data-group-id="group-10">}</span><span class="w">
   </span><span class="k" data-group-id="group-8">end</span><span class="w">
-</span><span class="k" data-group-id="group-5">end</span></code></pre><p>Test locally with <code class="inline">mix lambda.invoke MyApp.Handler '{&quot;x&quot;:1}' --http --method POST --path /items</code>.</p><h2 id="infrastructure-as-code" class="section-heading"><a href="#infrastructure-as-code" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a><span class="text">Infrastructure as code</span></h2><h3 id="aws-sam" class="section-heading"><a href="#aws-sam" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a><span class="text">AWS SAM</span></h3><pre><code class="yaml">Resources:
-  Hello:
-    Type: AWS::Serverless::Function
-    Properties:
-      Runtime: provided.al2023
-      Architectures: [arm64]
-      Handler: MyApp.Handler
-      CodeUri: _build/prod/rel/lambda/lambda.zip
-      Layers:
-        - arn:aws:lambda:eu-central-1:ACCOUNT:layer:mayfly-erlang-27-3-4-arm64:1
-      LoggingConfig:
-        LogFormat: JSON
-        ApplicationLogLevel: INFO
-      FunctionUrlConfig:
-        AuthType: NONE
-        InvokeMode: RESPONSE_STREAM      # only for streaming handlers</code></pre><h3 id="terraform" class="section-heading"><a href="#terraform" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a><span class="text">Terraform</span></h3><pre><code class="hcl">resource &quot;aws_lambda_function&quot; &quot;hello&quot; {
-  function_name = &quot;hello&quot;
-  runtime       = &quot;provided.al2023&quot;
-  architectures = [&quot;arm64&quot;]
-  handler       = &quot;MyApp.Handler&quot;
-  filename      = &quot;${path.module}/_build/prod/rel/lambda/lambda.zip&quot;
-  source_code_hash = filebase64sha256(&quot;${path.module}/_build/prod/rel/lambda/lambda.zip&quot;)
-  layers        = [var.mayfly_layer_arn]
-  role          = aws_iam_role.lambda.arn
-  timeout       = 30
-  memory_size   = 512
-
-  logging_config {
-    log_format = &quot;JSON&quot;
-  }
-}</code></pre><h3 id="cdk-typescript" class="section-heading"><a href="#cdk-typescript" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a><span class="text">CDK (TypeScript)</span></h3><pre><code class="ts">new lambda.Function(this, &quot;Hello&quot;, {
+</span><span class="k" data-group-id="group-5">end</span></code></pre><p>Test locally with <code class="inline">mix lambda.invoke MyApp.Handler '{&quot;x&quot;:1}' --http --method POST --path /items</code>.</p><h2 id="infrastructure-as-code" class="section-heading"><a href="#infrastructure-as-code" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a><span class="text">Infrastructure as code</span></h2><p>Mayfly ships working SAM, Terraform and CDK definitions in
+<a rel="nofollow" href="https://github.com/bmalum/mayfly/tree/main/templates"><code class="inline">templates/</code></a> (also in
+the Hex package under <code class="inline">deps/mayfly/templates</code>). Each resolves the public Erlang
+layer for the deployment region from an embedded map covering all 16 regions ×
+OTP 27/28/29 × both architectures; the map is re-rendered by the weekly layer
+workflow (<code class="inline">layer/render-templates.sh</code>), so the templates in <code class="inline">main</code> always carry
+current ARNs. The quickest way to get them is the generator:</p><pre><code class="makeup bash" translate="no"><span class="">mix lambda.new hello --iac sam        # or terraform | cdk; --arch x86_64, --otp 28, --region us-east-1
+</span></code></pre><p>It creates the Mix project (handler with an HTTP branch, release config,
+<code class="inline">.tool-versions</code> pinned to the layer's exact OTP from the catalog, an ExUnit
+test through <a href="Mayfly.LocalRuntime.html"><code class="inline">Mayfly.LocalRuntime</code></a>, README) plus the IaC files with the
+function name, handler, architecture and OTP filled in. All three were
+deployed, invoked and destroyed from the generated projects on 2026-10-09.</p><h3 id="aws-sam-template-yaml-samconfig-toml-makefile-in-the-project-root" class="section-heading"><a href="#aws-sam-template-yaml-samconfig-toml-makefile-in-the-project-root" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a><span class="text">AWS SAM (<code class="inline">template.yaml</code>, <code class="inline">samconfig.toml</code>, <code class="inline">Makefile</code> in the project root)</span></h3><pre><code class="makeup bash" translate="no"><span class="">sam build        # BuildMethod: makefile -&gt; MIX_ENV=prod mix release lambda, no Docker
+</span><span class="">sam deploy --guided   # afterwards: sam deploy
+</span><span class="">sam delete
+</span></code></pre><p><code class="inline">AWS::Serverless::Function</code> with <code class="inline">provided.al2023</code>, <code class="inline">Architectures</code>,
+<code class="inline">LoggingConfig: JSON</code>, <code class="inline">Tracing: Active</code>, a Function URL (parameters
+<code class="inline">FunctionUrlAuthType</code>, <code class="inline">FunctionUrlInvokeMode</code>), a log group with retention,
+and <code class="inline">Layers</code> chosen via <code class="inline">Mappings.MayflyLayers[region][otp&lt;major&gt;&lt;arch&gt;]</code>
+(<code class="inline">x86_64</code> is written <code class="inline">x8664</code>: mapping keys must be alphanumeric). Parameters
+<code class="inline">Architecture</code> and <code class="inline">OtpMajor</code> select the layer; <code class="inline">OtpMajor</code> must match the OTP
+you build with.</p><h3 id="terraform-infra-main-tf-variables-tf-locals-tf" class="section-heading"><a href="#terraform-infra-main-tf-variables-tf-locals-tf" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a><span class="text">Terraform (<code class="inline">infra/main.tf</code>, <code class="inline">variables.tf</code>, <code class="inline">locals.tf</code>)</span></h3><pre><code class="makeup bash" translate="no"><span class="">MIX_ENV=prod mix release lambda
+</span><span class="">cd infra &amp;&amp; terraform init &amp;&amp; terraform apply -auto-approve
+</span><span class="">terraform destroy -auto-approve
+</span></code></pre><p><code class="inline">aws_lambda_function</code> + IAM role with <code class="inline">AWSLambdaBasicExecutionRole</code>, log group,
+optional <code class="inline">aws_lambda_function_url</code>. <code class="inline">locals.tf</code> holds the static layer map
+(reproducible plans); <code class="inline">var.layer_arn</code> overrides it, and the file documents a
+<code class="inline">data &quot;http&quot;</code> variant that resolves the catalog at plan time.</p><h3 id="cdk-infra-lib-mayfly-function-ts-bin-app-ts" class="section-heading"><a href="#cdk-infra-lib-mayfly-function-ts-bin-app-ts" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a><span class="text">CDK (<code class="inline">infra/lib/mayfly-function.ts</code>, <code class="inline">bin/app.ts</code>)</span></h3><pre><code class="makeup bash" translate="no"><span class="">MIX_ENV=prod mix release lambda
+</span><span class="">cd infra &amp;&amp; npm install &amp;&amp; npx cdk bootstrap &amp;&amp; npx cdk deploy --require-approval never
+</span><span class="">npx cdk destroy --force
+</span></code></pre><p><code class="inline">MayflyFunction</code> extends <code class="inline">lambda.Function</code>: runtime, architecture, handler,
+layer, JSON logs, tracing and sane memory/timeout defaults; every other
+<code class="inline">FunctionProps</code> passes through. With an explicit stack region the layer ARN is
+resolved at synth time; environment-agnostic stacks get a CloudFormation
+<code class="inline">Mapping</code> and <code class="inline">Fn::FindInMap</code>. <code class="inline">MayflyFunction.layerArn(region, arch, otpMajor)</code>
+is a plain lookup for other constructs.</p><h3 id="minimal-hand-written-snippets" class="section-heading"><a href="#minimal-hand-written-snippets" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a><span class="text">Minimal hand-written snippets</span></h3><pre><code class="yaml"># SAM
+Hello:
+  Type: AWS::Serverless::Function
+  Properties:
+    Runtime: provided.al2023
+    Architectures: [arm64]
+    Handler: MyApp.Handler
+    CodeUri: _build/prod/rel/lambda/lambda.zip
+    Layers: [arn:aws:lambda:eu-central-1:651236577491:layer:mayfly-erlang-27-arm64:4]
+    LoggingConfig: { LogFormat: JSON }</code></pre><pre><code class="hcl"># Terraform
+resource &quot;aws_lambda_function&quot; &quot;hello&quot; {
+  function_name    = &quot;hello&quot;
+  runtime          = &quot;provided.al2023&quot;
+  architectures    = [&quot;arm64&quot;]
+  handler          = &quot;MyApp.Handler&quot;
+  filename         = &quot;_build/prod/rel/lambda/lambda.zip&quot;
+  source_code_hash = filebase64sha256(&quot;_build/prod/rel/lambda/lambda.zip&quot;)
+  layers           = [var.mayfly_layer_arn]
+  role             = aws_iam_role.lambda.arn
+  logging_config { log_format = &quot;JSON&quot; }
+}</code></pre><pre><code class="ts">// CDK
+new lambda.Function(this, &quot;Hello&quot;, {
   runtime: lambda.Runtime.PROVIDED_AL2023,
   architecture: lambda.Architecture.ARM_64,
   handler: &quot;MyApp.Handler&quot;,
   code: lambda.Code.fromAsset(&quot;_build/prod/rel/lambda/lambda.zip&quot;),
   layers: [lambda.LayerVersion.fromLayerVersionArn(this, &quot;Erlang&quot;, mayflyLayerArn)],
   loggingFormat: lambda.LoggingFormat.JSON,
-});</code></pre><h2 id="ci" class="section-heading"><a href="#ci" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a><span class="text">CI</span></h2><pre><code class="yaml">- uses: erlef/setup-beam@v1
+});</code></pre><p>Container images: <code class="inline">PackageType: Image</code> / <code class="inline">package_type = &quot;Image&quot;</code> /
+<code class="inline">lambda.DockerImageFunction</code> with the URI printed by <code class="inline">mix lambda.build --image --push</code>;
+no runtime, layers or handler setting (see <a href="#container-image">Container image</a>).</p><h2 id="ci" class="section-heading"><a href="#ci" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a><span class="text">CI</span></h2><pre><code class="yaml">- uses: erlef/setup-beam@v1
   with: { elixir-version: &quot;1.18&quot;, otp-version: &quot;27&quot; }
 - run: mix deps.get
 - run: MIX_ENV=prod mix release lambda             # layer: true → no Docker needed

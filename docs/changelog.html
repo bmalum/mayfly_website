@@ -14,7 +14,7 @@
 
       <link rel="canonical" href="https://elixir-aws-lambda.dev/docs/changelog.html" />
 
-    <script defer src="dist/sidebar_items-A9737C8F.js"></script>
+    <script defer src="dist/sidebar_items-D7238B79.js"></script>
     <script defer src="docs_config.js"></script>
     <script defer src="dist/html-MI33G4N7.js"></script>
 <meta name="description" content="Mayfly documentation: run Elixir on AWS Lambda with a lightweight custom runtime. Handler behaviour, mix release build, Erlang layers, response streaming, Managed Instances, observability.">
@@ -156,7 +156,13 @@ helpers <code class="inline">json/4</code>, <code class="inline">text/4</code>, 
 DynamoDB Streams (attribute values converted to terms); <code class="inline">process_batch/2</code>
 partial-batch helpers for SQS, Kinesis and DynamoDB; <a href="Mayfly.Events.html#decode/1"><code class="inline">Mayfly.Events.decode/1</code></a>
 dispatcher. Verified on Lambda with a Function URL, SQS
-<code class="inline">ReportBatchItemFailures</code>, S3 notifications, EventBridge and DynamoDB Streams.</li><li><code class="inline">mix lambda.build --image [--tag] [--push ECR_URI]</code>: container image for
+<code class="inline">ReportBatchItemFailures</code>, S3 notifications, EventBridge and DynamoDB Streams.</li><li><code class="inline">mix lambda.new PATH [--iac sam|terraform|cdk] [--arch] [--otp] [--region]</code>:
+generates a project (handler with HTTP branch, release config,
+<code class="inline">.tool-versions</code> pinned to the layer's OTP from the catalog, LocalRuntime
+test, README) plus a working SAM, Terraform or CDK definition.</li><li><code class="inline">templates/</code> with SAM, Terraform and a CDK <code class="inline">MayflyFunction</code> construct whose
+layer ARN maps (16 regions × OTP 27/28/29 × arch) are rendered from the
+catalog by <code class="inline">layer/render-templates.sh</code>, run weekly by the layers workflow.
+All three deployed, invoked and destroyed from generated projects.</li><li><code class="inline">mix lambda.build --image [--tag] [--push ECR_URI]</code>: container image for
 Lambda's image package type. Release built in the AL2023 build container,
 image based on <code class="inline">public.ecr.aws/lambda/provided:al2023</code> with the handler as
 <code class="inline">CMD</code>, <code class="inline">lambda.image.Dockerfile</code> override, ECR login/tag/push with digest,

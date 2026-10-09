@@ -30,6 +30,7 @@ Mayfly.md
 Mix.Tasks.Lambda.Build.md
 Mix.Tasks.Lambda.Doctor.md
 Mix.Tasks.Lambda.Invoke.md
+Mix.Tasks.Lambda.New.md
 api-reference.md
 architecture.md
 changelog.md

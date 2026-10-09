@@ -14,7 +14,7 @@
 
       <link rel="canonical" href="https://elixir-aws-lambda.dev/docs/getting-started.html" />
 
-    <script defer src="dist/sidebar_items-A9737C8F.js"></script>
+    <script defer src="dist/sidebar_items-D7238B79.js"></script>
     <script defer src="docs_config.js"></script>
     <script defer src="dist/html-MI33G4N7.js"></script>
 <meta name="description" content="Mayfly documentation: run Elixir on AWS Lambda with a lightweight custom runtime. Handler behaviour, mix release build, Erlang layers, response streaming, Managed Instances, observability.">
@@ -129,7 +129,11 @@ Mayfly
   </div>
 
 
-<h2 id="prerequisites" class="section-heading"><a href="#prerequisites" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a><span class="text">Prerequisites</span></h2><ul><li>Elixir 1.18+ and OTP 27+</li><li>An AWS account and the AWS CLI (for deployment)</li><li>Docker only if you bundle ERTS instead of using the layer</li></ul><h2 id="1-add-mayfly-and-a-release" class="section-heading"><a href="#1-add-mayfly-and-a-release" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a><span class="text">1. Add Mayfly and a release</span></h2><pre><code class="makeup elixir" translate="no"><span class="c1"># mix.exs</span><span class="w">
+<h2 id="prerequisites" class="section-heading"><a href="#prerequisites" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a><span class="text">Prerequisites</span></h2><ul><li>Elixir 1.18+ and OTP 27+</li><li>An AWS account and the AWS CLI (for deployment)</li><li>Docker only if you bundle ERTS instead of using the layer</li></ul><h2 id="1-add-mayfly-and-a-release" class="section-heading"><a href="#1-add-mayfly-and-a-release" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a><span class="text">1. Add Mayfly and a release</span></h2><blockquote><p><strong>Shortcut:</strong> <code class="inline">mix lambda.new hello --iac sam</code> (from any project that has
+<code class="inline">mayfly</code> in its deps, or a Mayfly checkout) generates everything in steps 1–3
+plus a SAM, Terraform or CDK definition; see the
+<a href="deployment.html#infrastructure-as-code">deployment guide</a>. The steps below
+show what it generates.</p></blockquote><pre><code class="makeup elixir" translate="no"><span class="c1"># mix.exs</span><span class="w">
 </span><span class="kd">def</span><span class="w"> </span><span class="nf">project</span><span class="w"> </span><span class="k" data-group-id="group-1">do</span><span class="w">
   </span><span class="p" data-group-id="group-2">[</span><span class="w">
     </span><span class="ss">app</span><span class="p">:</span><span class="w"> </span><span class="ss">:hello</span><span class="p">,</span><span class="w">

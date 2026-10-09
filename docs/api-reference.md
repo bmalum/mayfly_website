@@ -56,6 +56,8 @@ dependency; when it is not present the calls are no-ops.
 ## Mix Tasks
 
 - [mix lambda.doctor](Mix.Tasks.Lambda.Doctor.md): Runs a set of checks that catch the common setup mistakes before you deploy
+- [mix lambda.new](Mix.Tasks.Lambda.New.md): Generates a new Elixir project that builds and deploys as an AWS Lambda
+function with Mayfly.
 
 - Build &amp; local dev
   - [mix lambda.build](Mix.Tasks.Lambda.Build.md): Builds the Lambda package for a release configured with `Mayfly.Release`:
