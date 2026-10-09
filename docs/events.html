@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="ExDoc v0.40.4">
+    <meta name="project" content="Mayfly v1.0.0-rc.1">
+
+
+    <title>Event sources — Mayfly v1.0.0-rc.1</title>
+
+    <link rel="stylesheet" href="dist/html-elixir-RXHHCTJW.css" />
+
+      <link rel="canonical" href="https://elixir-aws-lambda.dev/docs/events.html" />
+
+    <script defer src="dist/sidebar_items-BCE38EE3.js"></script>
+    <script defer src="docs_config.js"></script>
+    <script defer src="dist/html-MI33G4N7.js"></script>
+<meta name="description" content="Mayfly documentation: run Elixir on AWS Lambda with a lightweight custom runtime. Handler behaviour, mix release build, Erlang layers, response streaming, Managed Instances, observability.">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#5b21b6">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Mayfly – Elixir on AWS Lambda">
+<meta property="og:title" content="Mayfly documentation – Elixir AWS Lambda runtime">
+<meta property="og:description" content="Run Elixir on AWS Lambda: handler behaviour, mix release build, Erlang layers, response streaming, Managed Instances.">
+<meta property="og:image" content="https://elixir-aws-lambda.dev/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/png" href="https://elixir-aws-lambda.dev/elixir-drop-only.png">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"TechArticle","isPartOf":{"@type":"WebSite","name":"Mayfly","url":"https://elixir-aws-lambda.dev/"},
+ "about":{"@type":"SoftwareSourceCode","name":"Mayfly","codeRepository":"https://github.com/bmalum/mayfly","programmingLanguage":"Elixir","runtimePlatform":"AWS Lambda provided.al2023"},
+ "author":{"@type":"Organization","name":"Karrer","url":"https://karrer.solutions"}}
+</script>
+
+  </head>
+  <body>
+    <script>(()=>{var t="ex_doc:settings",e="dark";var o="dark",s="light";var E="sidebar_state",n="closed";var r="sidebar_width";var a="sidebar-open";var i=new URLSearchParams(window.location.search),S=i.get("theme")||JSON.parse(localStorage.getItem(t)||"{}").theme;(S===o||S!==s&&window.matchMedia("(prefers-color-scheme: dark)").matches)&&document.body.classList.add(e);var d=sessionStorage.getItem(E),A=d!==n&&!window.matchMedia(`screen and (max-width: ${768}px)`).matches;document.body.classList.toggle(a,A);var c=sessionStorage.getItem(r);c&&document.body.style.setProperty("--sidebarWidth",`${c}px`);var p=/(Macintosh|iPhone|iPad|iPod)/.test(window.navigator.userAgent);document.documentElement.classList.toggle("apple-os",p);})();
+</script>
+
+<div class="body-wrapper">
+
+<button id="sidebar-menu" class="sidebar-button sidebar-toggle" aria-label="toggle sidebar" aria-controls="sidebar">
+  <i class="ri-menu-line ri-lg" title="Collapse/expand sidebar"></i>
+</button>
+
+<nav id="sidebar" class="sidebar">
+
+  <div class="sidebar-header">
+    <div class="sidebar-projectInfo">
+
+        <a href="https://github.com/bmalum/mayfly" class="sidebar-projectImage">
+          <img src="assets/logo.png" alt="Mayfly" />
+        </a>
+
+      <div>
+        <a href="https://github.com/bmalum/mayfly" class="sidebar-projectName" translate="no">
+Mayfly
+        </a>
+        <div class="sidebar-projectVersion" translate="no">
+          v1.0.0-rc.1
+        </div>
+      </div>
+    </div>
+    <ul id="sidebar-list-nav" class="sidebar-list-nav" role="tablist" data-extras="Pages"></ul>
+  </div>
+</nav>
+
+<output role="status" id="toast"></output>
+
+<main class="content page-extra" id="main" data-type="extras">
+  <div id="content" class="content-inner">
+    <div class="top-search">
+      <div class="search-settings">
+        <form class="search-bar" action="search.html">
+          <label class="search-label">
+            <span class="sr-only">Search documentation of Mayfly</span>
+            <div class="search-input-wrapper">
+              <input name="q" type="text" class="search-input" placeholder="Press / to search" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" />
+              <button type="button" tabindex="-1" class="search-close-button" aria-hidden="true">
+                <i class="ri-close-line ri-lg" title="Cancel search"></i>
+              </button>
+            </div>
+          </label>
+        </form>
+        <div class="autocomplete">
+        </div>
+        <div class="engine-selector" data-multiple="false">
+          <button type="button" class="engine-button" aria-label="Select search engine" aria-haspopup="true" aria-expanded="false">
+            <i class="ri-search-2-line" aria-hidden="true"></i>
+            <span class="engine-name">Default</span>
+            <i class="ri-arrow-down-s-line" aria-hidden="true"></i>
+          </button>
+          <div class="engine-dropdown" hidden role="menu">
+
+              <button type="button"
+                      class="engine-option"
+                      data-engine-url="search.html?q="
+                      role="menuitemradio"
+                      aria-checked="true">
+                <span class="name">Default</span>
+                <span class="help">In-browser search</span>
+              </button>
+
+          </div>
+        </div>
+        <button class="icon-settings display-settings">
+          <i class="ri-settings-3-line"></i>
+          <span class="sr-only">Settings</span>
+        </button>
+      </div>
+    </div>
+
+<div id="top-content">
+  <div class="heading-with-actions top-heading">
+    <h1>Event sources</h1>
+
+<a href="events.md" title="Copy Markdown (hold Ctrl/Cmd and click it to open as Markdown)" class="copy-markdown icon-action" rel="help">
+  <i class="ri-markdown-line" aria-hidden="true"></i>
+  <span class="sr-only">Copy Markdown</span>
+</a>
+
+
+      <a href="https://github.com/bmalum/mayfly/blob/v1.0.0-rc.1/guides/events.md#L1" title="View Source" class="icon-action" rel="help nofollow">
+        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+        <span class="sr-only">View Source</span>
+      </a>
+
+  </div>
+
+
+<p>Lambda hands your handler the raw JSON each service sends. <a href="Mayfly.Events.html"><code class="inline">Mayfly.Events</code></a>
+turns the common envelopes into structs: bodies are JSON-decoded when they
+parse, base64 is undone, S3 keys are URL-decoded, DynamoDB attribute values
+become plain terms, and partial-batch responses are one function call.</p><table><thead><tr><th style="text-align: left;">Source</th><th style="text-align: left;">Decoder</th><th style="text-align: left;">Notable fields</th></tr></thead><tbody><tr><td style="text-align: left;">API Gateway HTTP API (v2), Function URL</td><td style="text-align: left;"><a href="Mayfly.Events.HTTP.html"><code class="inline">Mayfly.Events.HTTP</code></a></td><td style="text-align: left;"><code class="inline">method</code>, <code class="inline">path</code>, <code class="inline">query</code>, <code class="inline">headers</code> (lowercased), <code class="inline">cookies</code>, <code class="inline">body</code> (decoded)</td></tr><tr><td style="text-align: left;">API Gateway REST API (v1), ALB</td><td style="text-align: left;"><a href="Mayfly.Events.HTTP.html"><code class="inline">Mayfly.Events.HTTP</code></a></td><td style="text-align: left;">same struct, <code class="inline">version: :v1 | :alb</code>, multi-value headers joined</td></tr><tr><td style="text-align: left;">SQS</td><td style="text-align: left;"><a href="Mayfly.Events.SQS.html"><code class="inline">Mayfly.Events.SQS</code></a></td><td style="text-align: left;"><code class="inline">records[].body</code> (decoded), <code class="inline">message_attributes</code>, <code class="inline">process_batch/2</code></td></tr><tr><td style="text-align: left;">SNS</td><td style="text-align: left;"><a href="Mayfly.Events.SNS.html"><code class="inline">Mayfly.Events.SNS</code></a></td><td style="text-align: left;"><code class="inline">records[].message</code> (decoded), <code class="inline">from_envelope/1</code> for SNS→SQS</td></tr><tr><td style="text-align: left;">S3</td><td style="text-align: left;"><a href="Mayfly.Events.S3.html"><code class="inline">Mayfly.Events.S3</code></a></td><td style="text-align: left;"><code class="inline">records[].bucket</code>, <code class="inline">key</code> (URL-decoded), <code class="inline">size</code>, <code class="inline">event_name</code></td></tr><tr><td style="text-align: left;">EventBridge</td><td style="text-align: left;"><a href="Mayfly.Events.EventBridge.html"><code class="inline">Mayfly.Events.EventBridge</code></a></td><td style="text-align: left;"><code class="inline">source</code>, <code class="inline">detail_type</code>, <code class="inline">detail</code></td></tr><tr><td style="text-align: left;">Kinesis Data Streams</td><td style="text-align: left;"><a href="Mayfly.Events.Kinesis.html"><code class="inline">Mayfly.Events.Kinesis</code></a></td><td style="text-align: left;"><code class="inline">records[].data</code> (base64 + JSON decoded), <code class="inline">process_batch/2</code></td></tr><tr><td style="text-align: left;">DynamoDB Streams</td><td style="text-align: left;"><a href="Mayfly.Events.DynamoDB.html"><code class="inline">Mayfly.Events.DynamoDB</code></a></td><td style="text-align: left;"><code class="inline">records[].event_name</code> (<code class="inline">:insert</code> …), <code class="inline">keys</code>, <code class="inline">new_image</code>, <code class="inline">old_image</code> as plain maps</td></tr></tbody></table><p>Every struct keeps the original map in <code class="inline">raw</code>. Use the specific decoder when
+you know the source, or let <a href="Mayfly.Events.html#decode/1"><code class="inline">Mayfly.Events.decode/1</code></a> dispatch:</p><pre><code class="makeup elixir" translate="no"><span class="kd">def</span><span class="w"> </span><span class="nf">handle</span><span class="p" data-group-id="group-1">(</span><span class="n">event</span><span class="p">,</span><span class="w"> </span><span class="c">_ctx</span><span class="p">,</span><span class="w"> </span><span class="c">_state</span><span class="p" data-group-id="group-1">)</span><span class="w"> </span><span class="k" data-group-id="group-2">do</span><span class="w">
+  </span><span class="k">case</span><span class="w"> </span><span class="nc">Mayfly.Events</span><span class="o">.</span><span class="n">decode</span><span class="p" data-group-id="group-3">(</span><span class="n">event</span><span class="p" data-group-id="group-3">)</span><span class="w"> </span><span class="k" data-group-id="group-4">do</span><span class="w">
+    </span><span class="p" data-group-id="group-5">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="group-6">%</span><span class="nc" data-group-id="group-6">Mayfly.Events.HTTP.Request</span><span class="p" data-group-id="group-6">{</span><span class="p" data-group-id="group-6">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">req</span><span class="p" data-group-id="group-5">}</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">serve</span><span class="p" data-group-id="group-7">(</span><span class="n">req</span><span class="p" data-group-id="group-7">)</span><span class="w">
+    </span><span class="p" data-group-id="group-8">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="group-9">%</span><span class="nc" data-group-id="group-9">Mayfly.Events.SQS</span><span class="p" data-group-id="group-9">{</span><span class="p" data-group-id="group-9">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sqs</span><span class="p" data-group-id="group-8">}</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p" data-group-id="group-10">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="nc">Mayfly.Events.SQS</span><span class="o">.</span><span class="n">process_batch</span><span class="p" data-group-id="group-11">(</span><span class="n">sqs</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">process</span><span class="o">/</span><span class="mi">1</span><span class="p" data-group-id="group-11">)</span><span class="p" data-group-id="group-10">}</span><span class="w">
+    </span><span class="p" data-group-id="group-12">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="group-13">%</span><span class="nc" data-group-id="group-13">Mayfly.Events.S3</span><span class="p" data-group-id="group-13">{</span><span class="ss">records</span><span class="p">:</span><span class="w"> </span><span class="n">records</span><span class="p" data-group-id="group-13">}</span><span class="p" data-group-id="group-12">}</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p" data-group-id="group-14">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="nc">Enum</span><span class="o">.</span><span class="n">map</span><span class="p" data-group-id="group-15">(</span><span class="n">records</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">ingest</span><span class="o">/</span><span class="mi">1</span><span class="p" data-group-id="group-15">)</span><span class="p" data-group-id="group-14">}</span><span class="w">
+    </span><span class="ss">:unknown</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p" data-group-id="group-16">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="group-17">%{</span><span class="ss">echo</span><span class="p">:</span><span class="w"> </span><span class="n">event</span><span class="p" data-group-id="group-17">}</span><span class="p" data-group-id="group-16">}</span><span class="w">
+  </span><span class="k" data-group-id="group-4">end</span><span class="w">
+</span><span class="k" data-group-id="group-2">end</span></code></pre><h2 id="http-api-gateway-and-function-urls" class="section-heading"><a href="#http-api-gateway-and-function-urls" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a><span class="text">HTTP: API Gateway and Function URLs</span></h2><pre><code class="makeup elixir" translate="no"><span class="kn">alias</span><span class="w"> </span><span class="nc">Mayfly.Events.HTTP</span><span class="w">
+
+</span><span class="kd">def</span><span class="w"> </span><span class="nf">handle</span><span class="p" data-group-id="group-1">(</span><span class="n">event</span><span class="p">,</span><span class="w"> </span><span class="c">_ctx</span><span class="p">,</span><span class="w"> </span><span class="c">_state</span><span class="p" data-group-id="group-1">)</span><span class="w"> </span><span class="k" data-group-id="group-2">do</span><span class="w">
+  </span><span class="n">req</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">HTTP</span><span class="o">.</span><span class="n">decode</span><span class="p" data-group-id="group-3">(</span><span class="n">event</span><span class="p" data-group-id="group-3">)</span><span class="w">
+
+  </span><span class="k">case</span><span class="w"> </span><span class="p" data-group-id="group-4">{</span><span class="n">req</span><span class="o">.</span><span class="n">method</span><span class="p">,</span><span class="w"> </span><span class="n">req</span><span class="o">.</span><span class="n">path</span><span class="p" data-group-id="group-4">}</span><span class="w"> </span><span class="k" data-group-id="group-5">do</span><span class="w">
+    </span><span class="p" data-group-id="group-6">{</span><span class="s">&quot;GET&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;/items&quot;</span><span class="p" data-group-id="group-6">}</span><span class="w"> </span><span class="o">-&gt;</span><span class="w">
+      </span><span class="nc">HTTP</span><span class="o">.</span><span class="n">json</span><span class="p" data-group-id="group-7">(</span><span class="mi">200</span><span class="p">,</span><span class="w"> </span><span class="nc">Items</span><span class="o">.</span><span class="n">list</span><span class="p" data-group-id="group-8">(</span><span class="n">req</span><span class="o">.</span><span class="n">query</span><span class="p" data-group-id="group-8">)</span><span class="p">,</span><span class="w"> </span><span class="n">req</span><span class="p">,</span><span class="w"> </span><span class="ss">headers</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="group-9">%{</span><span class="s">&quot;cache-control&quot;</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="s">&quot;max-age=60&quot;</span><span class="p" data-group-id="group-9">}</span><span class="p" data-group-id="group-7">)</span><span class="w">
+
+    </span><span class="p" data-group-id="group-10">{</span><span class="s">&quot;POST&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;/items&quot;</span><span class="p" data-group-id="group-10">}</span><span class="w"> </span><span class="o">-&gt;</span><span class="w">
+      </span><span class="c1"># req.body is already a map for JSON requests</span><span class="w">
+      </span><span class="nc">HTTP</span><span class="o">.</span><span class="n">json</span><span class="p" data-group-id="group-11">(</span><span class="mi">201</span><span class="p">,</span><span class="w"> </span><span class="nc">Items</span><span class="o">.</span><span class="n">create</span><span class="p" data-group-id="group-12">(</span><span class="n">req</span><span class="o">.</span><span class="n">body</span><span class="p" data-group-id="group-12">)</span><span class="p">,</span><span class="w"> </span><span class="n">req</span><span class="p">,</span><span class="w"> </span><span class="ss">cookies</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="group-13">[</span><span class="s">&quot;session=</span><span class="si" data-group-id="group-14">#{</span><span class="n">sid</span><span class="si" data-group-id="group-14">}</span><span class="s">&quot;</span><span class="p" data-group-id="group-13">]</span><span class="p" data-group-id="group-11">)</span><span class="w">
+
+    </span><span class="p" data-group-id="group-15">{</span><span class="s">&quot;GET&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;/logo.png&quot;</span><span class="p" data-group-id="group-15">}</span><span class="w"> </span><span class="o">-&gt;</span><span class="w">
+      </span><span class="nc">HTTP</span><span class="o">.</span><span class="n">binary</span><span class="p" data-group-id="group-16">(</span><span class="mi">200</span><span class="p">,</span><span class="w"> </span><span class="nc">File</span><span class="o">.</span><span class="n">read!</span><span class="p" data-group-id="group-17">(</span><span class="s">&quot;priv/logo.png&quot;</span><span class="p" data-group-id="group-17">)</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;image/png&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">req</span><span class="p" data-group-id="group-16">)</span><span class="w">
+
+    </span><span class="bp">_</span><span class="w"> </span><span class="o">-&gt;</span><span class="w">
+      </span><span class="nc">HTTP</span><span class="o">.</span><span class="n">text</span><span class="p" data-group-id="group-18">(</span><span class="mi">404</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;not found&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">req</span><span class="p" data-group-id="group-18">)</span><span class="w">
+  </span><span class="k" data-group-id="group-5">end</span><span class="w">
+</span><span class="k" data-group-id="group-2">end</span></code></pre><p>Pass the request (or its <code class="inline">version</code>) to the response helpers so they produce
+the right shape: v2/Function URL responses carry <code class="inline">cookies</code>; v1 and ALB get
+<code class="inline">multiValueHeaders</code> when a header value is a list; ALB also gets
+<code class="inline">statusDescription</code>. <code class="inline">HTTP.respond/4</code> is the generic form.</p><p>Test locally: <code class="inline">mix lambda.invoke MyApp.Handler '{&quot;name&quot;:&quot;x&quot;}' --event apigw-v2 --method POST --path /items</code>
+(<code class="inline">--http</code> is an alias).</p><h2 id="sqs-with-partial-batch-responses" class="section-heading"><a href="#sqs-with-partial-batch-responses" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a><span class="text">SQS with partial batch responses</span></h2><pre><code class="makeup elixir" translate="no"><span class="kd">def</span><span class="w"> </span><span class="nf">handle</span><span class="p" data-group-id="group-1">(</span><span class="n">event</span><span class="p">,</span><span class="w"> </span><span class="c">_ctx</span><span class="p">,</span><span class="w"> </span><span class="c">_state</span><span class="p" data-group-id="group-1">)</span><span class="w"> </span><span class="k" data-group-id="group-2">do</span><span class="w">
+  </span><span class="n">sqs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Mayfly.Events.SQS</span><span class="o">.</span><span class="n">decode</span><span class="p" data-group-id="group-3">(</span><span class="n">event</span><span class="p" data-group-id="group-3">)</span><span class="w">
+
+  </span><span class="p" data-group-id="group-4">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w">
+   </span><span class="nc">Mayfly.Events.SQS</span><span class="o">.</span><span class="n">process_batch</span><span class="p" data-group-id="group-5">(</span><span class="n">sqs</span><span class="p">,</span><span class="w"> </span><span class="k" data-group-id="group-6">fn</span><span class="w"> </span><span class="n">record</span><span class="w"> </span><span class="o">-&gt;</span><span class="w">
+     </span><span class="nc">Orders</span><span class="o">.</span><span class="n">process</span><span class="p" data-group-id="group-7">(</span><span class="n">record</span><span class="o">.</span><span class="n">body</span><span class="p" data-group-id="group-7">)</span><span class="w">      </span><span class="c1"># {:ok, _} | {:error, _} | raise</span><span class="w">
+   </span><span class="k" data-group-id="group-6">end</span><span class="p" data-group-id="group-5">)</span><span class="p" data-group-id="group-4">}</span><span class="w">
+</span><span class="k" data-group-id="group-2">end</span></code></pre><p><code class="inline">process_batch/2</code> returns <code class="inline">%{batchItemFailures: [%{itemIdentifier: id}]}</code>
+for every record whose function returned <code class="inline">{:error, _}</code>, raised, exited or
+threw. Create the event source mapping with
+<code class="inline">--function-response-types ReportBatchItemFailures</code>; Lambda then retries only
+those messages. <a href="Mayfly.Events.Kinesis.html"><code class="inline">Mayfly.Events.Kinesis</code></a> and <a href="Mayfly.Events.DynamoDB.html"><code class="inline">Mayfly.Events.DynamoDB</code></a> offer the
+same with <code class="inline">sequence_number</code> as the identifier.</p><p>SNS → SQS → Lambda: the SQS body is an SNS envelope. <a href="Mayfly.Events.SNS.html#envelope?/1"><code class="inline">Mayfly.Events.SNS.envelope?/1</code></a>
+detects it and <code class="inline">from_envelope/1</code> decodes it.</p><h2 id="s3" class="section-heading"><a href="#s3" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a><span class="text">S3</span></h2><pre><code class="makeup elixir" translate="no"><span class="p" data-group-id="group-1">%</span><span class="nc" data-group-id="group-1">Mayfly.Events.S3</span><span class="p" data-group-id="group-1">{</span><span class="ss">records</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="group-2">[</span><span class="p" data-group-id="group-3">%{</span><span class="ss">bucket</span><span class="p">:</span><span class="w"> </span><span class="n">bucket</span><span class="p">,</span><span class="w"> </span><span class="ss">key</span><span class="p">:</span><span class="w"> </span><span class="n">key</span><span class="p">,</span><span class="w"> </span><span class="ss">event_name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;ObjectCreated:Put&quot;</span><span class="p" data-group-id="group-3">}</span><span class="p" data-group-id="group-2">]</span><span class="p" data-group-id="group-1">}</span><span class="w"> </span><span class="o">=</span><span class="w">
+  </span><span class="nc">Mayfly.Events.S3</span><span class="o">.</span><span class="n">decode</span><span class="p" data-group-id="group-4">(</span><span class="n">event</span><span class="p" data-group-id="group-4">)</span><span class="w">
+</span><span class="c1"># key is URL-decoded: &quot;uploads/report 2026 (final).json&quot;, ready for GetObject</span></code></pre><h2 id="eventbridge" class="section-heading"><a href="#eventbridge" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a><span class="text">EventBridge</span></h2><pre><code class="makeup elixir" translate="no"><span class="k">case</span><span class="w"> </span><span class="nc">Mayfly.Events.EventBridge</span><span class="o">.</span><span class="n">decode</span><span class="p" data-group-id="group-1">(</span><span class="n">event</span><span class="p" data-group-id="group-1">)</span><span class="w"> </span><span class="k" data-group-id="group-2">do</span><span class="w">
+  </span><span class="p" data-group-id="group-3">%{</span><span class="ss">source</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;my.app&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">detail_type</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;OrderPlaced&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">detail</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="group-4">%{</span><span class="s">&quot;orderId&quot;</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="n">id</span><span class="p" data-group-id="group-4">}</span><span class="p" data-group-id="group-3">}</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">...</span><span class="w">
+  </span><span class="p" data-group-id="group-5">%{</span><span class="ss">source</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;aws.events&quot;</span><span class="p" data-group-id="group-5">}</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="ss">:scheduled_tick</span><span class="w">
+</span><span class="k" data-group-id="group-2">end</span></code></pre><h2 id="dynamodb-streams" class="section-heading"><a href="#dynamodb-streams" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a><span class="text">DynamoDB Streams</span></h2><pre><code class="makeup elixir" translate="no"><span class="n">stream</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Mayfly.Events.DynamoDB</span><span class="o">.</span><span class="n">decode</span><span class="p" data-group-id="group-1">(</span><span class="n">event</span><span class="p" data-group-id="group-1">)</span><span class="w">
+
+</span><span class="k">for</span><span class="w"> </span><span class="p" data-group-id="group-2">%{</span><span class="ss">event_name</span><span class="p">:</span><span class="w"> </span><span class="ss">:insert</span><span class="p">,</span><span class="w"> </span><span class="ss">new_image</span><span class="p">:</span><span class="w"> </span><span class="n">item</span><span class="p" data-group-id="group-2">}</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">stream</span><span class="o">.</span><span class="n">records</span><span class="w"> </span><span class="k" data-group-id="group-3">do</span><span class="w">
+  </span><span class="c1"># item: %{&quot;id&quot; =&gt; &quot;order-2&quot;, &quot;price&quot; =&gt; 12.5, &quot;qty&quot; =&gt; 3, &quot;in_stock&quot; =&gt; true,</span><span class="w">
+  </span><span class="c1">#         &quot;lines&quot; =&gt; [&quot;x&quot;, 7, %{&quot;deep&quot; =&gt; false}], &quot;tags&quot; =&gt; [&quot;a&quot;, &quot;b&quot;], &quot;note&quot; =&gt; nil}</span><span class="w">
+</span><span class="k" data-group-id="group-3">end</span></code></pre><p><a href="Mayfly.Events.DynamoDB.html#from_attribute_values/1"><code class="inline">Mayfly.Events.DynamoDB.from_attribute_values/1</code></a> converts any DynamoDB JSON
+(<code class="inline">%{&quot;id&quot; =&gt; %{&quot;S&quot; =&gt; &quot;a&quot;}}</code>) and is public for reuse.</p><h2 id="local-fixtures" class="section-heading"><a href="#local-fixtures" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a><span class="text">Local fixtures</span></h2><p><code class="inline">mix lambda.invoke HANDLER JSON --event SOURCE</code> wraps your JSON in a realistic
+envelope: it becomes the HTTP body, SQS body, SNS message, EventBridge
+<code class="inline">detail</code>, Kinesis <code class="inline">data</code> or DynamoDB <code class="inline">NewImage</code> (plain JSON is converted to
+attribute values). For S3 pass <code class="inline">{&quot;key&quot;: &quot;path/to object.txt&quot;}</code>. Sources:
+<code class="inline">apigw-v2 apigw-v1 alb sqs sns s3 eventbridge kinesis dynamodb</code>.</p>
+
+</div>
+
+<div class="bottom-actions" id="bottom-actions">
+  <div class="bottom-actions-item">
+
+      <a href="getting-started.html" class="bottom-actions-button" rel="prev">
+        <span class="subheader">
+          ← Previous Page
+        </span>
+        <span class="title">
+Getting Started
+        </span>
+      </a>
+
+  </div>
+  <div class="bottom-actions-item">
+
+      <a href="deployment.html" class="bottom-actions-button" rel="next">
+        <span class="subheader">
+          Next Page →
+        </span>
+        <span class="title">
+Deployment
+        </span>
+      </a>
+
+  </div>
+</div>
+    <footer class="footer">
+
+        <p>
+
+            <span class="line">
+              <a href="https://hex.pm/packages/mayfly/1.0.0-rc.1">Hex Package</a>
+
+              <a href="https://preview.hex.pm/preview/mayfly/1.0.0-rc.1">Hex Preview</a>
+
+                (<a href="https://preview.hex.pm/preview/mayfly/1.0.0-rc.1/show/guides/events.md">current file</a>)
+
+            </span>
+
+          <span class="line">
+            <button class="a-main footer-button display-quick-switch" title="Go to package docs">
+              Go to package docs
+            </button>
+
+              <a href="llms.txt" target="_blank">
+                View llms.txt
+              </a>
+
+
+              <a href="Mayfly.epub">
+                Download ePub version
+              </a>
+
+          </span>
+        </p>
+
+        <p class="built-using">
+          Built using
+          <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" target="_blank" rel="help noopener" translate="no">ExDoc</a> (v0.40.4) for the
+
+            <a href="https://elixir-lang.org" title="Elixir" target="_blank" translate="no">Elixir programming language</a>
+
+        </p>
+
+
+    </footer>
+  </div>
+</main>
+</div>
+
+  </body>
+</html>

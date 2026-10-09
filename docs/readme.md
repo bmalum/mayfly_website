@@ -79,7 +79,7 @@ aws lambda create-function --function-name hello \
 | | Supported |
 |---|---|
 | Elixir | 1.18 or newer |
-| Erlang/OTP | 27 or newer; the layer and Docker image ship OTP 27.3.4 |
+| Erlang/OTP | 27, 28 or 29; public layers exist for the latest patch of each (OTP 29 needs Elixir ≥ 1.20) |
 | Lambda | `provided.al2023`, x86_64 or arm64; Lambda (default) and Managed Instances |
 
 Upgrading from 0.x? See [guides/migrating-from-0.x.md](guides/migrating-from-0.x.md).
@@ -109,6 +109,20 @@ end
 Set the Lambda **Handler** to `MyApp.Handler`. `event` is the decoded JSON payload (string keys). `Mayfly.Context` gives you `request_id`, `invocation_id`, `deadline_ms` (`Mayfly.Context.remaining_time_ms/1`), `function_arn`, `trace_id`, `tenant_id` and the static function config in `env`.
 
 Legacy `Module.function` handlers (arity 1 or 2) still work; see the migration guide.
+
+### Event sources
+
+`Mayfly.Events` decodes the envelopes AWS services send: API Gateway / Function URL requests (`body` already a map), SQS, SNS, S3 (URL-decoded keys), EventBridge, Kinesis and DynamoDB Streams (attribute values as plain terms), with partial-batch helpers:
+
+```elixir
+case Mayfly.Events.decode(event) do
+  {:ok, %Mayfly.Events.HTTP.Request{method: "POST", body: body} = req} -> Mayfly.Events.HTTP.json(201, create(body), req)
+  {:ok, %Mayfly.Events.SQS{} = sqs} -> {:ok, Mayfly.Events.SQS.process_batch(sqs, &process/1)}
+  :unknown -> {:ok, event}
+end
+```
+
+See [guides/events.md](guides/events.md). `mix lambda.invoke … --event sqs` (or `s3`, `eventbridge`, `dynamodb`, …) wraps a payload in a realistic envelope for local testing.
 
 ## Responses
 
@@ -209,6 +223,7 @@ cp -r deps/mayfly/skills/mayfly-elixir-lambda .kiro/skills/      # or .claude/sk
 The docs are also published as Markdown with an index at [elixir-aws-lambda.dev/docs/llms.txt](https://elixir-aws-lambda.dev/docs/llms.txt).
 
 - [Getting started](guides/getting-started.md)
+- [Event sources](guides/events.md) – typed decoders for API Gateway, SQS, SNS, S3, EventBridge, Kinesis, DynamoDB Streams
 - [Deployment](guides/deployment.md) – layer vs bundled ERTS, Docker, IaC snippets
 - [Erlang runtime layers](guides/layers.md) – public ARNs, naming, self-hosting, automation
 - [Streaming](guides/streaming.md)
@@ -226,13 +241,13 @@ The docs are also published as Markdown with an index at [elixir-aws-lambda.dev/
 | `Mayfly: no Erlang runtime at /opt/erlang` | No layer attached (or wrong architecture). Attach the `mayfly-erlang-…-<arch>` layer |
 | `Mayfly: release was built for ERTS X but the layer provides Y` | Toolchain OTP differs from the layer's. Build with the exact OTP version of the layer (`mise use erlang@…`) or attach the matching layer |
 | `exec format error` | Bundled ERTS built for the wrong architecture; rebuild with `--docker --arch` |
-| Handler gets `%{"requestContext" => …, "body" => "…"}` | Function URL / API Gateway wrap the payload; decode `event["body"]`. Test locally with `mix lambda.invoke --http` |
+| Handler gets `%{"requestContext" => …, "body" => "…"}` | Function URL / API Gateway wrap the payload; use `Mayfly.Events.HTTP.decode/1` (`body` is decoded for you). Test locally with `mix lambda.invoke --event apigw-v2` |
 | Nothing happens in `iex`/`mix test` | Expected: Mayfly only runs when `bootstrap` calls `Mayfly.Boot.main/0` or you call `Mayfly.start_link/1` |
 | Console shows buffered response for a streaming function | Normal; the console never streams. Use a Function URL with `RESPONSE_STREAM` or `InvokeWithResponseStream` |
 
 ## Contributing
 
-Run `mix format`, `mix compile --warnings-as-errors` and `mix test` before opening a PR; CI enforces all three plus a release build.
+Run `mix format`, `mix compile --warnings-as-errors` and `mix test` before opening a PR; CI enforces all three plus a release build. `AGENTS.md` describes the architecture, invariants and release/layer procedures for contributors and coding agents; `skills/mayfly-maintainer/` is the operational runbook.
 
 ## License
 

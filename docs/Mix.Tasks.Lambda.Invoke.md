@@ -16,11 +16,19 @@ successful invocation and 1 for an error (including init errors).
 
     --timeout MS     Deadline reported in the context (default 30000)
     --raw            Print the raw response body instead of pretty JSON
-    --http           Wrap the event the way a Function URL / API Gateway v2
-                     does (`{"version":"2.0","rawPath":...,"body":...}`), so
-                     handlers written for HTTP events can be tested locally
-    --method M       HTTP method for --http (default POST)
-    --path P         Request path for --http (default /)
+    --event SOURCE   Wrap the given JSON in a realistic envelope of that
+                     source, so handlers using `Mayfly.Events` can be tested
+                     locally. SOURCE is one of
+                     apigw-v2 (also Function URL), apigw-v1, alb, sqs, sns,
+                     s3, eventbridge, kinesis, dynamodb.
+                     The JSON becomes the HTTP body / SQS body / SNS message /
+                     EventBridge detail / Kinesis data / DynamoDB NewImage.
+                     For s3 pass {"key":"path/to object.txt"}.
+    --http           Alias for --event apigw-v2
+    --method M       HTTP method for HTTP envelopes (default POST)
+    --path P         Request path for HTTP envelopes (default /)
+    --detail-type T  EventBridge detail-type (default LocalEvent)
+    --source S       EventBridge source (default mix.lambda.invoke)
 
 ---
 

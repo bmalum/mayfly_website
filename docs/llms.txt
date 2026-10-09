@@ -9,6 +9,7 @@
 
 - Guides
   - [Getting Started](getting-started.md)
+  - [Event sources](events.md)
   - [Deployment](deployment.md)
   - [Erlang runtime layers](layers.md)
   - [Architecture](architecture.md)
@@ -25,6 +26,24 @@ response headers and passed as the second argument to `c:Mayfly.Handler.handle/3
 and `/runtime/init/error`
   - [Mayfly.Handler](Mayfly.Handler.md): Behaviour for Lambda function handlers.
   - [Mayfly.Response](Mayfly.Response.md): What a handler may return inside `{:ok, _}`.
+
+- Event sources
+  - [Mayfly.Events](Mayfly.Events.md): Typed decoders for the event shapes AWS services send to Lambda.
+  - [Mayfly.Events.DynamoDB](Mayfly.Events.DynamoDB.md): Amazon DynamoDB Streams events.
+  - [Mayfly.Events.DynamoDB.Record](Mayfly.Events.DynamoDB.Record.md): One stream record.
+  - [Mayfly.Events.EventBridge](Mayfly.Events.EventBridge.md): Amazon EventBridge events (custom events, scheduled rules, AWS service events).
+  - [Mayfly.Events.HTTP](Mayfly.Events.HTTP.md): HTTP events from API Gateway (REST v1 and HTTP v2), Lambda Function URLs
+(v2 shape) and Application Load Balancer, plus helpers that build the
+proxy response each of them expects.
+  - [Mayfly.Events.HTTP.Request](Mayfly.Events.HTTP.Request.md): A decoded HTTP request. See `Mayfly.Events.HTTP`.
+  - [Mayfly.Events.Kinesis](Mayfly.Events.Kinesis.md): Amazon Kinesis Data Streams events.
+  - [Mayfly.Events.Kinesis.Record](Mayfly.Events.Kinesis.Record.md): One Kinesis record.
+  - [Mayfly.Events.S3](Mayfly.Events.S3.md): Amazon S3 event notifications.
+  - [Mayfly.Events.S3.Record](Mayfly.Events.S3.Record.md): One S3 notification record.
+  - [Mayfly.Events.SNS](Mayfly.Events.SNS.md): Amazon SNS notifications delivered directly to Lambda.
+  - [Mayfly.Events.SNS.Record](Mayfly.Events.SNS.Record.md): One SNS notification.
+  - [Mayfly.Events.SQS](Mayfly.Events.SQS.md): Amazon SQS events.
+  - [Mayfly.Events.SQS.Record](Mayfly.Events.SQS.Record.md): One SQS message.
 
 - Runtime
   - [Mayfly](Mayfly.md): Mayfly – an AWS Lambda custom runtime for Elixir.

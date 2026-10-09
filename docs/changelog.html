@@ -14,7 +14,7 @@
 
       <link rel="canonical" href="https://elixir-aws-lambda.dev/docs/changelog.html" />
 
-    <script defer src="dist/sidebar_items-B9A7F5BC.js"></script>
+    <script defer src="dist/sidebar_items-BCE38EE3.js"></script>
     <script defer src="docs_config.js"></script>
     <script defer src="dist/html-MI33G4N7.js"></script>
 <meta name="description" content="Mayfly documentation: run Elixir on AWS Lambda with a lightweight custom runtime. Handler behaviour, mix release build, Erlang layers, response streaming, Managed Instances, observability.">
@@ -143,12 +143,22 @@ Function URL / API Gateway v2 request.</li><li><code class="inline">mix lambda.b
 mounts external <code class="inline">path:</code> dependencies into the container.</li><li><a href="Mix.Tasks.Lambda.Doctor.html"><code class="inline">mix lambda.doctor</code></a> checks the release configuration, resolves the handler
 and runs its <code class="inline">init/1</code>, and compares the local OTP with a layer's
 (<code class="inline">--layer ARN</code>); without <code class="inline">--layer</code> it looks the matching public layer up in
-the catalog at elixir-aws-lambda.dev/layers for <code class="inline">--arch</code>/<code class="inline">--region</code>.</li><li>The Layers workflow publishes the ARN index to the website catalog
+the catalog at elixir-aws-lambda.dev/layers for <code class="inline">--arch</code>/<code class="inline">--region</code>.</li><li>Dialyzer PLTs are kept in <code class="inline">_build/plts</code> (a <code class="inline">priv/plts</code> location was shipped
+into consumer releases).</li><li>The Layers workflow publishes the ARN index to the website catalog
 (<code class="inline">/layers/</code> page and static JSON resolver).</li><li><a href="Mayfly.Response.html#stream/2"><code class="inline">Mayfly.Response.stream/2</code></a> accepts <code class="inline">send_timeout:</code> to bound a stalled
 streaming write (default 30 s).</li><li><code class="inline">bootstrap</code> uses a single scheduler (<code class="inline">+S 1:1</code>) only on standard Lambda;
 on Managed Instances (<code class="inline">AWS_LAMBDA_MAX_CONCURRENCY &gt; 1</code>) the VM sizes
 schedulers to the vCPUs. Managed Instances verified on real hardware.</li><li>Dialyzer runs in CI; a <code class="inline">Publish</code> workflow releases to Hex.pm on <code class="inline">v*</code> tags.</li><li><code class="inline">skills/mayfly-elixir-lambda</code>: an Agent Skill for coding agents, shipped in
-the Hex package.</li><li><a href="Mayfly.Response.html"><code class="inline">Mayfly.Response</code></a>: custom content types, response streaming with chunked
+the Hex package.</li><li><a href="Mayfly.Events.html"><code class="inline">Mayfly.Events</code></a>: typed decoders for API Gateway v1/v2 and Function URL
+requests (<a href="Mayfly.Events.HTTP.html"><code class="inline">Mayfly.Events.HTTP</code></a> with JSON/base64-decoded bodies and response
+helpers <code class="inline">json/4</code>, <code class="inline">text/4</code>, <code class="inline">binary/5</code>, <code class="inline">redirect/3</code>, <code class="inline">respond/4</code>), SQS, SNS
+(incl. SNS-in-SQS envelopes), S3 (URL-decoded keys), EventBridge, Kinesis and
+DynamoDB Streams (attribute values converted to terms); <code class="inline">process_batch/2</code>
+partial-batch helpers for SQS, Kinesis and DynamoDB; <a href="Mayfly.Events.html#decode/1"><code class="inline">Mayfly.Events.decode/1</code></a>
+dispatcher. Verified on Lambda with a Function URL, SQS
+<code class="inline">ReportBatchItemFailures</code>, S3 notifications, EventBridge and DynamoDB Streams.</li><li><code class="inline">mix lambda.invoke --event SOURCE</code> wraps a payload in a realistic envelope
+(<code class="inline">apigw-v2 apigw-v1 alb sqs sns s3 eventbridge kinesis dynamodb</code>); <code class="inline">--http</code>
+is now an alias for <code class="inline">--event apigw-v2</code>.</li><li><a href="Mayfly.Response.html"><code class="inline">Mayfly.Response</code></a>: custom content types, response streaming with chunked
 transfer encoding, error trailers and the Function URL HTTP prelude
 (<a href="Mayfly.Response.html#http/2"><code class="inline">Mayfly.Response.http/2</code></a>).</li><li><a href="Mayfly.Context.html"><code class="inline">Mayfly.Context</code></a>: <code class="inline">invocation_id</code>, <code class="inline">tenant_id</code>, <code class="inline">env</code>; <code class="inline">remaining_time_ms/1</code>,
 <code class="inline">logger_metadata/1</code>.</li><li>Lambda Managed Instances: <code class="inline">AWS_LAMBDA_MAX_CONCURRENCY</code> pollers run
