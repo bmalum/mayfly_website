@@ -14,7 +14,7 @@
 
       <link rel="canonical" href="https://elixir-aws-lambda.dev/docs/changelog.html" />
 
-    <script defer src="dist/sidebar_items-BCE38EE3.js"></script>
+    <script defer src="dist/sidebar_items-16A5EDB9.js"></script>
     <script defer src="docs_config.js"></script>
     <script defer src="dist/html-MI33G4N7.js"></script>
 <meta name="description" content="Mayfly documentation: run Elixir on AWS Lambda with a lightweight custom runtime. Handler behaviour, mix release build, Erlang layers, response streaming, Managed Instances, observability.">
@@ -156,7 +156,13 @@ helpers <code class="inline">json/4</code>, <code class="inline">text/4</code>, 
 DynamoDB Streams (attribute values converted to terms); <code class="inline">process_batch/2</code>
 partial-batch helpers for SQS, Kinesis and DynamoDB; <a href="Mayfly.Events.html#decode/1"><code class="inline">Mayfly.Events.decode/1</code></a>
 dispatcher. Verified on Lambda with a Function URL, SQS
-<code class="inline">ReportBatchItemFailures</code>, S3 notifications, EventBridge and DynamoDB Streams.</li><li><code class="inline">mix lambda.invoke --event SOURCE</code> wraps a payload in a realistic envelope
+<code class="inline">ReportBatchItemFailures</code>, S3 notifications, EventBridge and DynamoDB Streams.</li><li><a href="Mayfly.Metrics.html"><code class="inline">Mayfly.Metrics</code></a>: CloudWatch Embedded Metric Format (<code class="inline">emit/3</code>, <code class="inline">count/4</code>,
+<code class="inline">timing/4</code>, <code class="inline">build/3</code>) and <code class="inline">attach_invocation_metrics/2</code> emitting
+<a href="https://elixir.hexdocs.pm/Duration.html"><code class="inline">Duration</code></a>/<code class="inline">Errors</code>/<code class="inline">ColdStart</code> per invocation. Verified end to end:
+datapoints appear in CloudWatch under the namespace.</li><li>Companion package <a rel="nofollow" href="https://github.com/bmalum/mayfly_aws"><code class="inline">mayfly_aws</code></a> with
+<code class="inline">Mayfly.Idempotency</code> (DynamoDB-backed exactly-once execution), a minimal
+signed DynamoDB client and <code class="inline">Mayfly.AWS.SigV4</code>; <code class="inline">guides/idempotency.md</code>.</li><li>Optional <code class="inline">:telemetry</code> calls go through <a href="https://elixir.hexdocs.pm/Kernel.html#apply/3"><code class="inline">apply/3</code></a>, so consumers without the
+dependency compile warning-free.</li><li><code class="inline">mix lambda.invoke --event SOURCE</code> wraps a payload in a realistic envelope
 (<code class="inline">apigw-v2 apigw-v1 alb sqs sns s3 eventbridge kinesis dynamodb</code>); <code class="inline">--http</code>
 is now an alias for <code class="inline">--event apigw-v2</code>.</li><li><a href="Mayfly.Response.html"><code class="inline">Mayfly.Response</code></a>: custom content types, response streaming with chunked
 transfer encoding, error trailers and the Function URL HTTP prelude

@@ -15,6 +15,7 @@
   - [Architecture](architecture.md)
   - [Response streaming](streaming.md)
   - [Observability](observability.md)
+  - [Idempotency](idempotency.md)
   - [Migrating from 0.x](migrating-from-0-x.md)
 
 ## Modules
@@ -60,6 +61,9 @@ resolved and initialised exactly once.
   - [Mayfly.LogFormatter](Mayfly.LogFormatter.md): Logger formatter that emits one JSON object per line in the shape Lambda's
 [advanced logging controls](https://docs.aws.amazon.com/lambda/latest/dg/monitoring-cloudwatchlogs-advanced.html)
 expect, so CloudWatch parses level, request id and tenant id
+  - [Mayfly.Metrics](Mayfly.Metrics.md): CloudWatch metrics without API calls, using the
+[Embedded Metric Format](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Embedded_Metric_Format_Specification.html):
+one JSON line on stdout that CloudWatch Logs turns into metrics.
   - [Mayfly.Telemetry](Mayfly.Telemetry.md): Telemetry events emitted by the runtime. `:telemetry` is an optional
 dependency; when it is not present the calls are no-ops.
 

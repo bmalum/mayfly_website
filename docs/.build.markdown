@@ -19,6 +19,7 @@ Mayfly.HTTP.md
 Mayfly.Handler.md
 Mayfly.LocalRuntime.md
 Mayfly.LogFormatter.md
+Mayfly.Metrics.md
 Mayfly.Poller.md
 Mayfly.Release.md
 Mayfly.Response.md
@@ -35,6 +36,7 @@ changelog.md
 deployment.md
 events.md
 getting-started.md
+idempotency.md
 layers.md
 llms.txt
 migrating-from-0-x.md

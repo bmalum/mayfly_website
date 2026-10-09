@@ -20,6 +20,7 @@ Mayfly.HTTP.html
 Mayfly.Handler.html
 Mayfly.LocalRuntime.html
 Mayfly.LogFormatter.html
+Mayfly.Metrics.html
 Mayfly.Poller.html
 Mayfly.Release.html
 Mayfly.Response.html
@@ -42,10 +43,11 @@ dist/lato-latin-700-normal-2XVSBPG4.woff2
 dist/lato-latin-ext-400-normal-N27NCBWW.woff2
 dist/lato-latin-ext-700-normal-Q2L5DVMW.woff2
 dist/remixicon-ZWU5GQ4X.woff2
-dist/search_data-2B8D70B8.js
-dist/sidebar_items-BCE38EE3.js
+dist/search_data-05FEC6CC.js
+dist/sidebar_items-16A5EDB9.js
 events.html
 getting-started.html
+idempotency.html
 index.html
 layers.html
 migrating-from-0-x.html
