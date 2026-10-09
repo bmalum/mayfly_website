@@ -14,7 +14,7 @@
 
       <link rel="canonical" href="https://elixir-aws-lambda.dev/docs/changelog.html" />
 
-    <script defer src="dist/sidebar_items-CDB82FD9.js"></script>
+    <script defer src="dist/sidebar_items-A9737C8F.js"></script>
     <script defer src="docs_config.js"></script>
     <script defer src="dist/html-MI33G4N7.js"></script>
 <meta name="description" content="Mayfly documentation: run Elixir on AWS Lambda with a lightweight custom runtime. Handler behaviour, mix release build, Erlang layers, response streaming, Managed Instances, observability.">
@@ -156,7 +156,13 @@ helpers <code class="inline">json/4</code>, <code class="inline">text/4</code>, 
 DynamoDB Streams (attribute values converted to terms); <code class="inline">process_batch/2</code>
 partial-batch helpers for SQS, Kinesis and DynamoDB; <a href="Mayfly.Events.html#decode/1"><code class="inline">Mayfly.Events.decode/1</code></a>
 dispatcher. Verified on Lambda with a Function URL, SQS
-<code class="inline">ReportBatchItemFailures</code>, S3 notifications, EventBridge and DynamoDB Streams.</li><li><a href="Mayfly.Metrics.html"><code class="inline">Mayfly.Metrics</code></a>: CloudWatch Embedded Metric Format (<code class="inline">emit/3</code>, <code class="inline">count/4</code>,
+<code class="inline">ReportBatchItemFailures</code>, S3 notifications, EventBridge and DynamoDB Streams.</li><li><code class="inline">mix lambda.build --image [--tag] [--push ECR_URI]</code>: container image for
+Lambda's image package type. Release built in the AL2023 build container,
+image based on <code class="inline">public.ecr.aws/lambda/provided:al2023</code> with the handler as
+<code class="inline">CMD</code>, <code class="inline">lambda.image.Dockerfile</code> override, ECR login/tag/push with digest,
+attestations disabled (Lambda rejects OCI indexes with them). Verified with
+a bcrypt C NIF on arm64: local RIE invoke and Lambda, cold start median
+433 ms once cached.</li><li><a href="Mayfly.Metrics.html"><code class="inline">Mayfly.Metrics</code></a>: CloudWatch Embedded Metric Format (<code class="inline">emit/3</code>, <code class="inline">count/4</code>,
 <code class="inline">timing/4</code>, <code class="inline">build/3</code>) and <code class="inline">attach_invocation_metrics/2</code> emitting
 <a href="https://elixir.hexdocs.pm/Duration.html"><code class="inline">Duration</code></a>/<code class="inline">Errors</code>/<code class="inline">ColdStart</code> per invocation. Verified end to end:
 datapoints appear in CloudWatch under the namespace.</li><li>Companion package <a rel="nofollow" href="https://github.com/bmalum/mayfly_plug"><code class="inline">mayfly_plug</code></a>:
@@ -176,7 +182,11 @@ invocations concurrently in isolated processes.</li><li>Runtime API: <code class
 normalised to <code class="inline">Category.Reason</code>, <code class="inline">Lambda-Runtime-Function-Xray-Error-Cause</code>,
 <code class="inline">User-Agent</code>.</li><li><a href="Mayfly.LogFormatter.html"><code class="inline">Mayfly.LogFormatter</code></a> (JSON lines for advanced logging controls) installed
 automatically when <code class="inline">AWS_LAMBDA_LOG_FORMAT=JSON</code>; <code class="inline">AWS_LAMBDA_LOG_LEVEL</code> /
-<code class="inline">LOGLEVEL</code> honoured.</li><li><code class="inline">:telemetry</code> events (optional dependency).</li><li><a href="Mayfly.LocalRuntime.html"><code class="inline">Mayfly.LocalRuntime</code></a> emulator and <a href="Mix.Tasks.Lambda.Invoke.html"><code class="inline">mix lambda.invoke</code></a>.</li><li><a href="Mayfly.Boot.html#main/0"><code class="inline">Mayfly.Boot.main/0</code></a> explicit entry point; <a href="Mayfly.html#start_link/1"><code class="inline">Mayfly.start_link/1</code></a> public API.</li><li><code class="inline">Runtime.InitError</code>, <code class="inline">Runtime.InvalidEvent</code> error types.</li></ul><h3 id="changed" class="section-heading"><a href="#changed" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a><span class="text">Changed</span></h3><ul><li>Requires Elixir 1.18+; uses the built-in <a href="https://elixir.hexdocs.pm/JSON.html"><code class="inline">JSON</code></a> module. Jason removed.</li><li><a href="Mayfly.HTTP.html"><code class="inline">Mayfly.HTTP</code></a> (<code class="inline">:gen_tcp</code>) replaces <code class="inline">:httpc</code>; <code class="inline">:inets</code>/<code class="inline">:ssl</code> no longer
+<code class="inline">LOGLEVEL</code> honoured.</li><li><code class="inline">:telemetry</code> events (optional dependency).</li><li><a href="Mayfly.LocalRuntime.html"><code class="inline">Mayfly.LocalRuntime</code></a> emulator and <a href="Mix.Tasks.Lambda.Invoke.html"><code class="inline">mix lambda.invoke</code></a>.</li><li><a href="Mayfly.Boot.html#main/0"><code class="inline">Mayfly.Boot.main/0</code></a> explicit entry point; <a href="Mayfly.html#start_link/1"><code class="inline">Mayfly.start_link/1</code></a> public API.</li><li><code class="inline">Runtime.InitError</code>, <code class="inline">Runtime.InvalidEvent</code> error types.</li></ul><h3 id="considered-and-not-shipped" class="section-heading"><a href="#considered-and-not-shipped" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a><span class="text">Considered and not shipped</span></h3><ul><li>An Elixir layer (<code class="inline">mayfly-elixir-&lt;vsn&gt;-otp-&lt;major&gt;</code>, zip 0.16 MB instead of
+1.6 MB). Measured on Lambda: cold start median 511 ms vs 543 ms with the
+ERTS layer alone (21 forced cold starts each, arm64, 512 MB), p90 541 vs
+709 ms, deploy upload about one second faster. Below the 50 ms bar for a
+second version axis; see &quot;Why there is no Elixir layer&quot; in the layers guide.</li></ul><h3 id="changed" class="section-heading"><a href="#changed" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a><span class="text">Changed</span></h3><ul><li>Requires Elixir 1.18+; uses the built-in <a href="https://elixir.hexdocs.pm/JSON.html"><code class="inline">JSON</code></a> module. Jason removed.</li><li><a href="Mayfly.HTTP.html"><code class="inline">Mayfly.HTTP</code></a> (<code class="inline">:gen_tcp</code>) replaces <code class="inline">:httpc</code>; <code class="inline">:inets</code>/<code class="inline">:ssl</code> no longer
 required at boot.</li><li><a href="Mix.Tasks.Lambda.Build.html"><code class="inline">mix lambda.build</code></a> only builds the configured release (optionally in
 Docker) and copies <code class="inline">lambda.zip</code>; no <code class="inline">MIX_ENV=lambda</code>, defaults to <code class="inline">prod</code>.</li><li><code class="inline">errorType</code> has no <code class="inline">Elixir.</code> prefix; <code class="inline">stackTrace</code> is a list; <code class="inline">{:error, &quot;s&quot;}</code>
 is <code class="inline">HandlerError</code>; non-<code class="inline">{:ok,_}/{:error,_}</code> returns are <code class="inline">Runtime.InvalidResponse</code>.</li><li><code class="inline">Runtime.HandlerNotFound</code> renamed to <code class="inline">Runtime.NoSuchHandler</code> (AWS-recommended).</li><li>Modules renamed: <code class="inline">Mayfly.Error</code> → <a href="Mayfly.ErrorPayload.html"><code class="inline">Mayfly.ErrorPayload</code></a>, <code class="inline">Mayfly.Runtime</code> →

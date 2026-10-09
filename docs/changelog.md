@@ -50,6 +50,13 @@ A redesign. See `guides/migrating-from-0.x.md` for the upgrade path.
   partial-batch helpers for SQS, Kinesis and DynamoDB; `Mayfly.Events.decode/1`
   dispatcher. Verified on Lambda with a Function URL, SQS
   `ReportBatchItemFailures`, S3 notifications, EventBridge and DynamoDB Streams.
+- `mix lambda.build --image [--tag] [--push ECR_URI]`: container image for
+  Lambda's image package type. Release built in the AL2023 build container,
+  image based on `public.ecr.aws/lambda/provided:al2023` with the handler as
+  `CMD`, `lambda.image.Dockerfile` override, ECR login/tag/push with digest,
+  attestations disabled (Lambda rejects OCI indexes with them). Verified with
+  a bcrypt C NIF on arm64: local RIE invoke and Lambda, cold start median
+  433 ms once cached.
 - `Mayfly.Metrics`: CloudWatch Embedded Metric Format (`emit/3`, `count/4`,
   `timing/4`, `build/3`) and `attach_invocation_metrics/2` emitting
   `Duration`/`Errors`/`ColdStart` per invocation. Verified end to end:
@@ -84,6 +91,14 @@ A redesign. See `guides/migrating-from-0.x.md` for the upgrade path.
 - `Mayfly.LocalRuntime` emulator and `mix lambda.invoke`.
 - `Mayfly.Boot.main/0` explicit entry point; `Mayfly.start_link/1` public API.
 - `Runtime.InitError`, `Runtime.InvalidEvent` error types.
+
+### Considered and not shipped
+
+- An Elixir layer (`mayfly-elixir-<vsn>-otp-<major>`, zip 0.16 MB instead of
+  1.6 MB). Measured on Lambda: cold start median 511 ms vs 543 ms with the
+  ERTS layer alone (21 forced cold starts each, arm64, 512 MB), p90 541 vs
+  709 ms, deploy upload about one second faster. Below the 50 ms bar for a
+  second version axis; see "Why there is no Elixir layer" in the layers guide.
 
 ### Changed
 - Requires Elixir 1.18+; uses the built-in `JSON` module. Jason removed.

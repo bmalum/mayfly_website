@@ -58,8 +58,9 @@ dependency; when it is not present the calls are no-ops.
 - [mix lambda.doctor](Mix.Tasks.Lambda.Doctor.md): Runs a set of checks that catch the common setup mistakes before you deploy
 
 - Build &amp; local dev
-  - [mix lambda.build](Mix.Tasks.Lambda.Build.md): Builds the Lambda package for a release configured with `Mayfly.Release`
-and copies the resulting `lambda.zip` to `--outdir`.
+  - [mix lambda.build](Mix.Tasks.Lambda.Build.md): Builds the Lambda package for a release configured with `Mayfly.Release`:
+a `lambda.zip` (copied to `--outdir`) or, with `--image`, a container image
+for Lambda's image package type.
   - [mix lambda.invoke](Mix.Tasks.Lambda.Invoke.md): Runs your handler exactly as Mayfly would inside Lambda – handler
 resolution, `init/1`, JSON decoding, context, error formatting – against
 `Mayfly.LocalRuntime`, and prints the response or error.
