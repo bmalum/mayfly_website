@@ -14,7 +14,7 @@
 
       <link rel="canonical" href="https://elixir-aws-lambda.dev/docs/Mayfly.LocalRuntime.html" />
 
-    <script defer src="dist/sidebar_items-D7238B79.js"></script>
+    <script defer src="dist/sidebar_items-4D4641CA.js"></script>
     <script defer src="docs_config.js"></script>
     <script defer src="dist/html-MI33G4N7.js"></script>
 <meta name="description" content="Mayfly documentation: run Elixir on AWS Lambda with a lightweight custom runtime. Handler behaviour, mix release build, Erlang layers, response streaming, Managed Instances, observability.">
@@ -201,6 +201,16 @@ faithful Lambda simulation. For that, use
 
     <div class="summary-row">
       <div class="summary-signature">
+        <a href="#extensions/1" data-no-tooltip="" translate="no">extensions(rt)</a>
+
+      </div>
+
+        <div class="summary-synopsis"><p>Registered extensions: <code class="inline">%{identifier =&gt; %{name: ..., events: [...]}}</code>.</p></div>
+
+    </div>
+
+    <div class="summary-row">
+      <div class="summary-signature">
         <a href="#init_error/1" data-no-tooltip="" translate="no">init_error(rt)</a>
 
       </div>
@@ -222,11 +232,45 @@ runtime to process it and returns the outcome.</p></div>
 
     <div class="summary-row">
       <div class="summary-signature">
+        <a href="#push_telemetry/2" data-no-tooltip="" translate="no">push_telemetry(rt, records)</a>
+
+      </div>
+
+        <div class="summary-synopsis"><p>Delivers telemetry records to every subscribed extension the way Lambda
+does: an HTTP POST of a JSON array to the subscription's destination URI.
+Returns the list of HTTP status codes received.</p></div>
+
+    </div>
+
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#shutdown/2" data-no-tooltip="" translate="no">shutdown(rt, reason \\ &quot;spindown&quot;)</a>
+
+      </div>
+
+        <div class="summary-synopsis"><p>Sends a SHUTDOWN event to every registered extension (regardless of the
+events it subscribed to; real Lambda only delivers SHUTDOWN to external
+extensions, this is a test aid).</p></div>
+
+    </div>
+
+    <div class="summary-row">
+      <div class="summary-signature">
         <a href="#start_link/1" data-no-tooltip="" translate="no">start_link(opts \\ [])</a>
 
       </div>
 
         <div class="summary-synopsis"><p>Starts the emulator on an ephemeral port (or <code class="inline">:port</code>).</p></div>
+
+    </div>
+
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#telemetry_subscriptions/1" data-no-tooltip="" translate="no">telemetry_subscriptions(rt)</a>
+
+      </div>
+
+        <div class="summary-synopsis"><p>Telemetry subscriptions by extension identifier (the decoded PUT body).</p></div>
 
     </div>
 
@@ -303,7 +347,7 @@ runtime to process it and returns the outcome.</p></div>
       <h1 class="signature" translate="no">address(rt)</h1>
 
 
-        <a href="https://github.com/bmalum/mayfly/blob/v1.0.0-rc.1/lib/mayfly/local_runtime.ex#L49" class="icon-action" rel="help nofollow" aria-label="View Source">
+        <a href="https://github.com/bmalum/mayfly/blob/v1.0.0-rc.1/lib/mayfly/local_runtime.ex#L53" class="icon-action" rel="help nofollow" aria-label="View Source">
           <i class="ri-code-s-slash-line" aria-hidden="true"></i>
         </a>
 
@@ -343,6 +387,34 @@ runtime to process it and returns the outcome.</p></div>
 <p>Returns a specification to start this module under a supervisor.</p><p>See <a href="https://elixir.hexdocs.pm/Supervisor.html"><code class="inline">Supervisor</code></a>.</p>
   </section>
 </section>
+<section class="detail" id="extensions/1">
+
+  <div class="detail-header">
+    <a href="#extensions/1" class="detail-link" data-no-tooltip="" aria-label="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+    </a>
+    <div class="heading-with-actions">
+      <h1 class="signature" translate="no">extensions(rt)</h1>
+
+
+        <a href="https://github.com/bmalum/mayfly/blob/v1.0.0-rc.1/lib/mayfly/local_runtime.ex#L73" class="icon-action" rel="help nofollow" aria-label="View Source">
+          <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+        </a>
+
+    </div>
+  </div>
+
+  <section class="docstring">
+
+      <div class="specs">
+
+          <pre translate="no"><span class="attribute">@spec</span> extensions(<a href="https://elixir.hexdocs.pm/GenServer.html#t:server/0">GenServer.server</a>()) :: <a href="https://elixir.hexdocs.pm/typespecs.html#basic-types">map</a>()</pre>
+
+      </div>
+
+<p>Registered extensions: <code class="inline">%{identifier =&gt; %{name: ..., events: [...]}}</code>.</p>
+  </section>
+</section>
 <section class="detail" id="init_error/1">
 
   <div class="detail-header">
@@ -353,7 +425,7 @@ runtime to process it and returns the outcome.</p></div>
       <h1 class="signature" translate="no">init_error(rt)</h1>
 
 
-        <a href="https://github.com/bmalum/mayfly/blob/v1.0.0-rc.1/lib/mayfly/local_runtime.ex#L65" class="icon-action" rel="help nofollow" aria-label="View Source">
+        <a href="https://github.com/bmalum/mayfly/blob/v1.0.0-rc.1/lib/mayfly/local_runtime.ex#L69" class="icon-action" rel="help nofollow" aria-label="View Source">
           <i class="ri-code-s-slash-line" aria-hidden="true"></i>
         </a>
 
@@ -383,7 +455,7 @@ runtime to process it and returns the outcome.</p></div>
       <h1 class="signature" translate="no">invoke(rt, event, opts \\ [])</h1>
 
 
-        <a href="https://github.com/bmalum/mayfly/blob/v1.0.0-rc.1/lib/mayfly/local_runtime.ex#L56" class="icon-action" rel="help nofollow" aria-label="View Source">
+        <a href="https://github.com/bmalum/mayfly/blob/v1.0.0-rc.1/lib/mayfly/local_runtime.ex#L60" class="icon-action" rel="help nofollow" aria-label="View Source">
           <i class="ri-code-s-slash-line" aria-hidden="true"></i>
         </a>
 
@@ -402,6 +474,68 @@ runtime to process it and returns the outcome.</p></div>
 runtime to process it and returns the outcome.</p>
   </section>
 </section>
+<section class="detail" id="push_telemetry/2">
+
+  <div class="detail-header">
+    <a href="#push_telemetry/2" class="detail-link" data-no-tooltip="" aria-label="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+    </a>
+    <div class="heading-with-actions">
+      <h1 class="signature" translate="no">push_telemetry(rt, records)</h1>
+
+
+        <a href="https://github.com/bmalum/mayfly/blob/v1.0.0-rc.1/lib/mayfly/local_runtime.ex#L85" class="icon-action" rel="help nofollow" aria-label="View Source">
+          <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+        </a>
+
+    </div>
+  </div>
+
+  <section class="docstring">
+
+      <div class="specs">
+
+          <pre translate="no"><span class="attribute">@spec</span> push_telemetry(<a href="https://elixir.hexdocs.pm/GenServer.html#t:server/0">GenServer.server</a>(), [<a href="https://elixir.hexdocs.pm/typespecs.html#basic-types">map</a>()]) :: [<a href="https://elixir.hexdocs.pm/typespecs.html#basic-types">integer</a>() | {:error, <a href="https://elixir.hexdocs.pm/typespecs.html#built-in-types">term</a>()}]</pre>
+
+      </div>
+
+<p>Delivers telemetry records to every subscribed extension the way Lambda
+does: an HTTP POST of a JSON array to the subscription's destination URI.
+Returns the list of HTTP status codes received.</p>
+  </section>
+</section>
+<section class="detail" id="shutdown/2">
+
+    <span id="shutdown/1"></span>
+
+  <div class="detail-header">
+    <a href="#shutdown/2" class="detail-link" data-no-tooltip="" aria-label="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+    </a>
+    <div class="heading-with-actions">
+      <h1 class="signature" translate="no">shutdown(rt, reason \\ &quot;spindown&quot;)</h1>
+
+
+        <a href="https://github.com/bmalum/mayfly/blob/v1.0.0-rc.1/lib/mayfly/local_runtime.ex#L111" class="icon-action" rel="help nofollow" aria-label="View Source">
+          <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+        </a>
+
+    </div>
+  </div>
+
+  <section class="docstring">
+
+      <div class="specs">
+
+          <pre translate="no"><span class="attribute">@spec</span> shutdown(<a href="https://elixir.hexdocs.pm/GenServer.html#t:server/0">GenServer.server</a>(), <a href="https://elixir.hexdocs.pm/String.html#t:t/0">String.t</a>()) :: :ok</pre>
+
+      </div>
+
+<p>Sends a SHUTDOWN event to every registered extension (regardless of the
+events it subscribed to; real Lambda only delivers SHUTDOWN to external
+extensions, this is a test aid).</p>
+  </section>
+</section>
 <section class="detail" id="start_link/1">
 
     <span id="start_link/0"></span>
@@ -414,7 +548,7 @@ runtime to process it and returns the outcome.</p>
       <h1 class="signature" translate="no">start_link(opts \\ [])</h1>
 
 
-        <a href="https://github.com/bmalum/mayfly/blob/v1.0.0-rc.1/lib/mayfly/local_runtime.ex#L43" class="icon-action" rel="help nofollow" aria-label="View Source">
+        <a href="https://github.com/bmalum/mayfly/blob/v1.0.0-rc.1/lib/mayfly/local_runtime.ex#L47" class="icon-action" rel="help nofollow" aria-label="View Source">
           <i class="ri-code-s-slash-line" aria-hidden="true"></i>
         </a>
 
@@ -424,6 +558,34 @@ runtime to process it and returns the outcome.</p>
   <section class="docstring">
 
 <p>Starts the emulator on an ephemeral port (or <code class="inline">:port</code>).</p>
+  </section>
+</section>
+<section class="detail" id="telemetry_subscriptions/1">
+
+  <div class="detail-header">
+    <a href="#telemetry_subscriptions/1" class="detail-link" data-no-tooltip="" aria-label="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+    </a>
+    <div class="heading-with-actions">
+      <h1 class="signature" translate="no">telemetry_subscriptions(rt)</h1>
+
+
+        <a href="https://github.com/bmalum/mayfly/blob/v1.0.0-rc.1/lib/mayfly/local_runtime.ex#L77" class="icon-action" rel="help nofollow" aria-label="View Source">
+          <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+        </a>
+
+    </div>
+  </div>
+
+  <section class="docstring">
+
+      <div class="specs">
+
+          <pre translate="no"><span class="attribute">@spec</span> telemetry_subscriptions(<a href="https://elixir.hexdocs.pm/GenServer.html#t:server/0">GenServer.server</a>()) :: <a href="https://elixir.hexdocs.pm/typespecs.html#basic-types">map</a>()</pre>
+
+      </div>
+
+<p>Telemetry subscriptions by extension identifier (the decoded PUT body).</p>
   </section>
 </section>
 

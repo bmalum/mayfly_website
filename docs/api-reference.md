@@ -40,6 +40,8 @@ runs the handler and posts the result, then polls again.
 resolved and initialised exactly once.
 
 - Observability
+  - [Mayfly.Extension](Mayfly.Extension.md): Internal Lambda extension: registers with the Extensions API, subscribes to
+the Telemetry API, and turns platform telemetry into `:telemetry` events.
   - [Mayfly.LogFormatter](Mayfly.LogFormatter.md): Logger formatter that emits one JSON object per line in the shape Lambda's
 [advanced logging controls](https://docs.aws.amazon.com/lambda/latest/dg/monitoring-cloudwatchlogs-advanced.html)
 expect, so CloudWatch parses level, request id and tenant id

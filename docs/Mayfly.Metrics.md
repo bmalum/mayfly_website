@@ -51,6 +51,21 @@ Attaches a `:telemetry` handler to `[:mayfly, :invocation, :stop]` that emits
 `FunctionName`. Safe to call once per environment; returns `{:error, :already_exists}`
 if attached twice. Returns `{:error, :telemetry_not_available}` without the dep.
 
+# `attach_platform_metrics`
+
+```elixir
+@spec attach_platform_metrics(String.t(), keyword()) :: :ok | {:error, term()}
+```
+
+Attaches a `:telemetry` handler to `[:mayfly, :platform, :report]` (emitted by
+`Mayfly.Extension` when the extension is enabled) that publishes Lambda's
+own numbers as EMF metrics under `namespace`, dimension `FunctionName`:
+`Duration`, `BilledDuration`, `MaxMemoryUsed`, `MemorySize`, and
+`InitDuration` when present (cold starts). Unlike
+`attach_invocation_metrics/2`, `Duration` here is what Lambda measured and
+`BilledDuration` is what you pay for. The report for an invocation arrives
+after that invocation has finished, attributed by `requestId`.
+
 # `build`
 
 ```elixir

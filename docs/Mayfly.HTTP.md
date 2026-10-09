@@ -75,6 +75,21 @@ simply blocks in `Enum.reduce_while/3`. `:send_timeout` (ms, default 30 000)
 bounds how long a single chunk write may stall before the stream is aborted
 with `{:error, :timeout}`; the error is reported through the trailers.
 
+# `put`
+
+```elixir
+@spec put(
+  {String.t(), :inet.port_number()},
+  String.t(),
+  [header()],
+  iodata(),
+  keyword()
+) ::
+  {:ok, response()} | {:error, term()}
+```
+
+`PUT path` with a complete body (`Content-Length`).
+
 ---
 
 *Consult [api-reference.md](api-reference.md) for complete listing*

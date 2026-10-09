@@ -15,6 +15,7 @@ Mayfly.Events.SNS.md
 Mayfly.Events.SQS.Record.md
 Mayfly.Events.SQS.md
 Mayfly.Events.md
+Mayfly.Extension.md
 Mayfly.HTTP.md
 Mayfly.Handler.md
 Mayfly.LocalRuntime.md

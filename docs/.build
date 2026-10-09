@@ -16,6 +16,7 @@ Mayfly.Events.SNS.html
 Mayfly.Events.SQS.Record.html
 Mayfly.Events.SQS.html
 Mayfly.Events.html
+Mayfly.Extension.html
 Mayfly.HTTP.html
 Mayfly.Handler.html
 Mayfly.LocalRuntime.html
@@ -44,8 +45,8 @@ dist/lato-latin-700-normal-2XVSBPG4.woff2
 dist/lato-latin-ext-400-normal-N27NCBWW.woff2
 dist/lato-latin-ext-700-normal-Q2L5DVMW.woff2
 dist/remixicon-ZWU5GQ4X.woff2
-dist/search_data-73926957.js
-dist/sidebar_items-D7238B79.js
+dist/search_data-2C5F6132.js
+dist/sidebar_items-4D4641CA.js
 events.html
 getting-started.html
 idempotency.html

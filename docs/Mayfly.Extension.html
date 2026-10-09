@@ -8,11 +8,11 @@
     <meta name="project" content="Mayfly v1.0.0-rc.1">
 
 
-    <title>Mayfly.Events.SQS — Mayfly v1.0.0-rc.1</title>
+    <title>Mayfly.Extension — Mayfly v1.0.0-rc.1</title>
 
     <link rel="stylesheet" href="dist/html-elixir-RXHHCTJW.css" />
 
-      <link rel="canonical" href="https://elixir-aws-lambda.dev/docs/Mayfly.Events.SQS.html" />
+      <link rel="canonical" href="https://elixir-aws-lambda.dev/docs/Mayfly.Extension.html" />
 
     <script defer src="dist/sidebar_items-4D4641CA.js"></script>
     <script defer src="docs_config.js"></script>
@@ -114,19 +114,19 @@ Mayfly
 <div id="top-content">
   <div class="heading-with-actions top-heading">
     <h1>
-      <span translate="no">Mayfly.<wbr />Events.<wbr />SQS</span> 
+      <span translate="no">Mayfly.<wbr />Extension</span> 
       <small class="app-vsn" translate="no">(Mayfly v1.0.0-rc.1)</small>
 
     </h1>
 
-<a href="Mayfly.Events.SQS.md" title="Copy Markdown (hold Ctrl/Cmd and click it to open as Markdown)" class="copy-markdown icon-action" rel="help">
+<a href="Mayfly.Extension.md" title="Copy Markdown (hold Ctrl/Cmd and click it to open as Markdown)" class="copy-markdown icon-action" rel="help">
   <i class="ri-markdown-line" aria-hidden="true"></i>
   <span class="sr-only">Copy Markdown</span>
 </a>
 
 
 
-      <a href="https://github.com/bmalum/mayfly/blob/v1.0.0-rc.1/lib/mayfly/events/sqs.ex#L1" title="View Source" class="icon-action" rel="help nofollow">
+      <a href="https://github.com/bmalum/mayfly/blob/v1.0.0-rc.1/lib/mayfly/extension.ex#L1" title="View Source" class="icon-action" rel="help nofollow">
         <i class="ri-code-s-slash-line" aria-hidden="true"></i>
         <span class="sr-only">View Source</span>
       </a>
@@ -135,19 +135,38 @@ Mayfly
 
 
     <section id="moduledoc">
-<p>Amazon SQS events.</p><pre><code class="makeup elixir" translate="no"><span class="kd">def</span><span class="w"> </span><span class="nf">handle</span><span class="p" data-group-id="group-1">(</span><span class="n">event</span><span class="p">,</span><span class="w"> </span><span class="c">_ctx</span><span class="p">,</span><span class="w"> </span><span class="c">_state</span><span class="p" data-group-id="group-1">)</span><span class="w"> </span><span class="k" data-group-id="group-2">do</span><span class="w">
-  </span><span class="n">sqs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Mayfly.Events.SQS</span><span class="o">.</span><span class="n">decode</span><span class="p" data-group-id="group-3">(</span><span class="n">event</span><span class="p" data-group-id="group-3">)</span><span class="w">
-
-  </span><span class="p" data-group-id="group-4">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w">
-   </span><span class="nc">Mayfly.Events.SQS</span><span class="o">.</span><span class="n">process_batch</span><span class="p" data-group-id="group-5">(</span><span class="n">sqs</span><span class="p">,</span><span class="w"> </span><span class="k" data-group-id="group-6">fn</span><span class="w"> </span><span class="n">record</span><span class="w"> </span><span class="o">-&gt;</span><span class="w">
-     </span><span class="nc">MyApp.Orders</span><span class="o">.</span><span class="n">process</span><span class="p" data-group-id="group-7">(</span><span class="n">record</span><span class="o">.</span><span class="n">body</span><span class="p" data-group-id="group-7">)</span><span class="w">   </span><span class="c1"># {:ok, _} | {:error, _} | raise</span><span class="w">
-   </span><span class="k" data-group-id="group-6">end</span><span class="p" data-group-id="group-5">)</span><span class="p" data-group-id="group-4">}</span><span class="w">
-</span><span class="k" data-group-id="group-2">end</span></code></pre><p><a href="#process_batch/2"><code class="inline">process_batch/2</code></a> returns the partial-batch response
-(<code class="inline">%{batchItemFailures: [...]}</code>) so that only failed messages are retried.
-The event source mapping must be created with
-<code class="inline">FunctionResponseTypes=ReportBatchItemFailures</code> for Lambda to honour it.</p><p><code class="inline">body</code> is JSON-decoded when it parses, otherwise the raw string.
-<code class="inline">message_attributes</code> is flattened to <code class="inline">%{&quot;name&quot; =&gt; value}</code> (string or binary
-values; number values are returned as strings as SQS sends them).</p>
+<p>Internal Lambda extension: registers with the Extensions API, subscribes to
+the Telemetry API, and turns platform telemetry into <code class="inline">:telemetry</code> events.</p><p>Off by default. Enable with <code class="inline">MAYFLY_EXTENSION=1</code> (or <code class="inline">config :mayfly, extension: true</code> / the <code class="inline">:extension</code> option of <a href="Mayfly.html#start_link/1"><code class="inline">Mayfly.start_link/1</code></a>). When
+enabled, <a href="Mayfly.Supervisor.html"><code class="inline">Mayfly.Supervisor</code></a> registers the extension <em>before</em> the first
+<code class="inline">/next</code> poll, which is what Lambda requires of internal extensions, so the
+cost is one extra HTTP round trip plus the subscription at cold start.</p><h2 id="module-what-you-get" class="section-heading"><a href="#module-what-you-get" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a><span class="text">What you get</span></h2><ul><li><code class="inline">:telemetry</code> events <code class="inline">[:mayfly, :platform, type]</code> for every platform
+record, with the record's <code class="inline">metrics</code> (numbers) as measurements and the
+full record plus <code class="inline">time</code> as metadata. <code class="inline">type</code> is the part after
+<code class="inline">platform.</code> as an atom: <code class="inline">:init_start</code>, <code class="inline">:init_runtime_done</code>,
+<code class="inline">:init_report</code>, <code class="inline">:start</code>, <code class="inline">:runtime_done</code>, <code class="inline">:report</code>, <code class="inline">:extension</code>,
+<code class="inline">:telemetry_subscription</code>, <code class="inline">:log_dropped</code>, ... <code class="inline">platform.report</code> carries
+<code class="inline">durationMs</code>, <code class="inline">billedDurationMs</code>, <code class="inline">memorySizeMB</code>, <code class="inline">maxMemoryUsedMB</code> and,
+on cold starts, <code class="inline">initDurationMs</code> – numbers the function cannot otherwise
+see about itself. <a href="Mayfly.Metrics.html#attach_platform_metrics/2"><code class="inline">Mayfly.Metrics.attach_platform_metrics/2</code></a> publishes
+them as CloudWatch EMF metrics.</li><li>Every telemetry record is logged at <code class="inline">debug</code> level.</li></ul><p>What you do <strong>not</strong> get: a <code class="inline">SHUTDOWN</code> hook. Lambda only delivers <code class="inline">SHUTDOWN</code>
+to <em>external</em> extensions (separate processes under <code class="inline">/opt/extensions</code>);
+internal extensions registering for it are rejected with
+<code class="inline">ShutdownEventNotSupportedForInternalExtension</code>. Mayfly therefore registers
+for <code class="inline">INVOKE</code> only. Logger flushing at shutdown would need an external
+extension and is out of scope; Lambda's log capture of the invocation's
+stdout is complete once the response is posted, so lines logged before the
+handler returns are not at risk.</p><h2 id="module-how-it-works" class="section-heading"><a href="#module-how-it-works" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a><span class="text">How it works</span></h2><ol><li><code class="inline">POST /2020-01-01/extension/register</code> with <code class="inline">Lambda-Extension-Name: mayfly</code>
+and events <code class="inline">[&quot;INVOKE&quot;]</code>; the response header
+<code class="inline">Lambda-Extension-Identifier</code> authenticates later calls.</li><li>A <code class="inline">:gen_tcp</code> listener is opened on <code class="inline">sandbox.localdomain</code> (the only host
+the Telemetry API may deliver to) and <code class="inline">PUT /2022-07-01/telemetry</code>
+subscribes to <code class="inline">platform</code> events with a small buffer
+(<code class="inline">timeoutMs: 25, maxBytes: 262144, maxItems: 1000</code>).</li><li>A process loops on <code class="inline">GET /2020-01-01/extension/event/next</code>. <code class="inline">INVOKE</code>
+events are acknowledged and otherwise ignored (the pollers handle
+invocations). Should Lambda ever deliver <code class="inline">SHUTDOWN</code> to an internal
+extension, Mayfly flushes <a href="https://logger.hexdocs.pm/Logger.html"><code class="inline">Logger</code></a> and halts.</li></ol><p>Telemetry is delivered <em>after</em> the invocation that produced it has
+completed (Lambda sends <code class="inline">platform.report</code> once the response is posted), so
+metrics derived from it are attributed by <code class="inline">requestId</code>, not by the current
+invocation. Nothing here runs in the request path.</p>
     </section>
 
 </div>
@@ -159,20 +178,6 @@ values; number values are returned as strings as SQS sends them).</p>
       </a>
       <span class="text">Summary</span>
     </h2>
-<div class="summary-types summary">
-  <h3>
-    <a href="#types">Types</a>
-  </h3>
-
-    <div class="summary-row">
-      <div class="summary-signature">
-        <a href="#t:t/0" data-no-tooltip="" translate="no">t()</a>
-
-      </div>
-
-    </div>
-
-</div>
 <div class="summary-functions summary">
   <h3>
     <a href="#functions">Functions</a>
@@ -180,32 +185,31 @@ values; number values are returned as strings as SQS sends them).</p>
 
     <div class="summary-row">
       <div class="summary-signature">
-        <a href="#batch_failures/1" data-no-tooltip="" translate="no">batch_failures(message_ids)</a>
+        <a href="#enabled?/1" data-no-tooltip="" translate="no">enabled?(opts)</a>
 
       </div>
 
-        <div class="summary-synopsis"><p>Partial batch response for the given message ids.</p></div>
+        <div class="summary-synopsis"><p>True when the extension should be started (env <code class="inline">MAYFLY_EXTENSION</code>, app env, or option).</p></div>
 
     </div>
 
     <div class="summary-row">
       <div class="summary-signature">
-        <a href="#decode/1" data-no-tooltip="" translate="no">decode(e)</a>
+        <a href="#identifier/1" data-no-tooltip="" translate="no">identifier(server \\ __MODULE__)</a>
 
       </div>
 
-        <div class="summary-synopsis"><p>Decodes an SQS event.</p></div>
+        <div class="summary-synopsis"><p>The identifier Lambda assigned at registration (for tests and diagnostics).</p></div>
 
     </div>
 
     <div class="summary-row">
       <div class="summary-signature">
-        <a href="#process_batch/2" data-no-tooltip="" translate="no">process_batch(sqs, fun)</a>
+        <a href="#listener_port/1" data-no-tooltip="" translate="no">listener_port(server \\ __MODULE__)</a>
 
       </div>
 
-        <div class="summary-synopsis"><p>Runs <code class="inline">fun</code> for each record and returns the partial batch response listing
-the records for which <code class="inline">fun</code> returned <code class="inline">{:error, _}</code>, raised, exited or threw.</p></div>
+        <div class="summary-synopsis"><p>Port of the telemetry listener (for tests).</p></div>
 
     </div>
 
@@ -213,47 +217,6 @@ the records for which <code class="inline">fun</code> returned <code class="inli
 
   </section>
 
-
-  <section id="types" class="details-list">
-    <h2 class="section-heading">
-      <a class="hover-link" href="#types">
-        <i class="ri-link-m" aria-hidden="true"></i>
-      </a>
-      <span class="text">Types</span>
-    </h2>
-
-    <div class="types-list">
-<section class="detail" id="t:t/0">
-
-  <div class="detail-header">
-    <a href="#t:t/0" class="detail-link" data-no-tooltip="" aria-label="Link to this type">
-      <i class="ri-link-m" aria-hidden="true"></i>
-    </a>
-    <div class="heading-with-actions">
-      <h1 class="signature" translate="no">t()</h1>
-
-
-        <a href="https://github.com/bmalum/mayfly/blob/v1.0.0-rc.1/lib/mayfly/events/sqs.ex#L54" class="icon-action" rel="help nofollow" aria-label="View Source">
-          <i class="ri-code-s-slash-line" aria-hidden="true"></i>
-        </a>
-
-    </div>
-  </div>
-
-  <section class="docstring">
-
-      <div class="specs">
-
-          <pre translate="no"><span class="attribute">@type</span> t() :: %Mayfly.Events.SQS{raw: <a href="https://elixir.hexdocs.pm/typespecs.html#basic-types">map</a>(), records: [<a href="Mayfly.Events.SQS.Record.html#t:t/0">Mayfly.Events.SQS.Record.t</a>()]}</pre>
-
-      </div>
-
-
-  </section>
-</section>
-
-    </div>
-  </section>
 
   <section id="functions" class="details-list">
     <h2 class="section-heading">
@@ -264,17 +227,17 @@ the records for which <code class="inline">fun</code> returned <code class="inli
     </h2>
 
     <div class="functions-list">
-<section class="detail" id="batch_failures/1">
+<section class="detail" id="enabled?/1">
 
   <div class="detail-header">
-    <a href="#batch_failures/1" class="detail-link" data-no-tooltip="" aria-label="Link to this function">
+    <a href="#enabled?/1" class="detail-link" data-no-tooltip="" aria-label="Link to this function">
       <i class="ri-link-m" aria-hidden="true"></i>
     </a>
     <div class="heading-with-actions">
-      <h1 class="signature" translate="no">batch_failures(message_ids)</h1>
+      <h1 class="signature" translate="no">enabled?(opts)</h1>
 
 
-        <a href="https://github.com/bmalum/mayfly/blob/v1.0.0-rc.1/lib/mayfly/events/sqs.ex#L80" class="icon-action" rel="help nofollow" aria-label="View Source">
+        <a href="https://github.com/bmalum/mayfly/blob/v1.0.0-rc.1/lib/mayfly/extension.ex#L71" class="icon-action" rel="help nofollow" aria-label="View Source">
           <i class="ri-code-s-slash-line" aria-hidden="true"></i>
         </a>
 
@@ -285,26 +248,26 @@ the records for which <code class="inline">fun</code> returned <code class="inli
 
       <div class="specs">
 
-          <pre translate="no"><span class="attribute">@spec</span> batch_failures([<a href="https://elixir.hexdocs.pm/String.html#t:t/0">String.t</a>()]) :: %{
-  batchItemFailures: [%{itemIdentifier: <a href="https://elixir.hexdocs.pm/String.html#t:t/0">String.t</a>()}]
-}</pre>
+          <pre translate="no"><span class="attribute">@spec</span> enabled?(<a href="https://elixir.hexdocs.pm/typespecs.html#built-in-types">keyword</a>()) :: <a href="https://elixir.hexdocs.pm/typespecs.html#built-in-types">boolean</a>()</pre>
 
       </div>
 
-<p>Partial batch response for the given message ids.</p>
+<p>True when the extension should be started (env <code class="inline">MAYFLY_EXTENSION</code>, app env, or option).</p>
   </section>
 </section>
-<section class="detail" id="decode/1">
+<section class="detail" id="identifier/1">
+
+    <span id="identifier/0"></span>
 
   <div class="detail-header">
-    <a href="#decode/1" class="detail-link" data-no-tooltip="" aria-label="Link to this function">
+    <a href="#identifier/1" class="detail-link" data-no-tooltip="" aria-label="Link to this function">
       <i class="ri-link-m" aria-hidden="true"></i>
     </a>
     <div class="heading-with-actions">
-      <h1 class="signature" translate="no">decode(e)</h1>
+      <h1 class="signature" translate="no">identifier(server \\ __MODULE__)</h1>
 
 
-        <a href="https://github.com/bmalum/mayfly/blob/v1.0.0-rc.1/lib/mayfly/events/sqs.ex#L59" class="icon-action" rel="help nofollow" aria-label="View Source">
+        <a href="https://github.com/bmalum/mayfly/blob/v1.0.0-rc.1/lib/mayfly/extension.ex#L93" class="icon-action" rel="help nofollow" aria-label="View Source">
           <i class="ri-code-s-slash-line" aria-hidden="true"></i>
         </a>
 
@@ -315,24 +278,26 @@ the records for which <code class="inline">fun</code> returned <code class="inli
 
       <div class="specs">
 
-          <pre translate="no"><span class="attribute">@spec</span> decode(<a href="https://elixir.hexdocs.pm/typespecs.html#basic-types">map</a>()) :: <a href="#t:t/0">t</a>()</pre>
+          <pre translate="no"><span class="attribute">@spec</span> identifier(<a href="https://elixir.hexdocs.pm/GenServer.html#t:server/0">GenServer.server</a>()) :: <a href="https://elixir.hexdocs.pm/String.html#t:t/0">String.t</a>()</pre>
 
       </div>
 
-<p>Decodes an SQS event.</p>
+<p>The identifier Lambda assigned at registration (for tests and diagnostics).</p>
   </section>
 </section>
-<section class="detail" id="process_batch/2">
+<section class="detail" id="listener_port/1">
+
+    <span id="listener_port/0"></span>
 
   <div class="detail-header">
-    <a href="#process_batch/2" class="detail-link" data-no-tooltip="" aria-label="Link to this function">
+    <a href="#listener_port/1" class="detail-link" data-no-tooltip="" aria-label="Link to this function">
       <i class="ri-link-m" aria-hidden="true"></i>
     </a>
     <div class="heading-with-actions">
-      <h1 class="signature" translate="no">process_batch(sqs, fun)</h1>
+      <h1 class="signature" translate="no">listener_port(server \\ __MODULE__)</h1>
 
 
-        <a href="https://github.com/bmalum/mayfly/blob/v1.0.0-rc.1/lib/mayfly/events/sqs.ex#L89" class="icon-action" rel="help nofollow" aria-label="View Source">
+        <a href="https://github.com/bmalum/mayfly/blob/v1.0.0-rc.1/lib/mayfly/extension.ex#L97" class="icon-action" rel="help nofollow" aria-label="View Source">
           <i class="ri-code-s-slash-line" aria-hidden="true"></i>
         </a>
 
@@ -343,14 +308,11 @@ the records for which <code class="inline">fun</code> returned <code class="inli
 
       <div class="specs">
 
-          <pre translate="no"><span class="attribute">@spec</span> process_batch(<a href="#t:t/0">t</a>(), (<a href="Mayfly.Events.SQS.Record.html#t:t/0">Mayfly.Events.SQS.Record.t</a>() -&gt; <a href="https://elixir.hexdocs.pm/typespecs.html#built-in-types">term</a>())) :: %{
-  batchItemFailures: [%{itemIdentifier: <a href="https://elixir.hexdocs.pm/String.html#t:t/0">String.t</a>()}]
-}</pre>
+          <pre translate="no"><span class="attribute">@spec</span> listener_port(<a href="https://elixir.hexdocs.pm/GenServer.html#t:server/0">GenServer.server</a>()) :: <a href="https://www.erlang.org/doc/apps/kernel/inet.html#t:port_number/0">:inet.port_number</a>()</pre>
 
       </div>
 
-<p>Runs <code class="inline">fun</code> for each record and returns the partial batch response listing
-the records for which <code class="inline">fun</code> returned <code class="inline">{:error, _}</code>, raised, exited or threw.</p>
+<p>Port of the telemetry listener (for tests).</p>
   </section>
 </section>
 

@@ -17,6 +17,9 @@ supervision tree when using `Mayfly.LocalRuntime` in tests):
   * `:runtime_api` – `host:port`; default `System.get_env("AWS_LAMBDA_RUNTIME_API")`
   * `:concurrency` – number of pollers; default `AWS_LAMBDA_MAX_CONCURRENCY` or 1
   * `:handler_opts` – passed to the handler's `init/1`; default `[]`
+  * `:extension` – register the internal Lambda extension (`Mayfly.Extension`:
+    platform telemetry as `:telemetry` events, log flush on SHUTDOWN); default
+    `MAYFLY_EXTENSION=1` or `config :mayfly, extension: true`, else off
   * `:api` – module implementing `Mayfly.RuntimeAPI` (tests)
 
 # `start_link`

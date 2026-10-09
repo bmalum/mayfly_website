@@ -50,6 +50,14 @@ Returns a specification to start this module under a supervisor.
 
 See `Supervisor`.
 
+# `extensions`
+
+```elixir
+@spec extensions(GenServer.server()) :: map()
+```
+
+Registered extensions: `%{identifier => %{name: ..., events: [...]}}`.
+
 # `init_error`
 
 ```elixir
@@ -67,9 +75,37 @@ The payload posted to `/runtime/init/error`, if any.
 Queues `event` (any JSON-encodable term or a raw binary), waits for the
 runtime to process it and returns the outcome.
 
+# `push_telemetry`
+
+```elixir
+@spec push_telemetry(GenServer.server(), [map()]) :: [integer() | {:error, term()}]
+```
+
+Delivers telemetry records to every subscribed extension the way Lambda
+does: an HTTP POST of a JSON array to the subscription's destination URI.
+Returns the list of HTTP status codes received.
+
+# `shutdown`
+
+```elixir
+@spec shutdown(GenServer.server(), String.t()) :: :ok
+```
+
+Sends a SHUTDOWN event to every registered extension (regardless of the
+events it subscribed to; real Lambda only delivers SHUTDOWN to external
+extensions, this is a test aid).
+
 # `start_link`
 
 Starts the emulator on an ephemeral port (or `:port`).
+
+# `telemetry_subscriptions`
+
+```elixir
+@spec telemetry_subscriptions(GenServer.server()) :: map()
+```
+
+Telemetry subscriptions by extension identifier (the decoded PUT body).
 
 ---
 

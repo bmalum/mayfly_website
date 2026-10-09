@@ -14,7 +14,7 @@
 
       <link rel="canonical" href="https://elixir-aws-lambda.dev/docs/Mayfly.html" />
 
-    <script defer src="dist/sidebar_items-D7238B79.js"></script>
+    <script defer src="dist/sidebar_items-4D4641CA.js"></script>
     <script defer src="docs_config.js"></script>
     <script defer src="dist/html-MI33G4N7.js"></script>
 <meta name="description" content="Mayfly documentation: run Elixir on AWS Lambda with a lightweight custom runtime. Handler behaviour, mix release build, Erlang layers, response streaming, Managed Instances, observability.">
@@ -139,7 +139,9 @@ Mayfly
 <a href="Mayfly.Boot.html#main/0"><code class="inline">Mayfly.Boot.main/0</code></a>, which reads the environment and calls <a href="#start_link/1"><code class="inline">start_link/1</code></a>.
 You can also start the runtime yourself (for example from your own
 supervision tree when using <a href="Mayfly.LocalRuntime.html"><code class="inline">Mayfly.LocalRuntime</code></a> in tests):</p><pre><code class="makeup elixir" translate="no"><span class="nc">Mayfly</span><span class="o">.</span><span class="n">start_link</span><span class="p" data-group-id="group-1">(</span><span class="ss">handler</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;MyApp.Handler&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">runtime_api</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;127.0.0.1:9001&quot;</span><span class="p" data-group-id="group-1">)</span></code></pre><h2 id="module-options" class="section-heading"><a href="#module-options" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a><span class="text">Options</span></h2><ul><li><code class="inline">:handler</code> – <code class="inline">_HANDLER</code> string (module or <code class="inline">Module.function</code>); default
-<code class="inline">System.get_env(&quot;_HANDLER&quot;)</code></li><li><code class="inline">:runtime_api</code> – <code class="inline">host:port</code>; default <code class="inline">System.get_env(&quot;AWS_LAMBDA_RUNTIME_API&quot;)</code></li><li><code class="inline">:concurrency</code> – number of pollers; default <code class="inline">AWS_LAMBDA_MAX_CONCURRENCY</code> or 1</li><li><code class="inline">:handler_opts</code> – passed to the handler's <code class="inline">init/1</code>; default <code class="inline">[]</code></li><li><code class="inline">:api</code> – module implementing <a href="Mayfly.RuntimeAPI.html"><code class="inline">Mayfly.RuntimeAPI</code></a> (tests)</li></ul>
+<code class="inline">System.get_env(&quot;_HANDLER&quot;)</code></li><li><code class="inline">:runtime_api</code> – <code class="inline">host:port</code>; default <code class="inline">System.get_env(&quot;AWS_LAMBDA_RUNTIME_API&quot;)</code></li><li><code class="inline">:concurrency</code> – number of pollers; default <code class="inline">AWS_LAMBDA_MAX_CONCURRENCY</code> or 1</li><li><code class="inline">:handler_opts</code> – passed to the handler's <code class="inline">init/1</code>; default <code class="inline">[]</code></li><li><code class="inline">:extension</code> – register the internal Lambda extension (<a href="Mayfly.Extension.html"><code class="inline">Mayfly.Extension</code></a>:
+platform telemetry as <code class="inline">:telemetry</code> events, log flush on SHUTDOWN); default
+<code class="inline">MAYFLY_EXTENSION=1</code> or <code class="inline">config :mayfly, extension: true</code>, else off</li><li><code class="inline">:api</code> – module implementing <a href="Mayfly.RuntimeAPI.html"><code class="inline">Mayfly.RuntimeAPI</code></a> (tests)</li></ul>
     </section>
 
 </div>
@@ -192,7 +194,7 @@ supervision tree when using <a href="Mayfly.LocalRuntime.html"><code class="inli
       <h1 class="signature" translate="no">start_link(opts \\ [])</h1>
 
 
-        <a href="https://github.com/bmalum/mayfly/blob/v1.0.0-rc.1/lib/mayfly.ex#L31" class="icon-action" rel="help nofollow" aria-label="View Source">
+        <a href="https://github.com/bmalum/mayfly/blob/v1.0.0-rc.1/lib/mayfly.ex#L34" class="icon-action" rel="help nofollow" aria-label="View Source">
           <i class="ri-code-s-slash-line" aria-hidden="true"></i>
         </a>
 

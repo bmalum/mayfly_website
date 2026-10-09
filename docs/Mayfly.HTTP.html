@@ -14,7 +14,7 @@
 
       <link rel="canonical" href="https://elixir-aws-lambda.dev/docs/Mayfly.HTTP.html" />
 
-    <script defer src="dist/sidebar_items-D7238B79.js"></script>
+    <script defer src="dist/sidebar_items-4D4641CA.js"></script>
     <script defer src="docs_config.js"></script>
     <script defer src="dist/html-MI33G4N7.js"></script>
 <meta name="description" content="Mayfly documentation: run Elixir on AWS Lambda with a lightweight custom runtime. Handler behaviour, mix release build, Erlang layers, response streaming, Managed Instances, observability.">
@@ -212,6 +212,16 @@ iodata; it is consumed lazily and each element is written as one chunk.</p></div
 
     </div>
 
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#put/5" data-no-tooltip="" translate="no">put(arg, path, headers, body, opts \\ [])</a>
+
+      </div>
+
+        <div class="summary-synopsis"><p><code class="inline">PUT path</code> with a complete body (<code class="inline">Content-Length</code>).</p></div>
+
+    </div>
+
 </div>
 
   </section>
@@ -378,7 +388,7 @@ an invocation arrives (Lambda freezes the sandbox in between).</p>
       <h1 class="signature" translate="no">post_chunked(arg, path, headers, chunks, opts \\ [])</h1>
 
 
-        <a href="https://github.com/bmalum/mayfly/blob/v1.0.0-rc.1/lib/mayfly/http.ex#L62" class="icon-action" rel="help nofollow" aria-label="View Source">
+        <a href="https://github.com/bmalum/mayfly/blob/v1.0.0-rc.1/lib/mayfly/http.ex#L70" class="icon-action" rel="help nofollow" aria-label="View Source">
           <i class="ri-code-s-slash-line" aria-hidden="true"></i>
         </a>
 
@@ -407,6 +417,43 @@ outpaces the consumer (Lambda caps streaming at 2 MB/s after the first 6 MB)
 simply blocks in <a href="https://elixir.hexdocs.pm/Enum.html#reduce_while/3"><code class="inline">Enum.reduce_while/3</code></a>. <code class="inline">:send_timeout</code> (ms, default 30 000)
 bounds how long a single chunk write may stall before the stream is aborted
 with <code class="inline">{:error, :timeout}</code>; the error is reported through the trailers.</p>
+  </section>
+</section>
+<section class="detail" id="put/5">
+
+    <span id="put/4"></span>
+
+  <div class="detail-header">
+    <a href="#put/5" class="detail-link" data-no-tooltip="" aria-label="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+    </a>
+    <div class="heading-with-actions">
+      <h1 class="signature" translate="no">put(arg, path, headers, body, opts \\ [])</h1>
+
+
+        <a href="https://github.com/bmalum/mayfly/blob/v1.0.0-rc.1/lib/mayfly/http.ex#L44" class="icon-action" rel="help nofollow" aria-label="View Source">
+          <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+        </a>
+
+    </div>
+  </div>
+
+  <section class="docstring">
+
+      <div class="specs">
+
+          <pre translate="no"><span class="attribute">@spec</span> put(
+  {<a href="https://elixir.hexdocs.pm/String.html#t:t/0">String.t</a>(), <a href="https://www.erlang.org/doc/apps/kernel/inet.html#t:port_number/0">:inet.port_number</a>()},
+  <a href="https://elixir.hexdocs.pm/String.html#t:t/0">String.t</a>(),
+  [<a href="#t:header/0">header</a>()],
+  <a href="https://elixir.hexdocs.pm/typespecs.html#built-in-types">iodata</a>(),
+  <a href="https://elixir.hexdocs.pm/typespecs.html#built-in-types">keyword</a>()
+) ::
+  {:ok, <a href="#t:response/0">response</a>()} | {:error, <a href="https://elixir.hexdocs.pm/typespecs.html#built-in-types">term</a>()}</pre>
+
+      </div>
+
+<p><code class="inline">PUT path</code> with a complete body (<code class="inline">Content-Length</code>).</p>
   </section>
 </section>
 

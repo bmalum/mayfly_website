@@ -14,7 +14,7 @@
 
       <link rel="canonical" href="https://elixir-aws-lambda.dev/docs/Mayfly.Metrics.html" />
 
-    <script defer src="dist/sidebar_items-D7238B79.js"></script>
+    <script defer src="dist/sidebar_items-4D4641CA.js"></script>
     <script defer src="docs_config.js"></script>
     <script defer src="dist/html-MI33G4N7.js"></script>
 <meta name="description" content="Mayfly documentation: run Elixir on AWS Lambda with a lightweight custom runtime. Handler behaviour, mix release build, Erlang layers, response streaming, Managed Instances, observability.">
@@ -198,6 +198,23 @@ if attached twice. Returns <code class="inline">{:error, :telemetry_not_availabl
 
     <div class="summary-row">
       <div class="summary-signature">
+        <a href="#attach_platform_metrics/2" data-no-tooltip="" translate="no">attach_platform_metrics(namespace, opts \\ [])</a>
+
+      </div>
+
+        <div class="summary-synopsis"><p>Attaches a <code class="inline">:telemetry</code> handler to <code class="inline">[:mayfly, :platform, :report]</code> (emitted by
+<a href="Mayfly.Extension.html"><code class="inline">Mayfly.Extension</code></a> when the extension is enabled) that publishes Lambda's
+own numbers as EMF metrics under <code class="inline">namespace</code>, dimension <code class="inline">FunctionName</code>:
+<a href="https://elixir.hexdocs.pm/Duration.html"><code class="inline">Duration</code></a>, <code class="inline">BilledDuration</code>, <code class="inline">MaxMemoryUsed</code>, <code class="inline">MemorySize</code>, and
+<code class="inline">InitDuration</code> when present (cold starts). Unlike
+<a href="#attach_invocation_metrics/2"><code class="inline">attach_invocation_metrics/2</code></a>, <a href="https://elixir.hexdocs.pm/Duration.html"><code class="inline">Duration</code></a> here is what Lambda measured and
+<code class="inline">BilledDuration</code> is what you pay for. The report for an invocation arrives
+after that invocation has finished, attributed by <code class="inline">requestId</code>.</p></div>
+
+    </div>
+
+    <div class="summary-row">
+      <div class="summary-signature">
         <a href="#build/3" data-no-tooltip="" translate="no">build(namespace, metrics, opts \\ [])</a>
 
       </div>
@@ -323,6 +340,43 @@ units or too many dimensions/metrics.</p></div>
 <a href="https://elixir.hexdocs.pm/Duration.html"><code class="inline">Duration</code></a>, <code class="inline">Errors</code> and <code class="inline">ColdStart</code> under <code class="inline">namespace</code> with dimension
 <code class="inline">FunctionName</code>. Safe to call once per environment; returns <code class="inline">{:error, :already_exists}</code>
 if attached twice. Returns <code class="inline">{:error, :telemetry_not_available}</code> without the dep.</p>
+  </section>
+</section>
+<section class="detail" id="attach_platform_metrics/2">
+
+    <span id="attach_platform_metrics/1"></span>
+
+  <div class="detail-header">
+    <a href="#attach_platform_metrics/2" class="detail-link" data-no-tooltip="" aria-label="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+    </a>
+    <div class="heading-with-actions">
+      <h1 class="signature" translate="no">attach_platform_metrics(namespace, opts \\ [])</h1>
+
+
+        <a href="https://github.com/bmalum/mayfly/blob/v1.0.0-rc.1/lib/mayfly/metrics.ex#L187" class="icon-action" rel="help nofollow" aria-label="View Source">
+          <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+        </a>
+
+    </div>
+  </div>
+
+  <section class="docstring">
+
+      <div class="specs">
+
+          <pre translate="no"><span class="attribute">@spec</span> attach_platform_metrics(<a href="https://elixir.hexdocs.pm/String.html#t:t/0">String.t</a>(), <a href="https://elixir.hexdocs.pm/typespecs.html#built-in-types">keyword</a>()) :: :ok | {:error, <a href="https://elixir.hexdocs.pm/typespecs.html#built-in-types">term</a>()}</pre>
+
+      </div>
+
+<p>Attaches a <code class="inline">:telemetry</code> handler to <code class="inline">[:mayfly, :platform, :report]</code> (emitted by
+<a href="Mayfly.Extension.html"><code class="inline">Mayfly.Extension</code></a> when the extension is enabled) that publishes Lambda's
+own numbers as EMF metrics under <code class="inline">namespace</code>, dimension <code class="inline">FunctionName</code>:
+<a href="https://elixir.hexdocs.pm/Duration.html"><code class="inline">Duration</code></a>, <code class="inline">BilledDuration</code>, <code class="inline">MaxMemoryUsed</code>, <code class="inline">MemorySize</code>, and
+<code class="inline">InitDuration</code> when present (cold starts). Unlike
+<a href="#attach_invocation_metrics/2"><code class="inline">attach_invocation_metrics/2</code></a>, <a href="https://elixir.hexdocs.pm/Duration.html"><code class="inline">Duration</code></a> here is what Lambda measured and
+<code class="inline">BilledDuration</code> is what you pay for. The report for an invocation arrives
+after that invocation has finished, attributed by <code class="inline">requestId</code>.</p>
   </section>
 </section>
 <section class="detail" id="build/3">
