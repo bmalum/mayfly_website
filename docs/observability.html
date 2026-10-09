@@ -14,7 +14,7 @@
 
       <link rel="canonical" href="https://elixir-aws-lambda.dev/docs/observability.html" />
 
-    <script defer src="dist/sidebar_items-4D4641CA.js"></script>
+    <script defer src="dist/sidebar_items-169B0767.js"></script>
     <script defer src="docs_config.js"></script>
     <script defer src="dist/html-MI33G4N7.js"></script>
 <meta name="description" content="Mayfly documentation: run Elixir on AWS Lambda with a lightweight custom runtime. Handler behaviour, mix release build, Erlang layers, response streaming, Managed Instances, observability.">
@@ -186,11 +186,29 @@ as EMF metrics (<a href="https://elixir.hexdocs.pm/Duration.html"><code class="i
 measurement and <code class="inline">BilledDuration</code> is what you pay for. Each record is also
 logged at <code class="inline">debug</code>; to see those lines set the function's
 <code class="inline">ApplicationLogLevel</code> to <code class="inline">DEBUG</code> (Lambda's log filter applies before yours).</p><p>Limits: Lambda does not deliver <code class="inline">SHUTDOWN</code> to internal extensions
-(registering for it fails with <code class="inline">ShutdownEventNotSupportedForInternalExtension</code>),
-so there is no shutdown hook; that would require an external extension. Cost:
+(registering for it fails with <code class="inline">ShutdownEventNotSupportedForInternalExtension</code>);
+for a shutdown hook see the next section. Cost:
 one registration and one subscription call at init; measured cold start
 median 534 ms with the extension vs 527 ms without (arm64, 512 MB, 12/10
-samples), within the run-to-run noise.</p><h2 id="x-ray" class="section-heading"><a href="#x-ray" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a><span class="text">X-Ray</span></h2><p>Mayfly exports <code class="inline">_X_AMZN_TRACE_ID</code> from the invocation's trace header before
+samples), within the run-to-run noise.</p><h2 id="graceful-shutdown-mayfly-shutdown-the-mayfly-shutdown-layer" class="section-heading"><a href="#graceful-shutdown-mayfly-shutdown-the-mayfly-shutdown-layer" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a><span class="text">Graceful shutdown (<a href="Mayfly.Shutdown.html"><code class="inline">Mayfly.Shutdown</code></a> + the <code class="inline">mayfly-shutdown</code> layer)</span></h2><p>Lambda never tells a plain runtime that its execution environment is about to
+be discarded: the sandbox is frozen and later dropped, and anything still in
+memory (buffered log lines, metrics not yet flushed, open connections) goes
+with it. The exception: when an <strong>external extension</strong> is registered, Lambda
+sends <code class="inline">SIGTERM</code> to the runtime and waits up to 2 s before <code class="inline">SIGKILL</code>.</p><p>Mayfly ships that extension as the layer <code class="inline">mayfly-shutdown-&lt;arch&gt;</code>: a 260 KB
+static binary at <code class="inline">/opt/extensions/mayfly-shutdown</code> that registers for
+<code class="inline">SHUTDOWN</code> and does nothing else. Attach it next to the Erlang layer and
+<a href="Mayfly.Shutdown.html"><code class="inline">Mayfly.Shutdown</code></a> (installed by <a href="Mayfly.Boot.html"><code class="inline">Mayfly.Boot</code></a>) turns the signal into</p><ol><li><code class="inline">:telemetry</code> event <code class="inline">[:mayfly, :shutdown]</code> with <code class="inline">%{reason: :sigterm}</code>,</li><li>your hooks, each bounded by 1 s (<code class="inline">register/1</code>, typically from <code class="inline">init/1</code>),</li><li><a href="https://logger.hexdocs.pm/Logger.html#flush/0"><code class="inline">Logger.flush/0</code></a>,</li><li><code class="inline">System.halt(0)</code>.</li></ol><pre><code class="makeup elixir" translate="no"><span class="kd">def</span><span class="w"> </span><span class="nf">init</span><span class="p" data-group-id="group-1">(</span><span class="c">_opts</span><span class="p" data-group-id="group-1">)</span><span class="w"> </span><span class="k" data-group-id="group-2">do</span><span class="w">
+  </span><span class="nc">Mayfly.Shutdown</span><span class="o">.</span><span class="n">register</span><span class="p" data-group-id="group-3">(</span><span class="k" data-group-id="group-4">fn</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nc">MyApp.Metrics</span><span class="o">.</span><span class="n">flush</span><span class="p" data-group-id="group-5">(</span><span class="p" data-group-id="group-5">)</span><span class="w"> </span><span class="k" data-group-id="group-4">end</span><span class="p" data-group-id="group-3">)</span><span class="w">
+  </span><span class="nc">Mayfly.Shutdown</span><span class="o">.</span><span class="n">register</span><span class="p" data-group-id="group-6">(</span><span class="k" data-group-id="group-7">fn</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nc">MyApp.Repo</span><span class="o">.</span><span class="n">stop</span><span class="p" data-group-id="group-8">(</span><span class="p" data-group-id="group-8">)</span><span class="w"> </span><span class="k" data-group-id="group-7">end</span><span class="p" data-group-id="group-6">)</span><span class="w">
+  </span><span class="p" data-group-id="group-9">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="no">nil</span><span class="p" data-group-id="group-9">}</span><span class="w">
+</span><span class="k" data-group-id="group-2">end</span></code></pre><p>Without the layer nothing changes; the handler is simply never triggered.
+Verified on Lambda: on a <code class="inline">TIMEOUT</code> shutdown the log shows
+<code class="inline">Mayfly: shutdown (sigterm), running 1 hook(s)</code>, the hook's own line,
+<code class="inline">Mayfly: shutdown complete in 3 ms</code>, then the extension's exit; the same
+function without the layer logs nothing. Cold start with the layer: 519 ms
+vs 512 ms median without (6 samples each, arm64, 512 MB), noise. Layer ARNs
+are in the catalog (<code class="inline">layers/shutdown-arns.json</code> on the <code class="inline">layers</code> release and
+the website).</p><h2 id="x-ray" class="section-heading"><a href="#x-ray" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a><span class="text">X-Ray</span></h2><p>Mayfly exports <code class="inline">_X_AMZN_TRACE_ID</code> from the invocation's trace header before
 calling the handler, so X-Ray-aware libraries pick up the trace, and sends an
 X-Ray cause document with every error report
 (<code class="inline">Lambda-Runtime-Function-Xray-Error-Cause</code>). Enable active tracing on the

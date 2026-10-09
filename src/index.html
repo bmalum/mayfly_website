@@ -121,6 +121,8 @@
           { "@type": "Question", "name": "How fast does Elixir cold start on Lambda?", "acceptedAnswer": { "@type": "Answer", "text": "With Mayfly and the Erlang layer a stripped release cold-starts in roughly 500–600 ms on arm64; warm invocations take single-digit milliseconds and use about 85 MB of memory." } },
           { "@type": "Question", "name": "Do I need Docker to build an Elixir Lambda function?", "acceptedAnswer": { "@type": "Answer", "text": "No. With the Mayfly Erlang layer the deployment zip contains only architecture-independent BEAM files and is produced by mix release on macOS, Linux or Windows. Docker (or finch) is only needed if you bundle ERTS yourself or have native NIF dependencies." } },
           { "@type": "Question", "name": "Can I run a Phoenix app on AWS Lambda with Mayfly?", "acceptedAnswer": { "@type": "Answer", "text": "Yes for the HTTP/API part: the companion package mayfly_plug is a Plug.Conn.Adapter that runs Plug routers and Phoenix endpoints as Lambda handlers for API Gateway, Function URL and ALB events, including response streaming. A Phoenix 1.8 JSON API cold-starts in about 0.6–0.75 s. LiveView and channels need a WebSocket and are not supported." } },
+          { "@type": "Question", "name": "Can my Elixir Lambda function clean up before shutdown?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Attach the mayfly-shutdown extension layer and Lambda sends SIGTERM before discarding the environment; Mayfly.Shutdown runs registered hooks, flushes logs and exits within the 2 s window, with no measurable cold-start cost." } },
+          { "@type": "Question", "name": "How do I call AWS services from an Elixir Lambda function without ExAws?", "acceptedAnswer": { "@type": "Answer", "text": "The companion package mayfly_aws provides dependency-free clients for DynamoDB, S3 (including presigned URLs), SQS, SNS, SSM Parameter Store and Secrets Manager, plus idempotent handler execution, on a small SigV4 implementation verified from Lambda." } },
           { "@type": "Question", "name": "Does Mayfly support Lambda response streaming?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Return any Enumerable in a Mayfly.Response with stream/1; Mayfly uses chunked transfer encoding, adds the Function URL HTTP prelude and reports mid-stream errors via trailers." } },
           { "@type": "Question", "name": "Does Mayfly work with Lambda Managed Instances?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Mayfly starts one poller process per AWS_LAMBDA_MAX_CONCURRENCY slot so a single execution environment handles that many invocations in parallel, verified on real Managed Instances." } },
           { "@type": "Question", "name": "Which Elixir and OTP versions does Mayfly require?", "acceptedAnswer": { "@type": "Answer", "text": "Elixir 1.18 or newer and Erlang/OTP 27 or newer. With the layer, the OTP version of your build toolchain must match the layer's OTP version exactly; mix lambda.doctor checks this." } }
@@ -232,12 +234,32 @@
       <article class="bg-white p-6 rounded-lg shadow-sm border border-violet-100">
         <div class="text-3xl mb-3" aria-hidden="true">🔍</div>
         <h3 class="font-bold text-lg mb-2">Observable</h3>
-        <p class="text-sm text-zinc-600">JSON logs with request and tenant ids for CloudWatch, <code>:telemetry</code> events, X-Ray trace propagation.</p>
+        <p class="text-sm text-zinc-600">JSON logs with request and tenant ids, EMF metrics, <code>:telemetry</code> events incl. Lambda's own billed duration and memory via the Telemetry API, X-Ray propagation, and SIGTERM hooks before the environment is discarded.</p>
       </article>
       <article class="bg-white p-6 rounded-lg shadow-sm border border-violet-100">
         <div class="text-3xl mb-3" aria-hidden="true">🧪</div>
         <h3 class="font-bold text-lg mb-2">Local first, agent friendly</h3>
         <p class="text-sm text-zinc-600"><code>mix lambda.invoke</code> runs the real runtime against an emulated Runtime API; <code>mix lambda.doctor</code> catches setup mistakes. An <a href="https://github.com/bmalum/mayfly/tree/main/skills/mayfly-elixir-lambda" class="text-violet-800 underline">Agent Skill</a> and <a href="/docs/llms.txt" class="text-violet-800 underline">llms.txt</a> teach coding agents the library.</p>
+      </article>
+      <article class="bg-white p-6 rounded-lg shadow-sm border border-violet-100">
+        <div class="text-3xl mb-3" aria-hidden="true">🔥</div>
+        <h3 class="font-bold text-lg mb-2">Plug and Phoenix</h3>
+        <p class="text-sm text-zinc-600"><a href="https://github.com/bmalum/mayfly_plug" class="text-violet-800 underline">mayfly_plug</a>: a router or Phoenix endpoint <em>is</em> the handler. API Gateway, Function URL and ALB events become conns; <code>send_chunked</code> streams. Tested against a real Phoenix 1.8 endpoint.</p>
+      </article>
+      <article class="bg-white p-6 rounded-lg shadow-sm border border-violet-100">
+        <div class="text-3xl mb-3" aria-hidden="true">☁️</div>
+        <h3 class="font-bold text-lg mb-2">AWS without an SDK</h3>
+        <p class="text-sm text-zinc-600"><a href="https://github.com/bmalum/mayfly_aws" class="text-violet-800 underline">mayfly_aws</a>: idempotent handlers on DynamoDB, S3, SQS, SNS, SSM and Secrets Manager over a small SigV4 client. No dependencies, every call verified from Lambda.</p>
+      </article>
+      <article class="bg-white p-6 rounded-lg shadow-sm border border-violet-100">
+        <div class="text-3xl mb-3" aria-hidden="true">🏗️</div>
+        <h3 class="font-bold text-lg mb-2">Deploy your way</h3>
+        <p class="text-sm text-zinc-600"><code>mix lambda.new --iac sam|terraform|cdk</code> generates a project with working infrastructure code and the right layer ARN for every region. Or ship a container image with <code>mix lambda.build --image</code>.</p>
+      </article>
+      <article class="bg-white p-6 rounded-lg shadow-sm border border-violet-100">
+        <div class="text-3xl mb-3" aria-hidden="true">✅</div>
+        <h3 class="font-bold text-lg mb-2">Verified on Lambda</h3>
+        <p class="text-sm text-zinc-600">OTP 27, 28 and 29 on arm64 and x86_64, Managed Instances, streaming, images: each measured on real functions, with the numbers in the docs. CI deploys and invokes every published layer.</p>
       </article>
     </div>
   </section>
@@ -370,6 +392,7 @@ mix lambda.doctor        # release config, handler, OTP vs. layer</code></pre>
       </div>
       <p class="text-center text-sm text-zinc-500 mt-8">
         The bootstrap verifies the layer's ERTS matches your build before starting the VM, so a version mismatch fails with a readable message.
+        A second, tiny layer, <code>mayfly-shutdown-&lt;arch&gt;</code>, makes Lambda send SIGTERM before discarding an environment so your shutdown hooks and log flush run.
         Current ARNs: <a href="/layers/" class="text-violet-800 underline font-semibold">layer catalog</a> (every OTP version, region and architecture, with a JSON resolver) ·
         <a href="/docs/layers" class="text-violet-800 underline">layer guide</a>
       </p>
@@ -419,6 +442,8 @@ mix lambda.doctor        # release config, handler, OTP vs. layer</code></pre>
       <details class="bg-white p-5 rounded-lg shadow-sm border border-violet-100"><summary class="font-semibold cursor-pointer">Does Mayfly work with Lambda Managed Instances?</summary><p class="mt-3 text-sm text-zinc-600">Yes. Mayfly starts one poller process per <code>AWS_LAMBDA_MAX_CONCURRENCY</code> slot so a single execution environment handles that many invocations in parallel. Handler state from <code>init/1</code> is shared read-only.</p></details>
       <details class="bg-white p-5 rounded-lg shadow-sm border border-violet-100"><summary class="font-semibold cursor-pointer">Which Elixir and OTP versions does Mayfly require?</summary><p class="mt-3 text-sm text-zinc-600">Elixir 1.18 or newer and Erlang/OTP 27 or newer. With the layer, your build toolchain's OTP must match the layer's OTP version exactly; <code>mix lambda.doctor --layer ARN</code> checks this and the bootstrap enforces it at start.</p></details>
       <details class="bg-white p-5 rounded-lg shadow-sm border border-violet-100"><summary class="font-semibold cursor-pointer">Can I run a Phoenix app on Lambda with Mayfly?</summary><p class="mt-3 text-sm text-zinc-600">Yes for the HTTP/API part. The companion package <a href="https://github.com/bmalum/mayfly_plug" class="text-violet-800 underline">mayfly_plug</a> is a <code>Plug.Conn.Adapter</code>: <code>use Mayfly.Plug.Handler, plug: {MyAppWeb.Endpoint, []}</code> turns API Gateway, Function URL and ALB events into conns, runs your router or Phoenix endpoint and returns the proxy response, with <code>send_chunked</code> streaming through Lambda response streaming. No HTTP server in the release; a Phoenix 1.8 JSON API cold-starts in about 0.6–0.75 s with the Erlang layer. LiveView and channels need a WebSocket and are out of scope; use the Lambda Web Adapter with a container image for those. See the <a href="/docs/phoenix.html" class="text-violet-800 underline">Phoenix guide</a>.</p></details>
+      <details class="bg-white p-5 rounded-lg shadow-sm border border-violet-100"><summary class="font-semibold cursor-pointer">Can my function clean up before Lambda shuts the environment down?</summary><p class="mt-3 text-sm text-zinc-600">Yes, with the <code>mayfly-shutdown</code> layer. Lambda only signals a runtime when an external extension is registered; this layer is a 260 KB static extension that does exactly that, and Mayfly turns the SIGTERM into <code>Mayfly.Shutdown.register/1</code> hooks, a <code>Logger.flush</code> and a clean exit, within Lambda's 2 s window. Measured cold-start cost: none. See the <a href="/docs/observability" class="text-violet-800 underline">observability guide</a>.</p></details>
+      <details class="bg-white p-5 rounded-lg shadow-sm border border-violet-100"><summary class="font-semibold cursor-pointer">How do I call S3, SQS or DynamoDB without ExAws?</summary><p class="mt-3 text-sm text-zinc-600"><a href="https://github.com/bmalum/mayfly_aws" class="text-violet-800 underline">mayfly_aws</a> covers the calls most functions make (DynamoDB items, S3 objects and presigned URLs, SQS, SNS, SSM parameters, Secrets Manager) plus <code>Mayfly.Idempotency</code> for exactly-once handlers, in a few hundred lines on a SigV4 client with no dependencies. For everything else, <code>Mayfly.AWS.Request.send/6</code> signs any request. ExAws works too if you prefer it.</p></details>
       <details class="bg-white p-5 rounded-lg shadow-sm border border-violet-100"><summary class="font-semibold cursor-pointer">I'm on Mayfly 0.x. What changes?</summary><p class="mt-3 text-sm text-zinc-600">The handler is a module with <code>use Mayfly.Handler</code> instead of a <code>Module.function</code> string (the old form still works), the build is <code>mix release</code>, and Elixir 1.18+ is required. The <a href="/docs/migrating-from-0-x" class="text-violet-800 underline">migration guide</a> lists every change.</p></details>
     </div>
   </section>

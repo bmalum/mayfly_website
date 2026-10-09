@@ -5,5 +5,7 @@
 - Docs index (Markdown): https://elixir-aws-lambda.dev/docs/llms.txt
 - Agent Skill: https://github.com/bmalum/mayfly/tree/main/skills/mayfly-elixir-lambda
 - Source: https://github.com/bmalum/mayfly
-- Layer ARNs: https://github.com/bmalum/mayfly/releases/tag/layers
+- Layer ARNs: https://github.com/bmalum/mayfly/releases/tag/layers (Erlang runtime layers and the mayfly-shutdown extension layer)
+- Roadmap and Durable Functions PR-FAQ: https://elixir-aws-lambda.dev/docs/roadmap
+- Companion packages: https://github.com/bmalum/mayfly_plug (Plug/Phoenix), https://github.com/bmalum/mayfly_aws (Idempotency, DynamoDB, S3, SQS, SNS, SSM, Secrets Manager)
 - Author: https://karrer.solutions

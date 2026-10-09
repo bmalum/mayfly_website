@@ -31,6 +31,18 @@ const write = (rel, obj) => {
   fs.writeFileSync(p, JSON.stringify(obj, null, 2) + "\n");
 };
 const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+const shutdownSrc = "data/shutdown-layers.json";
+const shutdownEntries = fs.existsSync(shutdownSrc) ? JSON.parse(fs.readFileSync(shutdownSrc, "utf8")) : [];
+const shutdownSection = shutdownEntries.length
+  ? `<section class="mt-12" aria-labelledby="shutdown-heading">
+  <h2 id="shutdown-heading" class="mb-2 text-2xl font-bold text-zinc-800">Shutdown extension layer</h2>
+  <p class="text-sm text-zinc-600 mb-4 max-w-3xl"><code>mayfly-shutdown-&lt;arch&gt;</code> is an external Lambda extension (a static binary, no runtime) whose only job is to exist: with it attached, Lambda sends SIGTERM to your function before discarding the environment, and <code>Mayfly.Shutdown</code> runs your hooks and flushes logs. OTP-independent; attach it next to the Erlang layer. <a href="/docs/observability#graceful-shutdown-mayfly-shutdown-the-mayfly-shutdown-layer" class="text-violet-800 underline">Guide</a>.</p>
+  <table class="w-full text-sm"><thead><tr class="text-left text-zinc-500"><th class="py-2 pr-4">Region</th><th class="py-2 pr-4">Architecture</th><th class="py-2">Layer ARN</th></tr></thead><tbody>${shutdownEntries
+    .sort((a, b) => a.region.localeCompare(b.region) || a.arch.localeCompare(b.arch))
+    .map((e) => `<tr class="border-t border-violet-100"><td class="py-2 pr-4">${esc(e.region)}</td><td class="py-2 pr-4">${esc(e.arch)}</td><td class="py-2 font-mono text-xs break-all">${esc(e.arn)}</td></tr>`)
+    .join("")}</tbody></table>
+</section>`
+  : "";
 
 // ---- JSON outputs ----------------------------------------------------------
 write("index.json", { generated, count: entries.length, layers: entries });
@@ -204,6 +216,7 @@ const html = `<!doctype html>
   ${resolverDocs}
 
   ${entries.length ? `<h2 class="mb-4 text-2xl font-bold text-zinc-800">All layers</h2><div class="space-y-4">${sections}</div>` : empty}
+  ${shutdownSection}
 </main>
 <footer class="bg-zinc-900 py-8 text-center text-sm text-zinc-400"><p>© 2025–2026 <a href="https://karrer.solutions" class="underline hover:text-white">Karrer</a>. Erlang/OTP is Apache-2.0, Mayfly is MIT.</p></footer>
 

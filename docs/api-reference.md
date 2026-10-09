@@ -48,6 +48,7 @@ expect, so CloudWatch parses level, request id and tenant id
   - [Mayfly.Metrics](Mayfly.Metrics.md): CloudWatch metrics without API calls, using the
 [Embedded Metric Format](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Embedded_Metric_Format_Specification.html):
 one JSON line on stdout that CloudWatch Logs turns into metrics.
+  - [Mayfly.Shutdown](Mayfly.Shutdown.md): Graceful shutdown on `SIGTERM`.
   - [Mayfly.Telemetry](Mayfly.Telemetry.md): Telemetry events emitted by the runtime. `:telemetry` is an optional
 dependency; when it is not present the calls are no-ops.
 

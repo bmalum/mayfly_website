@@ -14,7 +14,7 @@
 
       <link rel="canonical" href="https://elixir-aws-lambda.dev/docs/changelog.html" />
 
-    <script defer src="dist/sidebar_items-4D4641CA.js"></script>
+    <script defer src="dist/sidebar_items-169B0767.js"></script>
     <script defer src="docs_config.js"></script>
     <script defer src="dist/html-MI33G4N7.js"></script>
 <meta name="description" content="Mayfly documentation: run Elixir on AWS Lambda with a lightweight custom runtime. Handler behaviour, mix release build, Erlang layers, response streaming, Managed Instances, observability.">
@@ -156,7 +156,13 @@ helpers <code class="inline">json/4</code>, <code class="inline">text/4</code>, 
 DynamoDB Streams (attribute values converted to terms); <code class="inline">process_batch/2</code>
 partial-batch helpers for SQS, Kinesis and DynamoDB; <a href="Mayfly.Events.html#decode/1"><code class="inline">Mayfly.Events.decode/1</code></a>
 dispatcher. Verified on Lambda with a Function URL, SQS
-<code class="inline">ReportBatchItemFailures</code>, S3 notifications, EventBridge and DynamoDB Streams.</li><li><a href="Mayfly.Extension.html"><code class="inline">Mayfly.Extension</code></a> (opt-in, <code class="inline">MAYFLY_EXTENSION=1</code>): internal Lambda extension
+<code class="inline">ReportBatchItemFailures</code>, S3 notifications, EventBridge and DynamoDB Streams.</li><li><a href="Mayfly.Shutdown.html"><code class="inline">Mayfly.Shutdown</code></a> + the <code class="inline">mayfly-shutdown</code> external extension layer: with the
+layer attached Lambda sends SIGTERM before discarding the environment; Mayfly
+emits <code class="inline">[:mayfly, :shutdown]</code>, runs registered hooks (1 s each), flushes
+Logger and halts. Verified on Lambda; no measurable cold-start cost.
+<code class="inline">layer/build-shutdown-extension.sh</code>, <code class="inline">layer/publish-shutdown.sh</code>, workflow job.</li><li>CI: OTP 29 and arm64 rows, container-image job invoking through the Runtime
+Interface Emulator; <code class="inline">layers.yml</code> gained an opt-in post-publish smoke matrix
+(every OTP major × architecture deployed and invoked on Lambda).</li><li><code class="inline">ROADMAP.md</code> with the Durable Functions PR-FAQ.</li><li><a href="Mayfly.Extension.html"><code class="inline">Mayfly.Extension</code></a> (opt-in, <code class="inline">MAYFLY_EXTENSION=1</code>): internal Lambda extension
 that subscribes to the Telemetry API and emits <code class="inline">[:mayfly, :platform, type]</code>
 <code class="inline">:telemetry</code> events with the record metrics; <a href="Mayfly.Metrics.html#attach_platform_metrics/2"><code class="inline">Mayfly.Metrics.attach_platform_metrics/2</code></a>
 publishes <a href="https://elixir.hexdocs.pm/Duration.html"><code class="inline">Duration</code></a>, <code class="inline">BilledDuration</code>, <code class="inline">MaxMemoryUsed</code>, <code class="inline">MemorySize</code>,
@@ -225,12 +231,12 @@ bodies were charlists.</li><li><code class="inline">zip</code> binary dependency
   </div>
   <div class="bottom-actions-item">
 
-      <a href="getting-started.html" class="bottom-actions-button" rel="next">
+      <a href="roadmap.html" class="bottom-actions-button" rel="next">
         <span class="subheader">
           Next Page →
         </span>
         <span class="title">
-Getting Started
+Mayfly roadmap
         </span>
       </a>
 

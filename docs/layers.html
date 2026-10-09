@@ -14,7 +14,7 @@
 
       <link rel="canonical" href="https://elixir-aws-lambda.dev/docs/layers.html" />
 
-    <script defer src="dist/sidebar_items-4D4641CA.js"></script>
+    <script defer src="dist/sidebar_items-169B0767.js"></script>
     <script defer src="docs_config.js"></script>
     <script defer src="dist/html-MI33G4N7.js"></script>
 <meta name="description" content="Mayfly documentation: run Elixir on AWS Lambda with a lightweight custom runtime. Handler behaviour, mix release build, Erlang layers, response streaming, Managed Instances, observability.">
@@ -170,7 +170,14 @@ catalog and resolver at <code class="inline">/layers/</code> reflect the new ver
 </span><span class="">  --template-file layer/publisher-role.yml --capabilities CAPABILITY_NAMED_IAM \
 </span><span class="">  --parameter-overrides GitHubRepo=&lt;owner&gt;/&lt;repo&gt;
 </span><span class=""># -&gt; Outputs.RoleArn becomes the GitHub secret LAYERS_ROLE_ARN
-</span></code></pre><h2 id="why-there-is-no-elixir-layer" class="section-heading"><a href="#why-there-is-no-elixir-layer" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a><span class="text">Why there is no Elixir layer</span></h2><p>Elixir's own applications (<code class="inline">elixir</code>, <code class="inline">logger</code>, <code class="inline">iex</code>) make up about 1.4 MB of
+</span></code></pre><h2 id="the-shutdown-extension-layer" class="section-heading"><a href="#the-shutdown-extension-layer" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a><span class="text">The shutdown extension layer</span></h2><p><code class="inline">mayfly-shutdown-&lt;arch&gt;</code> is a second, tiny layer family: a static C binary
+registered as an external extension so Lambda sends <code class="inline">SIGTERM</code> to the runtime
+before discarding the environment (see the observability guide, &quot;Graceful
+shutdown&quot;). It is architecture-specific but OTP-independent, so one version
+serves every function. Built by <code class="inline">layer/build-shutdown-extension.sh</code>, published
+by <code class="inline">layer/publish-shutdown.sh</code> and the <code class="inline">shutdown-extension</code> job of the layers
+workflow; ARNs are listed in <code class="inline">shutdown-arns.json</code> on the <code class="inline">layers</code> GitHub
+release and in the website catalog.</p><h2 id="why-there-is-no-elixir-layer" class="section-heading"><a href="#why-there-is-no-elixir-layer" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a><span class="text">Why there is no Elixir layer</span></h2><p>Elixir's own applications (<code class="inline">elixir</code>, <code class="inline">logger</code>, <code class="inline">iex</code>) make up about 1.4 MB of
 a 1.6 MB layer-mode zip, so a second layer family (<code class="inline">mayfly-elixir-&lt;vsn&gt;-otp-&lt;major&gt;</code>,
 unpacking to <code class="inline">/opt/elixir</code>) looked attractive. We built it and measured it
 rather than argue: a prototype <code class="inline">strip_elixir</code> release step removed the three

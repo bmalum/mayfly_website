@@ -25,6 +25,7 @@ Mayfly.Poller.md
 Mayfly.Release.md
 Mayfly.Response.md
 Mayfly.RuntimeAPI.md
+Mayfly.Shutdown.md
 Mayfly.Supervisor.md
 Mayfly.Telemetry.md
 Mayfly.md
@@ -45,4 +46,5 @@ migrating-from-0-x.md
 observability.md
 phoenix.md
 readme.md
+roadmap.md
 streaming.md
