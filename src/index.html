@@ -305,6 +305,7 @@ end</code></pre>
           <div class="bg-violet-800 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold flex-shrink-0" aria-hidden="true">1</div>
           <div class="flex-1 min-w-0">
             <h3 class="font-bold text-lg mb-3">Add the dependency and a release</h3>
+            <p class="text-sm text-zinc-600 mb-3">Shortcut: <code>mix lambda.new hello --iac sam</code> generates steps 1–3 plus deployable infrastructure code (<a href="/docs/iac" class="text-violet-800 underline">IaC guide</a>). By hand:</p>
             <pre class="text-sm"><code class="language-elixir"># mix.exs
 def project do
   [
@@ -459,7 +460,7 @@ mix lambda.doctor        # release config, handler, OTP vs. layer</code></pre>
         <div>
           <h3 class="text-white font-bold mb-4">Mayfly</h3>
           <p class="text-sm">A lightweight AWS Lambda custom runtime for Elixir. Elixir 1.18+, OTP 27+, <code>provided.al2023</code>, x86_64 and arm64.</p>
-          <p class="text-sm mt-3"><a href="https://hex.pm/packages/mayfly" target="_blank" rel="noopener noreferrer" class="hover:text-white transition">hex.pm/packages/mayfly</a></p>
+          <p class="text-sm mt-3"><a href="https://github.com/bmalum/mayfly/releases" target="_blank" rel="noopener noreferrer" class="hover:text-white transition">Releases</a> · Hex: <code>{:mayfly, "~> 1.0.0-rc"}</code> once published</p>
         </div>
         <div>
           <h3 class="text-white font-bold mb-4">Documentation</h3>
@@ -469,7 +470,10 @@ mix lambda.doctor        # release config, handler, OTP vs. layer</code></pre>
             <li><a href="/docs/iac" class="hover:text-white transition">Infrastructure as code</a></li>
             <li><a href="/docs/operations" class="hover:text-white transition">Operations</a></li>
             <li><a href="/docs/layers" class="hover:text-white transition">Erlang runtime layers</a></li>
+            <li><a href="/docs/events" class="hover:text-white transition">Event sources</a></li>
             <li><a href="/docs/streaming" class="hover:text-white transition">Response streaming</a></li>
+            <li><a href="/docs/phoenix" class="hover:text-white transition">Plug and Phoenix</a></li>
+            <li><a href="/docs/idempotency" class="hover:text-white transition">Idempotency</a></li>
             <li><a href="/docs/observability" class="hover:text-white transition">Observability</a></li>
             <li><a href="/docs/architecture" class="hover:text-white transition">Architecture</a></li>
             <li><a href="/docs/migrating-from-0-x" class="hover:text-white transition">Migrating from 0.x</a></li>
