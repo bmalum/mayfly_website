@@ -135,8 +135,8 @@ network blip can deliver the same event twice. &quot;Place the order&quot; must 
 happen once.</p><p><code class="inline">Mayfly.Idempotency</code> from the companion package
 <a rel="nofollow" href="https://github.com/bmalum/mayfly_aws"><code class="inline">mayfly_aws</code></a> gives a handler
 exactly-once semantics backed by a DynamoDB table. It lives outside the core
-package so the runtime stays free of <code class="inline">:ssl</code>; it starts <code class="inline">:inets</code>/<code class="inline">:ssl</code> lazily
-on first use (~60–80 ms once per execution environment).</p><pre><code class="makeup elixir" translate="no"><span class="c1"># mix.exs</span><span class="w">
+package so the runtime stays free of <code class="inline">:ssl</code>; <code class="inline">:inets</code>/<code class="inline">:ssl</code> start with the
+function (~20 ms once per execution environment).</p><pre><code class="makeup elixir" translate="no"><span class="c1"># mix.exs</span><span class="w">
 </span><span class="ss">deps</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="group-1">[</span><span class="p" data-group-id="group-2">{</span><span class="ss">:mayfly</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;~&gt; 1.0.0-rc&quot;</span><span class="p" data-group-id="group-2">}</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="group-3">{</span><span class="ss">:mayfly_aws</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;~&gt; 0.1&quot;</span><span class="p" data-group-id="group-3">}</span><span class="p" data-group-id="group-1">]</span></code></pre><pre><code class="makeup elixir" translate="no"><span class="kd">defmodule</span><span class="w"> </span><span class="nc">MyApp.Handler</span><span class="w"> </span><span class="k" data-group-id="group-1">do</span><span class="w">
   </span><span class="kn">use</span><span class="w"> </span><span class="nc">Mayfly.Handler</span><span class="w">
 

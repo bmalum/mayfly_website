@@ -148,14 +148,12 @@ full record plus <code class="inline">time</code> as metadata. <code class="inli
 <code class="inline">durationMs</code>, <code class="inline">billedDurationMs</code>, <code class="inline">memorySizeMB</code>, <code class="inline">maxMemoryUsedMB</code> and,
 on cold starts, <code class="inline">initDurationMs</code> – numbers the function cannot otherwise
 see about itself. <a href="Mayfly.Metrics.html#attach_platform_metrics/2"><code class="inline">Mayfly.Metrics.attach_platform_metrics/2</code></a> publishes
-them as CloudWatch EMF metrics.</li><li>Every telemetry record is logged at <code class="inline">debug</code> level.</li></ul><p>What you do <strong>not</strong> get: a <code class="inline">SHUTDOWN</code> hook. Lambda only delivers <code class="inline">SHUTDOWN</code>
-to <em>external</em> extensions (separate processes under <code class="inline">/opt/extensions</code>);
-internal extensions registering for it are rejected with
-<code class="inline">ShutdownEventNotSupportedForInternalExtension</code>. Mayfly therefore registers
-for <code class="inline">INVOKE</code> only. Logger flushing at shutdown would need an external
-extension and is out of scope; Lambda's log capture of the invocation's
-stdout is complete once the response is posted, so lines logged before the
-handler returns are not at risk.</p><h2 id="module-how-it-works" class="section-heading"><a href="#module-how-it-works" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a><span class="text">How it works</span></h2><ol><li><code class="inline">POST /2020-01-01/extension/register</code> with <code class="inline">Lambda-Extension-Name: mayfly</code>
+them as CloudWatch EMF metrics.</li><li>Every telemetry record is logged at <code class="inline">debug</code> level.</li></ul><p>What you do <strong>not</strong> get from this module: a <code class="inline">SHUTDOWN</code> hook. Lambda only
+delivers <code class="inline">SHUTDOWN</code> to <em>external</em> extensions; internal extensions
+registering for it are rejected with
+<code class="inline">ShutdownEventNotSupportedForInternalExtension</code>, so Mayfly registers for
+<code class="inline">INVOKE</code> only. Graceful shutdown is provided separately by <a href="Mayfly.Shutdown.html"><code class="inline">Mayfly.Shutdown</code></a>
+together with the <code class="inline">mayfly-shutdown</code> extension layer.</p><h2 id="module-how-it-works" class="section-heading"><a href="#module-how-it-works" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a><span class="text">How it works</span></h2><ol><li><code class="inline">POST /2020-01-01/extension/register</code> with <code class="inline">Lambda-Extension-Name: mayfly</code>
 and events <code class="inline">[&quot;INVOKE&quot;]</code>; the response header
 <code class="inline">Lambda-Extension-Identifier</code> authenticates later calls.</li><li>A <code class="inline">:gen_tcp</code> listener is opened on <code class="inline">sandbox.localdomain</code> (the only host
 the Telemetry API may deliver to) and <code class="inline">PUT /2022-07-01/telemetry</code>
@@ -237,7 +235,7 @@ invocation. Nothing here runs in the request path.</p>
       <h1 class="signature" translate="no">enabled?(opts)</h1>
 
 
-        <a href="https://github.com/bmalum/mayfly/blob/v1.0.0-rc.1/lib/mayfly/extension.ex#L71" class="icon-action" rel="help nofollow" aria-label="View Source">
+        <a href="https://github.com/bmalum/mayfly/blob/v1.0.0-rc.1/lib/mayfly/extension.ex#L69" class="icon-action" rel="help nofollow" aria-label="View Source">
           <i class="ri-code-s-slash-line" aria-hidden="true"></i>
         </a>
 
@@ -267,7 +265,7 @@ invocation. Nothing here runs in the request path.</p>
       <h1 class="signature" translate="no">identifier(server \\ __MODULE__)</h1>
 
 
-        <a href="https://github.com/bmalum/mayfly/blob/v1.0.0-rc.1/lib/mayfly/extension.ex#L93" class="icon-action" rel="help nofollow" aria-label="View Source">
+        <a href="https://github.com/bmalum/mayfly/blob/v1.0.0-rc.1/lib/mayfly/extension.ex#L91" class="icon-action" rel="help nofollow" aria-label="View Source">
           <i class="ri-code-s-slash-line" aria-hidden="true"></i>
         </a>
 
@@ -297,7 +295,7 @@ invocation. Nothing here runs in the request path.</p>
       <h1 class="signature" translate="no">listener_port(server \\ __MODULE__)</h1>
 
 
-        <a href="https://github.com/bmalum/mayfly/blob/v1.0.0-rc.1/lib/mayfly/extension.ex#L97" class="icon-action" rel="help nofollow" aria-label="View Source">
+        <a href="https://github.com/bmalum/mayfly/blob/v1.0.0-rc.1/lib/mayfly/extension.ex#L95" class="icon-action" rel="help nofollow" aria-label="View Source">
           <i class="ri-code-s-slash-line" aria-hidden="true"></i>
         </a>
 

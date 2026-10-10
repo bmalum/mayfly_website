@@ -18,8 +18,10 @@ supervision tree when using `Mayfly.LocalRuntime` in tests):
   * `:concurrency` – number of pollers; default `AWS_LAMBDA_MAX_CONCURRENCY` or 1
   * `:handler_opts` – passed to the handler's `init/1`; default `[]`
   * `:extension` – register the internal Lambda extension (`Mayfly.Extension`:
-    platform telemetry as `:telemetry` events, log flush on SHUTDOWN); default
-    `MAYFLY_EXTENSION=1` or `config :mayfly, extension: true`, else off
+    platform telemetry as `:telemetry` events); default `MAYFLY_EXTENSION=1`
+    or `config :mayfly, extension: true`, else off
+  * `:extension_opts` – passed to `Mayfly.Extension` (tests use it)
+  * `:name` – supervisor name; `nil` for an unnamed supervisor (default `Mayfly.Supervisor`)
   * `:api` – module implementing `Mayfly.RuntimeAPI` (tests)
 
 # `start_link`
