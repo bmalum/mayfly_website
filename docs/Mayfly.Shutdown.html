@@ -143,7 +143,9 @@ memory (log lines not yet written, metrics not yet flushed, a connection
 pool mid-request) is lost.</p><p>Mayfly ships that extension as the layer <code class="inline">mayfly-shutdown-&lt;arch&gt;</code> (a few KB,
 see <code class="inline">layer/shutdown-extension/</code>). Attach it, and the runtime receives
 <code class="inline">SIGTERM</code>; this module turns the signal into:</p><ol><li><code class="inline">:telemetry</code> event <code class="inline">[:mayfly, :shutdown]</code> with <code class="inline">%{reason: :sigterm}</code>;</li><li>the hooks registered with <a href="#register/1"><code class="inline">register/1</code></a> (your <code class="inline">init/1</code> can register one to
-drain a queue or close connections), each bounded by <code class="inline">:hook_timeout_ms</code>;</li><li><a href="https://logger.hexdocs.pm/Logger.html#flush/0"><code class="inline">Logger.flush/0</code></a>;</li><li><code class="inline">System.halt(0)</code>.</li></ol><p><a href="Mayfly.Boot.html#main/0"><code class="inline">Mayfly.Boot.main/0</code></a> installs the handler automatically. Without the layer
+drain a queue or close connections), each bounded by <code class="inline">:hook_timeout_ms</code>
+(1 s) and all of them together by <code class="inline">:deadline_ms</code> (1.2 s, inside Lambda's
+2 s window with room for the log flush);</li><li><a href="https://logger.hexdocs.pm/Logger.html#flush/0"><code class="inline">Logger.flush/0</code></a>;</li><li><code class="inline">System.halt(0)</code>.</li></ol><p><a href="Mayfly.Boot.html#main/0"><code class="inline">Mayfly.Boot.main/0</code></a> installs the handler automatically. Without the layer
 nothing changes: Lambda never sends the signal.</p><pre><code class="makeup elixir" translate="no"><span class="kd">def</span><span class="w"> </span><span class="nf">init</span><span class="p" data-group-id="group-1">(</span><span class="c">_opts</span><span class="p" data-group-id="group-1">)</span><span class="w"> </span><span class="k" data-group-id="group-2">do</span><span class="w">
   </span><span class="nc">Mayfly.Shutdown</span><span class="o">.</span><span class="n">register</span><span class="p" data-group-id="group-3">(</span><span class="k" data-group-id="group-4">fn</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nc">MyApp.Metrics</span><span class="o">.</span><span class="n">flush</span><span class="p" data-group-id="group-5">(</span><span class="p" data-group-id="group-5">)</span><span class="w"> </span><span class="k" data-group-id="group-4">end</span><span class="p" data-group-id="group-3">)</span><span class="w">
   </span><span class="p" data-group-id="group-6">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="no">nil</span><span class="p" data-group-id="group-6">}</span><span class="w">
@@ -212,7 +214,7 @@ at start to keep the VM alive).</p></div>
       <h1 class="signature" translate="no">register(fun, server \\ __MODULE__)</h1>
 
 
-        <a href="https://github.com/bmalum/mayfly/blob/v1.0.0-rc.1/lib/mayfly/shutdown.ex#L49" class="icon-action" rel="help nofollow" aria-label="View Source">
+        <a href="https://github.com/bmalum/mayfly/blob/v1.0.0-rc.1/lib/mayfly/shutdown.ex#L58" class="icon-action" rel="help nofollow" aria-label="View Source">
           <i class="ri-code-s-slash-line" aria-hidden="true"></i>
         </a>
 
@@ -227,7 +229,9 @@ at start to keep the VM alive).</p></div>
 
       </div>
 
-<p>Registers a zero-arity function to run on shutdown. Returns <code class="inline">:ok</code>.</p>
+<p>Registers a zero-arity function to run on shutdown. Returns <code class="inline">:ok</code>.</p><p>Outside Lambda (<a href="Mix.Tasks.Lambda.Invoke.html"><code class="inline">mix lambda.invoke</code></a>, tests, <a href="Mayfly.html#start_link/1"><code class="inline">Mayfly.start_link/1</code></a> in your own
+supervision tree) the handler process may not exist; the call then logs at
+debug and returns <code class="inline">:ok</code>, so <code class="inline">init/1</code> code registering hooks works everywhere.</p>
   </section>
 </section>
 <section class="detail" id="run/1">
@@ -242,7 +246,7 @@ at start to keep the VM alive).</p></div>
       <h1 class="signature" translate="no">run(server \\ __MODULE__)</h1>
 
 
-        <a href="https://github.com/bmalum/mayfly/blob/v1.0.0-rc.1/lib/mayfly/shutdown.ex#L59" class="icon-action" rel="help nofollow" aria-label="View Source">
+        <a href="https://github.com/bmalum/mayfly/blob/v1.0.0-rc.1/lib/mayfly/shutdown.ex#L75" class="icon-action" rel="help nofollow" aria-label="View Source">
           <i class="ri-code-s-slash-line" aria-hidden="true"></i>
         </a>
 

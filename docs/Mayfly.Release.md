@@ -34,7 +34,7 @@ directory.
 
 `prepare/1` applies these defaults unless you set them yourself:
 `include_executables_for: [:unix]`, `strip_beams: true`,
-`rel_templates_path` pointing at Mayfly's `vm.args`/`env.sh` (no
+`rel_templates_path` pointing at Mayfly's `vm.args` template (no
 distribution, `+sbwt none`, `RELEASE_TMP=/tmp`).
 
 Everything else is a normal release: umbrellas, several releases,

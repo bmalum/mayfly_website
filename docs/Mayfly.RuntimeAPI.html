@@ -358,7 +358,7 @@ Returns <code class="inline">nil</code> when unset.</p></div>
       <h1 class="signature" translate="no">init_error(endpoint, t)</h1>
 
 
-        <a href="https://github.com/bmalum/mayfly/blob/v1.0.0-rc.1/lib/mayfly/runtime_api.ex#L30" class="icon-action" rel="help nofollow" aria-label="View Source">
+        <a href="https://github.com/bmalum/mayfly/blob/v1.0.0-rc.1/lib/mayfly/runtime_api.ex#L31" class="icon-action" rel="help nofollow" aria-label="View Source">
           <i class="ri-code-s-slash-line" aria-hidden="true"></i>
         </a>
 
@@ -386,7 +386,7 @@ Returns <code class="inline">nil</code> when unset.</p></div>
       <h1 class="signature" translate="no">invocation_error(endpoint, t, t)</h1>
 
 
-        <a href="https://github.com/bmalum/mayfly/blob/v1.0.0-rc.1/lib/mayfly/runtime_api.ex#L29" class="icon-action" rel="help nofollow" aria-label="View Source">
+        <a href="https://github.com/bmalum/mayfly/blob/v1.0.0-rc.1/lib/mayfly/runtime_api.ex#L30" class="icon-action" rel="help nofollow" aria-label="View Source">
           <i class="ri-code-s-slash-line" aria-hidden="true"></i>
         </a>
 
@@ -427,7 +427,7 @@ Returns <code class="inline">nil</code> when unset.</p></div>
       <div class="specs">
 
           <pre translate="no"><span class="attribute">@callback</span> invocation_response(<a href="#t:endpoint/0">endpoint</a>(), <a href="Mayfly.Context.html#t:t/0">Mayfly.Context.t</a>(), <a href="Mayfly.Response.html#t:t/0">Mayfly.Response.t</a>()) ::
-  :ok | {:error, <a href="#t:error/0">error</a>()}</pre>
+  :ok | {:error_reported, <a href="Mayfly.ErrorPayload.html#t:t/0">Mayfly.ErrorPayload.t</a>()} | {:error, <a href="#t:error/0">error</a>()}</pre>
 
       </div>
 
@@ -485,7 +485,7 @@ Returns <code class="inline">nil</code> when unset.</p></div>
       <h1 class="signature" translate="no">endpoint(value \\ System.get_env(&quot;AWS_LAMBDA_RUNTIME_API&quot;))</h1>
 
 
-        <a href="https://github.com/bmalum/mayfly/blob/v1.0.0-rc.1/lib/mayfly/runtime_api.ex#L42" class="icon-action" rel="help nofollow" aria-label="View Source">
+        <a href="https://github.com/bmalum/mayfly/blob/v1.0.0-rc.1/lib/mayfly/runtime_api.ex#L43" class="icon-action" rel="help nofollow" aria-label="View Source">
           <i class="ri-code-s-slash-line" aria-hidden="true"></i>
         </a>
 

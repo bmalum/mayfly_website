@@ -157,7 +157,7 @@ directory.</p><h2 id="module-mayfly-options" class="section-heading"><a href="#m
 and makes <code class="inline">bootstrap</code> use <code class="inline">/opt/erlang/bin/erl</code> (default <code class="inline">false</code>).
 The zip then contains only BEAM files and can be built on any OS.</li></ul><p><a href="#prepare/1"><code class="inline">prepare/1</code></a> applies these defaults unless you set them yourself:
 <code class="inline">include_executables_for: [:unix]</code>, <code class="inline">strip_beams: true</code>,
-<code class="inline">rel_templates_path</code> pointing at Mayfly's <code class="inline">vm.args</code>/<code class="inline">env.sh</code> (no
+<code class="inline">rel_templates_path</code> pointing at Mayfly's <code class="inline">vm.args</code> template (no
 distribution, <code class="inline">+sbwt none</code>, <code class="inline">RELEASE_TMP=/tmp</code>).</p><p>Everything else is a normal release: umbrellas, several releases,
 <code class="inline">config/runtime.exs</code>, <code class="inline">--overwrite</code>, <code class="inline">MIX_ENV=prod</code>.</p>
     </section>
@@ -230,7 +230,7 @@ distribution, <code class="inline">+sbwt none</code>, <code class="inline">RELEA
       <h1 class="signature" translate="no">bootstrap(release)</h1>
 
 
-        <a href="https://github.com/bmalum/mayfly/blob/v1.0.0-rc.1/lib/mayfly/release.ex#L72" class="icon-action" rel="help nofollow" aria-label="View Source">
+        <a href="https://github.com/bmalum/mayfly/blob/v1.0.0-rc.1/lib/mayfly/release.ex#L79" class="icon-action" rel="help nofollow" aria-label="View Source">
           <i class="ri-code-s-slash-line" aria-hidden="true"></i>
         </a>
 
@@ -289,7 +289,7 @@ prepends the layer's <code class="inline">/opt/erlang/bin</code> (or <code class
       <h1 class="signature" translate="no">zip(release)</h1>
 
 
-        <a href="https://github.com/bmalum/mayfly/blob/v1.0.0-rc.1/lib/mayfly/release.ex#L86" class="icon-action" rel="help nofollow" aria-label="View Source">
+        <a href="https://github.com/bmalum/mayfly/blob/v1.0.0-rc.1/lib/mayfly/release.ex#L93" class="icon-action" rel="help nofollow" aria-label="View Source">
           <i class="ri-code-s-slash-line" aria-hidden="true"></i>
         </a>
 

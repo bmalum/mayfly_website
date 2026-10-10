@@ -53,7 +53,7 @@ tested against a fake. All functions return `:ok`/`{:ok, _}` for 2xx and
 
 ```elixir
 @callback invocation_response(endpoint(), Mayfly.Context.t(), Mayfly.Response.t()) ::
-  :ok | {:error, error()}
+  :ok | {:error_reported, Mayfly.ErrorPayload.t()} | {:error, error()}
 ```
 
 # `next_invocation`

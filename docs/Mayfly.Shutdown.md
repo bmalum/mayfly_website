@@ -16,7 +16,9 @@ see `layer/shutdown-extension/`). Attach it, and the runtime receives
 
 1. `:telemetry` event `[:mayfly, :shutdown]` with `%{reason: :sigterm}`;
 2. the hooks registered with `register/1` (your `init/1` can register one to
-   drain a queue or close connections), each bounded by `:hook_timeout_ms`;
+   drain a queue or close connections), each bounded by `:hook_timeout_ms`
+   (1 s) and all of them together by `:deadline_ms` (1.2 s, inside Lambda's
+   2 s window with room for the log flush);
 3. `Logger.flush/0`;
 4. `System.halt(0)`.
 
@@ -35,6 +37,10 @@ nothing changes: Lambda never sends the signal.
 ```
 
 Registers a zero-arity function to run on shutdown. Returns `:ok`.
+
+Outside Lambda (`mix lambda.invoke`, tests, `Mayfly.start_link/1` in your own
+supervision tree) the handler process may not exist; the call then logs at
+debug and returns `:ok`, so `init/1` code registering hooks works everywhere.
 
 # `run`
 
